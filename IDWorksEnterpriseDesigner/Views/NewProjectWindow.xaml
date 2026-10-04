@@ -1,1 +1,41 @@
+<Window x:Class="IDWorksEnterpriseDesigner.NewProjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="New Project" Height="320" Width="420"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <!-- Project Name -->
+        <StackPanel Grid.Row="0">
+            <Label Content="Project Name:"/>
+            <TextBox x:Name="txtProjectName" Height="25"/>
+        </StackPanel>
+
+        <!-- Initial Components Group -->
+        <GroupBox Header="Initial Components" Grid.Row="1" Margin="0,10,0,10">
+            <StackPanel Margin="10">
+                <CheckBox x:Name="chkProductionForm" Content="Production Form Design" IsChecked="True"/>
+                <CheckBox x:Name="chkCardDesign" Content="Card Design" IsChecked="True" Margin="0,5,0,0"/>
+                
+                <StackPanel Margin="20,5,0,0">
+                    <RadioButton x:Name="rbLandscape" Content="Landscape" IsChecked="True"/>
+                    <RadioButton x:Name="rbPortrait" Content="Portrait" Margin="0,5,0,0"/>
+                    <CheckBox x:Name="chkMultiCard" Content="Allow for more than one card design" Margin="0,5,0,0" IsEnabled="False"/>
+                </StackPanel>
+                
+                <CheckBox x:Name="chkReportDesign" Content="Report Design" IsChecked="True" Margin="0,10,0,0"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="OK" Width="75" Height="25" Margin="0,0,10,0" IsDefault="True" Click="BtnOK_Click"/>
+            <Button Content="Cancel" Width="75" Height="25" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
