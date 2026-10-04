@@ -20,7 +20,7 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore IDWorksEnterpriseDesigner.sln
+      run: dotnet restore **/*.csproj
 
-    - name: Build solution
-      run: dotnet build IDWorksEnterpriseDesigner.sln --configuration Release --no-restore
+    - name: Build project
+      run: dotnet build **/*.csproj --configuration Release --no-restore
