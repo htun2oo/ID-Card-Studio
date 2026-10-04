@@ -2,9 +2,6 @@ using System.Windows;
 
 namespace IDWorksEnterpriseDesigner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -21,20 +18,11 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // New Project Event Handler (CS1061 Error ကို ဖြေရှင်းပေးမည့် Method ဖြစ်ပါသည်)
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // Views/NewProjectWindow.xaml ရှိပါက Pop-up ဖွင့်ပေးပါမည်
-            try
-            {
-                IDWorksEnterpriseDesigner.Views.NewProjectWindow newProjectWin = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
-                newProjectWin.Owner = this;
-                newProjectWin.ShowDialog();
-            }
-            catch
-            {
-                MessageBox.Show("New Project Window is not implemented yet.", "New Project", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            IDWorksEnterpriseDesigner.Views.NewProjectWindow newProjectWin = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
+            newProjectWin.Owner = this;
+            newProjectWin.ShowDialog();
         }
     }
 }
