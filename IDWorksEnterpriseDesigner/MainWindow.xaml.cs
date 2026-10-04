@@ -13,6 +13,11 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
         }
 
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
             NewProjectWindow dialog = new NewProjectWindow();
@@ -20,23 +25,30 @@ namespace IDWorksEnterpriseDesigner
 
             if (dialog.ShowDialog() == true)
             {
-                // Window Title ကို ပုံအတိုင်း ပြောင်းလဲခြင်း
+                // Window Title ကို ပုံတူ ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
 
-                // မျက်နှာပြင်ဟောင်းများကို ရှင်းလင်းခြင်း
+                // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို စုံလင်စွာ ဖော်ပြပေးခြင်း (Window 4 အတိုင်း)
+                MenuEdit.Visibility = Visibility.Visible;
+                MenuInsert.Visibility = Visibility.Visible;
+                MenuFormat.Visibility = Visibility.Visible;
+                MenuTools.Visibility = Visibility.Visible;
+                MenuWindow.Visibility = Visibility.Visible;
+
+                // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // 2x2 Layout ဖွဲ့စည်းရန် Grid Layout ထည့်သွင်းခြင်း
+                // MDI Layout ဖွဲ့စည်းပုံ
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(280) }); // Left Column (Card Windows)
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) }); // Right Column
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(275) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
-                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) }); // Top Row
-                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(220) }); // Bottom Row
+                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(210) });
 
                 MdiHostGrid.Children.Add(layoutGrid);
 
-                // 1. Card & Card (back side) - Left Column
+                // 1. Left Side: Card & Card (back side)
                 if (dialog.HasCardDesign)
                 {
                     Grid leftStack = new Grid();
@@ -47,30 +59,30 @@ namespace IDWorksEnterpriseDesigner
                     Grid.SetRowSpan(leftStack, 2);
                     layoutGrid.Children.Add(leftStack);
 
-                    // Card (Front Side) Window
-                    Border cardFrontWindow = CreateDesignerWindow("Card", true);
+                    // Front Card Window
+                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 3);
                     Grid.SetRow(cardFrontWindow, 0);
                     leftStack.Children.Add(cardFrontWindow);
 
-                    // Card (Back Side) Window
-                    Border cardBackWindow = CreateDesignerWindow("Card (back side)", true);
+                    // Back Card Window
+                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 3);
                     Grid.SetRow(cardBackWindow, 1);
                     leftStack.Children.Add(cardBackWindow);
                 }
 
-                // 2. Production Form Window - Top Right
+                // 2. Top Right: Production Form Window
                 if (dialog.HasProductionForm)
                 {
-                    Border prodFormWindow = CreateProductionFormWindow("Production Form");
+                    Border prodFormWindow = CreateProductionFormSubWindow("Production Form");
                     Grid.SetColumn(prodFormWindow, 1);
                     Grid.SetRow(prodFormWindow, 0);
                     layoutGrid.Children.Add(prodFormWindow);
                 }
 
-                // 3. Report Window - Bottom Right
+                // 3. Bottom Right: Report Window
                 if (dialog.HasReportDesign)
                 {
-                    Border reportWindow = CreateDesignerWindow("Report", false);
+                    Border reportWindow = CreateDesignerSubWindow("Report", false, 6);
                     Grid.SetColumn(reportWindow, 1);
                     Grid.SetRow(reportWindow, 1);
                     layoutGrid.Children.Add(reportWindow);
@@ -78,25 +90,23 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Card နှင့် Report တို့အတွက် Ruler ပါသော Window ဖန်တီးပေးသည့် Helper Method
-        private Border CreateDesignerWindow(string title, bool isCard)
+        // Sub-Window (Card & Report) ဖန်တီးပေးသည့် နည်းလမ်း
+        private Border CreateDesignerSubWindow(string title, bool isCard, int maxRulerUnit)
         {
             Border border = new Border
             {
-                BorderBrush = new SolidColorBrush(Color.FromRgb(160, 180, 210)),
-                BorderThickness = new Thickness(2),
-                Margin = new Thickness(4),
-                Background = new SolidColorBrush(Color.FromRgb(240, 240, 240))
+                BorderBrush = new SolidColorBrush(Color.FromRgb(180, 200, 230)),
+                BorderThickness = new Thickness(3),
+                Margin = new Thickness(2),
+                Background = Brushes.White
             };
 
             DockPanel panel = new DockPanel();
 
-            // Title Bar
-            Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(210, 225, 245)), Height = 22 };
-            
-            // DockPanel.SetDock ကို အသုံးပြုထားပါသည်
+            // Sub-Window Header / Title Bar
+            Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(215, 228, 245)), Height = 22 };
             DockPanel.SetDock(titleBar, Dock.Top);
-            
+
             TextBlock titleText = new TextBlock
             {
                 Text = title,
@@ -108,77 +118,82 @@ namespace IDWorksEnterpriseDesigner
             };
             titleBar.Children.Add(titleText);
 
-            // Window Control Buttons (Minimize, Maximize, Close)
-            StackPanel winBtns = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 0, 4, 0) };
-            winBtns.Children.Add(new Button { Content = " ", Width = 14, Height = 14, Margin = new Thickness(1) });
-            winBtns.Children.Add(new Button { Content = " ", Width = 14, Height = 14, Margin = new Thickness(1) });
-            winBtns.Children.Add(new Button { Content = "r", FontFamily = new FontFamily("Marlett"), FontSize = 9, Width = 14, Height = 14, Margin = new Thickness(1) });
+            // Sub-Window Buttons (Minimize, Maximize, Close)
+            StackPanel winBtns = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 0, 2, 0) };
+            winBtns.Children.Add(new Button { Content = "_", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
+            winBtns.Children.Add(new Button { Content = "☐", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
+            winBtns.Children.Add(new Button { Content = "✕", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
             titleBar.Children.Add(winBtns);
 
             panel.Children.Add(titleBar);
 
-            // Designer Canvas Area (Ruler & White Canvas)
-            Grid canvasArea = new Grid { Background = new SolidColorBrush(Color.FromRgb(200, 200, 200)) };
-            canvasArea.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(20) });
-            canvasArea.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            canvasArea.RowDefinitions.Add(new RowDefinition { Height = new GridLength(20) });
-            canvasArea.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            // Canvas Area with Ruler
+            Grid canvasGrid = new Grid { Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)) };
+            canvasGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(22) });
+            canvasGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(22) });
+            canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            // Horizontal & Vertical Rulers
-            Rectangle topRuler = new Rectangle { Fill = new SolidColorBrush(Color.FromRgb(225, 225, 225)), Stroke = Brushes.Gray };
+            // Horizontal Ruler
+            UniformGrid topRuler = new UniformGrid { Rows = 1, Columns = maxRulerUnit, Background = Brushes.LightGray };
+            for (int i = 1; i <= maxRulerUnit; i++)
+            {
+                topRuler.Children.Add(new TextBlock { Text = i.ToString(), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, FontSize = 10, Margin = new Thickness(0, 0, 2, 0) });
+            }
             Grid.SetColumn(topRuler, 1);
             Grid.SetRow(topRuler, 0);
-            canvasArea.Children.Add(topRuler);
+            canvasGrid.Children.Add(topRuler);
 
-            Rectangle leftRuler = new Rectangle { Fill = new SolidColorBrush(Color.FromRgb(225, 225, 225)), Stroke = Brushes.Gray };
+            // Vertical Ruler
+            UniformGrid leftRuler = new UniformGrid { Columns = 1, Rows = 2, Background = Brushes.LightGray };
+            leftRuler.Children.Add(new TextBlock { Text = "1", VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 10 });
+            leftRuler.Children.Add(new TextBlock { Text = "2", VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 10 });
             Grid.SetColumn(leftRuler, 0);
             Grid.SetRow(leftRuler, 1);
-            canvasArea.Children.Add(leftRuler);
+            canvasGrid.Children.Add(leftRuler);
 
-            // White Working Paper Canvas
-            Border paper = new Border
+            // White Canvas Container
+            Border paperBorder = new Border
             {
                 Background = Brushes.White,
                 BorderBrush = Brushes.Black,
                 BorderThickness = new Thickness(1),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(10)
+                Margin = new Thickness(5)
             };
 
             if (isCard)
             {
-                paper.Width = 200;
-                paper.Height = 125;
+                paperBorder.Width = 210;
+                paperBorder.Height = 130;
             }
 
-            Grid.SetColumn(paper, 1);
-            Grid.SetRow(paper, 1);
-            canvasArea.Children.Add(paper);
+            Grid.SetColumn(paperBorder, 1);
+            Grid.SetRow(paperBorder, 1);
+            canvasGrid.Children.Add(paperBorder);
 
-            panel.Children.Add(canvasArea);
+            panel.Children.Add(canvasGrid);
             border.Child = panel;
 
             return border;
         }
 
-        // Production Form Window ဖန်တီးပေးသည့် Helper Method
-        private Border CreateProductionFormWindow(string title)
+        // Production Form Sub-Window ဖန်တီးပေးသည့် နည်းလမ်း
+        private Border CreateProductionFormSubWindow(string title)
         {
             Border border = new Border
             {
-                BorderBrush = new SolidColorBrush(Color.FromRgb(160, 180, 210)),
-                BorderThickness = new Thickness(2),
-                Margin = new Thickness(4),
+                BorderBrush = new SolidColorBrush(Color.FromRgb(180, 200, 230)),
+                BorderThickness = new Thickness(3),
+                Margin = new Thickness(2),
                 Background = Brushes.White
             };
 
             DockPanel panel = new DockPanel();
 
-            // Title Bar
-            Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(210, 225, 245)), Height = 22 };
-            
-            // DockPanel.SetDock ကို အသုံးပြုထားပါသည်
+            // Header
+            Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(215, 228, 245)), Height = 22 };
             DockPanel.SetDock(titleBar, Dock.Top);
 
             TextBlock titleText = new TextBlock
@@ -192,16 +207,20 @@ namespace IDWorksEnterpriseDesigner
             };
             titleBar.Children.Add(titleText);
 
-            // Window Control Buttons
-            StackPanel winBtns = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 0, 4, 0) };
-            winBtns.Children.Add(new Button { Content = " ", Width = 14, Height = 14, Margin = new Thickness(1) });
-            winBtns.Children.Add(new Button { Content = " ", Width = 14, Height = 14, Margin = new Thickness(1) });
-            winBtns.Children.Add(new Button { Content = "r", FontFamily = new FontFamily("Marlett"), FontSize = 9, Width = 14, Height = 14, Margin = new Thickness(1) });
+            // Control Buttons
+            StackPanel winBtns = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 0, 2, 0) };
+            winBtns.Children.Add(new Button { Content = "_", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
+            winBtns.Children.Add(new Button { Content = "☐", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
+            winBtns.Children.Add(new Button { Content = "✕", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
             titleBar.Children.Add(winBtns);
 
             panel.Children.Add(titleBar);
-            border.Child = panel;
 
+            // White Area
+            Grid whiteArea = new Grid { Background = Brushes.White };
+            panel.Children.Add(whiteArea);
+
+            border.Child = panel;
             return border;
         }
     }
