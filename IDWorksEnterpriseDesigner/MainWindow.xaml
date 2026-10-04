@@ -16,8 +16,8 @@
         <!-- 1. Menu Bar (Initial State: File, View, Help Only) -->
         <Menu Grid.Row="0" Background="#F0F0F0" Padding="2">
             <MenuItem Header="_File">
-                <MenuItem Header="_New..." KeyGesture="Ctrl+N"/>
-                <MenuItem Header="_Open..." KeyGesture="Ctrl+O"/>
+                <MenuItem Header="_New..." InputGestureText="Ctrl+N"/>
+                <MenuItem Header="_Open..." InputGestureText="Ctrl+O"/>
                 <Separator/>
                 <MenuItem Header="E_xit"/>
             </MenuItem>
@@ -26,7 +26,7 @@
                 <MenuItem Header="_Status Bar" IsCheckable="True" IsChecked="True"/>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="_Help Topics" KeyGesture="F1"/>
+                <MenuItem Header="_Help Topics" InputGestureText="F1"/>
                 <Separator/>
                 <MenuItem Header="_About Datacard ID Works Enterprise Designer..."/>
             </MenuItem>
@@ -77,21 +77,7 @@
 
                 <Separator />
 
-                <!-- Group 4: Alignment & Layout Tools -->
-                <Button ToolTip="Align Left" IsEnabled="False"/>
-                <Button ToolTip="Align Center" IsEnabled="False"/>
-                <Button ToolTip="Align Right" IsEnabled="False"/>
-
-                <Separator />
-
-                <!-- Group 5: Designer Options -->
-                <Button ToolTip="Card Options" IsEnabled="False"/>
-                <Button ToolTip="Production Options" IsEnabled="False"/>
-                <Button ToolTip="Report Options" IsEnabled="False"/>
-
-                <Separator />
-
-                <!-- Group 6: Zoom Combo -->
+                <!-- Group 4: Zoom Combo -->
                 <ComboBox Width="65" SelectedIndex="3" IsEnabled="False" Margin="2,0">
                     <ComboBoxItem Content="25%"/>
                     <ComboBoxItem Content="50%"/>
@@ -105,7 +91,6 @@
 
         <!-- 3. MDI Workspace Area (Gray Background) -->
         <Grid Grid.Row="2" Background="#A0A0A0">
-            <!-- Project / Document Opened ဖြစ်လာမှ ဤနေရာတွင် Layout / Canvas တက်လာမည်ဖြစ်ပါသည် -->
         </Grid>
 
         <!-- 4. Status Bar -->
