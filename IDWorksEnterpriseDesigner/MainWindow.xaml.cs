@@ -93,7 +93,9 @@ namespace IDWorksEnterpriseDesigner
 
             // Title Bar
             Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(210, 225, 245)), Height = 22 };
-            DockPanel.SetDock(titleBar, DockPanel.Dock.Top);
+            
+            // DockPanel.SetDock ကို အသုံးပြုထားပါသည်
+            DockPanel.SetDock(titleBar, Dock.Top);
             
             TextBlock titleText = new TextBlock
             {
@@ -175,7 +177,9 @@ namespace IDWorksEnterpriseDesigner
 
             // Title Bar
             Grid titleBar = new Grid { Background = new SolidColorBrush(Color.FromRgb(210, 225, 245)), Height = 22 };
-            DockPanel.SetDock(titleBar, DockPanel.Dock.Top);
+            
+            // DockPanel.SetDock ကို အသုံးပြုထားပါသည်
+            DockPanel.SetDock(titleBar, Dock.Top);
 
             TextBlock titleText = new TextBlock
             {
