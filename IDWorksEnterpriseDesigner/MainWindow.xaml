@@ -13,18 +13,23 @@
             <RowDefinition Height="22"/>   <!-- Status Bar -->
         </Grid.RowDefinitions>
 
-        <!-- 1. Menu Bar (Initial State: File, View, Help Only) -->
+        <!-- 1. Menu Bar -->
         <Menu Grid.Row="0" Background="#F0F0F0" Padding="2">
+            <!-- File Menu (ပုံအတိုင်း အတိအကျ ပြင်ဆင်ထားပါသည်) -->
             <MenuItem Header="_File">
-                <MenuItem Header="_New..." InputGestureText="Ctrl+N"/>
-                <MenuItem Header="_Open..." InputGestureText="Ctrl+O"/>
+                <MenuItem Header="New Project..." InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O"/>
                 <Separator/>
-                <MenuItem Header="E_xit"/>
+                <MenuItem Header="Recent File" IsEnabled="False"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
             </MenuItem>
+            
             <MenuItem Header="_View">
                 <MenuItem Header="_Toolbar" IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="_Status Bar" IsCheckable="True" IsChecked="True"/>
             </MenuItem>
+            
             <MenuItem Header="_Help">
                 <MenuItem Header="_Help Topics" InputGestureText="F1"/>
                 <Separator/>
@@ -89,11 +94,11 @@
             </ToolBar>
         </ToolBarTray>
 
-        <!-- 3. MDI Workspace Area (WorkspaceGrid x:Name ထည့်သွင်းထားသည်) -->
+        <!-- 3. Workspace Area -->
         <Grid x:Name="WorkspaceGrid" Grid.Row="2" Background="#A0A0A0">
         </Grid>
 
-        <!-- 4. Status Bar (StatusText x:Name ထည့်သွင်းထားသည်) -->
+        <!-- 4. Status Bar -->
         <StatusBar Grid.Row="3" Background="#F0F0F0" BorderThickness="0,1,0,0" BorderBrush="#D0D0D0">
             <StatusBarItem>
                 <TextBlock x:Name="StatusText" Text="For Help, press F1" FontSize="11" Foreground="#333333"/>
