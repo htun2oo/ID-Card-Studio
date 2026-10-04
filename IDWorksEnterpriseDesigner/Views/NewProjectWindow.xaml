@@ -7,10 +7,10 @@
         ShowInTaskbar="False"
         Background="#F0F0F0">
     <Grid Margin="12">
-        <!-- Grid.ColumnDefinitions ဟု အများကိန်း ပြင်ဆင်ထားပါသည် -->
+        <!-- မှန်ကန်သော Tag မှာ Grid.ColumnDefinitions ဖြစ်ပါသည် -->
         <Grid.ColumnDefinitions>
-            <Grid.ColumnDefinition Width="*"/>
-            <Grid.ColumnDefinition Width="75"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="75"/>
         </Grid.ColumnDefinitions>
 
         <!-- Left Side: Project Name and Initial Components -->
