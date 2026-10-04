@@ -7,6 +7,7 @@
         ShowInTaskbar="False"
         Background="#F0F0F0">
     <Grid Margin="12">
+        <!-- Grid.ColumnDefinitions ဟု အများကိန်း ပြင်ဆင်ထားပါသည် -->
         <Grid.ColumnDefinitions>
             <Grid.ColumnDefinition Width="*"/>
             <Grid.ColumnDefinition Width="75"/>
@@ -29,13 +30,13 @@
                         <StackPanel Orientation="Horizontal" Margin="0,2,0,4">
                             <!-- Landscape Icon & Radio -->
                             <Rectangle Width="14" Height="9" Stroke="#666666" Fill="White" Margin="0,0,4,0" VerticalAlignment="Center"/>
-                            <RadioButton Name="RadLandscape" Content="Landscape" FontSize="11" IsChecked="True" GroupName="CardOrientation" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                            <RadioButton Name="RadLandscape" Content="Landscape" FontSize="11" IsChecked="True" GroupName="CardOrientation" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" Margin="0,2,0,4">
                             <!-- Portrait Icon & Radio -->
                             <Rectangle Width="9" Height="14" Stroke="#666666" Fill="White" Margin="2,0,7,0" VerticalAlignment="Center"/>
-                            <RadioButton Name="RadPortrait" Content="Portrait" FontSize="11" GroupName="CardOrientation" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                            <RadioButton Name="RadPortrait" Content="Portrait" FontSize="11" GroupName="CardOrientation" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <CheckBox Name="ChkAllowMultipleCardDesigns" FontSize="10" Margin="0,4,0,0" Foreground="#555555">
