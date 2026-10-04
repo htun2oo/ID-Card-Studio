@@ -36,43 +36,43 @@
         <ToolBarTray Grid.Row="1" Background="#F0F0F0">
             <ToolBar ToolBarTray.IsLocked="True" Band="0" BandIndex="0">
                 <!-- Group 1: Standard File Tools -->
-                <Button ToolTip="New">
-                    <Image Source="pack://application:,,,/Resources/Icons/new.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="New" Width="24" Height="22">
+                    <TextBlock Text="📄" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Open">
-                    <Image Source="pack://application:,,,/Resources/Icons/open.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Open" Width="24" Height="22">
+                    <TextBlock Text="📂" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Save" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/save.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Save" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="💾" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Save All" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/saveall.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Save All" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="🗄️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Help">
-                    <Image Source="pack://application:,,,/Resources/Icons/help.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Help" Width="24" Height="22">
+                    <TextBlock Text="❓" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
 
                 <Separator />
 
                 <!-- Group 2: Edit Tools -->
-                <Button ToolTip="Cut" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/cut.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Cut" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="✂️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Copy" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/copy.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Copy" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="📋" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Paste" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/paste.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Paste" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="📌" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
 
                 <Separator />
 
                 <!-- Group 3: History Tools -->
-                <Button ToolTip="Undo" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/undo.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Undo" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="↩️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
-                <Button ToolTip="Redo" IsEnabled="False">
-                    <Image Source="pack://application:,,,/Resources/Icons/redo.png" Width="16" Height="16" ErrorTemplate="{x:Null}"/>
+                <Button ToolTip="Redo" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="↪️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
 
                 <Separator />
