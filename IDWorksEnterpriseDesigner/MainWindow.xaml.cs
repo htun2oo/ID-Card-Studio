@@ -10,60 +10,20 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
         }
 
-        private void OpenNewProject_Click(object sender, RoutedEventArgs e)
+        // MainWindow.xaml ရှိ Click="NewProject_Click" အတွက် Event Handler
+        private void NewProject_Click(object sender, RoutedEventArgs e)
         {
             NewProjectWindow dialog = new NewProjectWindow();
             dialog.Owner = this;
 
             if (dialog.ShowDialog() == true)
             {
-                // Window Title ကို ဒုတိယပုံအတိုင်း ပြောင်းလဲခြင်း
+                // Window Title ကို ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
 
-                // MDI Container / Canvas များကို ရှင်းလင်းခြင်း
-                // (သင့် Project ရှိ MDI Container ContainerName အတိုင်း အသုံးပြုပါ)
-                ClearMdiContainer();
-
-                // 1. Production Form Window ကို ညာဘက်အပေါ်တွင် ပြသခြင်း
-                if (dialog.HasProductionForm)
-                {
-                    CreateProductionFormWindow(dialog.ProjectName);
-                }
-
-                // 2. Card Design Windows (Card & Card (back side)) များကို ဘယ်ဘက်တွင် ပြသခြင်း
-                if (dialog.HasCardDesign)
-                {
-                    CreateCardDesignWindows(dialog.IsLandscape);
-                }
-
-                // 3. Report Design Window ကို ညာဘက်အောက်တွင် ပြသခြင်း
-                if (dialog.HasReportDesign)
-                {
-                    CreateReportDesignWindow();
-                }
+                // New Project ရွေးချယ်မှုများအတိုင်း MDI Windows များကို ပြသရန်
+                // (လိုအပ်ပါက Component များ ဖွင့်သည့် Logic ကို ဤနေရာတွင် ထည့်သွင်းနိုင်ပါသည်)
             }
-        }
-
-        private void ClearMdiContainer()
-        {
-            // MDI Container ထဲမှ Existing Window များကို ဖျက်ထုတ်ရန် Code
-        }
-
-        private void CreateProductionFormWindow(string projectName)
-        {
-            // Production Form Child Window ကို ဒုတိယပုံအတိုင်း
-            // Position: Top-Right ( Width: ~65%, Height: ~60% ) ဖြင့် ထည့်သွင်းပါ
-        }
-
-        private void CreateCardDesignWindows(bool isLandscape)
-        {
-            // Card (Front Side) Child Window - Position: Top-Left
-            // Card (Back Side) Child Window - Position: Bottom-Left
-        }
-
-        private void CreateReportDesignWindow()
-        {
-            // Report Child Window - Position: Bottom-Right
         }
     }
 }
