@@ -10,20 +10,30 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
-            
-            // Initial Status Message သတ်မှတ်ခြင်း
             SetStatusMessage("For Help, press F1");
         }
 
-        /// <summary>
-        /// Status Bar Text ကို ပြောင်းလဲရန် Helper Method
-        /// </summary>
         public void SetStatusMessage(string message)
         {
             if (StatusText != null)
             {
-                // TextBlock ဖြစ်သောကြောင့် Content အစား Text Property ကို သုံးထားပါသည်
                 StatusText.Text = message;
+            }
+        }
+
+        // New Project Event Handler (CS1061 Error ကို ဖြေရှင်းပေးမည့် Method ဖြစ်ပါသည်)
+        private void NewProject_Click(object sender, RoutedEventArgs e)
+        {
+            // Views/NewProjectWindow.xaml ရှိပါက Pop-up ဖွင့်ပေးပါမည်
+            try
+            {
+                IDWorksEnterpriseDesigner.Views.NewProjectWindow newProjectWin = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
+                newProjectWin.Owner = this;
+                newProjectWin.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("New Project Window is not implemented yet.", "New Project", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
