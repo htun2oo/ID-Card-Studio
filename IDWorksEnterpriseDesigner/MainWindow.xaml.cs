@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives; // UniformGrid အတွက် ထည့်သွင်းထားပါသည်
 using System.Windows.Media;
 using System.Windows.Shapes;
 using IDWorksEnterpriseDesigner.Views;
@@ -25,10 +26,10 @@ namespace IDWorksEnterpriseDesigner
 
             if (dialog.ShowDialog() == true)
             {
-                // Window Title ကို ပုံတူ ပြောင်းလဲခြင်း
+                // Window Title ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
 
-                // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို စုံလင်စွာ ဖော်ပြပေးခြင်း (Window 4 အတိုင်း)
+                // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို ဖော်ပြပေးခြင်း
                 MenuEdit.Visibility = Visibility.Visible;
                 MenuInsert.Visibility = Visibility.Visible;
                 MenuFormat.Visibility = Visibility.Visible;
