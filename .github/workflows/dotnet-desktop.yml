@@ -22,5 +22,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj
 
-    - name: Build project
-      run: dotnet build IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj --configuration Release --no-restore
+    # Windows x64 အတွက် Standalone App (.exe) ထွက်ရှိအောင် Publish လုပ်ခြင်း
+    - name: Publish Desktop App
+      run: dotnet publish IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj -c Release -r win-x64 --self-contained true -o ./publish
+
+    # ထွက်လာသော Build Files များကို Artifact အဖြစ် Upload ပြုလုပ်ခြင်း
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: IDWorksEnterpriseDesigner-Windows-x64
+        path: ./publish
