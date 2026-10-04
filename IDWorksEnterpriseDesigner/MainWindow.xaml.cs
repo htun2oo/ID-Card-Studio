@@ -10,7 +10,6 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
         }
 
-        // MainWindow.xaml ရှိ Click="NewProject_Click" အတွက် Event Handler
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
             NewProjectWindow dialog = new NewProjectWindow();
@@ -18,11 +17,17 @@ namespace IDWorksEnterpriseDesigner
 
             if (dialog.ShowDialog() == true)
             {
-                // Window Title ကို ပြောင်းလဲခြင်း
+                // Title ကို "Datacard ID Works Enterprise Designer - ProjectName - [Card]" သို့ ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
 
-                // New Project ရွေးချယ်မှုများအတိုင်း MDI Windows များကို ပြသရန်
-                // (လိုအပ်ပါက Component များ ဖွင့်သည့် Logic ကို ဤနေရာတွင် ထည့်သွင်းနိုင်ပါသည်)
+                // Card Design (Front/Back)
+                PnlCardContainer.Visibility = dialog.HasCardDesign ? Visibility.Visible : Visibility.Collapsed;
+
+                // Production Form Design
+                WinProductionForm.Visibility = dialog.HasProductionForm ? Visibility.Visible : Visibility.Collapsed;
+
+                // Report Design
+                WinReport.Visibility = dialog.HasReportDesign ? Visibility.Visible : Visibility.Collapsed;
             }
         }
     }
