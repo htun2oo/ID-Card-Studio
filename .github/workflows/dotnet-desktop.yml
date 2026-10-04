@@ -19,8 +19,11 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
 
-    - name: Build project
-      run: dotnet build --configuration Release --no-restore
+    - name: Restore dependencies
+      run: dotnet restore IDWorksEnterpriseDesigner.sln
+
+    - name: Build solution
+      run: dotnet build IDWorksEnterpriseDesigner.sln --configuration Release --no-restore
