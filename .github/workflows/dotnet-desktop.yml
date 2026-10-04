@@ -9,16 +9,13 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-      ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT: true
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@main
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@main
       with:
         dotnet-version: '9.0.x'
 
@@ -29,7 +26,7 @@ jobs:
       run: dotnet publish IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj -c Release -r win-x64 --self-contained true -o ./publish
 
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@main
       with:
         name: IDWorksEnterpriseDesigner-Windows-x64
         path: ./publish
