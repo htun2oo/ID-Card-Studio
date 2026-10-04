@@ -15,9 +15,8 @@
 
         <!-- 1. Menu Bar -->
         <Menu Grid.Row="0" Background="#F0F0F0" Padding="2">
-            <!-- File Menu (ပုံအတိုင်း အတိအကျ ပြင်ဆင်ထားပါသည်) -->
             <MenuItem Header="_File">
-                <MenuItem Header="New Project..." InputGestureText="Ctrl+N"/>
+                <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click"/>
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O"/>
                 <Separator/>
                 <MenuItem Header="Recent File" IsEnabled="False"/>
@@ -37,11 +36,10 @@
             </MenuItem>
         </Menu>
 
-        <!-- 2. Classic Icon Toolbar -->
+        <!-- 2. Classic Icon Toolbar (ကျန်တာများ မပြောင်းလဲပါ) -->
         <ToolBarTray Grid.Row="1" Background="#F0F0F0">
             <ToolBar ToolBarTray.IsLocked="True" Band="0" BandIndex="0">
-                <!-- Group 1: Standard File Tools -->
-                <Button ToolTip="New" Width="24" Height="22">
+                <Button ToolTip="New" Width="24" Height="22" Click="NewProject_Click">
                     <TextBlock Text="📄" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
                 <Button ToolTip="Open" Width="24" Height="22">
@@ -59,7 +57,6 @@
 
                 <Separator />
 
-                <!-- Group 2: Edit Tools -->
                 <Button ToolTip="Cut" Width="24" Height="22" IsEnabled="False">
                     <TextBlock Text="✂️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
@@ -72,7 +69,6 @@
 
                 <Separator />
 
-                <!-- Group 3: History Tools -->
                 <Button ToolTip="Undo" Width="24" Height="22" IsEnabled="False">
                     <TextBlock Text="↩️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
@@ -82,7 +78,6 @@
 
                 <Separator />
 
-                <!-- Group 4: Zoom Combo -->
                 <ComboBox Width="65" SelectedIndex="3" IsEnabled="False" Margin="2,0">
                     <ComboBoxItem Content="25%"/>
                     <ComboBoxItem Content="50%"/>
