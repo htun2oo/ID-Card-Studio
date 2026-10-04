@@ -25,6 +25,13 @@ jobs:
     - name: Publish Desktop App
       run: dotnet publish IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj -c Release -r win-x64 --self-contained true -o ./publish
 
+    # Self-Signed Certificate ဖန်တီးပြီး Executable (.exe) ကို Sign ပြုလုပ်ခြင်း
+    - name: Sign Executable File
+      shell: powershell
+      run: |
+        $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDWorksEnterprise" -CertStoreLocation cert:\CurrentUser\My
+        Set-AuthenticodeSignature -FilePath "./publish/IDWorksEnterpriseDesigner.exe" -Certificate $cert
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@main
       with:
