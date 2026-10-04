@@ -1,33 +1,103 @@
-using System.Windows;
+<Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Datacard ID Works Enterprise Designer" 
+        Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Background="#A0A0A0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Menu Bar -->
+            <RowDefinition Height="Auto"/> <!-- Toolbar -->
+            <RowDefinition Height="*"/>    <!-- Workspace Area -->
+            <RowDefinition Height="22"/>   <!-- Status Bar -->
+        </Grid.RowDefinitions>
 
-namespace IDWorksEnterpriseDesigner
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-            SetStatusMessage("For Help, press F1");
-        }
+        <!-- 1. Menu Bar -->
+        <Menu Grid.Row="0" Background="#F0F0F0" Padding="2">
+            <MenuItem Header="_File">
+                <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click"/>
+                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O"/>
+                <Separator/>
+                <MenuItem Header="Recent File" IsEnabled="False"/>
+                <Separator/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            
+            <MenuItem Header="_View">
+                <MenuItem Header="_Toolbar" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="_Status Bar" IsCheckable="True" IsChecked="True"/>
+            </MenuItem>
+            
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Help Topics" InputGestureText="F1"/>
+                <Separator/>
+                <MenuItem Header="_About Datacard ID Works Enterprise Designer..."/>
+            </MenuItem>
+        </Menu>
 
-        public void SetStatusMessage(string message)
-        {
-            if (StatusText != null)
-            {
-                StatusText.Text = message;
-            }
-        }
+        <!-- 2. Classic Icon Toolbar -->
+        <ToolBarTray Grid.Row="1" Background="#F0F0F0">
+            <ToolBar ToolBarTray.IsLocked="True" Band="0" BandIndex="0">
+                <Button ToolTip="New" Width="24" Height="22" Click="NewProject_Click">
+                    <TextBlock Text="📄" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Open" Width="24" Height="22">
+                    <TextBlock Text="📂" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Save" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="💾" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Save All" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="🗄️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Help" Width="24" Height="22">
+                    <TextBlock Text="❓" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
 
-        // New Project Event Handler (CS1061 Error ကို ဖြေရှင်းပေးမည့် Method ဖြစ်ပါသည်)
-        private void NewProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Views/NewProjectWindow.xaml ရှိပါက Pop-up ဖွင့်ပေးပါသည်
-            IDWorksEnterpriseDesigner.Views.NewProjectWindow newProjectWin = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
-            newProjectWin.Owner = this;
-            newProjectWin.ShowDialog();
-        }
-    }
-}
+                <Separator />
+
+                <Button ToolTip="Cut" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="✂️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Copy" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="📋" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Paste" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="📌" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+
+                <Separator />
+
+                <Button ToolTip="Undo" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="↩️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+                <Button ToolTip="Redo" Width="24" Height="22" IsEnabled="False">
+                    <TextBlock Text="↪️" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+
+                <Separator />
+
+                <ComboBox Width="65" SelectedIndex="3" IsEnabled="False" Margin="2,0">
+                    <ComboBoxItem Content="25%"/>
+                    <ComboBoxItem Content="50%"/>
+                    <ComboBoxItem Content="75%"/>
+                    <ComboBoxItem Content="100%"/>
+                    <ComboBoxItem Content="150%"/>
+                    <ComboBoxItem Content="200%"/>
+                </ComboBox>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- 3. Workspace Area -->
+        <Grid x:Name="WorkspaceGrid" Grid.Row="2" Background="#A0A0A0">
+        </Grid>
+
+        <!-- 4. Status Bar -->
+        <StatusBar Grid.Row="3" Background="#F0F0F0" BorderThickness="0,1,0,0" BorderBrush="#D0D0D0">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="For Help, press F1" FontSize="11" Foreground="#333333"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
