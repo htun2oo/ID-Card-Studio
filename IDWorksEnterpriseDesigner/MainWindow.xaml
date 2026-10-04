@@ -89,14 +89,14 @@
             </ToolBar>
         </ToolBarTray>
 
-        <!-- 3. MDI Workspace Area (Gray Background) -->
-        <Grid Grid.Row="2" Background="#A0A0A0">
+        <!-- 3. MDI Workspace Area (WorkspaceGrid x:Name ထည့်သွင်းထားသည်) -->
+        <Grid x:Name="WorkspaceGrid" Grid.Row="2" Background="#A0A0A0">
         </Grid>
 
-        <!-- 4. Status Bar -->
+        <!-- 4. Status Bar (StatusText x:Name ထည့်သွင်းထားသည်) -->
         <StatusBar Grid.Row="3" Background="#F0F0F0" BorderThickness="0,1,0,0" BorderBrush="#D0D0D0">
             <StatusBarItem>
-                <TextBlock Text="For Help, press F1" FontSize="11" Foreground="#333333"/>
+                <TextBlock x:Name="StatusText" Text="For Help, press F1" FontSize="11" Foreground="#333333"/>
             </StatusBarItem>
         </StatusBar>
     </Grid>
