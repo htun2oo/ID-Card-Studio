@@ -1,47 +1,36 @@
 using System.Windows;
 
-namespace IDWorksEnterpriseDesigner
+namespace IDWorksEnterpriseDesigner.Views
 {
     public partial class NewProjectWindow : Window
     {
-        public string ProjectName
-        {
-            get { return TxtProjectName.Text; }
-        }
+        public string ProjectName { get; private set; } = string.Empty;
+        public bool HasProductionForm { get; private set; }
+        public bool HasCardDesign { get; private set; }
+        public bool IsLandscape { get; private set; }
+        public bool HasReportDesign { get; private set; }
 
         public NewProjectWindow()
         {
             InitializeComponent();
         }
 
-        private void Ok_Click(object sender, RoutedEventArgs e)
+        private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(TxtProjectName.Text))
+            {
+                MessageBox.Show("Please enter a Project Name.", "Validation Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            ProjectName = TxtProjectName.Text.Trim();
+            HasProductionForm = ChkProductionFormDesign.IsChecked == true;
+            HasCardDesign = ChkCardDesign.IsChecked == true;
+            IsLandscape = RadLandscape.IsChecked == true;
+            HasReportDesign = ChkReportDesign.IsChecked == true;
+
             this.DialogResult = true;
             this.Close();
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            this.Close();
-        }
-
-        private void ChkCardDesign_Checked(object sender, RoutedEventArgs e)
-        {
-            SetCardOptionsEnabled(true);
-        }
-
-        private void ChkCardDesign_Unchecked(object sender, RoutedEventArgs e)
-        {
-            SetCardOptionsEnabled(false);
-        }
-
-        private void SetCardOptionsEnabled(bool isEnabled)
-        {
-            if (RbLandscape != null) RbLandscape.IsEnabled = isEnabled;
-            if (RbPortrait != null) RbPortrait.IsEnabled = isEnabled;
-            if (ChkAllowMultiple != null) ChkAllowMultiple.IsEnabled = isEnabled;
-            if (TxtAllowMultiple != null) TxtAllowMultiple.IsEnabled = isEnabled;
         }
     }
 }
