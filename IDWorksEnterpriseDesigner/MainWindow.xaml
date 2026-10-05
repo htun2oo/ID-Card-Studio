@@ -1,58 +1,134 @@
-<!-- 3. View Menu -->
-<MenuItem Header="_View">
-    <!-- Toolbars Submenu -->
-    <MenuItem Header="Toolbars">
-        <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
-        <Separator />
-        <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
-    </MenuItem>
+<Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <!-- Top Menu Bar -->
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0">
+            <!-- 1. File Menu -->
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
+                <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
+                <Separator x:Name="Sep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuCloseProject" Header="_Close Project" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuSaveProject" Header="_Save Project" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuSaveProjectAs" Header="Save Project _As..." Visibility="Collapsed" />
+                <Separator x:Name="Sep2" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuProjectProperties" Header="Project _Properties..." Visibility="Collapsed" />
+                <Separator x:Name="Sep3" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuPrintSampleCard" Header="_Print Sample Card..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuPreviewSampleReport" Header="Pre_view Sample Report..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuReportPageSetup" Header="Report Page Set_up..." Visibility="Collapsed" />
+                <Separator x:Name="Sep4" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuDeleteProject" Header="_Delete Project..." Visibility="Collapsed" />
+                <Separator />
+                <MenuItem x:Name="MenuRecentFile" Header="Recent File" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="E_xit" Click="Exit_Click" />
+            </MenuItem>
 
-    <Separator x:Name="ViewSep1" Visibility="Collapsed" />
-    
-    <!-- Field Data Items -->
-    <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
-    <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+            <!-- 2. Edit Menu -->
+            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
+                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
+                <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Cu_t Fields" InputGestureText="Ctrl+X" IsEnabled="False" />
+                <MenuItem Header="_Copy Fields" InputGestureText="Ctrl+C" IsEnabled="False" />
+                <MenuItem Header="_Paste Fields" InputGestureText="Ctrl+V" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Select _Fields..." />
+                <MenuItem Header="Select _All Fields" InputGestureText="Ctrl+A" />
+                <Separator />
+                <MenuItem Header="Field _Properties..." InputGestureText="Ctrl+F" IsEnabled="False" />
+                <MenuItem Header="_Multi-field Text Properties..." />
+                <MenuItem Header="M_ulti-field Prompt Properties..." />
+                <MenuItem Header="P_roduction Form Properties..." InputGestureText="F6" />
+                <Separator />
+                <MenuItem Header="Field Tab Order" InputGestureText="Ctrl+B" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="_Delete Selected Fields" InputGestureText="Del" IsEnabled="False" />
+                <MenuItem Header="Delete Production Form" />
+            </MenuItem>
 
-    <Separator x:Name="ViewSep2" Visibility="Collapsed" />
+            <!-- 3. View Menu -->
+            <MenuItem Header="_View">
+                <MenuItem Header="Toolbars">
+                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
+                    <Separator />
+                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
+                </MenuItem>
+                
+                <Separator x:Name="ViewSep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep2" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep3" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep4" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
+                <MenuItem x:Name="MenuViewZoomReport" Header="Zoom Report" Visibility="Collapsed">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
 
-    <!-- Document Type Items -->
-    <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
-    <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
-    <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
-    <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
+                <Separator x:Name="ViewSep5" Visibility="Collapsed" />
+                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
+            </MenuItem>
 
-    <Separator x:Name="ViewSep3" Visibility="Collapsed" />
+            <!-- 4. Insert Menu -->
+            <MenuItem x:Name="MenuInsert" Header="_Insert" Visibility="Collapsed" />
 
-    <!-- Card Side Selection Items -->
-    <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
-    <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+            <!-- 5. Format Menu -->
+            <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
 
-    <Separator x:Name="ViewSep4" Visibility="Collapsed" />
+            <!-- 6. Tools Menu -->
+            <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
 
-    <!-- Ruler and Zoom Items -->
-    <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
-    
-    <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
-        <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="200%" IsCheckable="True" />
-        <MenuItem Header="400%" IsCheckable="True" />
-    </MenuItem>
-    
-    <MenuItem x:Name="MenuViewZoomReport" Header="Zoom Report" Visibility="Collapsed">
-        <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
-        <MenuItem Header="200%" IsCheckable="True" />
-        <MenuItem Header="400%" IsCheckable="True" />
-    </MenuItem>
+            <!-- 7. Window Menu -->
+            <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
 
-    <Separator x:Name="ViewSep5" Visibility="Collapsed" />
+            <!-- 8. Help Menu -->
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Online Help..." InputGestureText="F1" />
+                <Separator />
+                <MenuItem Header="_About..." />
+            </MenuItem>
+        </Menu>
 
-    <!-- Always Visible Options -->
-    <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
-</MenuItem>
+        <!-- Status Bar -->
+        <StatusBar DockPanel.Dock="Bottom" Height="24" Background="#F0F0F0">
+            <StatusBarItem>
+                <TextBlock Text="For Help, press F1" FontSize="11" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Main Workspace Grid Area -->
+        <Grid x:Name="MdiHostGrid" Background="Gray">
+        </Grid>
+    </DockPanel>
+</Window>
