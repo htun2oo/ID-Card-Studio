@@ -28,7 +28,7 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- 2. Edit Menu -->
+            <!-- 2. Edit Menu (Project ဖွင့်မှ ပေါ်မည်) -->
             <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
                 <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
                 <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
@@ -51,7 +51,7 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu (ဒုတိယပုံပါအတိုင်း အပြည့်အစုံ ပြင်ဆင်ထားပါသည်) -->
+            <!-- 3. View Menu (Project မဖွင့်မီ Toolbars နှင့် Show Welcome သာ ပေါ်မည်ဖြစ်ပြီး ကျန်တာများ Collapsed လုပ်ထားပါသည်) -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -65,24 +65,27 @@
                     <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
                 </MenuItem>
-                <Separator />
-                <MenuItem Header="Field Names" InputGestureText="Ctrl+H" />
-                <MenuItem Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" />
-                <Separator />
-                <MenuItem Header="Card..." />
-                <MenuItem Header="Report..." />
-                <MenuItem Header="Production Form" />
-                <MenuItem Header="Field Connector" />
-                <Separator />
-                <MenuItem Header="Front of Selected Card" IsCheckable="True" IsChecked="True" />
-                <MenuItem Header="Back of Selected Card" IsCheckable="True" />
-                <Separator />
-                <MenuItem Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" />
-                <MenuItem Header="Zoom Card">
+                
+                <!-- Project ဖွင့်မှ ပေါ်လာမည့် View Menu Items များ -->
+                <Separator x:Name="ViewSep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <Separator x:Name="ViewSep2" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
+                <Separator x:Name="ViewSep3" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                <Separator x:Name="ViewSep4" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
                     <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="200%" IsCheckable="True" />
                     <MenuItem Header="400%" IsCheckable="True" />
                 </MenuItem>
+                
                 <Separator />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
