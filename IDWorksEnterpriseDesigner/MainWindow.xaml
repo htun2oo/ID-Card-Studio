@@ -54,8 +54,16 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu -->
+            <!-- 3. View Menu (Size Alignment ကို ညီအောင် Style သတ်မှတ်ထားပါသည်) -->
             <MenuItem Header="_View">
+                <MenuItem.Resources>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="MinHeight" Value="22"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    </Style>
+                </MenuItem.Resources>
+
+                <!-- Toolbars Submenu -->
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
