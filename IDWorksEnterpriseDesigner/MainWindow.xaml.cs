@@ -84,13 +84,13 @@ namespace IDWorksEnterpriseDesigner
                     Grid.SetRowSpan(leftStack, 2);
                     layoutGrid.Children.Add(leftStack);
 
-                    // Front Card Window (cm metrics: 3 cm horiz, 2 cm vert)
-                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 3, 2);
+                    // Front Card Window (ISO ID-1 standard: 8.56 cm x 5.398 cm, Ruler horizontal 9 cm)
+                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 9, 6);
                     Grid.SetRow(cardFrontWindow, 0);
                     leftStack.Children.Add(cardFrontWindow);
 
-                    // Back Card Window
-                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 3, 2);
+                    // Back Card Window (ISO ID-1 standard)
+                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 9, 6);
                     Grid.SetRow(cardBackWindow, 1);
                     leftStack.Children.Add(cardBackWindow);
                 }
@@ -165,8 +165,8 @@ namespace IDWorksEnterpriseDesigner
             canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(22) });
             canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            // 1 CM = 37.8 Pixels (Standard 96 DPI)
-            double cmDpi = 37.8;
+            // 1 CM = 37.7952 Pixels (Standard 96 DPI precise conversion)
+            double cmDpi = 37.7952;
 
             // Ruler & Grid Container Canvas
             Canvas designAreaCanvas = new Canvas { Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)), ClipToBounds = true };
@@ -183,8 +183,9 @@ namespace IDWorksEnterpriseDesigner
 
             if (isCard)
             {
-                paperBorder.Width = 8.5 * cmDpi; // 8.5 cm standard card width
-                paperBorder.Height = 5.4 * cmDpi; // 5.4 cm standard card height
+                // ISO ID-1 Standard: 85.60 mm x 53.98 mm (8.56 cm x 5.398 cm)
+                paperBorder.Width = 8.56 * cmDpi;
+                paperBorder.Height = 5.398 * cmDpi;
             }
             else
             {
