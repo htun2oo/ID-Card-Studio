@@ -54,7 +54,7 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu (Size Alignment ကို ညီအောင် Style သတ်မှတ်ထားပါသည်) -->
+            <!-- 3. View Menu -->
             <MenuItem Header="_View">
                 <MenuItem.Resources>
                     <Style TargetType="MenuItem">
