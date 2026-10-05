@@ -116,6 +116,15 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
+            // New Project နှိပ်လိုက်သောအခါ Edit Menu နှင့် View Menu ၏ Items များကို ဖွင့်ပေးမည်ဖြစ်သည်
+            MenuEdit.Visibility = Visibility.Visible;
+            MenuInsert.Visibility = Visibility.Visible;
+            MenuFormat.Visibility = Visibility.Visible;
+            MenuTools.Visibility = Visibility.Visible;
+            MenuWindow.Visibility = Visibility.Visible;
+
+            // Project ဖွင့်လိုက်သည်နှင့် Card Front Selected Mode သို့ ပြောင်းလဲပေးမည်
+            SetViewMenuMode(ActiveViewMode.CardFront);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
