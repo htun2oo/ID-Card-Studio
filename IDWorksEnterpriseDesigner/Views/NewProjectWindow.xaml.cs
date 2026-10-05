@@ -21,18 +21,22 @@ namespace IDWorksEnterpriseDesigner
             this.Close();
         }
 
-        private void ChkCardDesign_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (RbLandscape != null) RbLandscape.IsEnabled = false;
-            if (RbPortrait != null) RbPortrait.IsEnabled = false;
-            if (ChkAllowMultiple != null) ChkAllowMultiple.IsEnabled = false;
-        }
-
         private void ChkCardDesign_Checked(object sender, RoutedEventArgs e)
         {
-            if (RbLandscape != null) RbLandscape.IsEnabled = true;
-            if (RbPortrait != null) RbPortrait.IsEnabled = true;
-            if (ChkAllowMultiple != null) ChkAllowMultiple.IsEnabled = true;
+            SetCardOptionsEnabled(true);
+        }
+
+        private void ChkCardDesign_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SetCardOptionsEnabled(false);
+        }
+
+        private void SetCardOptionsEnabled(bool isEnabled)
+        {
+            if (RbLandscape != null) RbLandscape.IsEnabled = isEnabled;
+            if (RbPortrait != null) RbPortrait.IsEnabled = isEnabled;
+            if (ChkAllowMultiple != null) ChkAllowMultiple.IsEnabled = isEnabled;
+            if (TxtAllowMultiple != null) TxtAllowMultiple.IsEnabled = isEnabled;
         }
     }
 }
