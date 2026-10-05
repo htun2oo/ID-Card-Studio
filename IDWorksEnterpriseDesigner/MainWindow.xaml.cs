@@ -63,9 +63,9 @@ namespace IDWorksEnterpriseDesigner
                 // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // MDI Layout ဖွဲ့စည်းပုံ
+                // MDI Layout ဖွဲ့စည်းပုံ (Card တစ်ခုလုံး အပြည့်မြင်ရရန် Column Width ကို 360 သို့ တိုးမြှင့်ထားပါသည်)
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(275) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(360) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -104,10 +104,10 @@ namespace IDWorksEnterpriseDesigner
                     layoutGrid.Children.Add(prodFormWindow);
                 }
 
-                // 3. Bottom Right: Report Window
+                // 3. Bottom Right: Report Window (Window အပြည့် Ruler မြင်ရရန် Range ကို 18 cm x 10 cm သို့ ပြောင်းထားပါသည်)
                 if (dialog.HasReportDesign)
                 {
-                    Border reportWindow = CreateDesignerSubWindow("Report", false, 6, 2);
+                    Border reportWindow = CreateDesignerSubWindow("Report", false, 18, 10);
                     Grid.SetColumn(reportWindow, 1);
                     Grid.SetRow(reportWindow, 1);
                     layoutGrid.Children.Add(reportWindow);
