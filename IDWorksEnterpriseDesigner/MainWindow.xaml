@@ -6,7 +6,7 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <!-- File Menu (ဒုတိယပုံအတိုင်း တိကျစွာ ပြင်ဆင်ထားပါသည်) -->
+            <!-- File Menu -->
             <MenuItem Header="_File">
                 <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
@@ -52,12 +52,11 @@
             <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
             <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
 
-            <!-- Help Menu -->
+            <!-- Help Menu (ဒုတိယပုံစံအတိုင်း တိကျစွာ ပြင်ဆင်ထားပါသည်) -->
             <MenuItem Header="_Help">
-                <MenuItem Header="ID Works _Help Topics..." />
-                <MenuItem Header="Datacard _Web Site..." />
+                <MenuItem Header="_Online Help..." InputGestureText="F1" />
                 <Separator />
-                <MenuItem Header="_About Datacard ID Works..." />
+                <MenuItem Header="_About..." />
             </MenuItem>
         </Menu>
 
