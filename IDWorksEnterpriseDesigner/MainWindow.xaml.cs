@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives; // UniformGrid အတွက် ထည့်သွင်းထားပါသည်
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using IDWorksEnterpriseDesigner.Views;
@@ -9,6 +10,8 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
+        private string _projectName = "Sample";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,8 +29,10 @@ namespace IDWorksEnterpriseDesigner
 
             if (dialog.ShowDialog() == true)
             {
-                // Window Title ပြောင်းလဲခြင်း
-                this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
+                _projectName = dialog.ProjectName;
+
+                // Window Title ပြောင်းလဲခြင်း (Default အဖြစ် [Card] ဟု သတ်မှတ်ခြင်း)
+                this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [Card]";
 
                 // File Menu တွင်းရှိ Separators များကို ဖော်ပြပေးခြင်း
                 Sep1.Visibility = Visibility.Visible;
@@ -46,7 +51,7 @@ namespace IDWorksEnterpriseDesigner
                 MenuDeleteProject.Visibility = Visibility.Visible;
 
                 // Recent File ကို အသုံးပြုနိုင်အောင် ဖွင့်ပေးပြီး ဖိုင်လမ်းကြောင်း အပြည့်အစုံ ဖော်ပြခြင်း
-                MenuRecentFile.Header = @"1 C:\Users\...\Sample\Sample.iwp";
+                MenuRecentFile.Header = $@"1 C:\Users\...\Sample\{_projectName}.iwp";
                 MenuRecentFile.IsEnabled = true;
 
                 // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို ဖော်ပြပေးခြင်း
@@ -120,6 +125,12 @@ namespace IDWorksEnterpriseDesigner
                 BorderThickness = new Thickness(3),
                 Margin = new Thickness(2),
                 Background = Brushes.White
+            };
+
+            // Window ကို Click နှိပ်လိုက်သည့်အခါ Main Title Bar ကို အလိုအလျောက် ပြောင်းပေးခြင်း
+            border.MouseLeftButtonDown += (s, e) =>
+            {
+                this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [{title}]";
             };
 
             DockPanel panel = new DockPanel();
@@ -209,6 +220,12 @@ namespace IDWorksEnterpriseDesigner
                 BorderThickness = new Thickness(3),
                 Margin = new Thickness(2),
                 Background = Brushes.White
+            };
+
+            // Window ကို Click နှိပ်လိုက်သည့်အခါ Main Title Bar ကို အလိုအလျောက် ပြောင်းပေးခြင်း
+            border.MouseLeftButtonDown += (s, e) =>
+            {
+                this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [{title}]";
             };
 
             DockPanel panel = new DockPanel();
