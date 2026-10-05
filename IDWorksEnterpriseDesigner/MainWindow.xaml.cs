@@ -63,9 +63,10 @@ namespace IDWorksEnterpriseDesigner
                 // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // MDI Layout ဖွဲ့စည်းပုံ (အပေါ်/အောက် နှင့် ညာဘက် အချိုးအစား တူညီစေရန် 360px သို့ ညှိပေးထားပါသည်)
+                // MDI Layout ဖွဲ့စည်းပုံ
+                // Card Window Width ကိန်းသေ ပမာဏနှင့် Ruler/Margin အတိုင်းအတာများ တိကျကိုင်တွယ်နိုင်ရန် 380px သို့ ညှိပေးထားပါသည်
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(360) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -84,12 +85,12 @@ namespace IDWorksEnterpriseDesigner
                     Grid.SetRowSpan(leftStack, 2);
                     layoutGrid.Children.Add(leftStack);
 
-                    // Front Card Window (ISO ID-1 standard: 8.56 cm x 5.398 cm, Ruler horizontal 8 cm)
+                    // Front Card Window
                     Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 8, 5);
                     Grid.SetRow(cardFrontWindow, 0);
                     leftStack.Children.Add(cardFrontWindow);
 
-                    // Back Card Window (ISO ID-1 standard)
+                    // Back Card Window
                     Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 8, 5);
                     Grid.SetRow(cardBackWindow, 1);
                     leftStack.Children.Add(cardBackWindow);
@@ -193,7 +194,7 @@ namespace IDWorksEnterpriseDesigner
                 paperBorder.Height = 10 * cmDpi;
             }
 
-            // Card / Paper Margin - Left Offset 15px
+            // Card / Paper Margin - Left 15px, Top 15px
             Canvas.SetLeft(paperBorder, 15);
             Canvas.SetTop(paperBorder, 15);
             designAreaCanvas.Children.Add(paperBorder);
