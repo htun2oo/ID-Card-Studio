@@ -28,7 +28,7 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- 2. Edit Menu (ပုံပါအတိုင်း Sub-menu များနှင့် ပြင်ဆင်ထားပါသည်) -->
+            <!-- 2. Edit Menu -->
             <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
                 <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
                 <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
@@ -51,7 +51,7 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu -->
+            <!-- 3. View Menu (ဒုတိယပုံပါအတိုင်း အပြည့်အစုံ ပြင်ဆင်ထားပါသည်) -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -65,6 +65,25 @@
                     <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
                 </MenuItem>
+                <Separator />
+                <MenuItem Header="Field Names" InputGestureText="Ctrl+H" />
+                <MenuItem Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" />
+                <Separator />
+                <MenuItem Header="Card..." />
+                <MenuItem Header="Report..." />
+                <MenuItem Header="Production Form" />
+                <MenuItem Header="Field Connector" />
+                <Separator />
+                <MenuItem Header="Front of Selected Card" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Back of Selected Card" IsCheckable="True" />
+                <Separator />
+                <MenuItem Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Zoom Card">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
+                <Separator />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
