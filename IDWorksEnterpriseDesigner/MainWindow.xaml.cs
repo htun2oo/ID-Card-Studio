@@ -63,9 +63,9 @@ namespace IDWorksEnterpriseDesigner
                 // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // MDI Layout ဖွဲ့စည်းပုံ (Card Window ကို ညာဘက်သို့ အနည်းငယ် ပိုကြီးစေရန် Column Width ကို 380 သို့ တိုးမြှင့်ထားပါသည်)
+                // MDI Layout ဖွဲ့စည်းပုံ (အပေါ်/အောက် နှင့် ညာဘက် အချိုးအစား တူညီစေရန် 360px သို့ ညှိပေးထားပါသည်)
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(360) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
