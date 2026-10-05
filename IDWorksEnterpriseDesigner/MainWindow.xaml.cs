@@ -63,7 +63,7 @@ namespace IDWorksEnterpriseDesigner
                 // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // MDI Layout ဖွဲ့စည်းပုံ (Card တစ်ခုလုံး အပြည့်မြင်ရရန် Column Width ကို 360 သို့ တိုးမြှင့်ထားပါသည်)
+                // MDI Layout ဖွဲ့စည်းပုံ
                 Grid layoutGrid = new Grid();
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(360) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
@@ -84,13 +84,13 @@ namespace IDWorksEnterpriseDesigner
                     Grid.SetRowSpan(leftStack, 2);
                     layoutGrid.Children.Add(leftStack);
 
-                    // Front Card Window (ISO ID-1 standard: 8.56 cm x 5.398 cm, Ruler horizontal 9 cm)
-                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 9, 6);
+                    // Front Card Window (ISO ID-1 standard: 8.56 cm x 5.398 cm, Ruler horizontal 8 cm)
+                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 8, 5);
                     Grid.SetRow(cardFrontWindow, 0);
                     leftStack.Children.Add(cardFrontWindow);
 
                     // Back Card Window (ISO ID-1 standard)
-                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 9, 6);
+                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 8, 5);
                     Grid.SetRow(cardBackWindow, 1);
                     leftStack.Children.Add(cardBackWindow);
                 }
@@ -104,7 +104,7 @@ namespace IDWorksEnterpriseDesigner
                     layoutGrid.Children.Add(prodFormWindow);
                 }
 
-                // 3. Bottom Right: Report Window (Window အပြည့် Ruler မြင်ရရန် Range ကို 18 cm x 10 cm သို့ ပြောင်းထားပါသည်)
+                // 3. Bottom Right: Report Window
                 if (dialog.HasReportDesign)
                 {
                     Border reportWindow = CreateDesignerSubWindow("Report", false, 18, 10);
@@ -193,6 +193,7 @@ namespace IDWorksEnterpriseDesigner
                 paperBorder.Height = 10 * cmDpi;
             }
 
+            // Card / Paper Margin - Left Offset 15px
             Canvas.SetLeft(paperBorder, 15);
             Canvas.SetTop(paperBorder, 15);
             designAreaCanvas.Children.Add(paperBorder);
@@ -201,6 +202,17 @@ namespace IDWorksEnterpriseDesigner
             Canvas topRulerCanvas = new Canvas { Background = Brushes.LightGray, Height = 22, Cursor = Cursors.SizeNS };
             Grid.SetColumn(topRulerCanvas, 1);
             Grid.SetRow(topRulerCanvas, 0);
+
+            // Card Window များ၏ ညာဘက်အစွန်းတွင် Margin ခွာပေးရန် MaxWidth သတ်မှတ်ခြင်း
+            if (isCard)
+            {
+                double cardContentWidth = 15 + (8.56 * cmDpi) + 15; // Left margin + Card width + Right margin (15px)
+                topRulerCanvas.MaxWidth = cardContentWidth;
+                topRulerCanvas.HorizontalAlignment = HorizontalAlignment.Left;
+                designAreaCanvas.MaxWidth = cardContentWidth;
+                designAreaCanvas.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+
             DrawHorizontalRuler(topRulerCanvas, maxRulerCmX, cmDpi);
 
             // Vertical Ruler Canvas
