@@ -63,9 +63,9 @@ namespace IDWorksEnterpriseDesigner
                 // Workspace ကို ရှင်းလင်းခြင်း
                 MdiHostGrid.Children.Clear();
 
-                // MDI Layout ဖွဲ့စည်းပုံ
+                // MDI Layout ဖွဲ့စည်းပုံ (Card Window ကို ညာဘက်သို့ အနည်းငယ် ပိုကြီးစေရန် Column Width ကို 380 သို့ တိုးမြှင့်ထားပါသည်)
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(360) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -202,16 +202,6 @@ namespace IDWorksEnterpriseDesigner
             Canvas topRulerCanvas = new Canvas { Background = Brushes.LightGray, Height = 22, Cursor = Cursors.SizeNS };
             Grid.SetColumn(topRulerCanvas, 1);
             Grid.SetRow(topRulerCanvas, 0);
-
-            // Card Window များ၏ ညာဘက်အစွန်းတွင် Margin ခွာပေးရန် MaxWidth သတ်မှတ်ခြင်း
-            if (isCard)
-            {
-                double cardContentWidth = 15 + (8.56 * cmDpi) + 15; // Left margin + Card width + Right margin (15px)
-                topRulerCanvas.MaxWidth = cardContentWidth;
-                topRulerCanvas.HorizontalAlignment = HorizontalAlignment.Left;
-                designAreaCanvas.MaxWidth = cardContentWidth;
-                designAreaCanvas.HorizontalAlignment = HorizontalAlignment.Left;
-            }
 
             DrawHorizontalRuler(topRulerCanvas, maxRulerCmX, cmDpi);
 
