@@ -1,6 +1,5 @@
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives; // UniformGrid အတွက် ထည့်သွင်းထားပါသည်
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -31,7 +30,7 @@ namespace IDWorksEnterpriseDesigner
             {
                 _projectName = dialog.ProjectName;
 
-                // Window Title ပြောင်းလဲခြင်း (Default အဖြစ် [Card] ဟု သတ်မှတ်ခြင်း)
+                // Window Title ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [Card]";
 
                 // File Menu တွင်းရှိ Separators များကို ဖော်ပြပေးခြင်း
@@ -50,11 +49,11 @@ namespace IDWorksEnterpriseDesigner
                 MenuReportPageSetup.Visibility = Visibility.Visible;
                 MenuDeleteProject.Visibility = Visibility.Visible;
 
-                // Recent File ကို အသုံးပြုနိုင်အောင် ဖွင့်ပေးပြီး ဖိုင်လမ်းကြောင်း အပြည့်အစုံ ဖော်ပြခြင်း
+                // Recent File
                 MenuRecentFile.Header = $@"1 C:\Users\...\Sample\{_projectName}.iwp";
                 MenuRecentFile.IsEnabled = true;
 
-                // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို ဖော်ပြပေးခြင်း
+                // Menu Items များ ဖော်ပြပေးခြင်း
                 MenuEdit.Visibility = Visibility.Visible;
                 MenuInsert.Visibility = Visibility.Visible;
                 MenuFormat.Visibility = Visibility.Visible;
@@ -85,13 +84,13 @@ namespace IDWorksEnterpriseDesigner
                     Grid.SetRowSpan(leftStack, 2);
                     layoutGrid.Children.Add(leftStack);
 
-                    // Front Card Window
-                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 3);
+                    // Front Card Window (cm metrics: 3 cm horiz, 2 cm vert)
+                    Border cardFrontWindow = CreateDesignerSubWindow("Card", true, 3, 2);
                     Grid.SetRow(cardFrontWindow, 0);
                     leftStack.Children.Add(cardFrontWindow);
 
                     // Back Card Window
-                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 3);
+                    Border cardBackWindow = CreateDesignerSubWindow("Card (back side)", true, 3, 2);
                     Grid.SetRow(cardBackWindow, 1);
                     leftStack.Children.Add(cardBackWindow);
                 }
@@ -108,7 +107,7 @@ namespace IDWorksEnterpriseDesigner
                 // 3. Bottom Right: Report Window
                 if (dialog.HasReportDesign)
                 {
-                    Border reportWindow = CreateDesignerSubWindow("Report", false, 6);
+                    Border reportWindow = CreateDesignerSubWindow("Report", false, 6, 2);
                     Grid.SetColumn(reportWindow, 1);
                     Grid.SetRow(reportWindow, 1);
                     layoutGrid.Children.Add(reportWindow);
@@ -117,7 +116,7 @@ namespace IDWorksEnterpriseDesigner
         }
 
         // Sub-Window (Card & Report) ဖန်တီးပေးသည့် နည်းလမ်း
-        private Border CreateDesignerSubWindow(string title, bool isCard, int maxRulerUnit)
+        private Border CreateDesignerSubWindow(string title, bool isCard, int maxRulerCmX, int maxRulerCmY)
         {
             Border border = new Border
             {
@@ -127,7 +126,7 @@ namespace IDWorksEnterpriseDesigner
                 Background = Brushes.White
             };
 
-            // Window ကို Click နှိပ်လိုက်သည့်အခါ Main Title Bar ကို အလိုအလျောက် ပြောင်းပေးခြင်း
+            // Window Active ဖြစ်လျှင် Title Bar ပြောင်းလဲရန်
             border.MouseLeftButtonDown += (s, e) =>
             {
                 this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [{title}]";
@@ -150,7 +149,7 @@ namespace IDWorksEnterpriseDesigner
             };
             titleBar.Children.Add(titleText);
 
-            // Sub-Window Buttons (Minimize, Maximize, Close)
+            // Sub-Window Buttons
             StackPanel winBtns = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 0, 2, 0) };
             winBtns.Children.Add(new Button { Content = "_", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
             winBtns.Children.Add(new Button { Content = "☐", Width = 16, Height = 14, FontSize = 8, Margin = new Thickness(1), Background = Brushes.LightGray });
@@ -166,49 +165,242 @@ namespace IDWorksEnterpriseDesigner
             canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(22) });
             canvasGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 
-            // Horizontal Ruler
-            UniformGrid topRuler = new UniformGrid { Rows = 1, Columns = maxRulerUnit, Background = Brushes.LightGray };
-            for (int i = 1; i <= maxRulerUnit; i++)
-            {
-                topRuler.Children.Add(new TextBlock { Text = i.ToString(), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Bottom, FontSize = 10, Margin = new Thickness(0, 0, 2, 0) });
-            }
-            Grid.SetColumn(topRuler, 1);
-            Grid.SetRow(topRuler, 0);
-            canvasGrid.Children.Add(topRuler);
+            // 1 CM = 37.8 Pixels (Standard 96 DPI)
+            double cmDpi = 37.8;
 
-            // Vertical Ruler
-            UniformGrid leftRuler = new UniformGrid { Columns = 1, Rows = 2, Background = Brushes.LightGray };
-            leftRuler.Children.Add(new TextBlock { Text = "1", VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 10 });
-            leftRuler.Children.Add(new TextBlock { Text = "2", VerticalAlignment = VerticalAlignment.Bottom, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 10 });
-            Grid.SetColumn(leftRuler, 0);
-            Grid.SetRow(leftRuler, 1);
-            canvasGrid.Children.Add(leftRuler);
+            // Ruler & Grid Container Canvas
+            Canvas designAreaCanvas = new Canvas { Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)), ClipToBounds = true };
+            Grid.SetColumn(designAreaCanvas, 1);
+            Grid.SetRow(designAreaCanvas, 1);
 
-            // White Canvas Container
+            // White Paper Container
             Border paperBorder = new Border
             {
                 Background = Brushes.White,
                 BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(5)
+                BorderThickness = new Thickness(1)
             };
 
             if (isCard)
             {
-                paperBorder.Width = 210;
-                paperBorder.Height = 130;
+                paperBorder.Width = 8.5 * cmDpi; // 8.5 cm standard card width
+                paperBorder.Height = 5.4 * cmDpi; // 5.4 cm standard card height
+            }
+            else
+            {
+                paperBorder.Width = 15 * cmDpi;
+                paperBorder.Height = 10 * cmDpi;
             }
 
-            Grid.SetColumn(paperBorder, 1);
-            Grid.SetRow(paperBorder, 1);
-            canvasGrid.Children.Add(paperBorder);
+            Canvas.SetLeft(paperBorder, 15);
+            Canvas.SetTop(paperBorder, 15);
+            designAreaCanvas.Children.Add(paperBorder);
+
+            // Horizontal Ruler Canvas
+            Canvas topRulerCanvas = new Canvas { Background = Brushes.LightGray, Height = 22, Cursor = Cursors.SizeNS };
+            Grid.SetColumn(topRulerCanvas, 1);
+            Grid.SetRow(topRulerCanvas, 0);
+            DrawHorizontalRuler(topRulerCanvas, maxRulerCmX, cmDpi);
+
+            // Vertical Ruler Canvas
+            Canvas leftRulerCanvas = new Canvas { Background = Brushes.LightGray, Width = 22, Cursor = Cursors.SizeWE };
+            Grid.SetColumn(leftRulerCanvas, 0);
+            Grid.SetRow(leftRulerCanvas, 1);
+            DrawVerticalRuler(leftRulerCanvas, maxRulerCmY, cmDpi);
+
+            // Photoshop-style Guide Lines Dragging System
+            SetupGuideLineDragging(topRulerCanvas, leftRulerCanvas, designAreaCanvas);
+
+            canvasGrid.Children.Add(topRulerCanvas);
+            canvasGrid.Children.Add(leftRulerCanvas);
+            canvasGrid.Children.Add(designAreaCanvas);
 
             panel.Children.Add(canvasGrid);
             border.Child = panel;
 
             return border;
+        }
+
+        // Horizontal Ruler အမှတ်အသား (Centimeter Ticks) ဆွဲပေးခြင်း
+        private void DrawHorizontalRuler(Canvas canvas, int maxCm, double cmPx)
+        {
+            double startOffset = 15; // Align with paper margin
+            for (int cm = 1; cm <= maxCm; cm++)
+            {
+                double posX = startOffset + (cm * cmPx);
+
+                // Sub-ticks (mm lines)
+                for (int mm = 1; mm < 10; mm++)
+                {
+                    double mmX = startOffset + ((cm - 1) * cmPx) + (mm * (cmPx / 10));
+                    double h = (mm == 5) ? 8 : 4;
+                    Line subLine = new Line { X1 = mmX, Y1 = 22, X2 = mmX, Y2 = 22 - h, Stroke = Brushes.DimGray, StrokeThickness = 0.8 };
+                    canvas.Children.Add(subLine);
+                }
+
+                // Main CM Line & Text
+                Line mainLine = new Line { X1 = posX, Y1 = 22, X2 = posX, Y2 = 10, Stroke = Brushes.Black, StrokeThickness = 1 };
+                TextBlock txt = new TextBlock { Text = cm.ToString(), FontSize = 9, Foreground = Brushes.Black };
+                Canvas.SetLeft(txt, posX - 8);
+                Canvas.SetTop(txt, 0);
+
+                canvas.Children.Add(mainLine);
+                canvas.Children.Add(txt);
+            }
+        }
+
+        // Vertical Ruler အမှတ်အသား (Centimeter Ticks) ဆွဲပေးခြင်း
+        private void DrawVerticalRuler(Canvas canvas, int maxCm, double cmPx)
+        {
+            double startOffset = 15; // Align with paper margin
+            for (int cm = 1; cm <= maxCm; cm++)
+            {
+                double posY = startOffset + (cm * cmPx);
+
+                // Sub-ticks (mm lines)
+                for (int mm = 1; mm < 10; mm++)
+                {
+                    double mmY = startOffset + ((cm - 1) * cmPx) + (mm * (cmPx / 10));
+                    double w = (mm == 5) ? 8 : 4;
+                    Line subLine = new Line { X1 = 22, Y1 = mmY, X2 = 22 - w, Y2 = mmY, Stroke = Brushes.DimGray, StrokeThickness = 0.8 };
+                    canvas.Children.Add(subLine);
+                }
+
+                // Main CM Line & Text
+                Line mainLine = new Line { X1 = 22, Y1 = posY, X2 = 10, Y2 = posY, Stroke = Brushes.Black, StrokeThickness = 1 };
+                TextBlock txt = new TextBlock { Text = cm.ToString(), FontSize = 9, Foreground = Brushes.Black };
+                Canvas.SetLeft(txt, 1);
+                Canvas.SetTop(txt, posY - 7);
+
+                canvas.Children.Add(mainLine);
+                canvas.Children.Add(txt);
+            }
+        }
+
+        // Photoshop Style Grid / Guide Lines Drag & Drop Logic
+        private void SetupGuideLineDragging(Canvas topRuler, Canvas leftRuler, Canvas designCanvas)
+        {
+            Line currentGuide = null;
+
+            // Horizontal Guide Line Drag from Top Ruler
+            topRuler.MouseLeftButtonDown += (s, e) =>
+            {
+                Point p = e.GetPosition(designCanvas);
+                currentGuide = new Line
+                {
+                    X1 = 0,
+                    Y1 = p.Y,
+                    X2 = 2000,
+                    Y2 = p.Y,
+                    Stroke = Brushes.Cyan,
+                    StrokeThickness = 1,
+                    Cursor = Cursors.SizeNS
+                };
+
+                designCanvas.Children.Add(currentGuide);
+                topRuler.CaptureMouse();
+            };
+
+            topRuler.MouseMove += (s, e) =>
+            {
+                if (currentGuide != null && topRuler.IsMouseCaptured)
+                {
+                    Point p = e.GetPosition(designCanvas);
+                    currentGuide.Y1 = p.Y;
+                    currentGuide.Y2 = p.Y;
+                }
+            };
+
+            topRuler.MouseLeftButtonUp += (s, e) =>
+            {
+                if (topRuler.IsMouseCaptured)
+                {
+                    topRuler.ReleaseMouseCapture();
+                    MakeGuideDraggable(currentGuide, designCanvas, false);
+                    currentGuide = null;
+                }
+            };
+
+            // Vertical Guide Line Drag from Left Ruler
+            leftRuler.MouseLeftButtonDown += (s, e) =>
+            {
+                Point p = e.GetPosition(designCanvas);
+                currentGuide = new Line
+                {
+                    X1 = p.X,
+                    Y1 = 0,
+                    X2 = p.X,
+                    Y2 = 2000,
+                    Stroke = Brushes.Cyan,
+                    StrokeThickness = 1,
+                    Cursor = Cursors.SizeWE
+                };
+
+                designCanvas.Children.Add(currentGuide);
+                leftRuler.CaptureMouse();
+            };
+
+            leftRuler.MouseMove += (s, e) =>
+            {
+                if (currentGuide != null && leftRuler.IsMouseCaptured)
+                {
+                    Point p = e.GetPosition(designCanvas);
+                    currentGuide.X1 = p.X;
+                    currentGuide.X2 = p.X;
+                }
+            };
+
+            leftRuler.MouseLeftButtonUp += (s, e) =>
+            {
+                if (leftRuler.IsMouseCaptured)
+                {
+                    leftRuler.ReleaseMouseCapture();
+                    MakeGuideDraggable(currentGuide, designCanvas, true);
+                    currentGuide = null;
+                }
+            };
+        }
+
+        // Guide Line များကို Canvas ထဲသို့ ရောက်သွားပါက အပေါ်တွင် ပြန်လည် Drag ဆွဲရွှေ့နိုင်ရန် ဖန်တီးပေးခြင်း
+        private void MakeGuideDraggable(Line guide, Canvas designCanvas, bool isVertical)
+        {
+            if (guide == null) return;
+
+            bool isDragging = false;
+
+            guide.MouseLeftButtonDown += (s, e) =>
+            {
+                isDragging = true;
+                guide.CaptureMouse();
+                e.Handled = true;
+            };
+
+            guide.MouseMove += (s, e) =>
+            {
+                if (isDragging)
+                {
+                    Point p = e.GetPosition(designCanvas);
+                    if (isVertical)
+                    {
+                        guide.X1 = p.X;
+                        guide.X2 = p.X;
+                    }
+                    else
+                    {
+                        guide.Y1 = p.Y;
+                        guide.Y2 = p.Y;
+                    }
+                }
+            };
+
+            guide.MouseLeftButtonUp += (s, e) =>
+            {
+                if (isDragging)
+                {
+                    isDragging = false;
+                    guide.ReleaseMouseCapture();
+                }
+            };
         }
 
         // Production Form Sub-Window ဖန်တီးပေးသည့် နည်းလမ်း
@@ -222,7 +414,6 @@ namespace IDWorksEnterpriseDesigner
                 Background = Brushes.White
             };
 
-            // Window ကို Click နှိပ်လိုက်သည့်အခါ Main Title Bar ကို အလိုအလျောက် ပြောင်းပေးခြင်း
             border.MouseLeftButtonDown += (s, e) =>
             {
                 this.Title = $"Datacard ID Works Enterprise Designer - {_projectName} - [{title}]";
