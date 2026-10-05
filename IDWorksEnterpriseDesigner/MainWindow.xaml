@@ -56,7 +56,6 @@
 
             <!-- 3. View Menu -->
             <MenuItem Header="_View">
-                <!-- Toolbars Submenu -->
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
