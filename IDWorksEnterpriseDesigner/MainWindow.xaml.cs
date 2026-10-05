@@ -29,6 +29,17 @@ namespace IDWorksEnterpriseDesigner
                 // Window Title ပြောင်းလဲခြင်း
                 this.Title = $"Datacard ID Works Enterprise Designer - {dialog.ProjectName} - [Card]";
 
+                // File Menu တွင်းရှိ Project သက်ဆိုင်ရာ Menu Items များကို ဖော်ပြပေးခြင်း
+                MenuCloseProject.Visibility = Visibility.Visible;
+                MenuSaveProject.Visibility = Visibility.Visible;
+                MenuSaveProjectAs.Visibility = Visibility.Visible;
+                MenuProjectProperties.Visibility = Visibility.Visible;
+                MenuPrintSampleCard.Visibility = Visibility.Visible;
+                MenuPreviewSampleReport.Visibility = Visibility.Visible;
+                MenuReportPageSetup.Visibility = Visibility.Visible;
+                MenuDeleteProject.Visibility = Visibility.Visible;
+                MenuRecentFile.Visibility = Visibility.Visible;
+
                 // Project သစ်ဖွင့်လိုက်ပါက Menu Items များကို ဖော်ပြပေးခြင်း
                 MenuEdit.Visibility = Visibility.Visible;
                 MenuInsert.Visibility = Visibility.Visible;
