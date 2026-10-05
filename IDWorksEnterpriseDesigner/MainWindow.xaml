@@ -77,7 +77,7 @@
 
         <!-- Main MDI Workspace Grid Area -->
         <Grid x:Name="MdiHostGrid" Background="Gray">
-            <!-- Project မဖွင့်သေးမီ Gray Background အဖြစ် ဖော်ပြထားပါသည် -->
+            <!-- Project ဖွင့်လိုက်ပါက Sub-windows (Card, Card back, Report, Production) များဝင်မည် -->
         </Grid>
     </DockPanel>
 </Window>
