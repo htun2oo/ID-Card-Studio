@@ -145,8 +145,8 @@
                     <!-- Card Window (Front) -->
                     <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
-                            <!-- Title Bar ကို ပိုမိုမှိုင်းပြီး မှိန်သော မီးခိုပြာရောင် (#8A9BB0) သို့ ပြောင်းလဲထားပါသည် -->
-                            <Grid DockPanel.Dock="Top" Background="#8A9BB0" Height="22">
+                            <!-- Title Bar အရောင်ကို #D1D9E0 သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
                                 <TextBlock Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
                                     <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
@@ -175,8 +175,8 @@
                     <!-- Card (back side) Window -->
                     <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
-                            <!-- Title Bar ကို ပိုမိုမှိုင်းပြီး မှိန်သော မီးခိုပြာရောင် (#8A9BB0) သို့ ပြောင်းလဲထားပါသည် -->
-                            <Grid DockPanel.Dock="Top" Background="#8A9BB0" Height="22">
+                            <!-- Title Bar အရောင်ကို #D1D9E0 သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
                                 <TextBlock Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
                                     <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
@@ -213,8 +213,8 @@
                     <!-- Production Form Window -->
                     <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
-                            <!-- Title Bar ကို ပိုမိုမှိုင်းပြီး မှိန်သော မီးခိုပြာရောင် (#8A9BB0) သို့ ပြောင်းလဲထားပါသည် -->
-                            <Grid DockPanel.Dock="Top" Background="#8A9BB0" Height="22">
+                            <!-- Title Bar အရောင်ကို #D1D9E0 သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
                                 <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
                                     <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
@@ -229,8 +229,8 @@
                     <!-- Report Window -->
                     <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
-                            <!-- Title Bar ကို ပိုမိုမှိုင်းပြီး မှိန်သော မီးခိုပြာရောင် (#8A9BB0) သို့ ပြောင်းလဲထားပါသည် -->
-                            <Grid DockPanel.Dock="Top" Background="#8A9BB0" Height="22">
+                            <!-- Title Bar အရောင်ကို #D1D9E0 သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
                                 <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
                                     <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
