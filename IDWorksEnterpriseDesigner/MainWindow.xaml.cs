@@ -280,7 +280,7 @@ namespace IDWorksEnterpriseDesigner
         // Photoshop Style Grid / Guide Lines Drag & Drop Logic
         private void SetupGuideLineDragging(Canvas topRuler, Canvas leftRuler, Canvas designCanvas)
         {
-            Line currentGuide = null;
+            Line? currentGuide = null;
 
             // Horizontal Guide Line Drag from Top Ruler
             topRuler.MouseLeftButtonDown += (s, e) =>
@@ -316,8 +316,11 @@ namespace IDWorksEnterpriseDesigner
                 if (topRuler.IsMouseCaptured)
                 {
                     topRuler.ReleaseMouseCapture();
-                    MakeGuideDraggable(currentGuide, designCanvas, false);
-                    currentGuide = null;
+                    if (currentGuide != null)
+                    {
+                        MakeGuideDraggable(currentGuide, designCanvas, false);
+                        currentGuide = null;
+                    }
                 }
             };
 
@@ -355,14 +358,17 @@ namespace IDWorksEnterpriseDesigner
                 if (leftRuler.IsMouseCaptured)
                 {
                     leftRuler.ReleaseMouseCapture();
-                    MakeGuideDraggable(currentGuide, designCanvas, true);
-                    currentGuide = null;
+                    if (currentGuide != null)
+                    {
+                        MakeGuideDraggable(currentGuide, designCanvas, true);
+                        currentGuide = null;
+                    }
                 }
             };
         }
 
         // Guide Line များကို Canvas ထဲသို့ ရောက်သွားပါက အပေါ်တွင် ပြန်လည် Drag ဆွဲရွှေ့နိုင်ရန် ဖန်တီးပေးခြင်း
-        private void MakeGuideDraggable(Line guide, Canvas designCanvas, bool isVertical)
+        private void MakeGuideDraggable(Line? guide, Canvas designCanvas, bool isVertical)
         {
             if (guide == null) return;
 
