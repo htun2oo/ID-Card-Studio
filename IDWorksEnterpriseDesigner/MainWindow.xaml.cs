@@ -64,9 +64,9 @@ namespace IDWorksEnterpriseDesigner
                 MdiHostGrid.Children.Clear();
 
                 // MDI Layout ဖွဲ့စည်းပုံ
-                // Normal Window အနေအထားတွင် Card Window အရွယ်အစား ကောင်းမွန်စေရန် Column 0 ကို 380px fixed ထားပါသည်
+                // Card Size တစ်ခုလုံး Scroll Bar မလိုဘဲ အပြည့်အစုံ ပေါ်စေရန် Column 0 ကို 410px သို့ တိုးမြှင့်ထားပါသည်
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(410) });
                 layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -105,7 +105,7 @@ namespace IDWorksEnterpriseDesigner
                     layoutGrid.Children.Add(prodFormWindow);
                 }
 
-                // 3. Bottom Right: Report Window (Report document size ကို ပိုမိုကြီးမားအောင် Ruler စကေး 22x15 ထားရှိပါသည်)
+                // 3. Bottom Right: Report Window
                 if (dialog.HasReportDesign)
                 {
                     Border reportWindow = CreateDesignerSubWindow("Report", false, 22, 15);
@@ -169,11 +169,11 @@ namespace IDWorksEnterpriseDesigner
             // 1 CM = 37.7952 Pixels (Standard 96 DPI precise conversion)
             double cmDpi = 37.7952;
 
-            // ScrollViewer ဖြင့် ပတ်ပတ်လည် သပ်ရပ်စွာ Scroll လုပ်နိုင်ရန် ထိန်းချုပ်ပေးခြင်း
+            // ScrollViewer ဖြင့် Control လုပ်ခြင်း (Card Window များတွင် ScrollBar မပေါ်စေရန် Hidden ထားပါသည်)
             ScrollViewer scrollViewer = new ScrollViewer
             {
-                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                HorizontalScrollBarVisibility = isCard ? ScrollBarVisibility.Hidden : ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = isCard ? ScrollBarVisibility.Hidden : ScrollBarVisibility.Auto,
                 Background = new SolidColorBrush(Color.FromRgb(210, 210, 210))
             };
             Grid.SetColumn(scrollViewer, 1);
@@ -183,8 +183,8 @@ namespace IDWorksEnterpriseDesigner
             Canvas designAreaCanvas = new Canvas 
             { 
                 Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)),
-                Width = Math.Max(1000, (maxRulerCmX + 2) * cmDpi),
-                Height = Math.Max(800, (maxRulerCmY + 2) * cmDpi)
+                Width = isCard ? (maxRulerCmX * cmDpi + 20) : Math.Max(1000, (maxRulerCmX + 2) * cmDpi),
+                Height = isCard ? (maxRulerCmY * cmDpi + 20) : Math.Max(800, (maxRulerCmY + 2) * cmDpi)
             };
 
             // White Paper Container
@@ -195,6 +195,8 @@ namespace IDWorksEnterpriseDesigner
                 BorderThickness = new Thickness(1)
             };
 
+            double startOffset = 5;
+
             if (isCard)
             {
                 // ISO ID-1 Standard: 85.60 mm x 53.98 mm (8.56 cm x 5.398 cm)
@@ -203,14 +205,15 @@ namespace IDWorksEnterpriseDesigner
             }
             else
             {
-                // Full screen တွင် Report Document ကြီးမားစေရန် 20cm x 14cm သို့ ပြင်ဆင်ထားပါသည်
+                // Report Document Size (20cm x 14cm)
                 paperBorder.Width = 20 * cmDpi;
                 paperBorder.Height = 14 * cmDpi;
+                startOffset = 15;
             }
 
             // Margin Alignment
-            Canvas.SetLeft(paperBorder, 15);
-            Canvas.SetTop(paperBorder, 15);
+            Canvas.SetLeft(paperBorder, startOffset);
+            Canvas.SetTop(paperBorder, startOffset);
             designAreaCanvas.Children.Add(paperBorder);
 
             scrollViewer.Content = designAreaCanvas;
@@ -220,13 +223,13 @@ namespace IDWorksEnterpriseDesigner
             Grid.SetColumn(topRulerCanvas, 1);
             Grid.SetRow(topRulerCanvas, 0);
 
-            DrawHorizontalRuler(topRulerCanvas, maxRulerCmX, cmDpi);
+            DrawHorizontalRuler(topRulerCanvas, maxRulerCmX, cmDpi, startOffset);
 
             // Vertical Ruler Canvas
             Canvas leftRulerCanvas = new Canvas { Background = Brushes.LightGray, Width = 22, Cursor = Cursors.SizeWE };
             Grid.SetColumn(leftRulerCanvas, 0);
             Grid.SetRow(leftRulerCanvas, 1);
-            DrawVerticalRuler(leftRulerCanvas, maxRulerCmY, cmDpi);
+            DrawVerticalRuler(leftRulerCanvas, maxRulerCmY, cmDpi, startOffset);
 
             // Photoshop-style Guide Lines Dragging System
             SetupGuideLineDragging(topRulerCanvas, leftRulerCanvas, designAreaCanvas);
@@ -242,9 +245,8 @@ namespace IDWorksEnterpriseDesigner
         }
 
         // Horizontal Ruler အမှတ်အသား (Centimeter Ticks) ဆွဲပေးခြင်း
-        private void DrawHorizontalRuler(Canvas canvas, int maxCm, double cmPx)
+        private void DrawHorizontalRuler(Canvas canvas, int maxCm, double cmPx, double startOffset)
         {
-            double startOffset = 15; // Align with paper margin
             for (int cm = 1; cm <= maxCm; cm++)
             {
                 double posX = startOffset + (cm * cmPx);
@@ -270,9 +272,8 @@ namespace IDWorksEnterpriseDesigner
         }
 
         // Vertical Ruler အမှတ်အသား (Centimeter Ticks) ဆွဲပေးခြင်း
-        private void DrawVerticalRuler(Canvas canvas, int maxCm, double cmPx)
+        private void DrawVerticalRuler(Canvas canvas, int maxCm, double cmPx, double startOffset)
         {
-            double startOffset = 15; // Align with paper margin
             for (int cm = 1; cm <= maxCm; cm++)
             {
                 double posY = startOffset + (cm * cmPx);
