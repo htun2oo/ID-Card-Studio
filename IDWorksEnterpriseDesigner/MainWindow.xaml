@@ -28,8 +28,28 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- 2. Edit Menu (Project ဖွင့်မှ ပေါ်မည်) -->
-            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed" />
+            <!-- 2. Edit Menu (ပုံပါအတိုင်း Sub-menu များနှင့် ပြင်ဆင်ထားပါသည်) -->
+            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
+                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
+                <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Cu_t Fields" InputGestureText="Ctrl+X" IsEnabled="False" />
+                <MenuItem Header="_Copy Fields" InputGestureText="Ctrl+C" IsEnabled="False" />
+                <MenuItem Header="_Paste Fields" InputGestureText="Ctrl+V" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Select _Fields..." />
+                <MenuItem Header="Select _All Fields" InputGestureText="Ctrl+A" />
+                <Separator />
+                <MenuItem Header="Field _Properties..." InputGestureText="Ctrl+F" IsEnabled="False" />
+                <MenuItem Header="_Multi-field Text Properties..." />
+                <MenuItem Header="M_ulti-field Prompt Properties..." />
+                <MenuItem Header="P_roduction Form Properties..." InputGestureText="F6" />
+                <Separator />
+                <MenuItem Header="Field Tab Order" InputGestureText="Ctrl+B" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="_Delete Selected Fields" InputGestureText="Del" IsEnabled="False" />
+                <MenuItem Header="Delete Production Form" />
+            </MenuItem>
 
             <!-- 3. View Menu -->
             <MenuItem Header="_View">
