@@ -1,6 +1,9 @@
 <Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
@@ -28,8 +31,28 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- 2. Edit Menu (Project ဖွင့်မှ ပေါ်မည်) -->
-            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed" />
+            <!-- 2. Edit Menu -->
+            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
+                <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
+                <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Cu_t Fields" InputGestureText="Ctrl+X" IsEnabled="False" />
+                <MenuItem Header="_Copy Fields" InputGestureText="Ctrl+C" IsEnabled="False" />
+                <MenuItem Header="_Paste Fields" InputGestureText="Ctrl+V" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="Select _Fields..." />
+                <MenuItem Header="Select _All Fields" InputGestureText="Ctrl+A" />
+                <Separator />
+                <MenuItem Header="Field _Properties..." InputGestureText="Ctrl+F" IsEnabled="False" />
+                <MenuItem Header="_Multi-field Text Properties..." />
+                <MenuItem Header="M_ulti-field Prompt Properties..." />
+                <MenuItem Header="P_roduction Form Properties..." InputGestureText="F6" />
+                <Separator />
+                <MenuItem Header="Field Tab Order" InputGestureText="Ctrl+B" IsEnabled="False" />
+                <Separator />
+                <MenuItem Header="_Delete Selected Fields" InputGestureText="Del" IsEnabled="False" />
+                <MenuItem Header="Delete Production Form" />
+            </MenuItem>
 
             <!-- 3. View Menu -->
             <MenuItem Header="_View">
@@ -45,19 +68,48 @@
                     <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
                 </MenuItem>
+                
+                <Separator x:Name="ViewSep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep2" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep3" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                
+                <Separator x:Name="ViewSep4" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
+                <MenuItem x:Name="MenuViewZoomReport" Header="Zoom Report" Visibility="Collapsed">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
+
+                <Separator x:Name="ViewSep5" Visibility="Collapsed" />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
-            <!-- 4. Insert Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 4. Insert Menu -->
             <MenuItem x:Name="MenuInsert" Header="_Insert" Visibility="Collapsed" />
 
-            <!-- 5. Format Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 5. Format Menu -->
             <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
 
-            <!-- 6. Tools Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 6. Tools Menu -->
             <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
 
-            <!-- 7. Window Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 7. Window Menu -->
             <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
 
             <!-- 8. Help Menu -->
@@ -75,9 +127,136 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main MDI Workspace Grid Area -->
-        <Grid x:Name="MdiHostGrid" Background="Gray">
-            <!-- Project မဖွင့်သေးမီ Gray Background အဖြစ် ဖော်ပြထားပါသည် -->
+        <!-- Main Workspace Area -->
+        <Grid x:Name="MdiHostGrid" Background="#808080">
+            <Grid x:Name="ProjectWorkspace" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.4*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column: Card Front and Card Back Windows -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Card Window (Front) -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <!-- Title Bar ကို မီးခိုရောစပ်ထားသော အပြာရောင် (#B8C4D9) သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#B8C4D9" Height="22">
+                                <TextBlock Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
+                                    <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="□" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="✕" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1"/>
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" Background="White"/>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Card (back side) Window -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <!-- Title Bar ကို မီးခိုရောစပ်ထားသော အပြာရောင် (#B8C4D9) သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#B8C4D9" Height="22">
+                                <TextBlock Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
+                                    <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="□" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="✕" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1"/>
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" Background="White"/>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Right Column: Production Form and Report Windows -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Production Form Window -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <!-- Title Bar ကို မီးခိုရောစပ်ထားသော အပြာရောင် (#B8C4D9) သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#B8C4D9" Height="22">
+                                <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
+                                    <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="□" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="✕" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Background="White" Margin="4"/>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Report Window -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <!-- Title Bar ကို မီးခိုရောစပ်ထားသော အပြာရောင် (#B8C4D9) သို့ ပြောင်းလဲထားပါသည် -->
+                            <Grid DockPanel.Dock="Top" Background="#B8C4D9" Height="22">
+                                <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,2,0">
+                                    <Button Content="-" Width="16" Height="14" FontSize="9" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="□" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                    <Button Content="✕" Width="16" Height="14" FontSize="8" Margin="1,0" Background="#E1E1E1"/>
+                                </StackPanel>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1"/>
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0"/>
+                                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" Background="White"/>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>
