@@ -113,35 +113,7 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // "New Project" Dialog Window ကို ပွင့်စေခြင်း
-            NewProjectWindow dlg = new NewProjectWindow();
-            dlg.Owner = this;
-            
-            bool? result = dlg.ShowDialog();
-
-            if (result == true)
-            {
-                // ရိုက်ထည့်လိုက်သော Project Name အလိုက် (သို့မဟုတ် Sample အလိုက်) Title ပြောင်းလဲခြင်း
-                string projName = string.IsNullOrWhiteSpace(dlg.ProjectName) ? "Sample" : dlg.ProjectName;
-                this.Title = $"Datacard ID Works Enterprise Designer - {projName} - [Card (back side)]";
-
-                // Hidden ဖြစ်နေသော Menus များ ပြသပေးခြင်း
-                if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
-                if (MenuInsert != null) MenuInsert.Visibility = Visibility.Visible;
-                if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
-                if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
-                if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
-
-                if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
-                if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
-                if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
-                if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
-
-                // MDI Workspace Layout ကို ပြသပေးခြင်း
-                if (ProjectWorkspace != null) ProjectWorkspace.Visibility = Visibility.Visible;
-
-                SetViewMenuMode(ActiveViewMode.CardBack);
-            }
+            // New Project Click Handler
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
