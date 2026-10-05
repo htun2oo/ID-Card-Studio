@@ -4,6 +4,11 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class NewProjectWindow : Window
     {
+        public string ProjectName
+        {
+            get { return TxtProjectName.Text; }
+        }
+
         public NewProjectWindow()
         {
             InitializeComponent();
