@@ -75,9 +75,185 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main MDI Workspace Grid Area -->
+        <!-- Main Workspace Area -->
         <Grid x:Name="MdiHostGrid" Background="Gray">
-            <!-- Project ဖွင့်လိုက်ပါက Sub-windows (Card, Card back, Report, Production) များဝင်မည် -->
+            <!-- 2x2 Layout Grid for Sub Windows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Window 1: Card View -->
+            <Border Grid.Row="0" Grid.Column="0" BorderBrush="#707070" BorderThickness="1" Margin="2" Background="#D4D0C8">
+                <DockPanel>
+                    <!-- Title Bar -->
+                    <Grid DockPanel.Dock="Top" Background="#0A246A" Height="20">
+                        <TextBlock Text="Card" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <!-- Content Area with ScrollViewer -->
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Top Ruler -->
+                            <Canvas Grid.Row="0" Grid.Column="1" Height="20" Width="300" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="35" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="75" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="115" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="155" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="5" Canvas.Left="195" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="6" Canvas.Left="235" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="7" Canvas.Left="275" Canvas.Top="2" FontSize="9"/>
+                            </Canvas>
+
+                            <!-- Left Ruler -->
+                            <Canvas Grid.Row="1" Grid.Column="0" Width="20" Height="180" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="5" Canvas.Top="30" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="5" Canvas.Top="70" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="5" Canvas.Top="110" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="5" Canvas.Top="150" FontSize="9"/>
+                            </Canvas>
+
+                            <!-- Card Surface -->
+                            <Border Grid.Row="1" Grid.Column="1" Width="300" Height="180" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <Canvas x:Name="CardFrontCanvas"/>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!-- Window 2: Production Form -->
+            <Border Grid.Row="0" Grid.Column="1" BorderBrush="#707070" BorderThickness="1" Margin="2" Background="White">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Background="#0A246A" Height="20">
+                        <TextBlock Text="Production Form" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <Grid Background="White"/>
+                </DockPanel>
+            </Border>
+
+            <!-- Window 3: Card (back side) View -->
+            <Border Grid.Row="1" Grid.Column="0" BorderBrush="#707070" BorderThickness="1" Margin="2" Background="#D4D0C8">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Background="#0A246A" Height="20">
+                        <TextBlock Text="Card (back side)" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Canvas Grid.Row="0" Grid.Column="1" Height="20" Width="300" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="35" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="75" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="115" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="155" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="5" Canvas.Left="195" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="6" Canvas.Left="235" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="7" Canvas.Left="275" Canvas.Top="2" FontSize="9"/>
+                            </Canvas>
+
+                            <Canvas Grid.Row="1" Grid.Column="0" Width="20" Height="180" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="5" Canvas.Top="30" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="5" Canvas.Top="70" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="5" Canvas.Top="110" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="5" Canvas.Top="150" FontSize="9"/>
+                            </Canvas>
+
+                            <Border Grid.Row="1" Grid.Column="1" Width="300" Height="180" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <Canvas x:Name="CardBackCanvas"/>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!-- Window 4: Report View -->
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="#707070" BorderThickness="1" Margin="2" Background="#D4D0C8">
+                <DockPanel>
+                    <Grid DockPanel.Dock="Top" Background="#0A246A" Height="20">
+                        <TextBlock Text="Report" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </Grid>
+                    <!-- Report View ScrollViewer with dynamically visible Rulers -->
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Report Top Ruler -->
+                            <Canvas Grid.Row="0" Grid.Column="1" Height="20" Width="850" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="35" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="75" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="115" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="155" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="5" Canvas.Left="195" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="6" Canvas.Left="235" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="7" Canvas.Left="275" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="8" Canvas.Left="315" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="9" Canvas.Left="355" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="10" Canvas.Left="395" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="11" Canvas.Left="435" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="12" Canvas.Left="475" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="13" Canvas.Left="515" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="14" Canvas.Left="555" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="15" Canvas.Left="595" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="16" Canvas.Left="635" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="17" Canvas.Left="675" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="18" Canvas.Left="715" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="19" Canvas.Left="755" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="20" Canvas.Left="795" Canvas.Top="2" FontSize="9"/>
+                                <TextBlock Text="21" Canvas.Left="835" Canvas.Top="2" FontSize="9"/>
+                            </Canvas>
+
+                            <!-- Report Left Ruler -->
+                            <Canvas Grid.Row="1" Grid.Column="0" Width="20" Height="1000" Background="#F0F0F0" ClipToBounds="False">
+                                <TextBlock Text="1" Canvas.Left="5" Canvas.Top="30" FontSize="9"/>
+                                <TextBlock Text="2" Canvas.Left="5" Canvas.Top="70" FontSize="9"/>
+                                <TextBlock Text="3" Canvas.Left="5" Canvas.Top="110" FontSize="9"/>
+                                <TextBlock Text="4" Canvas.Left="5" Canvas.Top="150" FontSize="9"/>
+                                <TextBlock Text="5" Canvas.Left="5" Canvas.Top="190" FontSize="9"/>
+                                <TextBlock Text="6" Canvas.Left="5" Canvas.Top="230" FontSize="9"/>
+                                <TextBlock Text="7" Canvas.Left="5" Canvas.Top="270" FontSize="9"/>
+                                <TextBlock Text="8" Canvas.Left="5" Canvas.Top="310" FontSize="9"/>
+                                <TextBlock Text="9" Canvas.Left="5" Canvas.Top="350" FontSize="9"/>
+                                <TextBlock Text="10" Canvas.Left="5" Canvas.Top="390" FontSize="9"/>
+                                <TextBlock Text="11" Canvas.Left="5" Canvas.Top="430" FontSize="9"/>
+                                <TextBlock Text="12" Canvas.Left="5" Canvas.Top="470" FontSize="9"/>
+                            </Canvas>
+
+                            <!-- Full Report Paper Surface -->
+                            <Border Grid.Row="1" Grid.Column="1" Width="850" Height="1000" Background="White" BorderBrush="Black" BorderThickness="1">
+                                <Canvas x:Name="ReportCanvas"/>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
         </Grid>
     </DockPanel>
 </Window>
