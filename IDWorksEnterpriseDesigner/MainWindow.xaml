@@ -1,72 +1,20 @@
-<Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Datacard ID Works Enterprise Designer" Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen">
-    <DockPanel>
-        <!-- Top Menu & Toolbar Container -->
-        <StackPanel DockPanel.Dock="Top">
-            <!-- Dynamic Menu Bar -->
-            <Menu Name="MainMenu" Background="#F0F0F0">
-                <MenuItem Header="File" Name="MenuFile">
-                    <MenuItem Header="New Project..." Click="NewProject_Click" InputGestureText="Ctrl+N" />
-                    <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" />
-                    <Separator />
-                    <MenuItem Header="Recent File" IsEnabled="False" />
-                    <Separator />
-                    <MenuItem Header="Exit" Click="Exit_Click" />
-                </MenuItem>
-                <MenuItem Header="Edit" Name="MenuEdit" Visibility="Collapsed" />
-                <MenuItem Header="View" Name="MenuView" />
-                <MenuItem Header="Insert" Name="MenuInsert" Visibility="Collapsed" />
-                <MenuItem Header="Format" Name="MenuFormat" Visibility="Collapsed" />
-                <MenuItem Header="Tools" Name="MenuTools" Visibility="Collapsed" />
-                <MenuItem Header="Window" Name="MenuWindow" Visibility="Collapsed" />
-                <MenuItem Header="Help" Name="MenuHelp" />
-            </Menu>
-
-            <!-- Standard Toolbar -->
-            <ToolBarTray Background="#F0F0F0">
-                <ToolBar Background="#F0F0F0">
-                    <Button Click="NewProject_Click" ToolTip="New Project">
-                        <TextBlock Text="📄" FontSize="14" />
-                    </Button>
-                    <Button ToolTip="Open Project">
-                        <TextBlock Text="📁" FontSize="14" />
-                    </Button>
-                    <Button ToolTip="Save">
-                        <TextBlock Text="💾" FontSize="14" />
-                    </Button>
-                    <Separator />
-                    <Button ToolTip="Help">
-                        <TextBlock Text="❓" FontSize="14" Foreground="Blue" FontWeight="Bold" />
-                    </Button>
-                    <Separator />
-                    <Button ToolTip="Cut"><TextBlock Text="✂" FontSize="14" /></Button>
-                    <Button ToolTip="Copy"><TextBlock Text="📋" FontSize="14" /></Button>
-                    <Button ToolTip="Paste"><TextBlock Text="📑" FontSize="14" /></Button>
-                    <Separator />
-                    <Button ToolTip="Undo"><TextBlock Text="↶" FontSize="14" /></Button>
-                    <Button ToolTip="Redo"><TextBlock Text="↷" FontSize="14" /></Button>
-                    <Separator />
-                    <ComboBox Width="65" SelectedIndex="0" Margin="2,0">
-                        <ComboBoxItem Content="100%" />
-                        <ComboBoxItem Content="75%" />
-                        <ComboBoxItem Content="50%" />
-                    </ComboBox>
-                </ToolBar>
-            </ToolBarTray>
-        </StackPanel>
-
-        <!-- Status Bar at Bottom -->
-        <StatusBar DockPanel.Dock="Bottom" Background="#F0F0F0">
-            <StatusBarItem>
-                <TextBlock Text="For Help, press F1" FontSize="11" Foreground="Black" />
-            </StatusBarItem>
-        </StatusBar>
-
-        <!-- Main Workspace Area (Gray MDI Background) -->
-        <Grid Name="MdiHostGrid" Background="#9E9E9E">
-        </Grid>
-    </DockPanel>
-</Window>
+<MenuItem Header="_File">
+    <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click"/>
+    <MenuItem Header="Open Project..." InputGestureText="Ctrl+O"/>
+    <MenuItem x:Name="MenuCloseProject" Header="Close Project" Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem x:Name="MenuSaveProject" Header="Save Project" InputGestureText="Ctrl+S" Visibility="Collapsed"/>
+    <MenuItem x:Name="MenuSaveProjectAs" Header="Save Project As..." Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem x:Name="MenuProjectProperties" Header="Project Properties..." InputGestureText="F7" Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem x:Name="MenuPrintSampleCard" Header="Print Sample Card..." InputGestureText="Ctrl+P" Visibility="Collapsed"/>
+    <MenuItem x:Name="MenuPreviewSampleReport" Header="Preview Sample Report..." IsEnabled="False" Visibility="Collapsed"/>
+    <MenuItem x:Name="MenuReportPageSetup" Header="Report Page Setup..." IsEnabled="False" Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem x:Name="MenuDeleteProject" Header="Delete Project" Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem x:Name="MenuRecentFile" Header="1 C:\Users\...\Sample\Sample.iwp" Visibility="Collapsed"/>
+    <Separator/>
+    <MenuItem Header="Exit" Click="Exit_Click"/>
+</MenuItem>
