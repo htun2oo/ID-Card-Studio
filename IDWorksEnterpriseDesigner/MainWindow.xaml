@@ -6,7 +6,7 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <!-- File Menu -->
+            <!-- 1. File Menu -->
             <MenuItem Header="_File">
                 <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
@@ -28,7 +28,10 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- View Menu -->
+            <!-- 2. Edit Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed" />
+
+            <!-- 3. View Menu -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -45,14 +48,19 @@
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
-            <!-- Menu Items (Project ပွင့်မှ ပေါ်မည့် Menu များ) -->
-            <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed" />
+            <!-- 4. Insert Menu (Project ဖွင့်မှ ပေါ်မည်) -->
             <MenuItem x:Name="MenuInsert" Header="_Insert" Visibility="Collapsed" />
+
+            <!-- 5. Format Menu (Project ဖွင့်မှ ပေါ်မည်) -->
             <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
+
+            <!-- 6. Tools Menu (Project ဖွင့်မှ ပေါ်မည်) -->
             <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
+
+            <!-- 7. Window Menu (Project ဖွင့်မှ ပေါ်မည်) -->
             <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
 
-            <!-- Help Menu (ဒုတိယပုံစံအတိုင်း တိကျစွာ ပြင်ဆင်ထားပါသည်) -->
+            <!-- 8. Help Menu -->
             <MenuItem Header="_Help">
                 <MenuItem Header="_Online Help..." InputGestureText="F1" />
                 <Separator />
