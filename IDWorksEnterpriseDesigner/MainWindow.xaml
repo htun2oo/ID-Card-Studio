@@ -1,7 +1,7 @@
 <Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Datacard ID Works Enterprise Designer" Height="726" Width="968"
+        Title="Datacard ID Works Enterprise Designer" Height="690" Width="920"
         WindowStartupLocation="CenterScreen">
     <DockPanel>
         <!-- Top Menu Bar -->
