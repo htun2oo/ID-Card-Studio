@@ -51,7 +51,7 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu (Project မဖွင့်မီ Toolbars နှင့် Show Welcome သာ ပေါ်မည်ဖြစ်ပြီး ကျန်တာများ Collapsed လုပ်ထားပါသည်) -->
+            <!-- 3. View Menu (Active Window ပေါ်မူတည်၍ ပြောင်းလဲနိုင်ရန် တည်ဆောက်ထားပါသည်) -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -66,18 +66,21 @@
                     <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
                 </MenuItem>
                 
-                <!-- Project ဖွင့်မှ ပေါ်လာမည့် View Menu Items များ -->
+                <!-- Project မဖွင့်သေးမီ မလိုအပ်သော View Items များကို မူလအတိုင်း Visibility Collapsed ထားပါသည် -->
                 <Separator x:Name="ViewSep1" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                
                 <Separator x:Name="ViewSep2" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
+                
                 <Separator x:Name="ViewSep3" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
+                
                 <Separator x:Name="ViewSep4" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
@@ -85,21 +88,26 @@
                     <MenuItem Header="200%" IsCheckable="True" />
                     <MenuItem Header="400%" IsCheckable="True" />
                 </MenuItem>
-                
-                <Separator />
+                <MenuItem x:Name="MenuViewZoomReport" Header="Zoom Report" Visibility="Collapsed">
+                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="200%" IsCheckable="True" />
+                    <MenuItem Header="400%" IsCheckable="True" />
+                </MenuItem>
+
+                <Separator x:Name="ViewSep5" Visibility="Collapsed" />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
-            <!-- 4. Insert Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 4. Insert Menu -->
             <MenuItem x:Name="MenuInsert" Header="_Insert" Visibility="Collapsed" />
 
-            <!-- 5. Format Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 5. Format Menu -->
             <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
 
-            <!-- 6. Tools Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 6. Tools Menu -->
             <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
 
-            <!-- 7. Window Menu (Project ဖွင့်မှ ပေါ်မည်) -->
+            <!-- 7. Window Menu -->
             <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
 
             <!-- 8. Help Menu -->
@@ -119,7 +127,6 @@
 
         <!-- Main MDI Workspace Grid Area -->
         <Grid x:Name="MdiHostGrid" Background="Gray">
-            <!-- Project မဖွင့်သေးမီ Gray Background အဖြစ် ဖော်ပြထားပါသည် -->
         </Grid>
     </DockPanel>
 </Window>
