@@ -6,11 +6,12 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <!-- File Menu -->
+            <!-- File Menu (ဒုတိယပုံအတိုင်း တိကျစွာ ပြင်ဆင်ထားပါသည်) -->
             <MenuItem Header="_File">
-                <MenuItem Header="_New Project..." Click="NewProject_Click" />
-                <MenuItem x:Name="MenuCloseProject" Header="_Close Project" Visibility="Collapsed" />
+                <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
+                <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
                 <Separator x:Name="Sep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuCloseProject" Header="_Close Project" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuSaveProject" Header="_Save Project" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuSaveProjectAs" Header="Save Project _As..." Visibility="Collapsed" />
                 <Separator x:Name="Sep2" Visibility="Collapsed" />
@@ -21,12 +22,13 @@
                 <MenuItem x:Name="MenuReportPageSetup" Header="Report Page Set_up..." Visibility="Collapsed" />
                 <Separator x:Name="Sep4" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuDeleteProject" Header="_Delete Project..." Visibility="Collapsed" />
+                <Separator />
                 <MenuItem x:Name="MenuRecentFile" Header="Recent File" IsEnabled="False" />
                 <Separator />
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- View Menu (ဒုတိယပုံစံအတိုင်း ပြင်ဆင်ထားပါသည်) -->
+            <!-- View Menu -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -68,7 +70,7 @@
 
         <!-- Main MDI Workspace Grid Area -->
         <Grid x:Name="MdiHostGrid" Background="Gray">
-            <!-- Project မဖွင့်သေးမီ Gray Background အဖြစ် သီးသန့် ဖော်ပြထားပါသည် -->
+            <!-- Project မဖွင့်သေးမီ Gray Background အဖြစ် ဖော်ပြထားပါသည် -->
         </Grid>
     </DockPanel>
 </Window>
