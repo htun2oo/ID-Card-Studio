@@ -64,13 +64,13 @@ namespace IDWorksEnterpriseDesigner
                 MdiHostGrid.Children.Clear();
 
                 // MDI Layout ဖွဲ့စည်းပုံ
-                // Card Window Width ကိန်းသေ ပမာဏနှင့် Ruler/Margin အတိုင်းအတာများ တိကျကိုင်တွယ်နိုင်ရန် 380px သို့ ညှိပေးထားပါသည်
+                // Normal Window နှင့် Full Screen အနေအထား နှစ်ခုလုံးတွင် Balance ဖြစ်စေရန် Star Ratio (35:65) သို့ ပြောင်းလဲထားပါသည်
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(35, GridUnitType.Star) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(65, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
-                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(210) });
+                layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
 
                 MdiHostGrid.Children.Add(layoutGrid);
 
@@ -194,10 +194,19 @@ namespace IDWorksEnterpriseDesigner
                 paperBorder.Height = 10 * cmDpi;
             }
 
-            // Card / Paper Margin - Left 15px, Top 15px
-            Canvas.SetLeft(paperBorder, 15);
-            Canvas.SetTop(paperBorder, 15);
-            designAreaCanvas.Children.Add(paperBorder);
+            // Margin & Center Alignment Behavior
+            // Full Screen နှင့် Normal Window နှစ်ခုလုံးတွင် Horizontal/Vertical Alignment ဗဟိုကျစေရေးအတွက် Margin ကို Dynamic ဖြစ်စေရန် Canvas အတွင်း Viewbox ဖြင့် ထိန်းချုပ်ပါသည်
+            Grid paperContainerGrid = new Grid
+            {
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(15, 15, 15, 15)
+            };
+            paperContainerGrid.Children.Add(paperBorder);
+            
+            Canvas.SetLeft(paperContainerGrid, 0);
+            Canvas.SetTop(paperContainerGrid, 0);
+            designAreaCanvas.Children.Add(paperContainerGrid);
 
             // Horizontal Ruler Canvas
             Canvas topRulerCanvas = new Canvas { Background = Brushes.LightGray, Height = 22, Cursor = Cursors.SizeNS };
