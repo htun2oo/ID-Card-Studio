@@ -64,10 +64,10 @@ namespace IDWorksEnterpriseDesigner
                 MdiHostGrid.Children.Clear();
 
                 // MDI Layout ဖွဲ့စည်းပုံ
-                // Normal Window နှင့် Full Screen အနေအထား နှစ်ခုလုံးတွင် Balance ဖြစ်စေရန် Star Ratio (35:65) သို့ ပြောင်းလဲထားပါသည်
+                // Normal Window အနေအထားတွင် Card Window အရွယ်အစား ကောင်းမွန်စေရန် Column 0 ကို 380px fixed ထားပါသည်
                 Grid layoutGrid = new Grid();
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(35, GridUnitType.Star) });
-                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(65, GridUnitType.Star) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(380) });
+                layoutGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
                 layoutGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
@@ -105,10 +105,10 @@ namespace IDWorksEnterpriseDesigner
                     layoutGrid.Children.Add(prodFormWindow);
                 }
 
-                // 3. Bottom Right: Report Window
+                // 3. Bottom Right: Report Window (Report document size ကို ပိုမိုကြီးမားအောင် Ruler စကေး 22x15 ထားရှိပါသည်)
                 if (dialog.HasReportDesign)
                 {
-                    Border reportWindow = CreateDesignerSubWindow("Report", false, 18, 10);
+                    Border reportWindow = CreateDesignerSubWindow("Report", false, 22, 15);
                     Grid.SetColumn(reportWindow, 1);
                     Grid.SetRow(reportWindow, 1);
                     layoutGrid.Children.Add(reportWindow);
@@ -169,10 +169,23 @@ namespace IDWorksEnterpriseDesigner
             // 1 CM = 37.7952 Pixels (Standard 96 DPI precise conversion)
             double cmDpi = 37.7952;
 
+            // ScrollViewer ဖြင့် ပတ်ပတ်လည် သပ်ရပ်စွာ Scroll လုပ်နိုင်ရန် ထိန်းချုပ်ပေးခြင်း
+            ScrollViewer scrollViewer = new ScrollViewer
+            {
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                Background = new SolidColorBrush(Color.FromRgb(210, 210, 210))
+            };
+            Grid.SetColumn(scrollViewer, 1);
+            Grid.SetRow(scrollViewer, 1);
+
             // Ruler & Grid Container Canvas
-            Canvas designAreaCanvas = new Canvas { Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)), ClipToBounds = true };
-            Grid.SetColumn(designAreaCanvas, 1);
-            Grid.SetRow(designAreaCanvas, 1);
+            Canvas designAreaCanvas = new Canvas 
+            { 
+                Background = new SolidColorBrush(Color.FromRgb(210, 210, 210)),
+                Width = Math.Max(1000, (maxRulerCmX + 2) * cmDpi),
+                Height = Math.Max(800, (maxRulerCmY + 2) * cmDpi)
+            };
 
             // White Paper Container
             Border paperBorder = new Border
@@ -190,23 +203,17 @@ namespace IDWorksEnterpriseDesigner
             }
             else
             {
-                paperBorder.Width = 15 * cmDpi;
-                paperBorder.Height = 10 * cmDpi;
+                // Full screen တွင် Report Document ကြီးမားစေရန် 20cm x 14cm သို့ ပြင်ဆင်ထားပါသည်
+                paperBorder.Width = 20 * cmDpi;
+                paperBorder.Height = 14 * cmDpi;
             }
 
-            // Margin & Center Alignment Behavior
-            // Full Screen နှင့် Normal Window နှစ်ခုလုံးတွင် Horizontal/Vertical Alignment ဗဟိုကျစေရေးအတွက် Margin ကို Dynamic ဖြစ်စေရန် Canvas အတွင်း Viewbox ဖြင့် ထိန်းချုပ်ပါသည်
-            Grid paperContainerGrid = new Grid
-            {
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Top,
-                Margin = new Thickness(15, 15, 15, 15)
-            };
-            paperContainerGrid.Children.Add(paperBorder);
-            
-            Canvas.SetLeft(paperContainerGrid, 0);
-            Canvas.SetTop(paperContainerGrid, 0);
-            designAreaCanvas.Children.Add(paperContainerGrid);
+            // Margin Alignment
+            Canvas.SetLeft(paperBorder, 15);
+            Canvas.SetTop(paperBorder, 15);
+            designAreaCanvas.Children.Add(paperBorder);
+
+            scrollViewer.Content = designAreaCanvas;
 
             // Horizontal Ruler Canvas
             Canvas topRulerCanvas = new Canvas { Background = Brushes.LightGray, Height = 22, Cursor = Cursors.SizeNS };
@@ -226,7 +233,7 @@ namespace IDWorksEnterpriseDesigner
 
             canvasGrid.Children.Add(topRulerCanvas);
             canvasGrid.Children.Add(leftRulerCanvas);
-            canvasGrid.Children.Add(designAreaCanvas);
+            canvasGrid.Children.Add(scrollViewer);
 
             panel.Children.Add(canvasGrid);
             border.Child = panel;
