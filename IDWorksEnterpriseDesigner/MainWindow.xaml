@@ -6,24 +6,25 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <!-- File Menu (Updated with Window 5 / File Menu Items) -->
+            <!-- File Menu (Updated for Disabled Recent File on Start) -->
             <MenuItem Header="_File">
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click"/>
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O"/>
                 <MenuItem x:Name="MenuCloseProject" Header="Close Project" Visibility="Collapsed"/>
-                <Separator/>
+                <Separator x:Name="Sep1" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuSaveProject" Header="Save Project" InputGestureText="Ctrl+S" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuSaveProjectAs" Header="Save Project As..." Visibility="Collapsed"/>
-                <Separator/>
+                <Separator x:Name="Sep2" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuProjectProperties" Header="Project Properties..." InputGestureText="F7" Visibility="Collapsed"/>
-                <Separator/>
+                <Separator x:Name="Sep3" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuPrintSampleCard" Header="Print Sample Card..." InputGestureText="Ctrl+P" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuPreviewSampleReport" Header="Preview Sample Report..." IsEnabled="False" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuReportPageSetup" Header="Report Page Setup..." IsEnabled="False" Visibility="Collapsed"/>
-                <Separator/>
+                <Separator x:Name="Sep4" Visibility="Collapsed"/>
                 <MenuItem x:Name="MenuDeleteProject" Header="Delete Project" Visibility="Collapsed"/>
                 <Separator/>
-                <MenuItem x:Name="MenuRecentFile" Header="1 C:\Users\...\Sample\Sample.iwp" Visibility="Collapsed"/>
+                <!-- Initial Recent File (Disabled) -->
+                <MenuItem x:Name="MenuRecentFile" Header="Recent File" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Exit" Click="Exit_Click"/>
             </MenuItem>
