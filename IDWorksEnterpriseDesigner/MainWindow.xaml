@@ -56,13 +56,6 @@
 
             <!-- 3. View Menu -->
             <MenuItem Header="_View">
-                <MenuItem.Resources>
-                    <Style TargetType="MenuItem">
-                        <Setter Property="MinHeight" Value="22"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    </Style>
-                </MenuItem.Resources>
-
                 <!-- Toolbars Submenu -->
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -135,8 +128,8 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main Workspace Grid Area -->
-        <Grid x:Name="MdiHostGrid" Background="Gray">
+        <!-- Main Workspace Area -->
+        <Grid x:Name="MdiHostGrid" Background="#808080">
         </Grid>
     </DockPanel>
 </Window>
