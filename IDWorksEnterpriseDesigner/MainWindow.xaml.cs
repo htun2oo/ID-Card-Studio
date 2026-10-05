@@ -4,7 +4,7 @@ namespace IDWorksEnterpriseDesigner
 {
     public enum ActiveViewMode
     {
-        None,           // Open Project မဖွင့်မီ Initial State (ပုံ ၁၊ ၂၊ ၃ အခြေအနေ)
+        None,           // Open Project မဖွင့်မီ Initial State
         CardFront,      // Card Front Selected
         CardBack,       // Card Back Selected
         ProductionForm, // Production Form Active
@@ -16,7 +16,6 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
-            // မူလ စတင်ချိန်တွင် ပထမပုံအတိုင်း Initial Mode သတ်မှတ်ထားပါမည်
             SetViewMenuMode(ActiveViewMode.None);
         }
 
@@ -24,12 +23,10 @@ namespace IDWorksEnterpriseDesigner
         {
             if (mode == ActiveViewMode.None)
             {
-                // Project မဖွင့်မီ View Menu Items အဓိက အစိတ်အပိုင်းများကို ခေတ္တ ဖျောက်ထားမည်
                 SetGroupVisibility(Visibility.Collapsed);
                 return;
             }
 
-            // Project/Window ပွင့်လာပါက View Menu ၏ Dynamic Items များကို ဖော်ပြမည်
             SetGroupVisibility(Visibility.Visible);
 
             switch (mode)
@@ -116,35 +113,30 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // ၁။ Title Bar စာသားအား Project Opened အခြေအနေသို့ ပြောင်းလဲခြင်း
-            this.Title = "Datacard ID Works Enterprise Designer - Untitled - [Card]";
+            // "New Project" Pop-up Window အား မူလ အလယ်ဗဟိုတွင် ပွင့်လာစေခြင်း
+            NewProjectWindow dlg = new NewProjectWindow();
+            dlg.Owner = this;
+            
+            bool? result = dlg.ShowDialog();
 
-            // ၂။ Menu Bar ရှိ ကျန် Top Menus များကို ဖော်ပြပေးခြင်း (ပုံ ၄ ပါ အခြေအနေ)
-            if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
-            if (MenuInsert != null) MenuInsert.Visibility = Visibility.Visible;
-            if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
-            if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
-            if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
+            if (result == true)
+            {
+                // OK နှိပ်လိုက်ပါက Main Window Title နှင့် Menu Bar များ Active ဖြစ်သွားမည်
+                this.Title = "Datacard ID Works Enterprise Designer - Untitled - [Card]";
 
-            // File Submenus အပိုများကို ဖော်ပြပေးခြင်း
-            if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
-            if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
-            if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
-            if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
-            if (Sep2 != null) Sep2.Visibility = Visibility.Visible;
-            if (MenuProjectProperties != null) MenuProjectProperties.Visibility = Visibility.Visible;
-            if (Sep3 != null) Sep3.Visibility = Visibility.Visible;
-            if (MenuPrintSampleCard != null) MenuPrintSampleCard.Visibility = Visibility.Visible;
-            if (MenuPreviewSampleReport != null) MenuPreviewSampleReport.Visibility = Visibility.Visible;
-            if (MenuReportPageSetup != null) MenuReportPageSetup.Visibility = Visibility.Visible;
-            if (Sep4 != null) Sep4.Visibility = Visibility.Visible;
-            if (MenuDeleteProject != null) MenuDeleteProject.Visibility = Visibility.Visible;
+                if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
+                if (MenuInsert != null) MenuInsert.Visibility = Visibility.Visible;
+                if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
+                if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
+                if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
 
-            // ၃။ View Menu Mode ကို Active (CardFront) သို့ ပြောင်းလဲပေးခြင်း
-            SetViewMenuMode(ActiveViewMode.CardFront);
+                if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
+                if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
+                if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
+                if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
 
-            // ၄။ Grid Workspace ကို အဖြူကွက်မပါသော Clean Background အဖြစ်သာ ထားရှိမည်
-            MdiHostGrid.Children.Clear();
+                SetViewMenuMode(ActiveViewMode.CardFront);
+            }
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
