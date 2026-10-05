@@ -1,6 +1,4 @@
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace IDWorksEnterpriseDesigner
 {
@@ -145,28 +143,8 @@ namespace IDWorksEnterpriseDesigner
             // ၃။ View Menu Mode ကို Active (CardFront) သို့ ပြောင်းလဲပေးခြင်း
             SetViewMenuMode(ActiveViewMode.CardFront);
 
-            // ၄။ Card Design Workspace Window အသစ်တစ်ခု တည်ဆောက်၍ Grid ထဲသို့ ထည့်သွင်းခြင်း
-            CreateCardWorkspaceWindow();
-        }
-
-        private void CreateCardWorkspaceWindow()
-        {
+            // ၄။ Grid Workspace ကို အဖြူကွက်မပါသော Clean Background အဖြစ်သာ ထားရှိမည်
             MdiHostGrid.Children.Clear();
-
-            // Designer Canvas Window Container တည်ဆောက်ခြင်း
-            Border cardWindow = new Border
-            {
-                Width = 650,
-                Height = 420,
-                Background = Brushes.White,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(20)
-            };
-
-            MdiHostGrid.Children.Add(cardWindow);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
