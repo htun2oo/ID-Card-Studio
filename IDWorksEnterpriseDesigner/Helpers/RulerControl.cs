@@ -6,11 +6,11 @@ using System.Windows.Media;
 
 namespace IDWorksEnterpriseDesigner.Helpers
 {
-    public class RulerControl : Control
+    public class RulerControl : FrameworkElement
     {
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register("Orientation", typeof(Orientation), typeof(RulerControl),
-                new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public Orientation Orientation
         {
@@ -18,50 +18,68 @@ namespace IDWorksEnterpriseDesigner.Helpers
             set => SetValue(OrientationProperty, value);
         }
 
-        static RulerControl()
+        protected override Size MeasureOverride(Size availableSize)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RulerControl), new FrameworkPropertyMetadata(typeof(RulerControl)));
+            // Ruler Control Size မပျောက်စေရန် အနည်းဆုံး Height/Width Dynamic ပေးခြင်း
+            if (Orientation == Orientation.Horizontal)
+            {
+                double h = double.IsNaN(Height) || Height == 0 ? 20 : Height;
+                double w = double.IsInfinity(availableSize.Width) ? 200 : availableSize.Width;
+                return new Size(w, h);
+            }
+            else
+            {
+                double w = double.IsNaN(Width) || Width == 0 ? 20 : Width;
+                double h = double.IsInfinity(availableSize.Height) ? 200 : availableSize.Height;
+                return new Size(w, h);
+            }
         }
 
         protected override void OnRender(DrawingContext dc)
         {
             base.OnRender(dc);
 
-            // Ruler နောက်ခံ
+            // Background Fill
             dc.DrawRectangle(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F0F0F0")), null, new Rect(0, 0, ActualWidth, ActualHeight));
-            
-            Pen linePen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#8E8E8E")), 1);
-            Pen borderPen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C0C0C0")), 1);
+
+            Pen linePen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#444444")), 1);
+            Pen borderPen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#B0B0B0")), 1);
 
             Typeface typeface = new Typeface("Segoe UI");
             double dpiScale = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
+            // 1 cm in WPF Device Independent Pixels (96 DPI / 2.54 cm = 37.7952 px)
+            double oneCmInPx = 96.0 / 2.54;
+            double oneMmInPx = oneCmInPx / 10.0;
+
             if (Orientation == Orientation.Horizontal)
             {
-                // အောက်ခြေ နယ်နိမိတ်မျဉ်း
+                // Bottom Line Border
                 dc.DrawLine(borderPen, new Point(0, ActualHeight - 0.5), new Point(ActualWidth, ActualHeight - 0.5));
 
-                // Horizontal Ruler Ticks & Numbers
-                for (double x = 0; x < ActualWidth; x += 5)
+                for (double x = 0; x <= ActualWidth; x += oneMmInPx)
                 {
+                    int mmIndex = (int)Math.Round(x / oneMmInPx);
                     double tickHeight;
-                    if (x % 50 == 0)
-                        tickHeight = 12; // မျဉ်းရှည်
-                    else if (x % 10 == 0)
-                        tickHeight = 7;  // အလယ်အလတ်မျဉ်း
+
+                    if (mmIndex % 10 == 0)
+                        tickHeight = 12; // 1 cm
+                    else if (mmIndex % 5 == 0)
+                        tickHeight = 7;  // 0.5 cm
                     else
-                        tickHeight = 4;  // မျဉ်းတို
+                        tickHeight = 4;  // 1 mm
 
                     dc.DrawLine(linePen, new Point(x + 0.5, ActualHeight), new Point(x + 0.5, ActualHeight - tickHeight));
 
-                    if (x % 50 == 0 && x > 0)
+                    if (mmIndex % 10 == 0)
                     {
+                        int cmValue = mmIndex / 10;
                         FormattedText text = new FormattedText(
-                            x.ToString(CultureInfo.InvariantCulture),
+                            cmValue.ToString(CultureInfo.InvariantCulture),
                             CultureInfo.CurrentCulture,
                             FlowDirection.LeftToRight,
-                            typeface, 8.5,
-                            new SolidColorBrush((Color)ColorConverter.ConvertFromString("#555555")),
+                            typeface, 8,
+                            new SolidColorBrush((Color)ColorConverter.ConvertFromString("#222222")),
                             dpiScale);
 
                         dc.DrawText(text, new Point(x + 2, 2));
@@ -70,34 +88,35 @@ namespace IDWorksEnterpriseDesigner.Helpers
             }
             else
             {
-                // ညာဘက် နယ်နိမိတ်မျဉ်း
+                // Right Line Border
                 dc.DrawLine(borderPen, new Point(ActualWidth - 0.5, 0), new Point(ActualWidth - 0.5, ActualHeight));
 
-                // Vertical Ruler Ticks & Numbers
-                for (double y = 0; y < ActualHeight; y += 5)
+                for (double y = 0; y <= ActualHeight; y += oneMmInPx)
                 {
+                    int mmIndex = (int)Math.Round(y / oneMmInPx);
                     double tickWidth;
-                    if (y % 50 == 0)
-                        tickWidth = 12;
-                    else if (y % 10 == 0)
-                        tickWidth = 7;
+
+                    if (mmIndex % 10 == 0)
+                        tickWidth = 12; // 1 cm
+                    else if (mmIndex % 5 == 0)
+                        tickWidth = 7;  // 0.5 cm
                     else
-                        tickWidth = 4;
+                        tickWidth = 4;  // 1 mm
 
                     dc.DrawLine(linePen, new Point(ActualWidth, y + 0.5), new Point(ActualWidth - tickWidth, y + 0.5));
 
-                    if (y % 50 == 0 && y > 0)
+                    if (mmIndex % 10 == 0)
                     {
+                        int cmValue = mmIndex / 10;
                         FormattedText text = new FormattedText(
-                            y.ToString(CultureInfo.InvariantCulture),
+                            cmValue.ToString(CultureInfo.InvariantCulture),
                             CultureInfo.CurrentCulture,
                             FlowDirection.LeftToRight,
-                            typeface, 8.5,
-                            new SolidColorBrush((Color)ColorConverter.ConvertFromString("#555555")),
+                            typeface, 8,
+                            new SolidColorBrush((Color)ColorConverter.ConvertFromString("#222222")),
                             dpiScale);
 
-                        // စာသားကို ဒေါင်လိုက် လှည့်ပြခြင်း
-                        dc.PushTransform(new TranslateTransform(2, y + 12));
+                        dc.PushTransform(new TranslateTransform(2, y + 10));
                         dc.PushTransform(new RotateTransform(-90));
                         dc.DrawText(text, new Point(0, 0));
                         dc.Pop();
