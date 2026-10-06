@@ -3,57 +3,101 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:helpers="clr-namespace:IDWorksEnterpriseDesigner.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="#E6E6E6">
-        <!-- Grid Structure ခွဲခြင်း -->
+        <!-- Grid Layout for Ruler and Main Workspace -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/> <!-- Top Horizontal Ruler -->
+            <RowDefinition Height="20"/> <!-- Top Ruler Area -->
             <RowDefinition Height="*"/>  <!-- Main Content Workspace -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/> <!-- Left Vertical Ruler -->
+            <ColumnDefinition Width="20"/> <!-- Left Ruler Area -->
             <ColumnDefinition Width="*"/>  <!-- Main Content Workspace -->
         </Grid.ColumnDefinitions>
 
-        <!-- 1. Top-Left Corner Box -->
+        <!-- 1. Top-Left Corner Square -->
         <Border Grid.Row="0" Grid.Column="0" 
-                Background="#F0F0F0" 
-                BorderBrush="#C0C0C0" 
+                Background="#E0E0E0" 
+                BorderBrush="#A0A0A0" 
                 BorderThickness="0,0,1,1"/>
 
-        <!-- 2. Horizontal (Top) Ruler -->
-        <helpers:RulerControl Grid.Row="0" Grid.Column="1" 
-                              Orientation="Horizontal" 
-                              HorizontalAlignment="Stretch" 
-                              VerticalAlignment="Stretch"/>
+        <!-- 2. Top Horizontal Ruler (အလျားလိုက် ပေတံ) -->
+        <Border Grid.Row="0" Grid.Column="1" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
+            <Canvas ClipToBounds="True">
+                <!-- 0 mm / Start Tick -->
+                <Line X1="10" Y1="10" X2="10" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="0" Canvas.Left="12" Canvas.Top="1" FontSize="8" Foreground="#444"/>
 
-        <!-- 3. Vertical (Left) Ruler -->
-        <helpers:RulerControl Grid.Row="1" Grid.Column="0" 
-                              Orientation="Vertical" 
-                              HorizontalAlignment="Stretch" 
-                              VerticalAlignment="Stretch"/>
+                <!-- 50px Tick -->
+                <Line X1="60" Y1="12" X2="60" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="50" Canvas.Left="62" Canvas.Top="1" FontSize="8" Foreground="#444"/>
 
-        <!-- 4. Card Design Workspace / Canvas -->
+                <!-- 100px Tick -->
+                <Line X1="110" Y1="10" X2="110" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="100" Canvas.Left="112" Canvas.Top="1" FontSize="8" Foreground="#444"/>
+
+                <!-- 150px Tick -->
+                <Line X1="160" Y1="12" X2="160" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="150" Canvas.Left="162" Canvas.Top="1" FontSize="8" Foreground="#444"/>
+
+                <!-- 200px Tick -->
+                <Line X1="210" Y1="10" X2="210" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="200" Canvas.Left="212" Canvas.Top="1" FontSize="8" Foreground="#444"/>
+
+                <!-- 250px Tick -->
+                <Line X1="260" Y1="12" X2="260" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="250" Canvas.Left="262" Canvas.Top="1" FontSize="8" Foreground="#444"/>
+
+                <!-- 300px Tick -->
+                <Line X1="310" Y1="10" X2="310" Y2="20" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="300" Canvas.Left="312" Canvas.Top="1" FontSize="8" Foreground="#444"/>
+            </Canvas>
+        </Border>
+
+        <!-- 3. Left Vertical Ruler (ဒေါင်လိုက် ပေတံ) -->
+        <Border Grid.Row="1" Grid.Column="0" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
+            <Canvas ClipToBounds="True">
+                <!-- 0 Start Tick -->
+                <Line X1="10" Y1="10" X2="20" Y2="10" Stroke="#555" StrokeThickness="1"/>
+
+                <!-- 50px Tick -->
+                <Line X1="12" Y1="60" X2="20" Y2="60" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="50" Canvas.Left="1" Canvas.Top="53" FontSize="8" Foreground="#444"/>
+
+                <!-- 100px Tick -->
+                <Line X1="10" Y1="110" X2="20" Y2="110" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="100" Canvas.Left="1" Canvas.Top="103" FontSize="8" Foreground="#444"/>
+
+                <!-- 150px Tick -->
+                <Line X1="12" Y1="160" X2="20" Y2="160" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="150" Canvas.Left="1" Canvas.Top="153" FontSize="8" Foreground="#444"/>
+
+                <!-- 200px Tick -->
+                <Line X1="10" Y1="210" X2="20" Y2="210" Stroke="#555" StrokeThickness="1"/>
+                <TextBlock Text="200" Canvas.Left="1" Canvas.Top="203" FontSize="8" Foreground="#444"/>
+            </Canvas>
+        </Border>
+
+        <!-- 4. Card Canvas Main Workspace (မူလ Card Container) -->
         <ScrollViewer Grid.Row="1" Grid.Column="1" 
                       HorizontalScrollBarVisibility="Auto" 
                       VerticalScrollBarVisibility="Auto"
                       Background="#D6D6D6">
 
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
                 <Border Width="323" Height="204" 
                         Background="White" 
                         BorderBrush="#000000" 
                         BorderThickness="1">
                     <Border.Effect>
-                        <DropShadowEffect BlurRadius="5" ShadowDepth="2" Direction="270" Color="Gray" Opacity="0.4"/>
+                        <DropShadowEffect BlurRadius="4" ShadowDepth="1" Direction="270" Color="Gray" Opacity="0.3"/>
                     </Border.Effect>
 
-                    <!-- သင်၏ မူလ Card Canvas Elements များ တည်ရှိရာ နေရာ -->
+                    <!-- မူလ Card Design Elements / Items (သီးခြားမပြောင်းလဲထားပါ) -->
                     <Canvas x:Name="DesignCanvas">
-                        <!-- Existing Items/Controls -->
+                        <!-- Existing Controls -->
                     </Canvas>
                 </Border>
             </Grid>
