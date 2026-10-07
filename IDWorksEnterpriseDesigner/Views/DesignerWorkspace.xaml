@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <UserControl.Resources>
-        <!-- 1 CM = 37.7952 DPI Pixels Horizontal Ruler Brush -->
+        <!-- Horizontal Ruler Brush (Centimeter Scale) -->
         <DrawingBrush x:Key="HorizontalCmRulerBrush" TileMode="Tile" Viewport="0,0,37.7952,20" ViewportUnits="Absolute">
             <DrawingBrush.Drawing>
                 <DrawingGroup>
@@ -21,7 +21,7 @@
             </DrawingBrush.Drawing>
         </DrawingBrush>
 
-        <!-- Vertical Ruler Brush -->
+        <!-- Vertical Ruler Brush (Centimeter Scale) -->
         <DrawingBrush x:Key="VerticalCmRulerBrush" TileMode="Tile" Viewport="0,0,20,37.7952" ViewportUnits="Absolute">
             <DrawingBrush.Drawing>
                 <DrawingGroup>
@@ -41,7 +41,6 @@
     </UserControl.Resources>
 
     <Grid Background="#707070">
-        <!-- 4 Grid Layout Areas -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -51,15 +50,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- 1. Top-Left: Card Window -->
+        <!-- Top-Left: Card Window -->
         <Border Grid.Row="0" Grid.Column="0" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
-                <!-- Title Bar -->
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
                     <TextBlock Text="Card" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center"/>
                 </Border>
                 
-                <!-- Ruler + Workspace Grid -->
                 <Grid Background="#E6E6E6">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
@@ -70,10 +67,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Top Left Corner -->
                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                    <!-- Top Horizontal Ruler -->
+                    <!-- Top Ruler -->
                     <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource HorizontalCmRulerBrush}" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                         <Canvas ClipToBounds="True">
                             <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
@@ -87,7 +83,7 @@
                         </Canvas>
                     </Border>
 
-                    <!-- Left Vertical Ruler -->
+                    <!-- Left Ruler -->
                     <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource VerticalCmRulerBrush}" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                         <Canvas ClipToBounds="True">
                             <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
@@ -99,7 +95,7 @@
                         </Canvas>
                     </Border>
 
-                    <!-- Workspace Container -->
+                    <!-- Main Workspace -->
                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
                             <Border Width="323" Height="204" Background="White" BorderBrush="#000000" BorderThickness="1">
@@ -111,7 +107,7 @@
             </DockPanel>
         </Border>
 
-        <!-- 2. Bottom-Left: Card (back side) Window -->
+        <!-- Bottom-Left: Card (back side) Window -->
         <Border Grid.Row="1" Grid.Column="0" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -130,7 +126,7 @@
 
                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                    <!-- Top Horizontal Ruler -->
+                    <!-- Top Ruler -->
                     <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource HorizontalCmRulerBrush}" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                         <Canvas ClipToBounds="True">
                             <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
@@ -144,10 +140,53 @@
                         </Canvas>
                     </Border>
 
-                    <!-- Left Vertical Ruler -->
+                    <!-- Left Ruler -->
                     <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource VerticalCmRulerBrush}" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                         <Canvas ClipToBounds="True">
                             <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
                             <TextBlock Text="1" Canvas.Left="2" Canvas.Top="38.8" FontSize="8" Foreground="#333"/>
                             <TextBlock Text="2" Canvas.Left="2" Canvas.Top="76.6" FontSize="8" Foreground="#333"/>
-                            <TextBlock Text="3" Canvas.Left="2" Canvas.Top="114.4" FontSize="8" Foreground="#33
+                            <TextBlock Text="3" Canvas.Left="2" Canvas.Top="114.4" FontSize="8" Foreground="#333"/>
+                            <TextBlock Text="4" Canvas.Left="2" Canvas.Top="152.2" FontSize="8" Foreground="#333"/>
+                            <TextBlock Text="5" Canvas.Left="2" Canvas.Top="190.0" FontSize="8" Foreground="#333"/>
+                        </Canvas>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
+                            <Border Width="323" Height="204" Background="White" BorderBrush="#000000" BorderThickness="1">
+                                <Canvas x:Name="CardBackCanvas"/>
+                            </Border>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </DockPanel>
+        </Border>
+
+        <!-- Top-Right: Production Form Window -->
+        <Border Grid.Row="0" Grid.Column="1" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
+            <DockPanel>
+                <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
+                    <TextBlock Text="Production Form" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center"/>
+                </Border>
+                <Grid Background="White"/>
+            </DockPanel>
+        </Border>
+
+        <!-- Bottom-Right: Report Window -->
+        <Border Grid.Row="1" Grid.Column="1" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
+            <DockPanel>
+                <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
+                    <TextBlock Text="Report" Foreground="White" FontWeight="Bold" FontSize="11" VerticalAlignment="Center"/>
+                </Border>
+                <Grid Background="#D6D6D6">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
+                            <Border Width="450" Height="150" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>
