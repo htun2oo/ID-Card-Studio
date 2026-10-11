@@ -12,8 +12,9 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // Show project workspace when New Project is clicked
+            // Show project workspace when New Project is clicked (ဤစာကြောင်းလေးကို ထည့်သွင်းပေးရန်ဖြစ်ပါသည်)
             ProjectWorkspace.Visibility = Visibility.Visible;
+
             MenuCloseProject.Visibility = Visibility.Visible;
             MenuSaveProject.Visibility = Visibility.Visible;
             MenuSaveProjectAs.Visibility = Visibility.Visible;
