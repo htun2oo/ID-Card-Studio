@@ -155,7 +155,7 @@
                                     
                                     <!-- Top Horizontal Centimeter Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21.58" Y1="21" X2="21.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -292,7 +292,7 @@
 
                                     <!-- Left Vertical Centimeter Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21" Y1="16.78" X2="24" Y2="16.78" Stroke="Gray" StrokeThickness="0.6"/>
@@ -433,7 +433,7 @@
                                     
                                     <!-- Back Card Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21.58" Y1="21" X2="21.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -558,7 +558,7 @@
 
                                     <!-- Back Card Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21" Y1="16.78" X2="24" Y2="16.78" Stroke="Gray" StrokeThickness="0.6"/>
@@ -731,7 +731,7 @@
 
                                     <!-- Report Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="TopRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21.58" Y1="21" X2="21.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -868,7 +868,7 @@
 
                                     <!-- Report Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                                        <Canvas ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
+                                        <Canvas Background="Transparent" ClipToBounds="True" MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown" MouseMove="Ruler_MouseMove" MouseLeftButtonUp="Ruler_MouseLeftButtonUp">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21" Y1="16.78" X2="24" Y2="16.78" Stroke="Gray" StrokeThickness="0.6"/>
