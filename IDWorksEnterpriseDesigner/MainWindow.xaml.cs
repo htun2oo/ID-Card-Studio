@@ -1,148 +1,43 @@
-using System.Windows;
-
-namespace IDWorksEnterpriseDesigner
+private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 {
-    public enum ActiveViewMode
+    if (ReportSizeComboBox != null && ReportDocumentBorder != null)
     {
-        None,           // Open Project မဖွင့်မီ Initial State
-        CardFront,      // Card Front Selected
-        CardBack,       // Card Back Selected
-        ProductionForm, // Production Form Active
-        Report          // Report Active
-    }
-
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
+        ComboBoxItem selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
+        if (selectedItem != null)
         {
-            InitializeComponent();
-            SetViewMenuMode(ActiveViewMode.None);
-        }
+            string tag = selectedItem.Tag.ToString();
+            // WPF pixels per inch conversion (Standard 96 DPI)
+            double dpi = 96.0;
 
-        public void SetViewMenuMode(ActiveViewMode mode)
-        {
-            if (mode == ActiveViewMode.None)
+            switch (tag)
             {
-                SetGroupVisibility(Visibility.Collapsed);
-                return;
-            }
-
-            SetGroupVisibility(Visibility.Visible);
-
-            switch (mode)
-            {
-                case ActiveViewMode.CardFront:
-                    MenuViewFrontCard.IsEnabled = true;
-                    MenuViewFrontCard.IsChecked = true;
-
-                    MenuViewBackCard.IsEnabled = true;
-                    MenuViewBackCard.IsChecked = false;
-
-                    MenuViewRuler.Header = "Ruler for Selected Card Side";
-                    MenuViewRuler.IsEnabled = true;
-
-                    MenuViewZoomCard.Visibility = Visibility.Visible;
-                    MenuViewZoomReport.Visibility = Visibility.Collapsed;
+                case "A4": // 8.27 x 11.69 inches -> Scaled down nicely for UI workspace
+                    ReportDocumentBorder.Width = 450;
+                    ReportDocumentBorder.Height = 635;
                     break;
-
-                case ActiveViewMode.CardBack:
-                    MenuViewFrontCard.IsEnabled = true;
-                    MenuViewFrontCard.IsChecked = false;
-
-                    MenuViewBackCard.IsEnabled = true;
-                    MenuViewBackCard.IsChecked = true;
-
-                    MenuViewRuler.Header = "Ruler for Selected Card Side";
-                    MenuViewRuler.IsEnabled = true;
-
-                    MenuViewZoomCard.Visibility = Visibility.Visible;
-                    MenuViewZoomReport.Visibility = Visibility.Collapsed;
+                case "A5": // 5.83 x 8.27 inches
+                    ReportDocumentBorder.Width = 320;
+                    ReportDocumentBorder.Height = 450;
                     break;
-
-                case ActiveViewMode.ProductionForm:
-                    MenuViewFrontCard.IsEnabled = false;
-                    MenuViewFrontCard.IsChecked = false;
-
-                    MenuViewBackCard.IsEnabled = false;
-                    MenuViewBackCard.IsChecked = false;
-
-                    MenuViewRuler.Header = "Ruler for Selected Card Side";
-                    MenuViewRuler.IsEnabled = false;
-
-                    MenuViewZoomCard.Visibility = Visibility.Collapsed;
-                    MenuViewZoomReport.Visibility = Visibility.Collapsed;
+                case "B5": // 6.93 x 9.84 inches
+                    ReportDocumentBorder.Width = 380;
+                    ReportDocumentBorder.Height = 540;
                     break;
-
-                case ActiveViewMode.Report:
-                    MenuViewFrontCard.IsEnabled = false;
-                    MenuViewFrontCard.IsChecked = false;
-
-                    MenuViewBackCard.IsEnabled = false;
-                    MenuViewBackCard.IsChecked = false;
-
-                    MenuViewRuler.Header = "Ruler for Report";
-                    MenuViewRuler.IsEnabled = true;
-
-                    MenuViewZoomCard.Visibility = Visibility.Collapsed;
-                    MenuViewZoomReport.Visibility = Visibility.Visible;
+                case "Letter": // 8.5 x 11 inches
+                    ReportDocumentBorder.Width = 460;
+                    ReportDocumentBorder.Height = 595;
+                    break;
+                case "Legal": // 8.5 x 14 inches
+                    ReportDocumentBorder.Width = 460;
+                    ReportDocumentBorder.Height = 756;
                     break;
             }
-        }
-
-        private void SetGroupVisibility(Visibility vis)
-        {
-            ViewSep1.Visibility = vis;
-            MenuViewFieldNames.Visibility = vis;
-            MenuViewSampleData.Visibility = vis;
-            
-            ViewSep2.Visibility = vis;
-            MenuViewCard.Visibility = vis;
-            MenuViewReport.Visibility = vis;
-            MenuViewProductionForm.Visibility = vis;
-            MenuViewFieldConnector.Visibility = vis;
-
-            ViewSep3.Visibility = vis;
-            MenuViewFrontCard.Visibility = vis;
-            MenuViewBackCard.Visibility = vis;
-
-            ViewSep4.Visibility = vis;
-            MenuViewRuler.Visibility = vis;
-
-            ViewSep5.Visibility = vis;
-        }
-
-        private void NewProject_Click(object sender, RoutedEventArgs e)
-        {
-            NewProjectWindow dlg = new NewProjectWindow();
-            dlg.Owner = this;
-            
-            bool? result = dlg.ShowDialog();
-
-            if (result == true)
-            {
-                string projName = string.IsNullOrWhiteSpace(dlg.ProjectName) ? "မမမ" : dlg.ProjectName;
-                this.Title = $"Datacard ID Works Enterprise Designer - {projName} - [Production Form]";
-
-                if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
-                if (MenuInsert != null) MenuInsert.Visibility = Visibility.Visible;
-                if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
-                if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
-                if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
-
-                if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
-                if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
-                if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
-                if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
-
-                if (ProjectWorkspace != null) ProjectWorkspace.Visibility = Visibility.Visible;
-
-                SetViewMenuMode(ActiveViewMode.ProductionForm);
-            }
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
         }
     }
+}
+
+private void ReportPageSetup_Click(object sender, RoutedEventArgs e)
+{
+    // Optional dialog handler or direct focus to size selector
+    MessageBox.Show("Report page setup can be selected directly from the dropdown menu on the top-right of the Report window.", "Report Page Setup", MessageBoxButton.OK, MessageBoxImage.Information);
 }
