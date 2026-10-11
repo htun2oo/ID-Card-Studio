@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- 1. Top-Left: Card Window -->
+        <!-- 1. Top-Left: Card Window (Front) -->
         <Border Grid.Row="0" Grid.Column="0" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -179,7 +179,7 @@
             </DockPanel>
         </Border>
 
-        <!-- 4. Bottom-Right: Report Window (Ruler ထည့်သွင်းထားသည်) -->
+        <!-- 4. Bottom-Right: Report Window -->
         <Border Grid.Row="1" Grid.Column="1" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -245,6 +245,7 @@
                         </Grid>
                     </Border>
 
+                    <!-- Main Workspace Area -->
                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15">
                             <Border Width="450" Height="150" Background="White" BorderBrush="#000000" BorderThickness="1"/>
