@@ -153,59 +153,165 @@
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
                                     
-                                    <!-- Top Horizontal Centimeter Ruler -->
+                                    <!-- Top Horizontal Centimeter Ruler with Sub-ticks (mm) -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
+                                            <!-- 0 cm -->
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- mm sub-ticks between 0 and 1 -->
+                                            <Line X1="25.4" Y1="21" X2="25.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="33.0" Y1="19" X2="33.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="40.6" Y1="21" X2="40.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="48.2" Y1="21" X2="48.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 1 cm -->
                                             <TextBlock Text="1" Canvas.Left="56" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="58.8" Y1="20" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="58.8" Y1="17" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="66.4" Y1="21" X2="66.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="74.0" Y1="19" X2="74.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="81.6" Y1="21" X2="81.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="89.2" Y1="21" X2="89.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 2 cm -->
                                             <TextBlock Text="2" Canvas.Left="94" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="96.8" Y1="20" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="96.8" Y1="17" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="104.4" Y1="21" X2="104.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="112.0" Y1="19" X2="112.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="119.6" Y1="21" X2="119.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="127.2" Y1="21" X2="127.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 3 cm -->
                                             <TextBlock Text="3" Canvas.Left="132" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="134.8" Y1="20" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="134.8" Y1="17" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="142.4" Y1="21" X2="142.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="150.0" Y1="19" X2="150.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="157.6" Y1="21" X2="157.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="165.2" Y1="21" X2="165.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 4 cm -->
                                             <TextBlock Text="4" Canvas.Left="170" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="172.8" Y1="20" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="172.8" Y1="17" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="180.4" Y1="21" X2="180.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="188.0" Y1="19" X2="188.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="195.6" Y1="21" X2="195.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="203.2" Y1="21" X2="203.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 5 cm -->
                                             <TextBlock Text="5" Canvas.Left="208" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="210.8" Y1="20" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="210.8" Y1="17" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="218.4" Y1="21" X2="218.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="226.0" Y1="19" X2="226.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="233.6" Y1="21" X2="233.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="241.2" Y1="21" X2="241.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 6 cm -->
                                             <TextBlock Text="6" Canvas.Left="246" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="248.8" Y1="20" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="248.8" Y1="17" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="256.4" Y1="21" X2="256.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="264.0" Y1="19" X2="264.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="271.6" Y1="21" X2="271.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="279.2" Y1="21" X2="279.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 7 cm -->
                                             <TextBlock Text="7" Canvas.Left="284" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="286.8" Y1="20" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="286.8" Y1="17" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="294.4" Y1="21" X2="294.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="302.0" Y1="19" X2="302.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="309.6" Y1="21" X2="309.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="317.2" Y1="21" X2="317.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 8 cm -->
                                             <TextBlock Text="8" Canvas.Left="322" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="324.8" Y1="20" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="324.8" Y1="17" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="332.4" Y1="21" X2="332.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="340.0" Y1="19" X2="340.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="347.6" Y1="21" X2="347.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="355.2" Y1="21" X2="355.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 9 cm -->
                                             <TextBlock Text="9" Canvas.Left="360" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="362.8" Y1="20" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="362.8" Y1="17" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="370.4" Y1="21" X2="370.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="378.0" Y1="19" X2="378.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="385.6" Y1="21" X2="385.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="393.2" Y1="21" X2="393.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <!-- 10 cm -->
                                             <TextBlock Text="10" Canvas.Left="396" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="400.8" Y1="20" X2="400.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="11" Canvas.Left="434" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="438.8" Y1="20" X2="438.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="12" Canvas.Left="472" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="476.8" Y1="20" X2="476.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="400.8" Y1="17" X2="400.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="408.4" Y1="21" X2="408.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="416.0" Y1="19" X2="416.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="423.6" Y1="21" X2="423.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="431.2" Y1="21" X2="431.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Left Vertical Centimeter Ruler -->
+                                    <!-- Left Vertical Centimeter Ruler with Sub-ticks (mm) -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="20.4" X2="24" Y2="20.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="27.8" X2="24" Y2="27.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="35.2" X2="21" Y2="35.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="42.6" X2="24" Y2="42.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="1" Canvas.Left="6" Canvas.Top="52" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="62.4" X2="24" Y2="62.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="69.8" X2="24" Y2="69.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="77.2" X2="24" Y2="77.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="84.6" X2="24" Y2="84.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="2" Canvas.Left="6" Canvas.Top="90" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="100.4" X2="24" Y2="100.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="107.8" X2="24" Y2="107.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="115.2" X2="24" Y2="115.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="122.6" X2="24" Y2="122.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="3" Canvas.Left="6" Canvas.Top="128" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="138.4" X2="24" Y2="138.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="145.8" X2="24" Y2="145.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="153.2" X2="24" Y2="153.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="160.6" X2="24" Y2="160.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="4" Canvas.Left="6" Canvas.Top="166" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="176.4" X2="24" Y2="176.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="183.8" X2="24" Y2="183.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="191.2" X2="24" Y2="191.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="198.6" X2="24" Y2="198.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="5" Canvas.Left="6" Canvas.Top="204" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="214.4" X2="24" Y2="214.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="221.8" X2="24" Y2="221.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="229.2" X2="24" Y2="229.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="236.6" X2="24" Y2="236.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="6" Canvas.Left="6" Canvas.Top="242" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="252.4" X2="24" Y2="252.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="259.8" X2="24" Y2="259.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="267.2" X2="24" Y2="267.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="274.6" X2="24" Y2="274.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="7" Canvas.Left="6" Canvas.Top="280" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="290.4" X2="24" Y2="290.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="297.8" X2="24" Y2="297.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="305.2" X2="24" Y2="305.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="312.6" X2="24" Y2="312.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="8" Canvas.Left="6" Canvas.Top="318" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="328.4" X2="24" Y2="328.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="335.8" X2="24" Y2="335.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="343.2" X2="24" Y2="343.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="350.6" X2="24" Y2="350.6" Stroke="Gray" StrokeThickness="0.75"/>
                                         </Canvas>
                                     </Border>
 
@@ -240,54 +346,141 @@
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="25.4" Y1="21" X2="25.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="33.0" Y1="19" X2="33.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="40.6" Y1="21" X2="40.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="48.2" Y1="21" X2="48.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="1" Canvas.Left="56" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="58.8" Y1="20" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="58.8" Y1="17" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="66.4" Y1="21" X2="66.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="74.0" Y1="19" X2="74.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="81.6" Y1="21" X2="81.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="89.2" Y1="21" X2="89.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="2" Canvas.Left="94" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="96.8" Y1="20" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="96.8" Y1="17" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="104.4" Y1="21" X2="104.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="112.0" Y1="19" X2="112.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="119.6" Y1="21" X2="119.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="127.2" Y1="21" X2="127.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="3" Canvas.Left="132" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="134.8" Y1="20" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="134.8" Y1="17" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="142.4" Y1="21" X2="142.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="150.0" Y1="19" X2="150.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="157.6" Y1="21" X2="157.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="165.2" Y1="21" X2="165.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="4" Canvas.Left="170" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="172.8" Y1="20" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="172.8" Y1="17" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="180.4" Y1="21" X2="180.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="188.0" Y1="19" X2="188.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="195.6" Y1="21" X2="195.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="203.2" Y1="21" X2="203.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="5" Canvas.Left="208" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="210.8" Y1="20" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="210.8" Y1="17" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="218.4" Y1="21" X2="218.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="226.0" Y1="19" X2="226.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="233.6" Y1="21" X2="233.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="241.2" Y1="21" X2="241.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="6" Canvas.Left="246" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="248.8" Y1="20" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="248.8" Y1="17" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="256.4" Y1="21" X2="256.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="264.0" Y1="19" X2="264.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="271.6" Y1="21" X2="271.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="279.2" Y1="21" X2="279.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="7" Canvas.Left="284" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="286.8" Y1="20" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="286.8" Y1="17" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="294.4" Y1="21" X2="294.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="302.0" Y1="19" X2="302.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="309.6" Y1="21" X2="309.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="317.2" Y1="21" X2="317.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="8" Canvas.Left="322" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="324.8" Y1="20" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="324.8" Y1="17" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="332.4" Y1="21" X2="332.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="340.0" Y1="19" X2="340.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="347.6" Y1="21" X2="347.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="355.2" Y1="21" X2="355.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="9" Canvas.Left="360" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="362.8" Y1="20" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="10" Canvas.Left="396" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="400.8" Y1="20" X2="400.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="11" Canvas.Left="434" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="438.8" Y1="20" X2="438.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="12" Canvas.Left="472" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="476.8" Y1="20" X2="476.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="362.8" Y1="17" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="370.4" Y1="21" X2="370.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="378.0" Y1="19" X2="378.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="385.6" Y1="21" X2="385.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="393.2" Y1="21" X2="393.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
                                         </Canvas>
                                     </Border>
 
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="20.4" X2="24" Y2="20.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="27.8" X2="24" Y2="27.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="35.2" X2="21" Y2="35.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="42.6" X2="24" Y2="42.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="1" Canvas.Left="6" Canvas.Top="52" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="62.4" X2="24" Y2="62.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="69.8" X2="24" Y2="69.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="77.2" X2="24" Y2="77.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="84.6" X2="24" Y2="84.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="2" Canvas.Left="6" Canvas.Top="90" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="100.4" X2="24" Y2="100.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="107.8" X2="24" Y2="107.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="115.2" X2="24" Y2="115.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="122.6" X2="24" Y2="122.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="3" Canvas.Left="6" Canvas.Top="128" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="138.4" X2="24" Y2="138.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="145.8" X2="24" Y2="145.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="153.2" X2="24" Y2="153.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="160.6" X2="24" Y2="160.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="4" Canvas.Left="6" Canvas.Top="166" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="176.4" X2="24" Y2="176.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="183.8" X2="24" Y2="183.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="191.2" X2="24" Y2="191.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="198.6" X2="24" Y2="198.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="5" Canvas.Left="6" Canvas.Top="204" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="214.4" X2="24" Y2="214.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="221.8" X2="24" Y2="221.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="229.2" X2="24" Y2="229.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="236.6" X2="24" Y2="236.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="6" Canvas.Left="6" Canvas.Top="242" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="252.4" X2="24" Y2="252.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="259.8" X2="24" Y2="259.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="267.2" X2="24" Y2="267.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="274.6" X2="24" Y2="274.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="7" Canvas.Left="6" Canvas.Top="280" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="290.4" X2="24" Y2="290.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="297.8" X2="24" Y2="297.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="305.2" X2="24" Y2="305.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="312.6" X2="24" Y2="312.6" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="8" Canvas.Left="6" Canvas.Top="318" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="328.4" X2="24" Y2="328.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="335.8" X2="24" Y2="335.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="343.2" X2="24" Y2="343.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="350.6" X2="24" Y2="350.6" Stroke="Gray" StrokeThickness="0.75"/>
                                         </Canvas>
                                     </Border>
 
@@ -351,86 +544,118 @@
                                     
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                                    <!-- Top Horizontal Centimeter Ruler for Report -->
+                                    <!-- Top Horizontal Centimeter Ruler for Report with Sub-ticks -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="25.4" Y1="21" X2="25.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="33.0" Y1="19" X2="33.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="40.6" Y1="21" X2="40.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="48.2" Y1="21" X2="48.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="1" Canvas.Left="56" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="58.8" Y1="20" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="58.8" Y1="17" X2="58.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="66.4" Y1="21" X2="66.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="74.0" Y1="19" X2="74.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="81.6" Y1="21" X2="81.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="89.2" Y1="21" X2="89.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="2" Canvas.Left="94" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="96.8" Y1="20" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="96.8" Y1="17" X2="96.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="104.4" Y1="21" X2="104.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="112.0" Y1="19" X2="112.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="119.6" Y1="21" X2="119.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="127.2" Y1="21" X2="127.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="3" Canvas.Left="132" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="134.8" Y1="20" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="134.8" Y1="17" X2="134.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="142.4" Y1="21" X2="142.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="150.0" Y1="19" X2="150.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="157.6" Y1="21" X2="157.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="165.2" Y1="21" X2="165.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="4" Canvas.Left="170" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="172.8" Y1="20" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="172.8" Y1="17" X2="172.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="180.4" Y1="21" X2="180.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="188.0" Y1="19" X2="188.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="195.6" Y1="21" X2="195.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="203.2" Y1="21" X2="203.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="5" Canvas.Left="208" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="210.8" Y1="20" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="210.8" Y1="17" X2="210.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="218.4" Y1="21" X2="218.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="226.0" Y1="19" X2="226.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="233.6" Y1="21" X2="233.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="241.2" Y1="21" X2="241.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="6" Canvas.Left="246" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="248.8" Y1="20" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="248.8" Y1="17" X2="248.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="256.4" Y1="21" X2="256.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="264.0" Y1="19" X2="264.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="271.6" Y1="21" X2="271.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="279.2" Y1="21" X2="279.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="7" Canvas.Left="284" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="286.8" Y1="20" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="286.8" Y1="17" X2="286.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="294.4" Y1="21" X2="294.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="302.0" Y1="19" X2="302.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="309.6" Y1="21" X2="309.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="317.2" Y1="21" X2="317.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="8" Canvas.Left="322" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="324.8" Y1="20" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="324.8" Y1="17" X2="324.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="332.4" Y1="21" X2="332.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="340.0" Y1="19" X2="340.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="347.6" Y1="21" X2="347.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="355.2" Y1="21" X2="355.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="9" Canvas.Left="360" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="362.8" Y1="20" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="362.8" Y1="17" X2="362.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="370.4" Y1="21" X2="370.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="378.0" Y1="19" X2="378.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="385.6" Y1="21" X2="385.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="393.2" Y1="21" X2="393.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="10" Canvas.Left="396" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="400.8" Y1="20" X2="400.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="400.8" Y1="17" X2="400.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="408.4" Y1="21" X2="408.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="416.0" Y1="19" X2="416.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="423.6" Y1="21" X2="423.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="431.2" Y1="21" X2="431.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="11" Canvas.Left="434" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="438.8" Y1="20" X2="438.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="438.8" Y1="17" X2="438.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="446.4" Y1="21" X2="446.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="454.0" Y1="19" X2="454.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="461.6" Y1="21" X2="461.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="469.2" Y1="21" X2="469.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+
                                             <TextBlock Text="12" Canvas.Left="472" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="476.8" Y1="20" X2="476.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="13" Canvas.Left="510" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="514.8" Y1="20" X2="514.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="14" Canvas.Left="548" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="552.8" Y1="20" X2="552.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="15" Canvas.Left="586" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="590.8" Y1="20" X2="590.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="16" Canvas.Left="624" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                                            <Line X1="628.8" Y1="20" X2="628.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="476.8" Y1="17" X2="476.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="484.4" Y1="21" X2="484.4" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="492.0" Y1="19" X2="492.0" Y2="24" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="499.6" Y1="21" X2="499.6" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="507.2" Y1="21" X2="507.2" Y2="24" Stroke="Gray" StrokeThickness="0.75"/>
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Left Vertical Centimeter Ruler for Report -->
+                                    <!-- Left Vertical Centimeter Ruler for Report with Sub-ticks -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                                            <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="52" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="90" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="128" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="166" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="204" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="6" Canvas.Left="6" Canvas.Top="242" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="7" Canvas.Left="6" Canvas.Top="280" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="8" Canvas.Left="6" Canvas.Top="318" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="9" Canvas.Left="6" Canvas.Top="356" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="359" X2="24" Y2="359" Stroke="Black" StrokeThickness="1"/>
-                                            <TextBlock Text="10" Canvas.Left="3" Canvas.Top="394" FontSize="9" Foreground="Black"/>
-                                            <Line X1="20" Y1="397" X2="24" Y2="397" Stroke="Black" StrokeThickness="1"/>
-                                        </Canvas>
-                                    </Border>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="20.4" X2="24" Y2="20.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="27.8" X2="24" Y2="27.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="35.2" X2="24" Y2="35.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="42.6" X2="24" Y2="42.6" Stroke="Gray" StrokeThickness="0.75"/>
 
-                                    <!-- Report Document Canvas/Border with Dynamic Size -->
-                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border x:Name="ReportDocumentBorder" Width="450" Height="635" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                        </Grid>
-                                    </ScrollViewer>
-                                </Grid>
-                            </Border>
-                        </DockPanel>
-                    </Border>
-                </Grid>
-            </Grid>
-        </Grid>
-    </DockPanel>
-</Window>
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="52" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="55" X2="24" Y2="55" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="62.4" X2="24" Y2="62.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="69.8" X2="24" Y2="69.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="77.2" X2="24" Y2="77.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="84.6" X2="24" Y2="84.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="90" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="93
