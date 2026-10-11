@@ -128,7 +128,7 @@ namespace IDWorksEnterpriseDesigner
                 {
                     X1 = 0,
                     Y1 = pos.Y,
-                    X2 = canvas.ActualWidth > 0 ? canvas.ActualWidth : 500,
+                    X2 = canvas.ActualWidth > 0 ? canvas.ActualWidth : 1000,
                     Y2 = pos.Y,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
@@ -136,6 +136,7 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 canvas.Children.Add(activeGuideLine);
+                e.Handled = true;
             }
         }
 
@@ -155,13 +156,14 @@ namespace IDWorksEnterpriseDesigner
                     X1 = pos.X,
                     Y1 = 0,
                     X2 = pos.X,
-                    Y2 = canvas.ActualHeight > 0 ? canvas.ActualHeight : 500,
+                    Y2 = canvas.ActualHeight > 0 ? canvas.ActualHeight : 1000,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                 };
 
                 canvas.Children.Add(activeGuideLine);
+                e.Handled = true;
             }
         }
 
@@ -182,6 +184,7 @@ namespace IDWorksEnterpriseDesigner
                     activeGuideLine.Y1 = pos.Y;
                     activeGuideLine.Y2 = pos.Y;
                 }
+                e.Handled = true;
             }
         }
 
@@ -194,6 +197,7 @@ namespace IDWorksEnterpriseDesigner
                 activeCanvas.ReleaseMouseCapture();
                 activeGuideLine = null;
                 activeCanvas = null;
+                e.Handled = true;
             }
         }
     }
