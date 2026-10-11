@@ -1,33 +1,46 @@
 <Window x:Class="IDWorksEnterpriseDesigner.NewProjectWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="New Project" Height="360" Width="450"
+        Title="New Project" Height="360" Width="440"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="90"/>
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Create a New ID Works Project" FontWeight="Bold" FontSize="14" Foreground="#000080" Margin="0,0,0,12"/>
-        
-        <Label Grid.Row="1" Content="Project Name:" Padding="0,0,0,4"/>
-        <TextBox x:Name="ProjectNameTextBox" Grid.Row="2" Height="26" Text="MyIDProject" VerticalContentAlignment="Center" Margin="0,0,0,12"/>
+        <!-- Project Name Section -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,12">
+            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
+        </StackPanel>
 
-        <Label Grid.Row="3" Content="Select Project Template / Type:" Padding="0,0,0,4"/>
-        <ListBox x:Name="TemplateListBox" Grid.Row="4" Height="100" Margin="0,0,0,16">
-            <ListBoxItem Content="Standard ID Card &amp; Report Project" IsSelected="True"/>
-            <ListBoxItem Content="Advanced Production Form Project"/>
-            <ListBoxItem Content="Blank Template"/>
-        </ListBox>
+        <!-- Initial Components GroupBox -->
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Margin="0,0,12,0" Padding="8">
+            <StackPanel>
+                <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" Margin="0,0,0,8"/>
+                
+                <CheckBox x:Name="CardDesignCheckBox" Content="Card Design" Margin="0,0,0,4" IsChecked="True" Checked="CardDesign_Checked" Unchecked="CardDesign_Unchecked"/>
+                <StackPanel x:Name="CardOptionsPanel" Margin="20,0,0,8">
+                    <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="Orientation" Margin="0,0,0,4" IsChecked="True"/>
+                    <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="Orientation" Margin="0,0,0,4"/>
+                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" TextWrapping="Wrap" Margin="0,2,0,4"/>
+                </StackPanel>
 
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="OK" Width="80" Height="26" Margin="0,0,8,0" Click="OkButton_Click" IsDefault="True"/>
-            <Button Content="Cancel" Width="80" Height="26" Click="CancelButton_Click" IsCancel="True"/>
+                <CheckBox x:Name="ReportDesignCheckBox" Content="Report Design" IsChecked="True"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Right Side Buttons -->
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
+            <Button Content="OK" Width="80" Height="24" Margin="0,0,0,6" Click="OkButton_Click" IsDefault="True"/>
+            <Button Content="Cancel" Width="80" Height="24" Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>
