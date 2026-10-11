@@ -1,16 +1,15 @@
 using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace IDWorksEnterpriseDesigner.Helpers
 {
-    public class RulerControl : Control
+    public class RulerControl : FrameworkElement
     {
         public static readonly DependencyProperty OrientationProperty =
             DependencyProperty.Register("Orientation", typeof(Orientation), typeof(RulerControl),
-                new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata(Orientation.Horizontal, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public Orientation Orientation
         {
@@ -18,9 +17,18 @@ namespace IDWorksEnterpriseDesigner.Helpers
             set => SetValue(OrientationProperty, value);
         }
 
-        static RulerControl()
+        protected override Size MeasureOverride(Size availableSize)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RulerControl), new FrameworkPropertyMetadata(typeof(RulerControl)));
+            if (Orientation == Orientation.Horizontal)
+            {
+                double w = double.IsInfinity(availableSize.Width) ? 300 : availableSize.Width;
+                return new Size(w, 20);
+            }
+            else
+            {
+                double h = double.IsInfinity(availableSize.Height) ? 300 : availableSize.Height;
+                return new Size(20, h);
+            }
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -30,13 +38,13 @@ namespace IDWorksEnterpriseDesigner.Helpers
             double width = ActualWidth > 0 ? ActualWidth : Width;
             double height = ActualHeight > 0 ? ActualHeight : Height;
 
-            if (double.IsNaN(width) || width <= 0) width = 500;
+            if (double.IsNaN(width) || width <= 0) width = 300;
             if (double.IsNaN(height) || height <= 0) height = 20;
 
-            // Background Fill (Light Gray Background for Ruler)
-            dc.DrawRectangle(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E2E2E2")), null, new Rect(0, 0, width, height));
+            // Ruler Background Fill
+            dc.DrawRectangle(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F0F0F0")), null, new Rect(0, 0, width, height));
 
-            Pen linePen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#333333")), 1);
+            Pen linePen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#555555")), 1);
             Pen borderPen = new Pen(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#A0A0A0")), 1);
             linePen.Freeze();
             borderPen.Freeze();
@@ -44,21 +52,21 @@ namespace IDWorksEnterpriseDesigner.Helpers
             Typeface typeface = new Typeface("Segoe UI");
             double dpiScale = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
-            // 1 CM = 37.7952 DIPs (at 96 DPI)
+            // 1 CM = 37.7952 DIPs (Standard 96 DPI)
             double oneCmPx = 96.0 / 2.54;
             double oneMmPx = oneCmPx / 10.0;
 
             if (Orientation == Orientation.Horizontal)
             {
                 // Bottom Border Line
-                dc.DrawLine(borderPen, new Point(0, height - 1), new Point(width, height - 1));
+                dc.DrawLine(borderPen, new Point(0, height - 0.5), new Point(width, height - 0.5));
 
                 for (double x = 0; x <= width; x += oneMmPx)
                 {
                     int mmIndex = (int)Math.Round(x / oneMmPx);
                     double tickHeight = (mmIndex % 10 == 0) ? 12 : (mmIndex % 5 == 0 ? 7 : 4);
 
-                    dc.DrawLine(linePen, new Point(x, height - 1), new Point(x, height - 1 - tickHeight));
+                    dc.DrawLine(linePen, new Point(x, height), new Point(x, height - tickHeight));
 
                     if (mmIndex % 10 == 0)
                     {
@@ -78,14 +86,14 @@ namespace IDWorksEnterpriseDesigner.Helpers
             else
             {
                 // Right Border Line
-                dc.DrawLine(borderPen, new Point(width - 1, 0), new Point(width - 1, height));
+                dc.DrawLine(borderPen, new Point(width - 0.5, 0), new Point(width - 0.5, height));
 
                 for (double y = 0; y <= height; y += oneMmPx)
                 {
                     int mmIndex = (int)Math.Round(y / oneMmPx);
                     double tickWidth = (mmIndex % 10 == 0) ? 12 : (mmIndex % 5 == 0 ? 7 : 4);
 
-                    dc.DrawLine(linePen, new Point(width - 1, y), new Point(width - 1 - tickWidth, y));
+                    dc.DrawLine(linePen, new Point(width, y), new Point(width - tickWidth, y));
 
                     if (mmIndex % 10 == 0)
                     {
