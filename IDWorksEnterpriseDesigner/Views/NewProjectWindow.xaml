@@ -30,7 +30,7 @@
                 <StackPanel x:Name="CardOptionsPanel" Margin="20,0,0,8">
                     <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="Orientation" Margin="0,0,0,4" IsChecked="True"/>
                     <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="Orientation" Margin="0,0,0,4"/>
-                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" TextWrapping="Wrap" Margin="0,2,0,4"/>
+                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design (data-driven)" Margin="0,2,0,4"/>
                 </StackPanel>
 
                 <CheckBox x:Name="ReportDesignCheckBox" Content="Report Design" IsChecked="True"/>
