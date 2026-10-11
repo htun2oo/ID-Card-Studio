@@ -9,11 +9,11 @@ namespace IDWorksEnterpriseDesigner
         {
             InitializeComponent();
             
-            // အက်ပ်စတင်ဖွင့်လိုက်သည်နှင့် Workspace နှင့် မီနူးများ အလိုအလျောက် ပေါ်လာစေရန်
-            NewProject_Click(null, null);
+            // အပလီကေးရှင်းစတင်ချိန်တွင် Workspace ကို ပုံမှန်အစအနေအထားဖြင့် အလိုအလျောက် ဖော်ပြရန်
+            LoadDefaultWorkspace();
         }
 
-        private void NewProject_Click(object sender, RoutedEventArgs e)
+        private void LoadDefaultWorkspace()
         {
             if (ProjectWorkspace != null)
             {
@@ -46,6 +46,15 @@ namespace IDWorksEnterpriseDesigner
                 MenuViewZoomCard.Visibility = Visibility.Visible;
                 MenuViewZoomReport.Visibility = Visibility.Visible;
             }
+        }
+
+        private void NewProject_Click(object sender, RoutedEventArgs e)
+        {
+            // မီနူးမှ New Project ကို နှိပ်သည့်အခါ အသစ်စတင်ရန် လိုအပ်သည့် လုပ်ဆောင်ချက်များ
+            LoadDefaultWorkspace();
+            
+            // လိုအပ်ပါက New Project Dialog အသစ် ထပ်မံပြသလိုပါက ဤနေရာတွင် ရေးသားနိုင်ပါသည်
+            // MessageBox.Show("New Project created successfully.", "New Project", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
