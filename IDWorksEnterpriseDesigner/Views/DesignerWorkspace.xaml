@@ -12,7 +12,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- 1. Top-Left: Card Window (Photoshop-style Centimeter Rulers ထည့်သွင်းထားသည်) -->
+        <!-- 1. Top-Left: Card Window -->
         <Border Grid.Row="0" Grid.Column="0" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -32,44 +32,36 @@
                     <!-- Top-Left Corner Box -->
                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                    <!-- Top Horizontal CM Ruler (1 cm = ~37.8 pixels) -->
+                    <!-- Top Horizontal Ruler (cm scale) -->
                     <Border Grid.Row="0" Grid.Column="1" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                        <Canvas ClipToBounds="True">
-                            <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="37.8" Y1="12" X2="37.8" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="1" Canvas.Left="39.8" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="75.6" Y1="12" X2="75.6" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="2" Canvas.Left="77.6" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="113.4" Y1="12" X2="113.4" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="3" Canvas.Left="115.4" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="151.2" Y1="12" X2="151.2" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="4" Canvas.Left="153.2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="189.0" Y1="12" X2="189.0" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="5" Canvas.Left="191.0" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="226.8" Y1="12" X2="226.8" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="6" Canvas.Left="228.8" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="264.6" Y1="12" X2="264.6" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="7" Canvas.Left="266.6" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="302.4" Y1="12" X2="302.4" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="8" Canvas.Left="304.4" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                        </Canvas>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <!-- 0 cm to 10 cm (1 cm = 37.8 pixels) -->
+                                <TextBlock Text="0" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="1" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="2" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="3" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="4" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="5" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="6" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="7" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                                <TextBlock Text="8" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2" TextAlignment="Left"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <!-- Left Vertical CM Ruler -->
+                    <!-- Left Vertical Ruler (cm scale) -->
                     <Border Grid.Row="1" Grid.Column="0" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                        <Canvas ClipToBounds="True">
-                            <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="37.8" X2="20" Y2="37.8" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="1" Canvas.Left="2" Canvas.Top="38.8" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="75.6" X2="20" Y2="75.6" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="2" Canvas.Left="2" Canvas.Top="76.6" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="113.4" X2="20" Y2="113.4" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="3" Canvas.Left="2" Canvas.Top="114.4" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="151.2" X2="20" Y2="151.2" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="4" Canvas.Left="2" Canvas.Top="152.2" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="189.0" X2="20" Y2="189.0" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="5" Canvas.Left="2" Canvas.Top="191.0" FontSize="8" Foreground="#333"/>
-                        </Canvas>
+                        <Grid>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <TextBlock Text="0" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="1" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="2" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="3" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="4" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="5" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
                     <!-- Main Workspace Area -->
@@ -84,7 +76,7 @@
             </DockPanel>
         </Border>
 
-        <!-- 2. Bottom-Left: Card (back side) Window (Photoshop-style Centimeter Rulers ထည့်သွင်းထားသည်) -->
+        <!-- 2. Bottom-Left: Card (back side) Window -->
         <Border Grid.Row="1" Grid.Column="0" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -104,44 +96,35 @@
                     <!-- Top-Left Corner Box -->
                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                    <!-- Top Horizontal CM Ruler -->
+                    <!-- Top Horizontal Ruler -->
                     <Border Grid.Row="0" Grid.Column="1" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                        <Canvas ClipToBounds="True">
-                            <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="37.8" Y1="12" X2="37.8" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="1" Canvas.Left="39.8" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="75.6" Y1="12" X2="75.6" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="2" Canvas.Left="77.6" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="113.4" Y1="12" X2="113.4" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="3" Canvas.Left="115.4" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="151.2" Y1="12" X2="151.2" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="4" Canvas.Left="153.2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="189.0" Y1="12" X2="189.0" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="5" Canvas.Left="191.0" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="226.8" Y1="12" X2="226.8" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="6" Canvas.Left="228.8" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="264.6" Y1="12" X2="264.6" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="7" Canvas.Left="266.6" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="302.4" Y1="12" X2="302.4" Y2="20" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="8" Canvas.Left="304.4" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                        </Canvas>
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock Text="0" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="1" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="2" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="3" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="4" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="5" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="6" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="7" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                                <TextBlock Text="8" Width="37.8" FontSize="8" Foreground="#333" Padding="2,0,0,2"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
-                    <!-- Left Vertical CM Ruler -->
+                    <!-- Left Vertical Ruler -->
                     <Border Grid.Row="1" Grid.Column="0" Background="#F0F0F0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                        <Canvas ClipToBounds="True">
-                            <TextBlock Text="0" Canvas.Left="2" Canvas.Top="1" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="37.8" X2="20" Y2="37.8" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="1" Canvas.Left="2" Canvas.Top="38.8" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="75.6" X2="20" Y2="75.6" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="2" Canvas.Left="2" Canvas.Top="76.6" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="113.4" X2="20" Y2="113.4" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="3" Canvas.Left="2" Canvas.Top="115.4" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="151.2" X2="20" Y2="151.2" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="4" Canvas.Left="2" Canvas.Top="153.2" FontSize="8" Foreground="#333"/>
-                            <Line X1="12" Y1="189.0" X2="20" Y2="189.0" Stroke="#555" StrokeThickness="1"/>
-                            <TextBlock Text="5" Canvas.Left="2" Canvas.Top="191.0" FontSize="8" Foreground="#333"/>
-                        </Canvas>
+                        <Grid>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <TextBlock Text="0" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="1" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="2" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="3" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="4" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                                <TextBlock Text="5" Height="37.8" FontSize="8" Foreground="#333" Padding="2,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
                     </Border>
 
                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
@@ -155,7 +138,7 @@
             </DockPanel>
         </Border>
 
-        <!-- 3. Top-Right: Production Form Window (မူလအတိုင်း) -->
+        <!-- 3. Top-Right: Production Form Window -->
         <Border Grid.Row="0" Grid.Column="1" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
@@ -165,7 +148,7 @@
             </DockPanel>
         </Border>
 
-        <!-- 4. Bottom-Right: Report Window (မူလအတိုင်း) -->
+        <!-- 4. Bottom-Right: Report Window -->
         <Border Grid.Row="1" Grid.Column="1" Margin="2" Background="#C0C0C0" BorderBrush="#909090" BorderThickness="1">
             <DockPanel>
                 <Border DockPanel.Dock="Top" Background="#1D2A78" Height="22" Padding="5,2">
