@@ -1,10 +1,17 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
+        private bool isDraggingGuide = false;
+        private Line? activeGuideLine = null;
+        private Canvas? activeCanvas = null;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -103,6 +110,90 @@ namespace IDWorksEnterpriseDesigner
                         ReportDocumentBorder.Height = 529;
                         break;
                 }
+            }
+        }
+
+        // Top Ruler (Horizontal) တွင် Mouse နှိပ်လိုက်သည့်အခါ အလျားလိုက် Guide Line အသစ်စဆွဲခြင်း
+        private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Canvas canvas)
+            {
+                activeCanvas = canvas;
+                isDraggingGuide = true;
+                canvas.CaptureMouse();
+
+                Point pos = e.GetPosition(canvas);
+
+                activeGuideLine = new Line()
+                {
+                    X1 = 0,
+                    Y1 = pos.Y,
+                    X2 = canvas.ActualWidth > 0 ? canvas.ActualWidth : 500,
+                    Y2 = pos.Y,
+                    Stroke = Brushes.Red,
+                    StrokeThickness = 1,
+                    StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
+                };
+
+                canvas.Children.Add(activeGuideLine);
+            }
+        }
+
+        // Left Ruler (Vertical) တွင် Mouse နှိပ်လိုက်သည့်အခါ ဒေါင်လိုက် Guide Line အသစ်စဆွဲခြင်း
+        private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Canvas canvas)
+            {
+                activeCanvas = canvas;
+                isDraggingGuide = true;
+                canvas.CaptureMouse();
+
+                Point pos = e.GetPosition(canvas);
+
+                activeGuideLine = new Line()
+                {
+                    X1 = pos.X,
+                    Y1 = 0,
+                    X2 = pos.X,
+                    Y2 = canvas.ActualHeight > 0 ? canvas.ActualHeight : 500,
+                    Stroke = Brushes.Red,
+                    StrokeThickness = 1,
+                    StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
+                };
+
+                canvas.Children.Add(activeGuideLine);
+            }
+        }
+
+        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့ပြောင်းရန်
+        private void Ruler_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDraggingGuide && activeGuideLine != null && activeCanvas != null)
+            {
+                Point pos = e.GetPosition(activeCanvas);
+                
+                if (activeGuideLine.X1 == activeGuideLine.X2) // Vertical Line
+                {
+                    activeGuideLine.X1 = pos.X;
+                    activeGuideLine.X2 = pos.X;
+                }
+                else // Horizontal Line
+                {
+                    activeGuideLine.Y1 = pos.Y;
+                    activeGuideLine.Y2 = pos.Y;
+                }
+            }
+        }
+
+        // Mouse လွှတ်လိုက်သည့်အခါ Guide Line ချပေးပြီး Drag လုပ်ခြင်း დასრულရန်
+        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingGuide && activeCanvas != null)
+            {
+                isDraggingGuide = false;
+                activeCanvas.ReleaseMouseCapture();
+                activeGuideLine = null;
+                activeCanvas = null;
             }
         }
     }
