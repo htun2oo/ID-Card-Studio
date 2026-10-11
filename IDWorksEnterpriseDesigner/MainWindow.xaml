@@ -69,6 +69,16 @@
                 </MenuItem>
             </MenuItem>
 
+            <!-- 4. Format Menu -->
+            <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
+
+            <!-- 5. Tools Menu -->
+            <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
+
+            <!-- 6. Window Menu -->
+            <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
+
+            <!-- 7. Help Menu -->
             <MenuItem Header="_Help">
                 <MenuItem Header="_Online Help..." InputGestureText="F1" />
                 <Separator />
@@ -245,7 +255,7 @@
                                     <!-- Report Document Canvas/Border with Dynamic Size -->
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border x:Name="ReportDocumentBorder" Width="450" Height="300" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Border x:Name="ReportDocumentBorder" Width="450" Height="635" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Grid>
