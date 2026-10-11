@@ -27,7 +27,7 @@ namespace IDWorksEnterpriseDesigner
                 {
                     ProjectWorkspace.Visibility = Visibility.Visible;
                 }
-        
+
                 if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
                 if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
                 if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
@@ -39,12 +39,12 @@ namespace IDWorksEnterpriseDesigner
                 if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
                 if (Sep3 != null) Sep3.Visibility = Visibility.Visible;
                 if (Sep4 != null) Sep4.Visibility = Visibility.Visible;
-        
+
                 if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
                 if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
                 if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
                 if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
-        
+
                 if (ViewSep1 != null) ViewSep1.Visibility = Visibility.Visible;
                 if (MenuViewFieldNames != null) MenuViewFieldNames.Visibility = Visibility.Visible;
                 if (MenuViewSampleData != null) MenuViewSampleData.Visibility = Visibility.Visible;
@@ -75,7 +75,7 @@ namespace IDWorksEnterpriseDesigner
         {
             if (ReportDocumentBorder != null && ReportSizeComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                string tag = selectedItem.Tag?.ToString();
+                string? tag = selectedItem.Tag?.ToString();
                 switch (tag)
                 {
                     case "A4":
