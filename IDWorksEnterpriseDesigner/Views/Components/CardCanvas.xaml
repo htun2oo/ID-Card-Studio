@@ -21,53 +21,49 @@
 
         <!-- Top Horizontal CM Ruler -->
         <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-            <Canvas ClipToBounds="True">
-                <TextBlock Text="0" Canvas.Left="4" Canvas.Top="4" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                <Line X1="37.8" Y1="14" X2="37.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="1" Canvas.Left="40.8" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="75.6" Y1="14" X2="75.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="2" Canvas.Left="78.6" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="113.4" Y1="14" X2="113.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="3" Canvas.Left="116.4" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="151.2" Y1="14" X2="151.2" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="4" Canvas.Left="154.2" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="189.0" Y1="14" X2="189.0" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="5" Canvas.Left="192.0" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="226.8" Y1="14" X2="226.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="6" Canvas.Left="229.8" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="264.6" Y1="14" X2="264.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="7" Canvas.Left="267.6" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="302.4" Y1="14" X2="302.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="8" Canvas.Left="305.4" Canvas.Top="4" FontSize="9" Foreground="Black"/>
-            </Canvas>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="37.8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="0" FontSize="9" FontWeight="Bold" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="1" Text="1" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="2" Text="2" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="3" Text="3" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="4" Text="4" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="5" Text="5" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="6" Text="6" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="7" Text="7" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Column="8" Text="8" FontSize="9" Foreground="Black" Margin="2,4,0,0" VerticalAlignment="Top"/>
+            </Grid>
         </Border>
 
         <!-- Left Vertical CM Ruler -->
         <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-            <Canvas ClipToBounds="True">
-                <TextBlock Text="0" Canvas.Left="4" Canvas.Top="4" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                <Line X1="14" Y1="37.8" X2="24" Y2="37.8" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="1" Canvas.Left="4" Canvas.Top="40.8" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="14" Y1="75.6" X2="24" Y2="75.6" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="2" Canvas.Left="4" Canvas.Top="78.6" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="14" Y1="113.4" X2="24" Y2="113.4" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="3" Canvas.Left="4" Canvas.Top="116.4" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="14" Y1="151.2" X2="24" Y2="151.2" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="4" Canvas.Left="4" Canvas.Top="154.2" FontSize="9" Foreground="Black"/>
-                
-                <Line X1="14" Y1="189.0" X2="24" Y2="189.0" Stroke="Black" StrokeThickness="1"/>
-                <TextBlock Text="5" Canvas.Left="4" Canvas.Top="192.0" FontSize="9" Foreground="Black"/>
-            </Canvas>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="37.8"/>
+                    <RowDefinition Height="37.8"/>
+                    <RowDefinition Height="37.8"/>
+                    <RowDefinition Height="37.8"/>
+                    <RowDefinition Height="37.8"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="0" FontSize="9" FontWeight="Bold" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="1" Text="1" FontSize="9" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="2" Text="2" FontSize="9" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="3" Text="3" FontSize="9" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="4" Text="4" FontSize="9" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="5" Text="5" FontSize="9" Foreground="Black" Margin="4,2,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            </Grid>
         </Border>
 
         <!-- Main Workspace Area -->
