@@ -12,7 +12,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // ProjectWorkspace ကို ဖော်ပြပေးရန်
             if (ProjectWorkspace != null)
             {
                 ProjectWorkspace.Visibility = Visibility.Visible;
@@ -22,10 +21,8 @@ namespace IDWorksEnterpriseDesigner
                 MenuProjectProperties.Visibility = Visibility.Visible;
                 MenuPrintSampleCard.Visibility = Visibility.Visible;
                 MenuPreviewSampleReport.Visibility = Visibility.Visible;
-                MenuReportPageSetup.Visibility = Visibility.Visible;
                 MenuDeleteProject.Visibility = Visibility.Visible;
                 MenuEdit.Visibility = Visibility.Visible;
-                MenuInsert.Visibility = Visibility.Visible;
                 MenuFormat.Visibility = Visibility.Visible;
                 MenuTools.Visibility = Visibility.Visible;
                 MenuWindow.Visibility = Visibility.Visible;
