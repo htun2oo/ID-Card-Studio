@@ -8,6 +8,9 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
+            
+            // အက်ပ်စတင်ဖွင့်လိုက်သည်နှင့် Workspace နှင့် မီနူးများ အလိုအလျောက် ပေါ်လာစေရန်
+            NewProject_Click(null, null);
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
