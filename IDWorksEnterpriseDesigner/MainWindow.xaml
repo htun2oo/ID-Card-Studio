@@ -658,4 +658,68 @@
                                             <Line X1="21" Y1="84.6" X2="24" Y2="84.6" Stroke="Gray" StrokeThickness="0.75"/>
 
                                             <TextBlock Text="2" Canvas.Left="6" Canvas.Top="90" FontSize="9" Foreground="Black"/>
-                                            <Line X1="17" Y1="93
+                                            <Line X1="17" Y1="93" X2="24" Y2="93" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="100.4" X2="24" Y2="100.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="107.8" X2="24" Y2="107.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="115.2" X2="24" Y2="115.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="122.6" X2="24" Y2="122.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="128" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="131" X2="24" Y2="131" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="138.4" X2="24" Y2="138.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="145.8" X2="24" Y2="145.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="153.2" X2="24" Y2="153.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="160.6" X2="24" Y2="160.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="166" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="169" X2="24" Y2="169" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="176.4" X2="24" Y2="176.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="183.8" X2="24" Y2="183.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="191.2" X2="24" Y2="191.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="198.6" X2="24" Y2="198.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="204" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="207" X2="24" Y2="207" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="214.4" X2="24" Y2="214.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="221.8" X2="24" Y2="221.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="229.2" X2="24" Y2="229.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="236.6" X2="24" Y2="236.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="6" Canvas.Left="6" Canvas.Top="242" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="245" X2="24" Y2="245" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="252.4" X2="24" Y2="252.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="259.8" X2="24" Y2="259.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="267.2" X2="24" Y2="267.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="274.6" X2="24" Y2="274.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="7" Canvas.Left="6" Canvas.Top="280" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="283" X2="24" Y2="283" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="290.4" X2="24" Y2="290.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="297.8" X2="24" Y2="297.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="305.2" X2="24" Y2="305.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="312.6" X2="24" Y2="312.6" Stroke="Gray" StrokeThickness="0.75"/>
+
+                                            <TextBlock Text="8" Canvas.Left="6" Canvas.Top="318" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="321" X2="24" Y2="321" Stroke="Black" StrokeThickness="1"/>
+                                            <Line X1="21" Y1="328.4" X2="24" Y2="328.4" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="19" Y1="335.8" X2="24" Y2="335.8" Stroke="Black" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="343.2" X2="24" Y2="343.2" Stroke="Gray" StrokeThickness="0.75"/>
+                                            <Line X1="21" Y1="350.6" X2="24" Y2="350.6" Stroke="Gray" StrokeThickness="0.75"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Report Document Canvas/Border with Dynamic Size -->
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
+                                            <Border x:Name="ReportDocumentBorder" Width="450" Height="635" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>
