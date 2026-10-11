@@ -31,7 +31,6 @@ namespace IDWorksEnterpriseDesigner
                 ViewSep2.Visibility = Visibility.Visible;
                 ViewSep3.Visibility = Visibility.Visible;
                 ViewSep4.Visibility = Visibility.Visible;
-                ViewSep5.Visibility = Visibility.Visible;
                 MenuViewFieldNames.Visibility = Visibility.Visible;
                 MenuViewSampleData.Visibility = Visibility.Visible;
                 MenuViewCard.Visibility = Visibility.Visible;
