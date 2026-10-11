@@ -82,7 +82,7 @@
                 <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
                 
-                <Separator x:Name="ViewSid4" Visibility="Collapsed" />
+                <Separator x:Name="ViewSep4" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
                     <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
