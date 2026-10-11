@@ -8,42 +8,52 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
+            
+            // Software စတင်ဖွင့်လိုက်ချိန်တွင် Workspace ကို ပုံမှန်ပိတ်ထားမည် (Main Window သက်သက်သာ ပေါ်မည်)
+            if (ProjectWorkspace != null)
+            {
+                ProjectWorkspace.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // Show project workspace when New Project is clicked (ဤစာကြောင်းလေးကို ထည့်သွင်းပေးရန်ဖြစ်ပါသည်)
-            ProjectWorkspace.Visibility = Visibility.Visible;
+            // File menu မှ New Project ကိုနှိပ်လိုက်မှသာ Workspace နှင့် Menu အပြည့်အစုံပေါ်လာမည်
+            if (ProjectWorkspace != null)
+            {
+                ProjectWorkspace.Visibility = Visibility.Visible;
+            }
 
-            MenuCloseProject.Visibility = Visibility.Visible;
-            MenuSaveProject.Visibility = Visibility.Visible;
-            MenuSaveProjectAs.Visibility = Visibility.Visible;
-            MenuProjectProperties.Visibility = Visibility.Visible;
-            MenuPrintSampleCard.Visibility = Visibility.Visible;
-            MenuPreviewSampleReport.Visibility = Visibility.Visible;
-            MenuDeleteProject.Visibility = Visibility.Visible;
-            Sep1.Visibility = Visibility.Visible;
-            Sep3.Visibility = Visibility.Visible;
-            Sep4.Visibility = Visibility.Visible;
+            if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
+            if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
+            if (MenuSaveProjectAs != null) MenuSaveProjectAs.Visibility = Visibility.Visible;
+            if (MenuProjectProperties != null) MenuProjectProperties.Visibility = Visibility.Visible;
+            if (MenuPrintSampleCard != null) MenuPrintSampleCard.Visibility = Visibility.Visible;
+            if (MenuPreviewSampleReport != null) MenuPreviewSampleReport.Visibility = Visibility.Visible;
+            if (MenuDeleteProject != null) MenuDeleteProject.Visibility = Visibility.Visible;
+            
+            if (Sep1 != null) Sep1.Visibility = Visibility.Visible;
+            if (Sep3 != null) Sep3.Visibility = Visibility.Visible;
+            if (Sep4 != null) Sep4.Visibility = Visibility.Visible;
 
-            MenuEdit.Visibility = Visibility.Visible;
-            MenuFormat.Visibility = Visibility.Visible;
-            MenuTools.Visibility = Visibility.Visible;
-            MenuWindow.Visibility = Visibility.Visible;
+            if (MenuEdit != null) MenuEdit.Visibility = Visibility.Visible;
+            if (MenuFormat != null) MenuFormat.Visibility = Visibility.Visible;
+            if (MenuTools != null) MenuTools.Visibility = Visibility.Visible;
+            if (MenuWindow != null) MenuWindow.Visibility = Visibility.Visible;
 
-            ViewSep1.Visibility = Visibility.Visible;
-            MenuViewFieldNames.Visibility = Visibility.Visible;
-            MenuViewSampleData.Visibility = Visibility.Visible;
-            ViewSep2.Visibility = Visibility.Visible;
-            MenuViewCard.Visibility = Visibility.Visible;
-            MenuViewReport.Visibility = Visibility.Visible;
-            MenuViewProductionForm.Visibility = Visibility.Visible;
-            MenuViewFieldConnector.Visibility = Visibility.Visible;
-            ViewSep3.Visibility = Visibility.Visible;
-            MenuViewFrontCard.Visibility = Visibility.Visible;
-            MenuViewBackCard.Visibility = Visibility.Visible;
-            ViewSep4.Visibility = Visibility.Visible;
-            MenuViewRuler.Visibility = Visibility.Visible;
+            if (ViewSep1 != null) ViewSep1.Visibility = Visibility.Visible;
+            if (MenuViewFieldNames != null) MenuViewFieldNames.Visibility = Visibility.Visible;
+            if (MenuViewSampleData != null) MenuViewSampleData.Visibility = Visibility.Visible;
+            if (ViewSep2 != null) ViewSep2.Visibility = Visibility.Visible;
+            if (MenuViewCard != null) MenuViewCard.Visibility = Visibility.Visible;
+            if (MenuViewReport != null) MenuViewReport.Visibility = Visibility.Visible;
+            if (MenuViewProductionForm != null) MenuViewProductionForm.Visibility = Visibility.Visible;
+            if (MenuViewFieldConnector != null) MenuViewFieldConnector.Visibility = Visibility.Visible;
+            if (ViewSep3 != null) ViewSep3.Visibility = Visibility.Visible;
+            if (MenuViewFrontCard != null) MenuViewFrontCard.Visibility = Visibility.Visible;
+            if (MenuViewBackCard != null) MenuViewBackCard.Visibility = Visibility.Visible;
+            if (ViewSep4 != null) ViewSep4.Visibility = Visibility.Visible;
+            if (MenuViewRuler != null) MenuViewRuler.Visibility = Visibility.Visible;
         }
 
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e)
@@ -56,7 +66,6 @@ namespace IDWorksEnterpriseDesigner
             Application.Current.Shutdown();
         }
 
-        // Report Document Size Changer based on Dropdown Selection (1 inch = 37.8 pixels)
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ReportDocumentBorder != null && ReportSizeComboBox.SelectedItem is ComboBoxItem selectedItem)
@@ -65,27 +74,22 @@ namespace IDWorksEnterpriseDesigner
                 switch (tag)
                 {
                     case "A4":
-                        // A4: 8.3 x 11.7 inches -> ~314 x 442 pixels
                         ReportDocumentBorder.Width = 314;
                         ReportDocumentBorder.Height = 442;
                         break;
                     case "A5":
-                        // A5: 5.8 x 8.3 inches -> ~219 x 314 pixels
                         ReportDocumentBorder.Width = 219;
                         ReportDocumentBorder.Height = 314;
                         break;
                     case "B5":
-                        // B5: 6.9 x 9.8 inches -> ~261 x 370 pixels
                         ReportDocumentBorder.Width = 261;
                         ReportDocumentBorder.Height = 370;
                         break;
                     case "Letter":
-                        // Letter: 8.5 x 11 inches -> ~321 x 416 pixels
                         ReportDocumentBorder.Width = 321;
                         ReportDocumentBorder.Height = 416;
                         break;
                     case "Legal":
-                        // Legal: 8.5 x 14 inches -> ~321 x 529 pixels
                         ReportDocumentBorder.Width = 321;
                         ReportDocumentBorder.Height = 529;
                         break;
