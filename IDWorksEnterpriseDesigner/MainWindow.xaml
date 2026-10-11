@@ -9,7 +9,7 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <!-- 1. File Menu -->
+            <!-- File Menu -->
             <MenuItem Header="_File">
                 <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
@@ -30,7 +30,7 @@
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
 
-            <!-- 2. Edit Menu -->
+            <!-- Edit Menu -->
             <MenuItem x:Name="MenuEdit" Header="_Edit" Visibility="Collapsed">
                 <MenuItem Header="_Undo" InputGestureText="Ctrl+Z" IsEnabled="False" />
                 <MenuItem Header="_Redo" InputGestureText="Ctrl+Y" IsEnabled="False" />
@@ -53,7 +53,7 @@
                 <MenuItem Header="Delete Production Form" />
             </MenuItem>
 
-            <!-- 3. View Menu -->
+            <!-- View Menu -->
             <MenuItem Header="_View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
@@ -67,45 +67,12 @@
                     <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" />
                 </MenuItem>
-                
-                <Separator x:Name="ViewSep1" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewFieldNames" Header="Field Names" InputGestureText="Ctrl+H" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewSampleData" Header="Sample Data" InputGestureText="Ctrl+M" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
-                
-                <Separator x:Name="ViewSep2" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewCard" Header="Card..." Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewReport" Header="Report..." Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewProductionForm" Header="Production Form" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewFieldConnector" Header="Field Connector" Visibility="Collapsed" />
-                
-                <Separator x:Name="ViewSep3" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewFrontCard" Header="Front of Selected Card" IsCheckable="True" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewBackCard" Header="Back of Selected Card" IsCheckable="True" Visibility="Collapsed" />
-                
-                <Separator x:Name="ViewSep4" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewRuler" Header="Ruler for Selected Card Side" IsCheckable="True" IsChecked="True" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuViewZoomCard" Header="Zoom Card" Visibility="Collapsed">
-                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="200%" IsCheckable="True" />
-                    <MenuItem Header="400%" IsCheckable="True" />
-                </MenuItem>
-                <MenuItem x:Name="MenuViewZoomReport" Header="Zoom Report" Visibility="Collapsed">
-                    <MenuItem Header="100%" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="200%" IsCheckable="True" />
-                    <MenuItem Header="400%" IsCheckable="True" />
-                </MenuItem>
             </MenuItem>
 
-            <!-- 4. Format Menu -->
+            <!-- Format, Tools, Window, Help Menus -->
             <MenuItem x:Name="MenuFormat" Header="F_ormat" Visibility="Collapsed" />
-
-            <!-- 5. Tools Menu -->
             <MenuItem x:Name="MenuTools" Header="_Tools" Visibility="Collapsed" />
-
-            <!-- 6. Window Menu -->
             <MenuItem x:Name="MenuWindow" Header="_Window" Visibility="Collapsed" />
-
-            <!-- 7. Help Menu -->
             <MenuItem Header="_Help">
                 <MenuItem Header="_Online Help..." InputGestureText="F1" />
                 <Separator />
@@ -152,18 +119,62 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Top Horizontal Ruler with Full Scale Numbers -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            
+                                            <TextBlock Text="1" Canvas.Left="115" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="117.8" Y1="20" X2="117.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="2" Canvas.Left="213" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="215.8" Y1="20" X2="215.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="3" Canvas.Left="311" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="313.8" Y1="20" X2="313.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="4" Canvas.Left="409" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="411.8" Y1="20" X2="411.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="5" Canvas.Left="507" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="509.8" Y1="20" X2="509.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="6" Canvas.Left="605" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="607.8" Y1="20" X2="607.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="7" Canvas.Left="703" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="705.8" Y1="20" X2="705.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="8" Canvas.Left="801" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="803.8" Y1="20" X2="803.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
+
+                                    <!-- Left Vertical Ruler with Full Scale Numbers -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="110" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="113" X2="24" Y2="113" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="208" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="211" X2="24" Y2="211" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="306" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="309" X2="24" Y2="309" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="404" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="407" X2="24" Y2="407" Stroke="Black" StrokeThickness="1"/>
+
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="502" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="505" X2="24" Y2="505" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
+
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -191,18 +202,47 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="115" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="117.8" Y1="20" X2="117.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="213" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="215.8" Y1="20" X2="215.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="311" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="313.8" Y1="20" X2="313.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="409" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="411.8" Y1="20" X2="411.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="507" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="509.8" Y1="20" X2="509.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="6" Canvas.Left="605" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="607.8" Y1="20" X2="607.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="7" Canvas.Left="703" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="705.8" Y1="20" X2="705.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="8" Canvas.Left="801" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="803.8" Y1="20" X2="803.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
+
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="110" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="113" X2="24" Y2="113" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="208" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="211" X2="24" Y2="211" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="306" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="309" X2="24" Y2="309" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="404" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="407" X2="24" Y2="407" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="502" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="505" X2="24" Y2="505" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
+
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -263,19 +303,41 @@
                                     
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
-                                    <!-- Top Horizontal Ruler for Report -->
+                                    <!-- Top Horizontal Ruler for Report with Scale -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="20" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="18" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="115" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="117.8" Y1="20" X2="117.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="213" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="215.8" Y1="20" X2="215.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="311" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="313.8" Y1="20" X2="313.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="409" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="411.8" Y1="20" X2="411.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="507" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="509.8" Y1="20" X2="509.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="6" Canvas.Left="605" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="607.8" Y1="20" X2="607.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="7" Canvas.Left="703" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="705.8" Y1="20" X2="705.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="8" Canvas.Left="801" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="803.8" Y1="20" X2="803.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="9" Canvas.Left="899" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="901.8" Y1="20" X2="901.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Left Vertical Ruler for Report -->
+                                    <!-- Left Vertical Ruler for Report with Scale -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas ClipToBounds="True">
                                             <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="18" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="110" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="113" X2="24" Y2="113" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="208" FontSize="9" Foreground="Black"/>
+                                            <Line X1="20" Y1="211" X2="24" Y2="211" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
 
