@@ -18,8 +18,12 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // New Project Dialog Window ကို ခေါ်ယူပြသခြင်း
+            // New Project Dialog Window ကို ဖန်တီးခြင်း
             NewProjectWindow newProjectDlg = new NewProjectWindow();
+            
+            // Main Window ကို Owner အဖြစ် သတ်မှတ်ပေးခြင်း (Main Window ၏ အလယ်တည့်တည့်တွင် ပေါ်လာစေရန်)
+            newProjectDlg.Owner = this;
+            
             if (newProjectDlg.ShowDialog() == true)
             {
                 // Dialog တွင် OK နှိပ်မှသာ Workspace နှင့် Menu များ ပေါ်လာမည်
