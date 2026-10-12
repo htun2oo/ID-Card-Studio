@@ -346,7 +346,7 @@ namespace IDWorksEnterpriseDesigner
                     Stroke = Brushes.Black,
                     StrokeThickness = 1.2
                 };
-                leftCanvas.Children.Add(mainLine);
+                ReportLeftRulerCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
@@ -357,7 +357,7 @@ namespace IDWorksEnterpriseDesigner
                 };
                 Canvas.SetLeft(text, cm >= 10 ? 1 : 3);
                 Canvas.SetTop(text, startY - 7);
-                leftCanvas.Children.Add(text);
+                ReportLeftRulerCanvas.Children.Add(text);
 
                 if (cm < limitY)
                 {
@@ -373,7 +373,7 @@ namespace IDWorksEnterpriseDesigner
                             Stroke = (mm == 5) ? Brushes.Black : subTickColor,
                             StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
-                        leftCanvas.Children.Add(subLine);
+                        ReportLeftRulerCanvas.Children.Add(subLine);
                     }
                 }
             }
