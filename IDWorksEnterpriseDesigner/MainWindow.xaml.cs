@@ -16,7 +16,6 @@ namespace IDWorksEnterpriseDesigner
         {
             InitializeComponent();
             
-            // Software စတင်ဖွင့်လိုက်ချိန်တွင် Workspace ကို ပုံမှန်ပိတ်ထားမည် (Main Window သက်သက်သာ ပေါ်မည်)
             if (ProjectWorkspace != null)
             {
                 ProjectWorkspace.Visibility = Visibility.Collapsed;
@@ -25,19 +24,12 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // New Project Dialog Window ကို ဖန်တီးခြင်း
             NewProjectWindow newProjectDlg = new NewProjectWindow();
-            
-            // Main Window ကို Owner အဖြစ် သတ်မှတ်ပေးခြင်း (Main Window ၏ အလယ်တည့်တည့်တွင် ပေါ်လာစေရန်)
             newProjectDlg.Owner = this;
             
             if (newProjectDlg.ShowDialog() == true)
             {
-                // Dialog တွင် OK နှိပ်မှသာ Workspace နှင့် Menu များ ပေါ်လာမည်
-                if (ProjectWorkspace != null)
-                {
-                    ProjectWorkspace.Visibility = Visibility.Visible;
-                }
+                if (ProjectWorkspace != null) ProjectWorkspace.Visibility = Visibility.Visible;
 
                 if (MenuCloseProject != null) MenuCloseProject.Visibility = Visibility.Visible;
                 if (MenuSaveProject != null) MenuSaveProject.Visibility = Visibility.Visible;
@@ -113,7 +105,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler (Horizontal) တွင် Mouse နှိပ်လိုက်သည့်အခါ အလျားလိုက် Guide Line အသစ်စဆွဲခြင်း
+        // Top Ruler (Horizontal) - မျဉ်းကြောင်းကို Card ဧရိယာအထိ ဆန့်ထုတ်ပြသရန်
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -128,7 +120,7 @@ namespace IDWorksEnterpriseDesigner
                 {
                     X1 = 0,
                     Y1 = pos.Y,
-                    X2 = canvas.ActualWidth > 0 ? canvas.ActualWidth : 1000,
+                    X2 = 2000, // Card နှင့် Workspace တစ်ခုလုံးပေါ်အထိ ရှည်ထွက်သွားစေရန်
                     Y2 = pos.Y,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
@@ -140,7 +132,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Left Ruler (Vertical) တွင် Mouse နှိပ်လိုက်သည့်အခါ ဒေါင်လိုက် Guide Line အသစ်စဆွဲခြင်း
+        // Left Ruler (Vertical) - မျဉ်းကြောင်းကို Card ဧရိယာအထိ ဆန့်ထုတ်ပြသရန်
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -156,7 +148,7 @@ namespace IDWorksEnterpriseDesigner
                     X1 = pos.X,
                     Y1 = 0,
                     X2 = pos.X,
-                    Y2 = canvas.ActualHeight > 0 ? canvas.ActualHeight : 1000,
+                    Y2 = 2000, // Card နှင့် Workspace တစ်ခုလုံးပေါ်အထိ ရှည်ထွက်သွားစေရန်
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
@@ -167,7 +159,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့ပြောင်းရန်
         private void Ruler_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDraggingGuide && activeGuideLine != null && activeCanvas != null)
@@ -188,7 +179,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Mouse လွှတ်လိုက်သည့်အခါ Guide Line ချပေးပြီး Drag လုပ်ခြင်း დასრულရန်
         private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (isDraggingGuide && activeCanvas != null)
