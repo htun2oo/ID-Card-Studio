@@ -20,11 +20,11 @@ namespace IDWorksEnterpriseDesigner
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Card ရူလာများ (Front နှင့် Back) ကို 10 cm အထိ ဆွဲပေးရန်
+            // Card ရူလာများ (Front နှင့် Back)
             DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 10.0, 6.0);
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 10.0, 6.0);
 
-            // Report ရူလာကို A4 အရွယ်အစား (21cm x 29.7cm) ဖြင့် ဆွဲပေးရန်
+            // Report ရူလာ (A4 အရွယ်အစား: 21cm x 29.7cm)
             DrawReportRulers(21.0, 29.7);
         }
 
@@ -38,7 +38,7 @@ namespace IDWorksEnterpriseDesigner
                 ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများအတွက် Report ပုံစံအတိုင်း အနက်ရောင် Main Ticks နှင့် မီးခိုးရောင် Sub-ticks များ သတ်မှတ်ဆွဲပေးသည့် Function
+        // Card ရူလာများကို ပိုမိုထင်းရှားစွာ ဆွဲပေးသည့် Function
         private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double widthCm, double heightCm)
         {
             if (topCanvas == null || leftCanvas == null) return;
@@ -59,22 +59,22 @@ namespace IDWorksEnterpriseDesigner
 
                 Line mainLine = new Line
                 {
-                    X1 = startX, Y1 = 17,
+                    X1 = startX, Y1 = 15,
                     X2 = startX, Y2 = 24,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 1
+                    StrokeThickness = 1.2
                 };
                 topCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
-                    FontSize = 9,
+                    FontSize = 10,
                     Foreground = Brushes.Black,
-                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                    FontWeight = FontWeights.Bold
                 };
-                Canvas.SetLeft(text, startX - (cm >= 10 ? 6 : 3));
-                Canvas.SetTop(text, 2);
+                Canvas.SetLeft(text, startX - (cm >= 10 ? 7 : 4));
+                Canvas.SetTop(text, 1);
                 topCanvas.Children.Add(text);
 
                 if (cm < (int)Math.Ceiling(widthCm))
@@ -82,14 +82,14 @@ namespace IDWorksEnterpriseDesigner
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subX = startX + (mm * (CmToPixel / 10.0));
-                        double tickHeight = (mm == 5) ? 5 : 3;
+                        double tickHeight = (mm == 5) ? 6 : 3.5;
 
                         Line subLine = new Line
                         {
                             X1 = subX, Y1 = 24 - tickHeight,
                             X2 = subX, Y2 = 24,
                             Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
                         };
                         topCanvas.Children.Add(subLine);
                     }
@@ -103,22 +103,22 @@ namespace IDWorksEnterpriseDesigner
 
                 Line mainLine = new Line
                 {
-                    X1 = 17, Y1 = startY,
+                    X1 = 15, Y1 = startY,
                     X2 = 24, Y2 = startY,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 1
+                    StrokeThickness = 1.2
                 };
                 leftCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
-                    FontSize = 9,
+                    FontSize = 10,
                     Foreground = Brushes.Black,
-                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                    FontWeight = FontWeights.Bold
                 };
-                Canvas.SetLeft(text, cm >= 10 ? 2 : 4);
-                Canvas.SetTop(text, startY - 6);
+                Canvas.SetLeft(text, cm >= 10 ? 1 : 3);
+                Canvas.SetTop(text, startY - 7);
                 leftCanvas.Children.Add(text);
 
                 if (cm < (int)Math.Ceiling(heightCm))
@@ -126,14 +126,14 @@ namespace IDWorksEnterpriseDesigner
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subY = startY + (mm * (CmToPixel / 10.0));
-                        double tickWidth = (mm == 5) ? 5 : 3;
+                        double tickWidth = (mm == 5) ? 6 : 3.5;
 
                         Line subLine = new Line
                         {
                             X1 = 24 - tickWidth, Y1 = subY,
                             X2 = 24, Y2 = subY,
                             Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
                         };
                         leftCanvas.Children.Add(subLine);
                     }
@@ -141,7 +141,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Report ရူလာများအတွက် သီးသန့် Function
+        // Report ရူလာများကို ပိုမိုထင်းရှားစွာ ဆွဲပေးသည့် Function
         private void DrawReportRulers(double widthCm, double heightCm)
         {
             if (ReportTopRulerCanvas == null || ReportLeftRulerCanvas == null) return;
@@ -162,22 +162,22 @@ namespace IDWorksEnterpriseDesigner
 
                 Line mainLine = new Line
                 {
-                    X1 = startX, Y1 = 17,
+                    X1 = startX, Y1 = 15,
                     X2 = startX, Y2 = 24,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 1
+                    StrokeThickness = 1.2
                 };
                 ReportTopRulerCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
-                    FontSize = 9,
+                    FontSize = 10,
                     Foreground = Brushes.Black,
-                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                    FontWeight = FontWeights.Bold
                 };
-                Canvas.SetLeft(text, startX - (cm >= 10 ? 6 : 3));
-                Canvas.SetTop(text, 2);
+                Canvas.SetLeft(text, startX - (cm >= 10 ? 7 : 4));
+                Canvas.SetTop(text, 1);
                 ReportTopRulerCanvas.Children.Add(text);
 
                 if (cm < (int)Math.Ceiling(widthCm))
@@ -185,14 +185,14 @@ namespace IDWorksEnterpriseDesigner
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subX = startX + (mm * (CmToPixel / 10.0));
-                        double tickHeight = (mm == 5) ? 5 : 3;
+                        double tickHeight = (mm == 5) ? 6 : 3.5;
 
                         Line subLine = new Line
                         {
                             X1 = subX, Y1 = 24 - tickHeight,
                             X2 = subX, Y2 = 24,
                             Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
                         };
                         ReportTopRulerCanvas.Children.Add(subLine);
                     }
@@ -206,22 +206,22 @@ namespace IDWorksEnterpriseDesigner
 
                 Line mainLine = new Line
                 {
-                    X1 = 17, Y1 = startY,
+                    X1 = 15, Y1 = startY,
                     X2 = 24, Y2 = startY,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 1
+                    StrokeThickness = 1.2
                 };
                 ReportLeftRulerCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
-                    FontSize = 9,
+                    FontSize = 10,
                     Foreground = Brushes.Black,
-                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                    FontWeight = FontWeights.Bold
                 };
-                Canvas.SetLeft(text, cm >= 10 ? 2 : 4);
-                Canvas.SetTop(text, startY - 6);
+                Canvas.SetLeft(text, cm >= 10 ? 1 : 3);
+                Canvas.SetTop(text, startY - 7);
                 ReportLeftRulerCanvas.Children.Add(text);
 
                 if (cm < (int)Math.Ceiling(heightCm))
@@ -229,14 +229,14 @@ namespace IDWorksEnterpriseDesigner
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subY = startY + (mm * (CmToPixel / 10.0));
-                        double tickWidth = (mm == 5) ? 5 : 3;
+                        double tickWidth = (mm == 5) ? 6 : 3.5;
 
                         Line subLine = new Line
                         {
                             X1 = 24 - tickWidth, Y1 = subY,
                             X2 = 24, Y2 = subY,
                             Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
                         };
                         ReportLeftRulerCanvas.Children.Add(subLine);
                     }
