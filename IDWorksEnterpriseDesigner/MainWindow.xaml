@@ -1,84 +1,309 @@
-<!-- 3. Report Window -->
-<Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+<Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
+        WindowStartupLocation="CenterScreen">
     <DockPanel>
-        <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
-            <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
-                <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" Tag="A4" IsSelected="True"/>
-                <ComboBoxItem Content="A5 (14.8 x 21.0 cm)" Tag="A5"/>
-                <ComboBoxItem Content="B5 (17.6 x 25.0 cm)" Tag="B5"/>
-                <ComboBoxItem Content="Letter (8.5 x 11 in)" Tag="Letter"/>
-                <ComboBoxItem Content="Legal (8.5 x 14 in)" Tag="Legal"/>
-            </ComboBox>
-        </Grid>
+        <!-- Top Menu Bar -->
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
+                <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
+                <MenuItem Header="Report Page Set_up..." Click="ReportPageSetup_Click" />
+                <Separator />
+                <MenuItem Header="E_xit" Click="Exit_Click" />
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="Toolbars" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Online Help..." InputGestureText="F1" />
+            </MenuItem>
+        </Menu>
 
-        <Border Background="#CCCCCC" Padding="4">
-            <Grid Background="#E6E6E6">
+        <!-- Status Bar -->
+        <StatusBar DockPanel.Dock="Bottom" Height="24" Background="#F0F0F0">
+            <StatusBarItem>
+                <TextBlock Text="For Help, press F1" FontSize="11" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Main Workspace Area -->
+        <Grid x:Name="MdiHostGrid" Background="#808080">
+            <Grid x:Name="ProjectWorkspace" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="24"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.4*"/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="24"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
-                
-                <!-- Report Top Horizontal Ruler (0 to 21 cm) -->
-                <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                    <Canvas Background="Transparent" ClipToBounds="True">
-                        <!-- 0 to 10 cm -->
-                        <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                        <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                        <Line X1="206.8" Y1="17" X2="206.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="10" Canvas.Left="391" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                        <Line X1="395.8" Y1="17" X2="395.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                        <!-- 11 to 21 cm -->
-                        <TextBlock Text="15" Canvas.Left="579" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                        <Line X1="584.8" Y1="17" X2="584.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="20" Canvas.Left="767" Canvas.Top="2" FontSize="9" Foreground="Black"/>
-                        <Line X1="773.8" Y1="17" X2="773.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
-                    </Canvas>
-                </Border>
 
-                <!-- Report Left Vertical Ruler (0 to 30 cm) -->
-                <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                    <Canvas Background="Transparent" ClipToBounds="True">
-                        <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
-                        <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="5" Canvas.Left="6" Canvas.Top="200" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="202.0" X2="24" Y2="202.0" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="10" Canvas.Left="4" Canvas.Top="388" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="391.0" X2="24" Y2="391.0" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="15" Canvas.Left="4" Canvas.Top="577" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="580.0" X2="24" Y2="580.0" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="20" Canvas.Left="4" Canvas.Top="766" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="769.0" X2="24" Y2="769.0" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="25" Canvas.Left="4" Canvas.Top="954" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="958.0" X2="24" Y2="958.0" Stroke="Black" StrokeThickness="1"/>
-                        <TextBlock Text="30" Canvas.Left="4" Canvas.Top="1143" FontSize="9" Foreground="Black"/>
-                        <Line X1="17" Y1="1147.0" X2="24" Y2="1147.0" Stroke="Black" StrokeThickness="1"/>
-                    </Canvas>
-                </Border>
+                <!-- Left Column: Card Windows (Front & Back) -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                <!-- Report Document Border & Overlay Canvas (Default A4: 793.8 x 1122.6) -->
-                <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                        <Border x:Name="ReportDocumentBorder" Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                        <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent"
-                                MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
-                                MouseMove="ReportOverlayCanvas_MouseMove"
-                                MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"
-                                IsHitTestVisible="True"/>
-                    </Grid>
-                </ScrollViewer>
+                    <!-- 1. Card Window (Front) -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Top Horizontal Ruler -->
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="53" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="55.6" Y1="17" X2="55.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="91" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="93.4" Y1="17" X2="93.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="129" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="131.2" Y1="17" X2="131.2" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="167" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="169.0" Y1="17" X2="169.0" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="206.8" Y1="17" X2="206.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="6" Canvas.Left="243" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="244.6" Y1="17" X2="244.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="7" Canvas.Left="281" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="282.4" Y1="17" X2="282.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="8" Canvas.Left="319" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="320.2" Y1="17" X2="320.2" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="9" Canvas.Left="357" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="358.0" Y1="17" X2="358.0" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Left Vertical Ruler -->
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="50" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="50.8" X2="24" Y2="50.8" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="88" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="88.6" X2="24" Y2="88.6" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="126" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="126.4" X2="24" Y2="126.4" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="164" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="164.2" X2="24" Y2="164.2" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="202" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="202.0" X2="24" Y2="202.0" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Front Card Overlay Canvas -->
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
+                                                    MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="FrontCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- 2. Card Window (Back) -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Back Top Horizontal Ruler -->
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="53" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="55.6" Y1="17" X2="55.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="91" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="93.4" Y1="17" X2="93.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="129" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="131.2" Y1="17" X2="131.2" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="167" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="169.0" Y1="17" X2="169.0" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="206.8" Y1="17" X2="206.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="6" Canvas.Left="243" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="244.6" Y1="17" X2="244.6" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="7" Canvas.Left="281" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="282.4" Y1="17" X2="282.4" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="8" Canvas.Left="319" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="320.2" Y1="17" X2="320.2" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="9" Canvas.Left="357" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="358.0" Y1="17" X2="358.0" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Back Left Vertical Ruler -->
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="50" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="50.8" X2="24" Y2="50.8" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="88" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="88.6" X2="24" Y2="88.6" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="126" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="126.4" X2="24" Y2="126.4" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="164" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="164.2" X2="24" Y2="164.2" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="202" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="202.0" X2="24" Y2="202.0" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Back Card Overlay Canvas -->
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
+                                                    MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="BackCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Right Column: Production Form and Report Windows -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Production Form Window -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="White" Margin="4"/>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- 3. Report Window -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="170"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" Tag="A4" IsSelected="True"/>
+                                    <ComboBoxItem Content="A5 (14.8 x 21.0 cm)" Tag="A5"/>
+                                    <ComboBoxItem Content="B5 (17.6 x 25.0 cm)" Tag="B5"/>
+                                    <ComboBoxItem Content="Letter (8.5 x 11 in)" Tag="Letter"/>
+                                    <ComboBoxItem Content="Legal (8.5 x 14 in)" Tag="Legal"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Report Top Horizontal Ruler (0 to 21 cm) -->
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="206.8" Y1="17" X2="206.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="10" Canvas.Left="391" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="395.8" Y1="17" X2="395.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="15" Canvas.Left="579" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="584.8" Y1="17" X2="584.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="20" Canvas.Left="767" Canvas.Top="2" FontSize="9" Foreground="Black"/>
+                                            <Line X1="773.8" Y1="17" X2="773.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Report Left Vertical Ruler (0 to 30 cm) -->
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
+                                        <Canvas Background="Transparent" ClipToBounds="True">
+                                            <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="Black"/>
+                                            <Line X1="17" Y1="13" X2="24" Y2="13" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="200" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="202.0" X2="24" Y2="202.0" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="10" Canvas.Left="4" Canvas.Top="388" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="391.0" X2="24" Y2="391.0" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="15" Canvas.Left="4" Canvas.Top="577" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="580.0" X2="24" Y2="580.0" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="20" Canvas.Left="4" Canvas.Top="766" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="769.0" X2="24" Y2="769.0" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="25" Canvas.Left="4" Canvas.Top="954" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="958.0" X2="24" Y2="958.0" Stroke="Black" StrokeThickness="1"/>
+                                            <TextBlock Text="30" Canvas.Left="4" Canvas.Top="1143" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="1147.0" X2="24" Y2="1147.0" Stroke="Black" StrokeThickness="1"/>
+                                        </Canvas>
+                                    </Border>
+
+                                    <!-- Report Document Border & Overlay Canvas -->
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
+                                            <Border x:Name="ReportDocumentBorder" Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent"
+                                                    MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="ReportOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                </Grid>
             </Grid>
-        </Border>
+        </Grid>
     </DockPanel>
-</Border>
+</Window>
