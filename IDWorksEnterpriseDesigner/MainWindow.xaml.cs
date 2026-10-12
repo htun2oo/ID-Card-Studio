@@ -9,14 +9,12 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Dragging state variables for Front Card
         private bool isDraggingFront = false;
-        private Line currentFrontLine;
+        private Line? currentFrontLine;
         private Point frontStartPoint;
 
-        // Dragging state variables for Back Card
         private bool isDraggingBack = false;
-        private Line currentBackLine;
+        private Line? currentBackLine;
         private Point backStartPoint;
 
         public MainWindow()
@@ -26,7 +24,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // Project Workspace ကို ပုံဖော်ပြသရန်
             if (ProjectWorkspace != null)
             {
                 ProjectWorkspace.Visibility = Visibility.Visible;
@@ -47,10 +44,10 @@ namespace IDWorksEnterpriseDesigner
         {
             if (ReportSizeComboBox == null || ReportDocumentBorder == null) return;
 
-            ComboBoxItem selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
+            ComboBoxItem? selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
             if (selectedItem != null)
             {
-                string tag = selectedItem.Tag?.ToString();
+                string? tag = selectedItem.Tag?.ToString();
                 switch (tag)
                 {
                     case "A4":
@@ -77,26 +74,10 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Front Card Ruler & Canvas Events ---
-        private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Ruler ပေါ်မှ ကလစ်နှိပ်သည့် အချိန်အတွက် လိုအပ်ပါက ထည့်သွင်းနိုင်ပါသည်
-        }
-
-        private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Ruler ပေါ်မှ ကလစ်နှိပ်သည့် အချိန်အတွက် လိုအပ်ပါက ထည့်သွင်းနိုင်ပါသည်
-        }
-
-        private void Ruler_MouseMove(object sender, MouseEventArgs e)
-        {
-            // Ruler Mouse Move 
-        }
-
-        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            // Ruler Mouse Up
-        }
+        private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
+        private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
+        private void Ruler_MouseMove(object sender, MouseEventArgs e) { }
+        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
 
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -109,7 +90,7 @@ namespace IDWorksEnterpriseDesigner
             {
                 Stroke = Brushes.Red,
                 StrokeThickness = 1,
-                StrokeDasharray = new DoubleCollection { 2, 2 },
+                StrokeDashArray = new DoubleCollection { 2, 2 },
                 X1 = frontStartPoint.X,
                 Y1 = 0,
                 X2 = frontStartPoint.X,
@@ -142,7 +123,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Back Card Canvas Events (Independent from Front Card) ---
         private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (BackCardOverlayCanvas == null) return;
@@ -154,7 +134,7 @@ namespace IDWorksEnterpriseDesigner
             {
                 Stroke = Brushes.Red,
                 StrokeThickness = 1,
-                StrokeDasharray = new DoubleCollection { 2, 2 },
+                StrokeDashArray = new DoubleCollection { 2, 2 },
                 X1 = backStartPoint.X,
                 Y1 = 0,
                 X2 = backStartPoint.X,
@@ -181,6 +161,7 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingBack = false;
                 if (BackCardOverlayCanvas != null)
                 {
+                    BackCardOverlayCanvas.ReleaseName("BackCardOverlayCanvas"); // Safe release check
                     BackCardOverlayCanvas.ReleaseMouseCapture();
                 }
                 currentBackLine = null;
