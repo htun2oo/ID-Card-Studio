@@ -52,25 +52,25 @@ namespace IDWorksEnterpriseDesigner
             if (selectedItem != null)
             {
                 string? tag = selectedItem.Tag?.ToString();
-                double newWidth = 378;
-                double newHeight = 534;
+                double newWidth = 793.8;
+                double newHeight = 1122.6;
 
                 switch (tag)
                 {
-                    case "A4":
-                        newWidth = 378; newHeight = 534;
+                    case "A4": // 21.0 x 29.7 cm
+                        newWidth = 793.8; newHeight = 1122.6;
                         break;
-                    case "A5":
-                        newWidth = 266; newHeight = 378;
+                    case "A5": // 14.8 x 21.0 cm
+                        newWidth = 559.4; newHeight = 793.8;
                         break;
-                    case "B5":
-                        newWidth = 316; newHeight = 450;
+                    case "B5": // 17.6 x 25.0 cm
+                        newWidth = 665.3; newHeight = 945.0;
                         break;
-                    case "Letter":
-                        newWidth = 324; newHeight = 420;
+                    case "Letter": // 8.5 x 11 in (~21.59 x 27.94 cm)
+                        newWidth = 816.0; newHeight = 1056.0;
                         break;
-                    case "Legal":
-                        newWidth = 324; newHeight = 534;
+                    case "Legal": // 8.5 x 14 in (~21.59 x 35.56 cm)
+                        newWidth = 816.0; newHeight = 1344.0;
                         break;
                 }
 
