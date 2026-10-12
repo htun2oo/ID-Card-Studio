@@ -92,7 +92,7 @@
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Front Card Canvas ( Grid မျဉ်းများမပါဘဲ White Background သက်သက် ) -->
+                                    <!-- Front Card Canvas -->
                                     <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -140,7 +140,7 @@
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Back Card Canvas ( Grid မျဉ်းများမပါဘဲ White Background သက်သက် ) -->
+                                    <!-- Back Card Canvas -->
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -217,7 +217,7 @@
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Report Document Canvas ( Grid မျဉ်းများမပါဘဲ White Background သက်သက် ) -->
+                                    <!-- Report Document Canvas -->
                                     <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" 
                                                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                                                   Background="#D6D6D6" ScrollChanged="ReportMainScrollViewer_ScrollChanged">
