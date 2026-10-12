@@ -25,7 +25,7 @@
                 <Separator x:Name="Sep4" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuDeleteProject" Header="_Delete Project..." Visibility="Collapsed" />
                 <Separator />
-                <MenuItem x:Name="MenuRecentFile" Header="Recent File" IsEnabled="False" />
+                <MenuItem Header="Recent File" IsEnabled="False" />
                 <Separator />
                 <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
@@ -403,7 +403,7 @@
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Front Card Overlay Canvas with Mouse Events -->
+                                    <!-- Front Card Overlay Canvas -->
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -674,14 +674,6 @@
                                             <Line X1="21" Y1="349.42" X2="24" Y2="349.42" Stroke="Gray" StrokeThickness="0.6"/>
                                         </Canvas>
                                     </Border>
-
-                                    <!-- Back Card Overlay Canvas -->
-                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" IsHitTestVisible="False"/>
-                                        </Grid>
-                                    </ScrollViewer>
                                 </Grid>
                             </Border>
                         </DockPanel>
@@ -986,6 +978,13 @@
                                             <Line X1="21" Y1="349.42" X2="24" Y2="349.42" Stroke="Gray" StrokeThickness="0.6"/>
                                         </Canvas>
                                     </Border>
+
+                                    <!-- Report Document Border with x:Name="ReportDocumentBorder" Added -->
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
+                                            <Border x:Name="ReportDocumentBorder" Width="314" Height="442" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                        </Grid>
+                                    </ScrollViewer>
                                 </Grid>
                             </Border>
                         </DockPanel>
