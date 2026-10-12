@@ -680,9 +680,9 @@
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
-                                                    MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
-                                                    MouseMove="FrontCardOverlayCanvas_MouseMove"
-                                                    MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"
+                                                    MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="BackCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"
                                                     IsHitTestVisible="True"/>
                                         </Grid>
                                     </ScrollViewer>
@@ -990,13 +990,6 @@
                                             <Line X1="21" Y1="349.42" X2="24" Y2="349.42" Stroke="Gray" StrokeThickness="0.6"/>
                                         </Canvas>
                                     </Border>
-
-                                    <!-- Report Document Border (Paper Area) -->
-                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border x:Name="ReportDocumentBorder" Width="314" Height="442" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                        </Grid>
-                                    </ScrollViewer>
                                 </Grid>
                             </Border>
                         </DockPanel>
