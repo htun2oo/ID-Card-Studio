@@ -80,56 +80,12 @@
                                     
                                     <!-- Front Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                                        <Canvas Background="Transparent" ClipToBounds="True">
-                                            <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="17.8" Y1="14" X2="17.8" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <Line X1="21.58" Y1="20" X2="21.58" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="25.36" Y1="20" X2="25.36" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="29.14" Y1="20" X2="29.14" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="32.92" Y1="20" X2="32.92" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="36.7" Y1="17" X2="36.7" Y2="24" Stroke="#000080" StrokeThickness="1"/>
-                                            <Line X1="40.48" Y1="20" X2="40.48" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="44.26" Y1="20" X2="44.26" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="48.04" Y1="20" X2="48.04" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-                                            <Line X1="51.82" Y1="20" X2="51.82" Y2="24" Stroke="#20B2AA" StrokeThickness="0.8"/>
-
-                                            <TextBlock Text="1" Canvas.Left="53" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="55.6" Y1="14" X2="55.6" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="2" Canvas.Left="91" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="93.4" Y1="14" X2="93.4" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="3" Canvas.Left="129" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="131.2" Y1="14" X2="131.2" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="4" Canvas.Left="167" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="169.0" Y1="14" X2="169.0" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="206.8" Y1="14" X2="206.8" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="6" Canvas.Left="243" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="244.6" Y1="14" X2="244.6" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="7" Canvas.Left="281" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="282.4" Y1="14" X2="282.4" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="8" Canvas.Left="319" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="320.2" Y1="14" X2="320.2" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="9" Canvas.Left="357" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="358.0" Y1="14" X2="358.0" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                        </Canvas>
+                                        <Canvas x:Name="FrontTopRulerCanvas" Width="380" Height="24" Background="Transparent" ClipToBounds="True"/>
                                     </Border>
 
                                     <!-- Front Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                                        <Canvas Background="Transparent" ClipToBounds="True">
-                                            <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="13" X2="24" Y2="13" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="50" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="50.8" X2="24" Y2="50.8" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="88" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="88.6" X2="24" Y2="88.6" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="126" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="126.4" X2="24" Y2="126.4" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="164" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="164.2" X2="24" Y2="164.2" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="202" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="202.0" X2="24" Y2="202.0" Stroke="#000080" StrokeThickness="1.2"/>
-                                        </Canvas>
+                                        <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Height="250" Background="Transparent" ClipToBounds="True"/>
                                     </Border>
 
                                     <!-- Front Card Canvas -->
@@ -168,46 +124,12 @@
                                     
                                     <!-- Back Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
-                                        <Canvas Background="Transparent" ClipToBounds="True">
-                                            <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="17.8" Y1="14" X2="17.8" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="1" Canvas.Left="53" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="55.6" Y1="14" X2="55.6" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="2" Canvas.Left="91" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="93.4" Y1="14" X2="93.4" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="3" Canvas.Left="129" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="131.2" Y1="14" X2="131.2" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="4" Canvas.Left="167" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="169.0" Y1="14" X2="169.0" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="206.8" Y1="14" X2="206.8" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="6" Canvas.Left="243" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="244.6" Y1="14" X2="244.6" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="7" Canvas.Left="281" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="282.4" Y1="14" X2="282.4" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="8" Canvas.Left="319" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="320.2" Y1="14" X2="320.2" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="9" Canvas.Left="357" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="358.0" Y1="14" X2="358.0" Y2="24" Stroke="#000080" StrokeThickness="1.2"/>
-                                        </Canvas>
+                                        <Canvas x:Name="BackTopRulerCanvas" Width="380" Height="24" Background="Transparent" ClipToBounds="True"/>
                                     </Border>
 
                                     <!-- Back Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
-                                        <Canvas Background="Transparent" ClipToBounds="True">
-                                            <TextBlock Text="0" Canvas.Left="4" Canvas.Top="15" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="13" X2="24" Y2="13" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="1" Canvas.Left="6" Canvas.Top="50" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="50.8" X2="24" Y2="50.8" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="2" Canvas.Left="6" Canvas.Top="88" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="88.6" X2="24" Y2="88.6" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="3" Canvas.Left="6" Canvas.Top="126" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="126.4" X2="24" Y2="126.4" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="4" Canvas.Left="6" Canvas.Top="164" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="164.2" X2="24" Y2="164.2" Stroke="#000080" StrokeThickness="1.2"/>
-                                            <TextBlock Text="5" Canvas.Left="6" Canvas.Top="202" FontSize="9" FontWeight="Bold" Foreground="#000080"/>
-                                            <Line X1="14" Y1="202.0" X2="24" Y2="202.0" Stroke="#000080" StrokeThickness="1.2"/>
-                                        </Canvas>
+                                        <Canvas x:Name="BackLeftRulerCanvas" Width="24" Height="250" Background="Transparent" ClipToBounds="True"/>
                                     </Border>
 
                                     <!-- Back Card Canvas -->
