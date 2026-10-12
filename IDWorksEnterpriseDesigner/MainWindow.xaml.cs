@@ -65,7 +65,7 @@ namespace IDWorksEnterpriseDesigner
             // Existing Guide Line ပေါ်တွင် Double Click နှိပ်လျှင် ဖျက်ပစ်ရန် Event ထည့်သွင်းခြင်း
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
-                if (ev.ClickCount == 2 && sender is Line line && line.Parent is Canvas parentCanvas)
+                if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
                 {
                     parentCanvas.Children.Remove(line);
                     ev.Handled = true;
