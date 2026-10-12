@@ -161,7 +161,6 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingBack = false;
                 if (BackCardOverlayCanvas != null)
                 {
-                    BackCardOverlayCanvas.ReleaseName("BackCardOverlayCanvas"); // Safe release check
                     BackCardOverlayCanvas.ReleaseMouseCapture();
                 }
                 currentBackLine = null;
