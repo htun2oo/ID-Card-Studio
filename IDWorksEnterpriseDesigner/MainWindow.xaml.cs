@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -108,7 +109,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler တွင် Click နှိပ်လိုက်ချိန် (လိုင်းချက်ချင်းမဆွဲပါ)
+        // Top Ruler (အပေါ်ဘက် ပေတံ) - အောက်သို့ဆွဲချလျှင် Horizontal Line ထွက်မည်
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -122,7 +123,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Left Ruler တွင် Click နှိပ်လိုက်ချိန် (လိုင်းချက်ချင်းမဆွဲပါ)
+        // Left Ruler (ဘယ်ဘက် ပေတံ) - ညာဘက်သို့ဆွဲထုတ်လျှင် Vertical Line ထွက်မည်
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -136,14 +137,13 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Mouse ကို ဖိပြီး ရွှေ့နေစဉ် (Drag လုပ်မှသာ Line အသစ်စတင်ပေါ်လာမည်)
+        // Mouse Drag လုပ်နေစဉ် မျဉ်းကြောင်း အသစ်ပေါ်လာပြီး လိုက်ပါရွေ့လျားမည်
         private void Ruler_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDownOnRuler && activeCanvas != null)
             {
                 Point currentPos = e.GetPosition(activeCanvas);
 
-                // Mouse ကို အနည်းငယ် (ဥပမာ ၃ ပစ်ဇယ်ထက်ပို၍) ရွှေ့မှသာ Drag လုပ်သည်ဟု သတ်မှတ်မည်
                 if (!isDraggingGuide && (Math.Abs(currentPos.X - mouseDownPos.X) > 3 || Math.Abs(currentPos.Y - mouseDownPos.Y) > 3))
                 {
                     isDraggingGuide = true;
@@ -155,46 +155,45 @@ namespace IDWorksEnterpriseDesigner
                         StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                     };
 
-                    if (rulerType == "Top")
+                    Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
+
+                    if (rulerType == "Top") // Top ruler မှဆွဲလျှင် အလျားလိုက် (Horizontal) မျဉ်း
                     {
-                        Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
-                        activeGuideLine.X1 = cardPos.X;
-                        activeGuideLine.Y1 = 0;
-                        activeGuideLine.X2 = cardPos.X;
-                        activeGuideLine.Y2 = FrontCardOverlayCanvas.ActualHeight;
-                    }
-                    else if (rulerType == "Left")
-                    {
-                        Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
                         activeGuideLine.X1 = 0;
                         activeGuideLine.Y1 = cardPos.Y;
                         activeGuideLine.X2 = FrontCardOverlayCanvas.ActualWidth;
                         activeGuideLine.Y2 = cardPos.Y;
+                    }
+                    else if (rulerType == "Left") // Left ruler မှဆွဲလျှင် ဒေါင်လိုက် (Vertical) မျဉ်း
+                    {
+                        activeGuideLine.X1 = cardPos.X;
+                        activeGuideLine.Y1 = 0;
+                        activeGuideLine.X2 = cardPos.X;
+                        activeGuideLine.Y2 = FrontCardOverlayCanvas.ActualHeight;
                     }
 
                     FrontCardOverlayCanvas.Children.Add(activeGuideLine);
                 }
                 else if (isDraggingGuide && activeGuideLine != null)
                 {
-                    // Drag ဆွဲနေစဉ် Mouse တည်နေရာအလိုက် လိုင်းရွေ့လျားစေရန်
                     Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
 
                     if (rulerType == "Top")
                     {
-                        activeGuideLine.X1 = cardPos.X;
-                        activeGuideLine.X2 = cardPos.X;
+                        activeGuideLine.Y1 = cardPos.Y;
+                        activeGuideLine.Y2 = cardPos.Y;
                     }
                     else if (rulerType == "Left")
                     {
-                        activeGuideLine.Y1 = cardPos.Y;
-                        activeGuideLine.Y2 = cardPos.Y;
+                        activeGuideLine.X1 = cardPos.X;
+                        activeGuideLine.X2 = cardPos.X;
                     }
                 }
             }
             e.Handled = true;
         }
 
-        // Mouse ကို လွှတ်လိုက်ချိန်
+        // Mouse လွှတ်လိုက်ချိန်
         private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (activeCanvas != null)
