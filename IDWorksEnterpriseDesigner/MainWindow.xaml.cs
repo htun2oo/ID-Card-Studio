@@ -25,7 +25,7 @@ namespace IDWorksEnterpriseDesigner
             DrawReportRulers(21.0, 29.7);
         }
 
-        // Window Size ပြောင်းလဲသွားသည့်အခါ (Maximize/Restore) ရူလာများ အလိုအလျောက် အပြည့်ဆွဲပေးရန်
+        // Window Size ပြောင်းလဲသွားသည့်အခါ ရူလာများ အလိုအလျောက် အပြည့်ဆွဲရန်
         private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
@@ -65,7 +65,7 @@ namespace IDWorksEnterpriseDesigner
             if (ReportLeftRulerScrollViewer != null) ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများဆွဲသည့် Function (Maximize လုပ်သည့်အခါပါ အပြည့်အစုံ ဆွဲပေးနိုင်ရန်)
+        // Card ရူလာများဆွဲသည့် Function
         private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double maxCmX, double maxCmY)
         {
             if (topCanvas == null || leftCanvas == null) return;
