@@ -11,7 +11,6 @@ namespace IDWorksEnterpriseDesigner
         private bool isDraggingGuide = false;
         private Line? activeGuideLine = null;
         private Canvas? activeCanvas = null;
-        private Point startPoint;
 
         public MainWindow()
         {
@@ -106,7 +105,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler (Horizontal) - Ruler မှနေ၍ Card ပေါ်သို့ မျဉ်းဆွဲချခြင်း
+        // Top Ruler မှ Mouse ဖြင့် နှိပ်ချလိုက်ချိန် (Horizontal Ruler)
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -115,26 +114,26 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 canvas.CaptureMouse();
 
-                startPoint = e.GetPosition(canvas);
+                Point pos = e.GetPosition(canvas);
 
-                // FrontCardOverlayCanvas ထဲသို့ ဒေါင်လိုက် (Vertical) Guide Line အသစ်ထည့်သွင်းခြင်း
+                // Card Overlay Canvas ပေါ်တွင် ဒေါင်လိုက် (Vertical) မျဉ်းကြောင်း ဖန်တီးခြင်း
                 activeGuideLine = new Line()
                 {
-                    X1 = startPoint.X,
+                    X1 = pos.X,
                     Y1 = 0,
-                    X2 = startPoint.X,
-                    Y2 = FrontCardOverlayCanvas.ActualHeight > 0 ? FrontCardOverlayCanvas.ActualHeight : 204.04,
+                    X2 = pos.X,
+                    Y2 = FrontCardOverlayCanvas.ActualHeight,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                 };
 
                 FrontCardOverlayCanvas.Children.Add(activeGuideLine);
-                e.Handled = true;
+                e.Handled = true; // Event အခြားနေရာသို့ မပျံ့နှံ့စေရန် တားဆီးခြင်း
             }
         }
 
-        // Left Ruler (Vertical) - Ruler မှနေ၍ Card ပေါ်သို့ အလျားလိုက် မျဉ်းဆွဲချခြင်း
+        // Left Ruler မှ Mouse ဖြင့် နှိပ်ချလိုက်ချိန် (Vertical Ruler)
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -143,15 +142,15 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 canvas.CaptureMouse();
 
-                startPoint = e.GetPosition(canvas);
+                Point pos = e.GetPosition(canvas);
 
-                // FrontCardOverlayCanvas ထဲသို့ အလျားလိုက် (Horizontal) Guide Line အသစ်ထည့်သွင်းခြင်း
+                // Card Overlay Canvas ပေါ်တွင် အလျားလိုက် (Horizontal) မျဉ်းကြောင်း ဖန်တီးခြင်း
                 activeGuideLine = new Line()
                 {
                     X1 = 0,
-                    Y1 = startPoint.Y,
-                    X2 = FrontCardOverlayCanvas.ActualWidth > 0 ? FrontCardOverlayCanvas.ActualWidth : 323.57,
-                    Y2 = startPoint.Y,
+                    Y1 = pos.Y,
+                    X2 = FrontCardOverlayCanvas.ActualWidth,
+                    Y2 = pos.Y,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
@@ -162,27 +161,29 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
+        // Mouse ဆွဲနေစဉ် (Drag လုပ်နေစဉ်) မျဉ်းကြောင်း လိုက်ပါရွေ့လျားစေရန်
         private void Ruler_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDraggingGuide && activeGuideLine != null && activeCanvas != null)
             {
-                Point pos = e.GetPosition(activeCanvas);
+                // Card Overlay Canvas ပေါ်ရှိ Mouse တည်နေရာကို တိုက်ရယူခြင်း
+                Point pos = e.GetPosition(FrontCardOverlayCanvas);
                 
-                // ဆွဲနေစဉ် Mouse တည်နေရာအလိုက် Guide Line ရွေ့လျားစေရန်
-                if (activeGuideLine.X1 == activeGuideLine.X2) // Vertical Line (Top Ruler မှဆွဲလျှင်)
-                {
-                    activeGuideLine.X1 = pos.X;
-                    activeGuideLine.X2 = pos.X;
-                }
-                else // Horizontal Line (Left Ruler မှဆွဲလျှင်)
+                if (activeGuideLine.Y1 == activeGuideLine.Y2) // Horizontal Line (Left Ruler မှဆွဲလျှင်)
                 {
                     activeGuideLine.Y1 = pos.Y;
                     activeGuideLine.Y2 = pos.Y;
+                }
+                else // Vertical Line (Top Ruler မှဆွဲလျှင်)
+                {
+                    activeGuideLine.X1 = pos.X;
+                    activeGuideLine.X2 = pos.X;
                 }
                 e.Handled = true;
             }
         }
 
+        // Mouse ကို လွှတ်လိုက်ချိန် (Drop လုပ်လိုက်ချိန်)
         private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (isDraggingGuide && activeCanvas != null)
