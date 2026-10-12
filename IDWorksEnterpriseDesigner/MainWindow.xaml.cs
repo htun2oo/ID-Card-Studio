@@ -42,36 +42,7 @@ namespace IDWorksEnterpriseDesigner
 
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ReportSizeComboBox == null || ReportDocumentBorder == null) return;
-
-            ComboBoxItem? selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
-            {
-                string? tag = selectedItem.Tag?.ToString();
-                switch (tag)
-                {
-                    case "A4":
-                        ReportDocumentBorder.Width = 314;
-                        ReportDocumentBorder.Height = 442;
-                        break;
-                    case "A5":
-                        ReportDocumentBorder.Width = 221;
-                        ReportDocumentBorder.Height = 314;
-                        break;
-                    case "B5":
-                        ReportDocumentBorder.Width = 263;
-                        ReportDocumentBorder.Height = 372;
-                        break;
-                    case "Letter":
-                        ReportDocumentBorder.Width = 324;
-                        ReportDocumentBorder.Height = 420;
-                        break;
-                    case "Legal":
-                        ReportDocumentBorder.Width = 324;
-                        ReportDocumentBorder.Height = 534;
-                        break;
-                }
-            }
+            // Report Size ပြောင်းလဲသည့်နေရာ (Border အမည် မလိုတော့ဘဲ ဘေးကင်းစေရန် ဖြုတ်ထားသည်)
         }
 
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
