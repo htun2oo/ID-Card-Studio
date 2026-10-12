@@ -62,7 +62,7 @@ namespace IDWorksEnterpriseDesigner
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Existing Guide Line ပေါ်တွင် Double Click နှိပ်လျှင် ဖျက်ပစ်ရန် Event ထည့်သွင်းခြင်း
+            // Existing Guide Line ပေါ်တွင် Double Click နှိပ်လျှင် ဖျက်ပစ်ရန် Event
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -94,14 +94,13 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Mouse ရွှေ့နေစဉ် (Ruler ပေါ်သို့ ပြန်ရောက်သွားပါက မျဉ်းကို ဖယ်ရှားပေးမည့် စနစ်ပါဝင်သည်)
+        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန် (သို့မဟုတ် Ruler ဆီသို့ ပြန်ဆွဲယူပါက ဖယ်ရှားရန်)
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // အကယ်၍ Mouse သည် ဧရိယာအပြင်ဘက် (သို့မဟုတ် Ruler ဧရိယာအနီး) သို့ ရောက်သွားပါက ဖျက်ပစ်ရန် စစ်ဆေးခြင်း
             if (mousePos.X < 0 || mousePos.Y < 0 || mousePos.X > activeOverlayCanvas.Width || mousePos.Y > activeOverlayCanvas.Height)
             {
                 activeOverlayCanvas.Children.Remove(draggedGuideLine);
