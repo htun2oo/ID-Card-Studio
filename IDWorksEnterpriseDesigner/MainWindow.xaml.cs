@@ -11,6 +11,7 @@ namespace IDWorksEnterpriseDesigner
         private bool isDraggingGuide = false;
         private Line? activeGuideLine = null;
         private Canvas? activeCanvas = null;
+        private Point startPoint;
 
         public MainWindow()
         {
@@ -105,7 +106,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler (Horizontal) - မျဉ်းကြောင်းကို Card ဧရိယာအထိ ဆန့်ထုတ်ပြသရန်
+        // Top Ruler (Horizontal) - Ruler မှနေ၍ Card ပေါ်သို့ မျဉ်းဆွဲချခြင်း
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -114,25 +115,26 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 canvas.CaptureMouse();
 
-                Point pos = e.GetPosition(canvas);
+                startPoint = e.GetPosition(canvas);
 
+                // FrontCardOverlayCanvas ထဲသို့ ဒေါင်လိုက် (Vertical) Guide Line အသစ်ထည့်သွင်းခြင်း
                 activeGuideLine = new Line()
                 {
-                    X1 = 0,
-                    Y1 = pos.Y,
-                    X2 = 2000, // Card နှင့် Workspace တစ်ခုလုံးပေါ်အထိ ရှည်ထွက်သွားစေရန်
-                    Y2 = pos.Y,
+                    X1 = startPoint.X,
+                    Y1 = 0,
+                    X2 = startPoint.X,
+                    Y2 = FrontCardOverlayCanvas.ActualHeight > 0 ? FrontCardOverlayCanvas.ActualHeight : 204.04,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                 };
 
-                canvas.Children.Add(activeGuideLine);
+                FrontCardOverlayCanvas.Children.Add(activeGuideLine);
                 e.Handled = true;
             }
         }
 
-        // Left Ruler (Vertical) - မျဉ်းကြောင်းကို Card ဧရိယာအထိ ဆန့်ထုတ်ပြသရန်
+        // Left Ruler (Vertical) - Ruler မှနေ၍ Card ပေါ်သို့ အလျားလိုက် မျဉ်းဆွဲချခြင်း
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -141,20 +143,21 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 canvas.CaptureMouse();
 
-                Point pos = e.GetPosition(canvas);
+                startPoint = e.GetPosition(canvas);
 
+                // FrontCardOverlayCanvas ထဲသို့ အလျားလိုက် (Horizontal) Guide Line အသစ်ထည့်သွင်းခြင်း
                 activeGuideLine = new Line()
                 {
-                    X1 = pos.X,
-                    Y1 = 0,
-                    X2 = pos.X,
-                    Y2 = 2000, // Card နှင့် Workspace တစ်ခုလုံးပေါ်အထိ ရှည်ထွက်သွားစေရန်
+                    X1 = 0,
+                    Y1 = startPoint.Y,
+                    X2 = FrontCardOverlayCanvas.ActualWidth > 0 ? FrontCardOverlayCanvas.ActualWidth : 323.57,
+                    Y2 = startPoint.Y,
                     Stroke = Brushes.Red,
                     StrokeThickness = 1,
                     StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                 };
 
-                canvas.Children.Add(activeGuideLine);
+                FrontCardOverlayCanvas.Children.Add(activeGuideLine);
                 e.Handled = true;
             }
         }
@@ -165,12 +168,13 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeCanvas);
                 
-                if (activeGuideLine.X1 == activeGuideLine.X2) // Vertical Line
+                // ဆွဲနေစဉ် Mouse တည်နေရာအလိုက် Guide Line ရွေ့လျားစေရန်
+                if (activeGuideLine.X1 == activeGuideLine.X2) // Vertical Line (Top Ruler မှဆွဲလျှင်)
                 {
                     activeGuideLine.X1 = pos.X;
                     activeGuideLine.X2 = pos.X;
                 }
-                else // Horizontal Line
+                else // Horizontal Line (Left Ruler မှဆွဲလျှင်)
                 {
                     activeGuideLine.Y1 = pos.Y;
                     activeGuideLine.Y2 = pos.Y;
