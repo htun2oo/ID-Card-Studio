@@ -240,7 +240,7 @@
                         </DockPanel>
                     </Border>
 
-                    <!-- 3. Report Window -->
+                    <!-- 3. Report Window (A4: 21.0 x 29.7 cm) -->
                     <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
@@ -271,10 +271,10 @@
                                     
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
                                     
-                                    <!-- Report Top Ruler with Full Sub-ticks (0 to 21 cm) -->
+                                    <!-- Report Top Ruler (0 to 21 cm Scale with Sub-ticks) -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1">
                                         <Canvas Background="Transparent" ClipToBounds="True">
-                                            <!-- 0 to 4 cm -->
+                                            <!-- 0 to 5 cm -->
                                             <TextBlock Text="0" Canvas.Left="15" Canvas.Top="2" FontSize="9" FontWeight="Bold" Foreground="Black"/>
                                             <Line X1="17.8" Y1="17" X2="17.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="21.58" Y1="21" X2="21.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="25.36" Y1="21" X2="25.36" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -315,7 +315,7 @@
                                             <Line X1="191.68" Y1="21" X2="191.68" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="195.46" Y1="21" X2="195.46" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
                                             <Line X1="199.24" Y1="21" X2="199.24" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="203.02" Y1="21" X2="203.02" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
 
-                                            <!-- 5 to 9 cm -->
+                                            <!-- 5 to 10 cm -->
                                             <TextBlock Text="5" Canvas.Left="205" Canvas.Top="2" FontSize="9" Foreground="Black"/>
                                             <Line X1="206.8" Y1="17" X2="206.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="210.58" Y1="21" X2="210.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="214.36" Y1="21" X2="214.36" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -356,7 +356,7 @@
                                             <Line X1="380.68" Y1="21" X2="380.68" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="384.46" Y1="21" X2="384.46" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
                                             <Line X1="388.24" Y1="21" X2="388.24" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="392.02" Y1="21" X2="392.02" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
 
-                                            <!-- 10 to 14 cm -->
+                                            <!-- 10 to 15 cm -->
                                             <TextBlock Text="10" Canvas.Left="391" Canvas.Top="2" FontSize="9" Foreground="Black"/>
                                             <Line X1="395.8" Y1="17" X2="395.8" Y2="24" Stroke="Black" StrokeThickness="1"/>
                                             <Line X1="399.58" Y1="21" X2="399.58" Y2="24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="403.36" Y1="21" X2="403.36" Y2="24" Stroke="Gray" StrokeThickness="0.6"/>
@@ -451,7 +451,7 @@
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Report Left Vertical Ruler with Full Sub-ticks (0 to 30 cm) -->
+                                    <!-- Report Left Vertical Ruler (0 to 29.7 cm Scale with Sub-ticks) -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0">
                                         <Canvas Background="Transparent" ClipToBounds="True">
                                             <!-- 0 cm -->
@@ -507,6 +507,82 @@
                                             <Line X1="19" Y1="220.9" X2="24" Y2="220.9" Stroke="Black" StrokeThickness="0.8"/>
                                             <Line X1="21" Y1="224.68" X2="24" Y2="224.68" Stroke="Gray" StrokeThickness="0.6"/><Line X1="21" Y1="228.46" X2="24" Y2="228.46" Stroke="Gray" StrokeThickness="0.6"/>
                                             <Line X1="21" Y1="232.24" X2="24" Y2="232.24" Stroke="Gray" StrokeThickness="0.6"/><Line X1="21" Y1="236.02" X2="24" Y2="236.02" Stroke="Gray" StrokeThickness="0.6"/>
+
+                                            <!-- 6 cm -->
+                                            <TextBlock Text="6" Canvas.Left="6" Canvas.Top="240" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="239.8" X2="24" Y2="239.8" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 7 cm -->
+                                            <TextBlock Text="7" Canvas.Left="6" Canvas.Top="278" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="277.6" X2="24" Y2="277.6" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 8 cm -->
+                                            <TextBlock Text="8" Canvas.Left="6" Canvas.Top="315" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="315.4" X2="24" Y2="315.4" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 9 cm -->
+                                            <TextBlock Text="9" Canvas.Left="6" Canvas.Top="353" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="353.2" X2="24" Y2="353.2" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 10 cm -->
+                                            <TextBlock Text="10" Canvas.Left="4" Canvas.Top="390" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="391.0" X2="24" Y2="391.0" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 11 cm -->
+                                            <TextBlock Text="11" Canvas.Left="4" Canvas.Top="428" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="428.8" X2="24" Y2="428.8" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 12 cm -->
+                                            <TextBlock Text="12" Canvas.Left="4" Canvas.Top="466" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="466.6" X2="24" Y2="466.6" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 13 cm -->
+                                            <TextBlock Text="13" Canvas.Left="4" Canvas.Top="504" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="504.4" X2="24" Y2="504.4" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 14 cm -->
+                                            <TextBlock Text="14" Canvas.Left="4" Canvas.Top="541" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="542.2" X2="24" Y2="542.2" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 15 cm -->
+                                            <TextBlock Text="15" Canvas.Left="4" Canvas.Top="579" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="580.0" X2="24" Y2="580.0" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 16 cm -->
+                                            <TextBlock Text="16" Canvas.Left="4" Canvas.Top="617" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="617.8" X2="24" Y2="617.8" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 17 cm -->
+                                            <TextBlock Text="17" Canvas.Left="4" Canvas.Top="655" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="655.6" X2="24" Y2="655.6" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 18 cm -->
+                                            <TextBlock Text="18" Canvas.Left="4" Canvas.Top="692" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="693.4" X2="24" Y2="693.4" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 19 cm -->
+                                            <TextBlock Text="19" Canvas.Left="4" Canvas.Top="730" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="731.2" X2="24" Y2="731.2" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 20 cm -->
+                                            <TextBlock Text="20" Canvas.Left="4" Canvas.Top="768" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="769.0" X2="24" Y2="769.0" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 21 cm -->
+                                            <TextBlock Text="21" Canvas.Left="4" Canvas.Top="805" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="806.8" X2="24" Y2="806.8" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 22 cm -->
+                                            <TextBlock Text="22" Canvas.Left="4" Canvas.Top="843" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="844.6" X2="24" Y2="844.6" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 23 cm -->
+                                            <TextBlock Text="23" Canvas.Left="4" Canvas.Top="881" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="882.4" X2="24" Y2="882.4" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 24 cm -->
+                                            <TextBlock Text="24" Canvas.Left="4" Canvas.Top="919" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="920.2" X2="24" Y2="920.2" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 25 cm -->
+                                            <TextBlock Text="25" Canvas.Left="4" Canvas.Top="957" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="958.0" X2="24" Y2="958.0" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 26 cm -->
+                                            <TextBlock Text="26" Canvas.Left="4" Canvas.Top="994" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="995.8" X2="24" Y2="995.8" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 27 cm -->
+                                            <TextBlock Text="27" Canvas.Left="4" Canvas.Top="1032" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="1033.6" X2="24" Y2="1033.6" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 28 cm -->
+                                            <TextBlock Text="28" Canvas.Left="4" Canvas.Top="1070" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="1071.4" X2="24" Y2="1071.4" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 29 cm -->
+                                            <TextBlock Text="29" Canvas.Left="4" Canvas.Top="1108" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="1109.2" X2="24" Y2="1109.2" Stroke="Black" StrokeThickness="1"/>
+                                            <!-- 30 cm -->
+                                            <TextBlock Text="30" Canvas.Left="4" Canvas.Top="1145" FontSize="9" Foreground="Black"/>
+                                            <Line X1="17" Y1="1147.0" X2="24" Y2="1147.0" Stroke="Black" StrokeThickness="1"/>
                                         </Canvas>
                                     </Border>
 
