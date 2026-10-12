@@ -12,9 +12,9 @@ namespace IDWorksEnterpriseDesigner
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
-        // Drag and Drop Guidelines အတွက် လိုအပ်သော Variables များနှင့် State များ
+        // Drag and Drop Guidelines အတွက် variables များ
         private bool isDraggingGuide = false;
-        private bool isHorizontalGuide = true; // True က Top Ruler မှ Horizontal line, False က Left Ruler မှ Vertical line
+        private bool isHorizontalGuide = true;
         private Line draggedGuideLine = null;
         private Canvas activeOverlayCanvas = null;
 
@@ -23,7 +23,6 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
             
-            // Window တစ်ခုလုံးတွင် Mouse Move နှင့် Up များကို ဖမ်းယူရန်
             this.MouseMove += MainWindow_MouseMove;
             this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
@@ -56,12 +55,21 @@ namespace IDWorksEnterpriseDesigner
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // ယာယီ Guide Line အသစ် ဖန်တီးခြင်း (အနီရောင် သို့မဟုတ် Cyan ဖြင့် ထင်းရှားစေရန်)
             draggedGuideLine = new Line
             {
                 Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Windows Accent Blue
                 StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection { 4, 2 } // Dashed line ပုံစံ
+                StrokeDashArray = new DoubleCollection { 4, 2 }
+            };
+
+            // Existing Guide Line ပေါ်တွင် Double Click နှိပ်လျှင် ဖျက်ပစ်ရန် Event ထည့်သွင်းခြင်း
+            draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
+            {
+                if (ev.ClickCount == 2 && sender is Line line && line.Parent is Canvas parentCanvas)
+                {
+                    parentCanvas.Children.Remove(line);
+                    ev.Handled = true;
+                }
             };
 
             if (isHorizontalGuide)
@@ -86,12 +94,23 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန်
+        // Mouse ရွှေ့နေစဉ် (Ruler ပေါ်သို့ ပြန်ရောက်သွားပါက မျဉ်းကို ဖယ်ရှားပေးမည့် စနစ်ပါဝင်သည်)
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
+
+            // အကယ်၍ Mouse သည် ဧရိယာအပြင်ဘက် (သို့မဟုတ် Ruler ဧရိယာအနီး) သို့ ရောက်သွားပါက ဖျက်ပစ်ရန် စစ်ဆေးခြင်း
+            if (mousePos.X < 0 || mousePos.Y < 0 || mousePos.X > activeOverlayCanvas.Width || mousePos.Y > activeOverlayCanvas.Height)
+            {
+                activeOverlayCanvas.Children.Remove(draggedGuideLine);
+                isDraggingGuide = false;
+                draggedGuideLine = null;
+                activeOverlayCanvas.Cursor = Cursors.Arrow;
+                ReleaseMouseCapture();
+                return;
+            }
 
             if (isHorizontalGuide)
             {
@@ -107,7 +126,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Mouse လွှတ်လိုက်သည့်အခါ Guide Line ကို Canvas ပေါ်တွင် ချမှတ်ရန်
         private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!isDraggingGuide) return;
