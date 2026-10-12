@@ -784,8 +784,8 @@
                                     <!-- Report Document Border & Overlay Canvas -->
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border x:Name="ReportDocumentBorder" Width="314" Height="442" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="ReportOverlayCanvas" Width="314" Height="442" Background="Transparent"
+                                            <Border x:Name="ReportDocumentBorder" Width="378" Height="534" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="ReportOverlayCanvas" Width="378" Height="534" Background="Transparent"
                                                     MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
                                                     MouseMove="ReportOverlayCanvas_MouseMove"
                                                     MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"
