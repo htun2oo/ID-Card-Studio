@@ -11,11 +11,12 @@ namespace IDWorksEnterpriseDesigner.Views
             InitializeComponent();
         }
 
-        private void CardDesign_Checked(object sender, RoutedEventArgs e) { }
-        private void CardDesign_Unchecked(object sender, RoutedEventArgs e) { }
-
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ProjectNameTextBox != null)
+            {
+                ProjectName = ProjectNameTextBox.Text;
+            }
             this.DialogResult = true;
             this.Close();
         }
