@@ -16,7 +16,7 @@ namespace IDWorksEnterpriseDesigner
         private string rulerType = ""; // "Top" သို့မဟုတ် "Left"
         private Point mouseDownPos;
 
-        // Card ပေါ်ရှိ Line များကို ပြန်လည်ရွှေ့ရန်နှင့် ဖျက်ရန်အတွက်
+        // Card ပေါ်မှ Line ကို ပြန်လည်ဆွဲထုတ်/ရွှေ့ရန်အတွက်
         private Line? selectedGuideLine = null;
         private bool isDraggingExistingLine = false;
 
@@ -113,6 +113,8 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
+        // --- Ruler Drag Handling (Ruler ပေါ်မှ လိုင်းအသစ် ဆွဲထုတ်ခြင်း) ---
+
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -194,7 +196,22 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // --- Card ပေါ်ရှိ Grid Line များကို ရွှေ့ရန် နှင့် ဖျက်ရန် Canvas Events ---
+        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (activeCanvas != null)
+            {
+                activeCanvas.ReleaseMouseCapture();
+            }
+
+            isMouseDownOnRuler = false;
+            isDraggingGuide = false;
+            activeGuideLine = null;
+            activeCanvas = null;
+            rulerType = "";
+            e.Handled = true;
+        }
+
+        // --- Canvas Handling (Card ပေါ်ရှိ Line များကို ရွှေ့ခြင်း သို့မဟုတ် ဖျက်ခြင်း) ---
 
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -202,14 +219,14 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(canvas);
 
-                // ကလစ်နှိပ်လိုက်သည့်နေရာနှင့် အနီးဆုံး Line ကို ရှာဖွေခြင်း (6 pixels အကွာအဝေးအတွင်း)
+                // ကလစ်နှိပ်လိုက်သည့်နေရာ၏ ၈ ပစ်ဇယ် အကွာအဝေးအတွင်းရှိသော Line ကို ရှာဖွေခြင်း
                 foreach (var child in canvas.Children)
                 {
                     if (child is Line line)
                     {
                         if (line.X1 == line.X2) // Vertical Line
                         {
-                            if (Math.Abs(pos.X - line.X1) <= 6)
+                            if (Math.Abs(pos.X - line.X1) <= 8)
                             {
                                 selectedGuideLine = line;
                                 isDraggingExistingLine = true;
@@ -220,7 +237,7 @@ namespace IDWorksEnterpriseDesigner
                         }
                         else if (line.Y1 == line.Y2) // Horizontal Line
                         {
-                            if (Math.Abs(pos.Y - line.Y1) <= 6)
+                            if (Math.Abs(pos.Y - line.Y1) <= 8)
                             {
                                 selectedGuideLine = line;
                                 isDraggingExistingLine = true;
@@ -240,8 +257,8 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(canvas);
 
-                // အကယ်၍ Line ကို Card ဧရိယာအပြင်ဘက်သို့ ဆွဲထုတ်သွားပါက အလိုအလျောက် ဖျက်ပစ်မည်
-                if (pos.X < 0 || pos.Y < 0 || pos.X > canvas.ActualWidth || pos.Y > canvas.ActualHeight)
+                // အကယ်၍ Line ကို Card ဧရိယာအပြင်ဘက် သို့မဟုတ် အနားစွန်းများသို့ ဆွဲထုတ်ပါက ဖျက်ပစ်မည်
+                if (pos.X < -5 || pos.Y < -5 || pos.X > canvas.ActualWidth + 5 || pos.Y > canvas.ActualHeight + 5)
                 {
                     canvas.Children.Remove(selectedGuideLine);
                     canvas.ReleaseMouseCapture();
@@ -250,7 +267,7 @@ namespace IDWorksEnterpriseDesigner
                 }
                 else
                 {
-                    // Card အတွင်းတွင် လိုချင်သည့်နေရာသို့ ရွှေ့ပြောင်းပေးမည်
+                    // Card အတွင်း၌ တည်နေရာ ပြန်လည်ရွှေ့ပေးမည်
                     if (selectedGuideLine.X1 == selectedGuideLine.X2) // Vertical Line
                     {
                         selectedGuideLine.X1 = pos.X;
@@ -275,21 +292,6 @@ namespace IDWorksEnterpriseDesigner
                 selectedGuideLine = null;
                 e.Handled = true;
             }
-        }
-
-        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (activeCanvas != null)
-            {
-                activeCanvas.ReleaseMouseCapture();
-            }
-
-            isMouseDownOnRuler = false;
-            isDraggingGuide = false;
-            activeGuideLine = null;
-            activeCanvas = null;
-            rulerType = "";
-            e.Handled = true;
         }
     }
 }
