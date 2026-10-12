@@ -12,6 +12,9 @@ namespace IDWorksEnterpriseDesigner
         // 1 cm = 37.8 pixels (96 DPI Standard)
         private const double CmToPixel = 37.8;
 
+        // မီလီမီတာ စကေးအသေးများအတွက် တင့်တယ်သော Steel Blue အရောင်
+        private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180));
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace IDWorksEnterpriseDesigner
                 ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများကို ပိုမိုထင်းရှားစွာ ဆွဲပေးသည့် Function
+        // Card ရူလာများဆွဲသည့် Function
         private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double widthCm, double heightCm)
         {
             if (topCanvas == null || leftCanvas == null) return;
@@ -88,8 +91,8 @@ namespace IDWorksEnterpriseDesigner
                         {
                             X1 = subX, Y1 = 24 - tickHeight,
                             X2 = subX, Y2 = 24,
-                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
+                            Stroke = (mm == 5) ? Brushes.Black : subTickColor,
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
                         topCanvas.Children.Add(subLine);
                     }
@@ -132,8 +135,8 @@ namespace IDWorksEnterpriseDesigner
                         {
                             X1 = 24 - tickWidth, Y1 = subY,
                             X2 = 24, Y2 = subY,
-                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
+                            Stroke = (mm == 5) ? Brushes.Black : subTickColor,
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
                         leftCanvas.Children.Add(subLine);
                     }
@@ -141,7 +144,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Report ရူလာများကို ပိုမိုထင်းရှားစွာ ဆွဲပေးသည့် Function
+        // Report ရူလာများဆွဲသည့် Function
         private void DrawReportRulers(double widthCm, double heightCm)
         {
             if (ReportTopRulerCanvas == null || ReportLeftRulerCanvas == null) return;
@@ -191,8 +194,8 @@ namespace IDWorksEnterpriseDesigner
                         {
                             X1 = subX, Y1 = 24 - tickHeight,
                             X2 = subX, Y2 = 24,
-                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
+                            Stroke = (mm == 5) ? Brushes.Black : subTickColor,
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
                         ReportTopRulerCanvas.Children.Add(subLine);
                     }
@@ -235,8 +238,8 @@ namespace IDWorksEnterpriseDesigner
                         {
                             X1 = 24 - tickWidth, Y1 = subY,
                             X2 = 24, Y2 = subY,
-                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
-                            StrokeThickness = (mm == 5) ? 0.9 : 0.6
+                            Stroke = (mm == 5) ? Brushes.Black : subTickColor,
+                            StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
                         ReportLeftRulerCanvas.Children.Add(subLine);
                     }
