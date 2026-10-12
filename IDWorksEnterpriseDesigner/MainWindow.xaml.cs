@@ -52,19 +52,19 @@ namespace IDWorksEnterpriseDesigner
             if (selectedItem != null)
             {
                 string? tag = selectedItem.Tag?.ToString();
-                double newWidth = 314;
-                double newHeight = 442;
+                double newWidth = 378;
+                double newHeight = 534;
 
                 switch (tag)
                 {
                     case "A4":
-                        newWidth = 314; newHeight = 442;
+                        newWidth = 378; newHeight = 534;
                         break;
                     case "A5":
-                        newWidth = 221; newHeight = 314;
+                        newWidth = 266; newHeight = 378;
                         break;
                     case "B5":
-                        newWidth = 263; newHeight = 372;
+                        newWidth = 316; newHeight = 450;
                         break;
                     case "Letter":
                         newWidth = 324; newHeight = 420;
