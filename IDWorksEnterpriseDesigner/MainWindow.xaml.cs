@@ -12,7 +12,6 @@ namespace IDWorksEnterpriseDesigner
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
-        // Nullable reference types အဖြစ် တိကျစွာ သတ်မှတ်ပေးခြင်း
         private bool isDraggingGuide = false;
         private bool isHorizontalGuide = true;
         private Line? draggedGuideLine = null;
@@ -33,7 +32,6 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
-            // Ruler Canvas များတွင် Mouse Down Event များ ချိတ်ဆက်ခြင်း
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, FrontCardOverlayCanvas);
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, FrontCardOverlayCanvas);
 
@@ -44,7 +42,6 @@ namespace IDWorksEnterpriseDesigner
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, ReportOverlayCanvas);
         }
 
-        // Guide Line ဆွဲတင်ခြင်း စတင်ရန်
         private void StartDragGuide(MouseButtonEventArgs e, bool isHorizontal, Canvas targetCanvas)
         {
             if (targetCanvas == null) return;
@@ -57,12 +54,11 @@ namespace IDWorksEnterpriseDesigner
 
             draggedGuideLine = new Line
             {
-                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Windows Accent Blue
+                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)),
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Existing Guide Line ပေါ်တွင် Double Click နှိပ်လျှင် ဖျက်ပစ်ရန် Event
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -94,7 +90,6 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန်
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
@@ -140,7 +135,6 @@ namespace IDWorksEnterpriseDesigner
             ReleaseMouseCapture();
         }
 
-        // Window Size ပြောင်းလဲသည့်အခါ ရူလာများ အလိုအလျောက် ပြန်ဆွဲရန်
         private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
@@ -161,7 +155,6 @@ namespace IDWorksEnterpriseDesigner
         }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
 
-        // Scroll ပြုလုပ်စဉ် ရူလာများပါ လိုက်ပါရွှေ့လျားစေရန်
         private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             if (FrontTopRulerScrollViewer != null) FrontTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
@@ -180,7 +173,6 @@ namespace IDWorksEnterpriseDesigner
             if (ReportLeftRulerScrollViewer != null) ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများဆွဲသည့် Function
         private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double maxCmX, double maxCmY)
         {
             if (topCanvas == null || leftCanvas == null) return;
@@ -284,7 +276,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Report ရူလာများဆွဲသည့် Function
         private void DrawReportRulers(double widthCm, double heightCm)
         {
             if (ReportTopRulerCanvas == null || ReportLeftRulerCanvas == null) return;
@@ -355,7 +346,7 @@ namespace IDWorksEnterpriseDesigner
                     Stroke = Brushes.Black,
                     StrokeThickness = 1.2
                 };
-                ReportLeftRulerCanvas.Children.Add(mainLine);
+                leftCanvas.Children.Add(mainLine);
 
                 TextBlock text = new TextBlock
                 {
@@ -366,7 +357,7 @@ namespace IDWorksEnterpriseDesigner
                 };
                 Canvas.SetLeft(text, cm >= 10 ? 1 : 3);
                 Canvas.SetTop(text, startY - 7);
-                ReportLeftRulerCanvas.Children.Add(text);
+                leftCanvas.Children.Add(text);
 
                 if (cm < limitY)
                 {
@@ -382,7 +373,7 @@ namespace IDWorksEnterpriseDesigner
                             Stroke = (mm == 5) ? Brushes.Black : subTickColor,
                             StrokeThickness = (mm == 5) ? 0.9 : 0.7
                         };
-                        ReportLeftRulerCanvas.Children.Add(subLine);
+                        leftCanvas.Children.Add(subLine);
                     }
                 }
             }
@@ -419,9 +410,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // ==========================================
-        // MENU EVENT HANDLERS
-        // ==========================================
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
             Window newProjectWin = new Window
@@ -481,9 +469,6 @@ namespace IDWorksEnterpriseDesigner
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
         private void Exit_Click(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
 
-        // ==========================================
-        // CANVAS MOUSE EVENT HANDLERS
-        // ==========================================
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
         private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
