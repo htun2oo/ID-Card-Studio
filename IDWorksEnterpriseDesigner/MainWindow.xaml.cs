@@ -12,10 +12,20 @@ namespace IDWorksEnterpriseDesigner
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
+        // Drag and Drop Guidelines အတွက် လိုအပ်သော Variables များနှင့် State များ
+        private bool isDraggingGuide = false;
+        private bool isHorizontalGuide = true; // True က Top Ruler မှ Horizontal line, False က Left Ruler မှ Vertical line
+        private Line draggedGuideLine = null;
+        private Canvas activeOverlayCanvas = null;
+
         public MainWindow()
         {
             InitializeComponent();
             this.Loaded += MainWindow_Loaded;
+            
+            // Window တစ်ခုလုံးတွင် Mouse Move နှင့် Up များကို ဖမ်းယူရန်
+            this.MouseMove += MainWindow_MouseMove;
+            this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -23,9 +33,97 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
+
+            // Ruler Canvas များတွင် Mouse Down Event များ ချိတ်ဆက်ခြင်း
+            FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, FrontCardOverlayCanvas);
+            FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, FrontCardOverlayCanvas);
+
+            BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, BackCardOverlayCanvas);
+            BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, BackCardOverlayCanvas);
+
+            ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, ReportOverlayCanvas);
+            ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, ReportOverlayCanvas);
         }
 
-        // Window Size ပြောင်းလဲသွားသည့်အခါ ရူလာများ အလိုအလျောက် အပြည့်ဆွဲရန်
+        // Guide Line ဆွဲတင်ခြင်း စတင်ရန်
+        private void StartDragGuide(MouseButtonEventArgs e, bool isHorizontal, Canvas targetCanvas)
+        {
+            if (targetCanvas == null) return;
+
+            isDraggingGuide = true;
+            isHorizontalGuide = isHorizontal;
+            activeOverlayCanvas = targetCanvas;
+
+            Point mousePos = e.GetPosition(activeOverlayCanvas);
+
+            // ယာယီ Guide Line အသစ် ဖန်တီးခြင်း (အနီရောင် သို့မဟုတ် Cyan ဖြင့် ထင်းရှားစေရန်)
+            draggedGuideLine = new Line
+            {
+                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Windows Accent Blue
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection { 4, 2 } // Dashed line ပုံစံ
+            };
+
+            if (isHorizontalGuide)
+            {
+                draggedGuideLine.X1 = 0;
+                draggedGuideLine.X2 = activeOverlayCanvas.Width;
+                draggedGuideLine.Y1 = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
+                draggedGuideLine.Y2 = draggedGuideLine.Y1;
+                activeOverlayCanvas.Cursor = Cursors.SizeNS;
+            }
+            else
+            {
+                draggedGuideLine.Y1 = 0;
+                draggedGuideLine.Y2 = activeOverlayCanvas.Height;
+                draggedGuideLine.X1 = Math.Clamp(mousePos.X, 0, activeOverlayCanvas.Width);
+                draggedGuideLine.X2 = draggedGuideLine.X1;
+                activeOverlayCanvas.Cursor = Cursors.SizeWE;
+            }
+
+            activeOverlayCanvas.Children.Add(draggedGuideLine);
+            Mouse.Capture(this);
+            e.Handled = true;
+        }
+
+        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန်
+        private void MainWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
+
+            Point mousePos = e.GetPosition(activeOverlayCanvas);
+
+            if (isHorizontalGuide)
+            {
+                double newY = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
+                draggedGuideLine.Y1 = newY;
+                draggedGuideLine.Y2 = newY;
+            }
+            else
+            {
+                double newX = Math.Clamp(mousePos.X, 0, activeOverlayCanvas.Width);
+                draggedGuideLine.X1 = newX;
+                draggedGuideLine.X2 = newX;
+            }
+        }
+
+        // Mouse လွှတ်လိုက်သည့်အခါ Guide Line ကို Canvas ပေါ်တွင် ချမှတ်ရန်
+        private void MainWindow_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!isDraggingGuide) return;
+
+            if (activeOverlayCanvas != null)
+            {
+                activeOverlayCanvas.Cursor = Cursors.Arrow;
+            }
+
+            isDraggingGuide = false;
+            draggedGuideLine = null;
+            activeOverlayCanvas = null;
+            ReleaseMouseCapture();
+        }
+
+        // Window Size ပြောင်းလဲသည့်အခါ ရူလာများ အလိုအလျောက် ပြန်ဆွဲရန်
         private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
         private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
@@ -82,7 +180,6 @@ namespace IDWorksEnterpriseDesigner
             int limitX = (int)Math.Ceiling(topWidth / CmToPixel);
             int limitY = (int)Math.Ceiling(leftHeight / CmToPixel);
 
-            // 1. Top Horizontal Ruler
             for (int cm = 0; cm <= limitX; cm++)
             {
                 double startX = cm * CmToPixel;
@@ -126,7 +223,6 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
 
-            // 2. Left Vertical Ruler
             for (int cm = 0; cm <= limitY; cm++)
             {
                 double startY = cm * CmToPixel;
@@ -188,7 +284,6 @@ namespace IDWorksEnterpriseDesigner
             int limitX = (int)Math.Ceiling(ReportTopRulerCanvas.Width / CmToPixel);
             int limitY = (int)Math.Ceiling(ReportLeftRulerCanvas.Height / CmToPixel);
 
-            // 1. Top Horizontal Ruler
             for (int cm = 0; cm <= limitX; cm++)
             {
                 double startX = cm * CmToPixel;
@@ -232,7 +327,6 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
 
-            // 2. Left Vertical Ruler
             for (int cm = 0; cm <= limitY; cm++)
             {
                 double startY = cm * CmToPixel;
