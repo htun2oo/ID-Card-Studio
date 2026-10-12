@@ -1,56 +1,26 @@
-<Window x:Class="IDWorksEnterpriseDesigner.NewProjectWindow"
+<Window x:Class="IDWorksEnterpriseDesigner.Views.NewProjectWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="New Project" Height="365" Width="445"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="12">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="New Project" Height="190" Width="360"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="WhiteSmoke">
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="90"/>
-        </Grid.ColumnDefinitions>
 
-        <!-- Project Name Section -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,10">
-            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
-        </StackPanel>
+        <TextBlock Text="Enter project name:" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
+        
+        <TextBox x:Name="ProjectNameTextBox" Text="Project1" Height="26" VerticalContentAlignment="Center" Margin="0,0,0,15" Grid.Row="1"/>
 
-        <!-- Initial Components GroupBox -->
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Margin="0,0,10,0" Padding="8,6,8,8">
-            <StackPanel>
-                <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" Margin="0,0,0,6"/>
-                
-                <CheckBox x:Name="CardDesignCheckBox" Content="Card Design" Margin="0,0,0,4" IsChecked="False" Checked="CardDesign_Checked" Unchecked="CardDesign_Unchecked"/>
-                
-                <StackPanel x:Name="CardOptionsPanel" Margin="18,0,0,6">
-                    <!-- Landscape Option with Icon (No default selection) -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                        <Border Width="16" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                        <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="Orientation" IsChecked="False" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    
-                    <!-- Portrait Option with Icon (No default selection) -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                        <Border Width="10" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="3,0,9,0" VerticalAlignment="Center"/>
-                        <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="Orientation" IsChecked="False" VerticalAlignment="Center"/>
-                    </StackPanel>
-                    
-                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design (data&#x0a;driven card production)" Margin="0,0,0,2"/>
-                </StackPanel>
-
-                <CheckBox x:Name="ReportDesignCheckBox" Content="Report Design" IsChecked="False" Margin="0,2,0,0"/>
-            </StackPanel>
-        </GroupBox>
-
-        <!-- Right Side Buttons -->
-        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
-            <Button Content="OK" Width="80" Height="24" Margin="0,0,0,6" Click="OkButton_Click" IsDefault="True"/>
-            <Button Content="Cancel" Width="80" Height="24" Click="CancelButton_Click" IsCancel="True"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
+            <Button Content="OK" Width="75" Height="25" Margin="0,0,10,0" Click="OkButton_Click"/>
+            <Button Content="Cancel" Width="75" Height="25" Click="CancelButton_Click"/>
         </StackPanel>
     </Grid>
 </Window>
