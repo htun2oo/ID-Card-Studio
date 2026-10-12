@@ -403,11 +403,15 @@
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Front Card Overlay Canvas Added -->
+                                    <!-- Front Card Overlay Canvas with Mouse Events -->
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" IsHitTestVisible="False"/>
+                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" 
+                                                    MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="FrontCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Grid>
@@ -671,7 +675,7 @@
                                         </Canvas>
                                     </Border>
 
-                                    <!-- Back Card Overlay Canvas Added -->
+                                    <!-- Back Card Overlay Canvas -->
                                     <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -982,13 +986,6 @@
                                             <Line X1="21" Y1="349.42" X2="24" Y2="349.42" Stroke="Gray" StrokeThickness="0.6"/>
                                         </Canvas>
                                     </Border>
-
-                                    <!-- Report Document Border -->
-                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
-                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17.8,13,0,0">
-                                            <Border x:Name="ReportDocumentBorder" Width="314" Height="442" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                        </Grid>
-                                    </ScrollViewer>
                                 </Grid>
                             </Border>
                         </DockPanel>
