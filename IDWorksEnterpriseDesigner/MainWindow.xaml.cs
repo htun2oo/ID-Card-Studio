@@ -47,12 +47,11 @@ namespace IDWorksEnterpriseDesigner
             ReportTopRulerCanvas.Width = totalWidthPx + 50;
             ReportLeftRulerCanvas.Height = totalHeightPx + 50;
 
-            // 1. Top Horizontal Ruler (အလျား စကေးဆွဲခြင်း - 0 မှ 21 cm အထိ)
+            // 1. Top Horizontal Ruler (0 မှ 21 cm အထိ)
             for (int cm = 0; cm <= (int)Math.Ceiling(widthCm); cm++)
             {
                 double startX = cm * CmToPixel;
 
-                // Main Tick Line (1 cm)
                 Line mainLine = new Line
                 {
                     X1 = startX, Y1 = 14,
@@ -62,7 +61,6 @@ namespace IDWorksEnterpriseDesigner
                 };
                 ReportTopRulerCanvas.Children.Add(mainLine);
 
-                // Cm Text Label
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
@@ -74,7 +72,6 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, 1);
                 ReportTopRulerCanvas.Children.Add(text);
 
-                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ)
                 if (cm < (int)Math.Ceiling(widthCm))
                 {
                     for (int mm = 1; mm < 10; mm++)
@@ -94,12 +91,11 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
 
-            // 2. Left Vertical Ruler (အနံ စကေးဆွဲခြင်း - 0 မှ 29.7 cm အထိ)
+            // 2. Left Vertical Ruler (0 မှ 29.7 cm အထိ)
             for (int cm = 0; cm <= (int)Math.Ceiling(heightCm); cm++)
             {
                 double startY = cm * CmToPixel;
 
-                // Main Tick Line (1 cm)
                 Line mainLine = new Line
                 {
                     X1 = 14, Y1 = startY,
@@ -109,7 +105,6 @@ namespace IDWorksEnterpriseDesigner
                 };
                 ReportLeftRulerCanvas.Children.Add(mainLine);
 
-                // Cm Text Label
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
@@ -121,7 +116,6 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, startY - 6);
                 ReportLeftRulerCanvas.Children.Add(text);
 
-                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ)
                 if (cm < (int)Math.Ceiling(heightCm))
                 {
                     for (int mm = 1; mm < 10; mm++)
@@ -142,7 +136,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Dropdown စာရွက်ဆိုဒ် ပြောင်းလဲပါက စကေးပါ လိုက်ပါပြောင်းလဲမည်
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ReportSizeComboBox == null || ReportDocumentBorder == null || ReportOverlayCanvas == null) return;
@@ -174,5 +167,27 @@ namespace IDWorksEnterpriseDesigner
                 DrawReportRulers(widthCm, heightCm);
             }
         }
+
+        // ==========================================
+        // MENU EVENT HANDLERS
+        // ==========================================
+        private void NewProject_Click(object sender, RoutedEventArgs e) { }
+        private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
+        private void Exit_Click(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
+
+        // ==========================================
+        // CANVAS MOUSE EVENT HANDLERS (Missing CS1061 Resolved)
+        // ==========================================
+        private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
+        private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
+        private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+
+        private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
+        private void BackCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
+        private void BackCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+
+        private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
+        private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
+        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
     }
 }
