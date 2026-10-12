@@ -11,9 +11,7 @@ namespace IDWorksEnterpriseDesigner
     {
         // 1 cm = 37.8 pixels (96 DPI Standard)
         private const double CmToPixel = 37.8;
-
-        // မီလီမီတာ စကေးအသေးများအတွက် တင့်တယ်သော Steel Blue အရောင်
-        private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180));
+        private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
         public MainWindow()
         {
@@ -31,17 +29,26 @@ namespace IDWorksEnterpriseDesigner
             DrawReportRulers(21.0, 29.7);
         }
 
-        // စာရွက်အကျယ် ရွှေ့လိုက်ပါက Report ရူလာပါ လိုက်ပါ ရွှေ့လျားစေရန်
-        private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        // Scroll ပြုလုပ်စဉ် ရူလာများပါ လိုက်ပါရွှေ့လျားစေရန်
+        private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (ReportTopRulerScrollViewer != null)
-                ReportTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
-
-            if (ReportLeftRulerScrollViewer != null)
-                ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+            if (FrontTopRulerScrollViewer != null) FrontTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+            if (FrontLeftRulerScrollViewer != null) FrontLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများဆွဲသည့် Function
+        private void BackMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (BackTopRulerScrollViewer != null) BackTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+            if (BackLeftRulerScrollViewer != null) BackLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+        }
+
+        private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (ReportTopRulerScrollViewer != null) ReportTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+            if (ReportLeftRulerScrollViewer != null) ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+        }
+
+        // Card ရူလာများဆွဲသည့် Function (Zero အမှတ်ချိန်ညှိပြီး)
         private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double widthCm, double heightCm)
         {
             if (topCanvas == null || leftCanvas == null) return;
