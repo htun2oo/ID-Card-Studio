@@ -9,15 +9,12 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Front Card Dragging State
         private bool isDraggingFront = false;
         private Line? currentFrontLine;
 
-        // Back Card Dragging State
         private bool isDraggingBack = false;
         private Line? currentBackLine;
 
-        // Report Dragging State
         private bool isDraggingReport = false;
         private Line? currentReportLine;
 
@@ -66,10 +63,10 @@ namespace IDWorksEnterpriseDesigner
                     case "B5": // 17.6 x 25.0 cm
                         newWidth = 665.3; newHeight = 945.0;
                         break;
-                    case "Letter": // 8.5 x 11 in (~21.59 x 27.94 cm)
+                    case "Letter": // 8.5 x 11 in
                         newWidth = 816.0; newHeight = 1056.0;
                         break;
-                    case "Legal": // 8.5 x 14 in (~21.59 x 35.56 cm)
+                    case "Legal": // 8.5 x 14 in
                         newWidth = 816.0; newHeight = 1344.0;
                         break;
                 }
