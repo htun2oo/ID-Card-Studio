@@ -9,13 +9,17 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
+        // Front Card Dragging State
         private bool isDraggingFront = false;
         private Line? currentFrontLine;
-        private Point frontStartPoint;
 
+        // Back Card Dragging State
         private bool isDraggingBack = false;
         private Line? currentBackLine;
-        private Point backStartPoint;
+
+        // Report Dragging State
+        private bool isDraggingReport = false;
+        private Line? currentReportLine;
 
         public MainWindow()
         {
@@ -42,29 +46,56 @@ namespace IDWorksEnterpriseDesigner
 
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Report Size ပြောင်းလဲသည့်နေရာ (Border အမည် မလိုတော့ဘဲ ဘေးကင်းစေရန် ဖြုတ်ထားသည်)
+            if (ReportSizeComboBox == null || ReportDocumentBorder == null || ReportOverlayCanvas == null) return;
+
+            ComboBoxItem? selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
+            if (selectedItem != null)
+            {
+                string? tag = selectedItem.Tag?.ToString();
+                double newWidth = 314;
+                double newHeight = 442;
+
+                switch (tag)
+                {
+                    case "A4":
+                        newWidth = 314; newHeight = 442;
+                        break;
+                    case "A5":
+                        newWidth = 221; newHeight = 314;
+                        break;
+                    case "B5":
+                        newWidth = 263; newHeight = 372;
+                        break;
+                    case "Letter":
+                        newWidth = 324; newHeight = 420;
+                        break;
+                    case "Legal":
+                        newWidth = 324; newHeight = 534;
+                        break;
+                }
+
+                ReportDocumentBorder.Width = newWidth;
+                ReportDocumentBorder.Height = newHeight;
+                ReportOverlayCanvas.Width = newWidth;
+                ReportOverlayCanvas.Height = newHeight;
+            }
         }
 
-        private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
-        private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
-        private void Ruler_MouseMove(object sender, MouseEventArgs e) { }
-        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
-
+        // --- Front Card Events ---
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (FrontCardOverlayCanvas == null) return;
-
             isDraggingFront = true;
-            frontStartPoint = e.GetPosition(FrontCardOverlayCanvas);
+            Point startPoint = e.GetPosition(FrontCardOverlayCanvas);
 
             currentFrontLine = new Line
             {
                 Stroke = Brushes.Red,
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 2, 2 },
-                X1 = frontStartPoint.X,
+                X1 = startPoint.X,
                 Y1 = 0,
-                X2 = frontStartPoint.X,
+                X2 = startPoint.X,
                 Y2 = FrontCardOverlayCanvas.ActualHeight
             };
 
@@ -75,7 +106,6 @@ namespace IDWorksEnterpriseDesigner
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingFront || currentFrontLine == null || FrontCardOverlayCanvas == null) return;
-
             Point currentPoint = e.GetPosition(FrontCardOverlayCanvas);
             currentFrontLine.X1 = currentPoint.X;
             currentFrontLine.X2 = currentPoint.X;
@@ -86,29 +116,26 @@ namespace IDWorksEnterpriseDesigner
             if (isDraggingFront)
             {
                 isDraggingFront = false;
-                if (FrontCardOverlayCanvas != null)
-                {
-                    FrontCardOverlayCanvas.ReleaseMouseCapture();
-                }
+                FrontCardOverlayCanvas?.ReleaseMouseCapture();
                 currentFrontLine = null;
             }
         }
 
+        // --- Back Card Events ---
         private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (BackCardOverlayCanvas == null) return;
-
             isDraggingBack = true;
-            backStartPoint = e.GetPosition(BackCardOverlayCanvas);
+            Point startPoint = e.GetPosition(BackCardOverlayCanvas);
 
             currentBackLine = new Line
             {
                 Stroke = Brushes.Red,
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 2, 2 },
-                X1 = backStartPoint.X,
+                X1 = startPoint.X,
                 Y1 = 0,
-                X2 = backStartPoint.X,
+                X2 = startPoint.X,
                 Y2 = BackCardOverlayCanvas.ActualHeight
             };
 
@@ -119,7 +146,6 @@ namespace IDWorksEnterpriseDesigner
         private void BackCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingBack || currentBackLine == null || BackCardOverlayCanvas == null) return;
-
             Point currentPoint = e.GetPosition(BackCardOverlayCanvas);
             currentBackLine.X1 = currentPoint.X;
             currentBackLine.X2 = currentPoint.X;
@@ -130,11 +156,48 @@ namespace IDWorksEnterpriseDesigner
             if (isDraggingBack)
             {
                 isDraggingBack = false;
-                if (BackCardOverlayCanvas != null)
-                {
-                    BackCardOverlayCanvas.ReleaseMouseCapture();
-                }
+                BackCardOverlayCanvas?.ReleaseMouseCapture();
                 currentBackLine = null;
+            }
+        }
+
+        // --- Report Window Events ---
+        private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (ReportOverlayCanvas == null) return;
+            isDraggingReport = true;
+            Point startPoint = e.GetPosition(ReportOverlayCanvas);
+
+            currentReportLine = new Line
+            {
+                Stroke = Brushes.Red,
+                StrokeThickness = 1,
+                StrokeDashArray = new DoubleCollection { 2, 2 },
+                X1 = startPoint.X,
+                Y1 = 0,
+                X2 = startPoint.X,
+                Y2 = ReportOverlayCanvas.ActualHeight
+            };
+
+            ReportOverlayCanvas.Children.Add(currentReportLine);
+            ReportOverlayCanvas.CaptureMouse();
+        }
+
+        private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!isDraggingReport || currentReportLine == null || ReportOverlayCanvas == null) return;
+            Point currentPoint = e.GetPosition(ReportOverlayCanvas);
+            currentReportLine.X1 = currentPoint.X;
+            currentReportLine.X2 = currentPoint.X;
+        }
+
+        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingReport)
+            {
+                isDraggingReport = false;
+                ReportOverlayCanvas?.ReleaseMouseCapture();
+                currentReportLine = null;
             }
         }
     }
