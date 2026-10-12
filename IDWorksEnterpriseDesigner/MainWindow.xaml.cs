@@ -12,11 +12,11 @@ namespace IDWorksEnterpriseDesigner
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
-        // Drag and Drop Guidelines အတွက် variables များ
+        // Nullable reference types အဖြစ် တိကျစွာ သတ်မှတ်ပေးခြင်း
         private bool isDraggingGuide = false;
         private bool isHorizontalGuide = true;
-        private Line draggedGuideLine = null;
-        private Canvas activeOverlayCanvas = null;
+        private Line? draggedGuideLine = null;
+        private Canvas? activeOverlayCanvas = null;
 
         public MainWindow()
         {
@@ -94,7 +94,7 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန် (သို့မဟုတ် Ruler ဆီသို့ ပြန်ဆွဲယူပါက ဖယ်ရှားရန်)
+        // Mouse ရွှေ့နေစဉ် Guide Line ပါ လိုက်ပါရွှေ့လျားစေရန်
         private void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
@@ -150,7 +150,7 @@ namespace IDWorksEnterpriseDesigner
         {
             if (ReportSizeComboBox != null && ReportSizeComboBox.SelectedItem is ComboBoxItem item)
             {
-                string tag = item.Tag?.ToString();
+                string? tag = item.Tag?.ToString();
                 double w = 21.0, h = 29.7;
                 if (tag == "A5") { w = 14.8; h = 21.0; }
                 else if (tag == "B5") { w = 17.6; h = 25.0; }
@@ -392,10 +392,9 @@ namespace IDWorksEnterpriseDesigner
         {
             if (ReportSizeComboBox == null || ReportDocumentBorder == null || ReportOverlayCanvas == null) return;
 
-            ComboBoxItem selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
-            if (selectedItem != null)
+            if (ReportSizeComboBox.SelectedItem is ComboBoxItem selectedItem)
             {
-                string tag = selectedItem.Tag?.ToString();
+                string? tag = selectedItem.Tag?.ToString();
                 double widthCm = 21.0;
                 double heightCm = 29.7;
 
