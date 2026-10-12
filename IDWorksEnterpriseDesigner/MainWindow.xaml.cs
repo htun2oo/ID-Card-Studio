@@ -156,8 +156,10 @@ namespace IDWorksEnterpriseDesigner
                         StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                     };
 
-                    // Line ကို Mouse ဖြင့် ထပ်မံဖမ်းဆွဲနိုင်ရန် Event ချိတ်ပေးခြင်း
+                    // Line ကို Mouse ဖြင့် ထပ်မံဖမ်းဆွဲနိုင်ရန် Event များကို တိုက်ရိုက်ချိတ်ဆက်ပေးခြင်း
                     activeGuideLine.MouseLeftButtonDown += GuideLine_MouseLeftButtonDown;
+                    activeGuideLine.MouseMove += GuideLine_MouseMove;
+                    activeGuideLine.MouseLeftButtonUp += GuideLine_MouseLeftButtonUp;
 
                     Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
 
@@ -209,17 +211,18 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Card ပေါ်တွင် Mouse ဖြင့် Line ကို ဆွဲရွှေ့နေစဉ် (Ruler သို့မဟုတ် အပြင်ဘက်သို့ ရောက်လျှင် ဖျက်ပစ်ရန်)
-        private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
+        // Card ပေါ်ရှိ Line ကို ဆွဲရွှေ့နေစဉ် (Card အပြင်ဘက်သို့ ရောက်လျှင် ဖျက်ပစ်ရန်)
+        private void GuideLine_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDraggingExistingLine && selectedGuideLine != null)
             {
                 Point pos = e.GetPosition(FrontCardOverlayCanvas);
 
-                // အကယ်၍ Line ကို Card ဧရိယာ၏ အနားစွန်းများ (သို့မဟုတ် ပေတံတည်ရှိရာ အပြင်ဘက်) သို့ ပြန်ဆွဲထုတ်သွားပါက ဖျက်ပစ်မည်
-                if (pos.X < 5 || pos.Y < 5 || pos.X > FrontCardOverlayCanvas.ActualWidth - 5 || pos.Y > FrontCardOverlayCanvas.ActualHeight - 5)
+                // အကယ်၍ Line ကို Card ဧရိယာ၏ အနားစွန်းများ (သို့မဟုတ် အပြင်ဘက်) သို့ ဆွဲထုတ်သွားပါက ဖျက်ပစ်မည်
+                if (pos.X < 2 || pos.Y < 2 || pos.X > FrontCardOverlayCanvas.ActualWidth - 2 || pos.Y > FrontCardOverlayCanvas.ActualHeight - 2)
                 {
                     FrontCardOverlayCanvas.Children.Remove(selectedGuideLine);
+                    selectedGuideLine.ReleaseMouseCapture();
                     isDraggingExistingLine = false;
                     selectedGuideLine = null;
                 }
@@ -242,13 +245,14 @@ namespace IDWorksEnterpriseDesigner
         }
 
         // Mouse ကို လွှတ်လိုက်ချိန်
-        private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void GuideLine_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (isDraggingExistingLine && selectedGuideLine != null)
             {
                 selectedGuideLine.ReleaseMouseCapture();
                 isDraggingExistingLine = false;
                 selectedGuideLine = null;
+                e.Handled = true;
             }
         }
 
