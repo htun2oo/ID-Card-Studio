@@ -211,7 +211,7 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // --- Canvas Handling (Card ပေါ်ရှိ Line များကို ရွှေ့ခြင်း သို့မဟုတ် ဖျက်ခြင်း) ---
+        // --- Canvas Handling (Card ပေါ်ရှိ Line များကို ရွှေ့ခြင်း, ဖျက်ခြင်း နှင့် Mouse Cursor ပြောင်းလဲခြင်း) ---
 
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -219,7 +219,6 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(canvas);
 
-                // ကလစ်နှိပ်လိုက်သည့်နေရာ၏ ၈ ပစ်ဇယ် အကွာအဝေးအတွင်းရှိသော Line ကို ရှာဖွေခြင်း
                 foreach (var child in canvas.Children)
                 {
                     if (child is Line line)
@@ -253,43 +252,79 @@ namespace IDWorksEnterpriseDesigner
 
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDraggingExistingLine && selectedGuideLine != null && sender is Canvas canvas)
+            if (sender is Canvas canvas)
             {
                 Point pos = e.GetPosition(canvas);
 
-                // အကယ်၍ Line ကို Card ဧရိယာအပြင်ဘက် သို့မဟုတ် အနားစွန်းများသို့ ဆွဲထုတ်ပါက ဖျက်ပစ်မည်
-                if (pos.X < -5 || pos.Y < -5 || pos.X > canvas.ActualWidth + 5 || pos.Y > canvas.ActualHeight + 5)
+                if (isDraggingExistingLine && selectedGuideLine != null)
                 {
-                    canvas.Children.Remove(selectedGuideLine);
-                    canvas.ReleaseMouseCapture();
-                    isDraggingExistingLine = false;
-                    selectedGuideLine = null;
+                    // အကယ်၍ Line ကို Card ဧရိယာအပြင်ဘက်သို့ ဆွဲထုတ်ပါက ဖျက်ပစ်မည်
+                    if (pos.X < -5 || pos.Y < -5 || pos.X > canvas.ActualWidth + 5 || pos.Y > canvas.ActualHeight + 5)
+                    {
+                        canvas.Children.Remove(selectedGuideLine);
+                        canvas.ReleaseMouseCapture();
+                        isDraggingExistingLine = false;
+                        selectedGuideLine = null;
+                        canvas.Cursor = Cursors.Arrow;
+                    }
+                    else
+                    {
+                        // Card အတွင်း၌ တည်နေရာ ပြန်လည်ရွှေ့ပေးမည်
+                        if (selectedGuideLine.X1 == selectedGuideLine.X2) // Vertical Line
+                        {
+                            selectedGuideLine.X1 = pos.X;
+                            selectedGuideLine.X2 = pos.X;
+                        }
+                        else // Horizontal Line
+                        {
+                            selectedGuideLine.Y1 = pos.Y;
+                            selectedGuideLine.Y2 = pos.Y;
+                        }
+                    }
                 }
                 else
                 {
-                    // Card အတွင်း၌ တည်နေရာ ပြန်လည်ရွှေ့ပေးမည်
-                    if (selectedGuideLine.X1 == selectedGuideLine.X2) // Vertical Line
+                    // Photoshop ကဲ့သို့ Line ပေါ်သို့ Mouse တင်လိုက်လျှင် Cursor ပုံစံပြောင်းပေးခြင်း
+                    bool isOverLine = false;
+                    foreach (var child in canvas.Children)
                     {
-                        selectedGuideLine.X1 = pos.X;
-                        selectedGuideLine.X2 = pos.X;
+                        if (child is Line line)
+                        {
+                            if (line.X1 == line.X2 && Math.Abs(pos.X - line.X1) <= 6) // Vertical Line (ဘယ်/ညာ မြားပုံစံ)
+                            {
+                                canvas.Cursor = Cursors.SizeWE;
+                                isOverLine = true;
+                                break;
+                            }
+                            else if (line.Y1 == line.Y2 && Math.Abs(pos.Y - line.Y1) <= 6) // Horizontal Line (အပေါ်/အောက် မြားပုံစံ)
+                            {
+                                canvas.Cursor = Cursors.SizeNS;
+                                isOverLine = true;
+                                break;
+                            }
+                        }
                     }
-                    else // Horizontal Line
+
+                    if (!isOverLine)
                     {
-                        selectedGuideLine.Y1 = pos.Y;
-                        selectedGuideLine.Y2 = pos.Y;
+                        canvas.Cursor = Cursors.Arrow;
                     }
                 }
-                e.Handled = true;
             }
+            e.Handled = true;
         }
 
         private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (isDraggingExistingLine && sender is Canvas canvas)
+            if (sender is Canvas canvas)
             {
-                canvas.ReleaseMouseCapture();
-                isDraggingExistingLine = false;
-                selectedGuideLine = null;
+                if (isDraggingExistingLine)
+                {
+                    canvas.ReleaseMouseCapture();
+                    isDraggingExistingLine = false;
+                    selectedGuideLine = null;
+                }
+                canvas.Cursor = Cursors.Arrow;
                 e.Handled = true;
             }
         }
