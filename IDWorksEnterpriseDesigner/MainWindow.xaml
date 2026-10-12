@@ -81,18 +81,18 @@
                                     <!-- Front Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="FrontTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="FrontTopRulerCanvas" Width="500" Height="24" Background="Transparent" Margin="10,0,0,0"/>
+                                            <Canvas x:Name="FrontTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="FrontTopRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
                                     <!-- Front Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="FrontLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Height="300" Background="Transparent" Margin="0,10,0,0"/>
+                                            <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="FrontLeftRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Front Card Canvas (Zero မှစတင်ရန် Margin="10,10,0,0" သို့ ချိန်ညှိထားသည်) -->
+                                    <!-- Front Card Canvas -->
                                     <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -129,18 +129,18 @@
                                     <!-- Back Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="BackTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="BackTopRulerCanvas" Width="500" Height="24" Background="Transparent" Margin="10,0,0,0"/>
+                                            <Canvas x:Name="BackTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="BackTopRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
                                     <!-- Back Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="BackLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="BackLeftRulerCanvas" Width="24" Height="300" Background="Transparent" Margin="0,10,0,0"/>
+                                            <Canvas x:Name="BackLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="BackLeftRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Back Card Canvas (Zero မှစတင်ရန် Margin="10,10,0,0" သို့ ချိန်ညှိထားသည်) -->
+                                    <!-- Back Card Canvas -->
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
@@ -207,13 +207,13 @@
 
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="ReportTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="ReportTopRulerCanvas" Width="793.8" Height="24" Background="Transparent" Margin="10,0,0,0"/>
+                                            <Canvas x:Name="ReportTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="ReportTopRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="ReportLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Height="1122.6" Background="Transparent" Margin="0,10,0,0"/>
+                                            <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="ReportLeftRulerCanvas_SizeChanged"/>
                                         </ScrollViewer>
                                     </Border>
 
