@@ -16,6 +16,10 @@ namespace IDWorksEnterpriseDesigner
         private string rulerType = ""; // "Top" သို့မဟုတ် "Left"
         private Point mouseDownPos;
 
+        // Card ပေါ်မှ Line ကို ပြန်လည်ဆွဲထုတ်ရန်အတွက်
+        private Line? selectedGuideLine = null;
+        private bool isDraggingExistingLine = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -109,7 +113,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler (အပေါ်ဘက် ပေတံ) - အောက်သို့ဆွဲချလျှင် Horizontal Line ထွက်မည်
+        // Top Ruler မှ အသစ်ဆွဲထုတ်ရန်
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -123,7 +127,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Left Ruler (ဘယ်ဘက် ပေတံ) - ညာဘက်သို့ဆွဲထုတ်လျှင် Vertical Line ထွက်မည်
+        // Left Ruler မှ အသစ်ဆွဲထုတ်ရန်
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -137,7 +141,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Mouse Drag လုပ်နေစဉ် မျဉ်းကြောင်း အသစ်ပေါ်လာပြီး လိုက်ပါရွေ့လျားမည်
+        // Ruler ပေါ်မှ Mouse ဆွဲနေစဉ်
         private void Ruler_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDownOnRuler && activeCanvas != null)
@@ -155,16 +159,19 @@ namespace IDWorksEnterpriseDesigner
                         StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                     };
 
+                    // Line ကို Mouse ဖြင့် ပြန်ဖျက်နိုင်ရန် Event ချိတ်ပေးခြင်း
+                    activeGuideLine.MouseLeftButtonDown += GuideLine_MouseLeftButtonDown;
+
                     Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
 
-                    if (rulerType == "Top") // Top ruler မှဆွဲလျှင် အလျားလိုက် (Horizontal) မျဉ်း
+                    if (rulerType == "Top")
                     {
                         activeGuideLine.X1 = 0;
                         activeGuideLine.Y1 = cardPos.Y;
                         activeGuideLine.X2 = FrontCardOverlayCanvas.ActualWidth;
                         activeGuideLine.Y2 = cardPos.Y;
                     }
-                    else if (rulerType == "Left") // Left ruler မှဆွဲလျှင် ဒေါင်လိုက် (Vertical) မျဉ်း
+                    else if (rulerType == "Left")
                     {
                         activeGuideLine.X1 = cardPos.X;
                         activeGuideLine.Y1 = 0;
@@ -193,7 +200,61 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Mouse လွှတ်လိုက်ချိန်
+        // Card ပေါ်ရှိ ဇယားကွက်လိုင်း (Guide Line) ကို ကလစ်နှိပ်ပြီး ပြန်ဖယ်ရှားရန် (သို့မဟုတ် ရွှေ့ရန်)
+        private void GuideLine_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Line line)
+            {
+                selectedGuideLine = line;
+                isDraggingExistingLine = true;
+                line.CaptureMouse();
+                e.Handled = true;
+            }
+        }
+
+        // Card ပေါ်တွင် Mouse ဖြင့် Line ကို ဆွဲရွှေ့နေစဉ် (သို့မဟုတ် Ruler ဆီသို့ ပြန်တွန်းထုတ်နေစဉ်)
+        private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDraggingExistingLine && selectedGuideLine != null)
+            {
+                Point pos = e.GetPosition(FrontCardOverlayCanvas);
+
+                // အကယ်၍ Card ဧရိယာ အပြင်ဘက် (သို့မဟုတ် Ruler တည်ရှိရာ အနားသတ်များ) သို့ ရောက်သွားပါက Line ကို ဖျက်ပစ်မည်
+                if (pos.X < 0 || pos.Y < 0 || pos.X > FrontCardOverlayCanvas.ActualWidth || pos.Y > FrontCardOverlayCanvas.ActualHeight)
+                {
+                    FrontCardOverlayCanvas.Children.Remove(selectedGuideLine);
+                    isDraggingExistingLine = false;
+                    selectedGuideLine = null;
+                }
+                else
+                {
+                    // Card အတွင်းတွင် ရှိနေသေးပါက နေရာရွှေ့ပြောင်းပေးမည်
+                    if (selectedGuideLine.X1 == selectedGuideLine.X2) // Vertical Line
+                    {
+                        selectedGuideLine.X1 = pos.X;
+                        selectedGuideLine.X2 = pos.X;
+                    }
+                    else // Horizontal Line
+                    {
+                        selectedGuideLine.Y1 = pos.Y;
+                        selectedGuideLine.Y2 = pos.Y;
+                    }
+                }
+                e.Handled = true;
+            }
+        }
+
+        // Mouse ကို လွှတ်လိုက်ချိန်
+        private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingExistingLine && selectedGuideLine != null)
+            {
+                selectedGuideLine.ReleaseMouseCapture();
+                isDraggingExistingLine = false;
+                selectedGuideLine = null;
+            }
+        }
+
         private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (activeCanvas != null)
