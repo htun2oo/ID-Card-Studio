@@ -9,192 +9,169 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        private bool isDraggingFront = false;
-        private Line? currentFrontLine;
-
-        private bool isDraggingBack = false;
-        private Line? currentBackLine;
-
-        private bool isDraggingReport = false;
-        private Line? currentReportLine;
+        // 1 cm = 37.8 pixels (96 DPI Standard)
+        private const double CmToPixel = 37.8;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.Loaded += MainWindow_Loaded;
         }
 
-        private void NewProject_Click(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ProjectWorkspace != null)
+            DrawReportRulers(21.0, 29.7); // Default A4 Size (21cm x 29.7cm)
+        }
+
+        // စာရွက်အကျယ် ရွှေ့လိုက်ပါက ရူလာပါ လိုက်ပါ ရွှေ့လျားစေရန်
+        private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            if (ReportTopRulerScrollViewer != null)
+                ReportTopRulerScrollViewer.ScrollToHorizontalOffset(e.HorizontalOffset);
+
+            if (ReportLeftRulerScrollViewer != null)
+                ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
+        }
+
+        // ရူလာစကေးနှင့် စကေးအသေးများ တိကျစွာ ဆွဲပေးသည့် Function
+        private void DrawReportRulers(double widthCm, double heightCm)
+        {
+            if (ReportTopRulerCanvas == null || ReportLeftRulerCanvas == null) return;
+
+            ReportTopRulerCanvas.Children.Clear();
+            ReportLeftRulerCanvas.Children.Clear();
+
+            double totalWidthPx = widthCm * CmToPixel;
+            double totalHeightPx = heightCm * CmToPixel;
+
+            ReportTopRulerCanvas.Width = totalWidthPx + 50;
+            ReportLeftRulerCanvas.Height = totalHeightPx + 50;
+
+            // 1. Top Horizontal Ruler (အလျား စကေးဆွဲခြင်း - 0 မှ 21 cm အထိ)
+            for (int cm = 0; cm <= (int)Math.Ceiling(widthCm); cm++)
             {
-                ProjectWorkspace.Visibility = Visibility.Visible;
+                double startX = cm * CmToPixel;
+
+                // Main Tick Line (1 cm)
+                Line mainLine = new Line
+                {
+                    X1 = startX, Y1 = 14,
+                    X2 = startX, Y2 = 24,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                ReportTopRulerCanvas.Children.Add(mainLine);
+
+                // Cm Text Label
+                TextBlock text = new TextBlock
+                {
+                    Text = cm.ToString(),
+                    FontSize = 9,
+                    Foreground = Brushes.Black,
+                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                };
+                Canvas.SetLeft(text, startX - (cm >= 10 ? 6 : 3));
+                Canvas.SetTop(text, 1);
+                ReportTopRulerCanvas.Children.Add(text);
+
+                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ)
+                if (cm < (int)Math.Ceiling(widthCm))
+                {
+                    for (int mm = 1; mm < 10; mm++)
+                    {
+                        double subX = startX + (mm * (CmToPixel / 10.0));
+                        double tickHeight = (mm == 5) ? 6 : 3;
+
+                        Line subLine = new Line
+                        {
+                            X1 = subX, Y1 = 24 - tickHeight,
+                            X2 = subX, Y2 = 24,
+                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
+                            StrokeThickness = (mm == 5) ? 0.8 : 0.5
+                        };
+                        ReportTopRulerCanvas.Children.Add(subLine);
+                    }
+                }
+            }
+
+            // 2. Left Vertical Ruler (အနံ စကေးဆွဲခြင်း - 0 မှ 29.7 cm အထိ)
+            for (int cm = 0; cm <= (int)Math.Ceiling(heightCm); cm++)
+            {
+                double startY = cm * CmToPixel;
+
+                // Main Tick Line (1 cm)
+                Line mainLine = new Line
+                {
+                    X1 = 14, Y1 = startY,
+                    X2 = 24, Y2 = startY,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                ReportLeftRulerCanvas.Children.Add(mainLine);
+
+                // Cm Text Label
+                TextBlock text = new TextBlock
+                {
+                    Text = cm.ToString(),
+                    FontSize = 9,
+                    Foreground = Brushes.Black,
+                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
+                };
+                Canvas.SetLeft(text, 2);
+                Canvas.SetTop(text, startY - 6);
+                ReportLeftRulerCanvas.Children.Add(text);
+
+                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ)
+                if (cm < (int)Math.Ceiling(heightCm))
+                {
+                    for (int mm = 1; mm < 10; mm++)
+                    {
+                        double subY = startY + (mm * (CmToPixel / 10.0));
+                        double tickWidth = (mm == 5) ? 6 : 3;
+
+                        Line subLine = new Line
+                        {
+                            X1 = 24 - tickWidth, Y1 = subY,
+                            X2 = 24, Y2 = subY,
+                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
+                            StrokeThickness = (mm == 5) ? 0.8 : 0.5
+                        };
+                        ReportLeftRulerCanvas.Children.Add(subLine);
+                    }
+                }
             }
         }
 
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void ReportPageSetup_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Report Page Setup clicked.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-
+        // Dropdown စာရွက်ဆိုဒ် ပြောင်းလဲပါက စကေးပါ လိုက်ပါပြောင်းလဲမည်
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ReportSizeComboBox == null || ReportDocumentBorder == null || ReportOverlayCanvas == null) return;
 
-            ComboBoxItem? selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
+            ComboBoxItem selectedItem = ReportSizeComboBox.SelectedItem as ComboBoxItem;
             if (selectedItem != null)
             {
-                string? tag = selectedItem.Tag?.ToString();
-                double newWidth = 793.8;
-                double newHeight = 1122.6;
+                string tag = selectedItem.Tag?.ToString();
+                double widthCm = 21.0;
+                double heightCm = 29.7;
 
                 switch (tag)
                 {
-                    case "A4": // 21.0 x 29.7 cm
-                        newWidth = 793.8; newHeight = 1122.6;
-                        break;
-                    case "A5": // 14.8 x 21.0 cm
-                        newWidth = 559.4; newHeight = 793.8;
-                        break;
-                    case "B5": // 17.6 x 25.0 cm
-                        newWidth = 665.3; newHeight = 945.0;
-                        break;
-                    case "Letter": // 8.5 x 11 in
-                        newWidth = 816.0; newHeight = 1056.0;
-                        break;
-                    case "Legal": // 8.5 x 14 in
-                        newWidth = 816.0; newHeight = 1344.0;
-                        break;
+                    case "A4": widthCm = 21.0; heightCm = 29.7; break;
+                    case "A5": widthCm = 14.8; heightCm = 21.0; break;
+                    case "B5": widthCm = 17.6; heightCm = 25.0; break;
+                    case "Letter": widthCm = 21.59; heightCm = 27.94; break;
+                    case "Legal": widthCm = 21.59; heightCm = 35.56; break;
                 }
 
-                ReportDocumentBorder.Width = newWidth;
-                ReportDocumentBorder.Height = newHeight;
-                ReportOverlayCanvas.Width = newWidth;
-                ReportOverlayCanvas.Height = newHeight;
-            }
-        }
+                double pxWidth = widthCm * CmToPixel;
+                double pxHeight = heightCm * CmToPixel;
 
-        // --- Front Card Events ---
-        private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (FrontCardOverlayCanvas == null) return;
-            isDraggingFront = true;
-            Point startPoint = e.GetPosition(FrontCardOverlayCanvas);
+                ReportDocumentBorder.Width = pxWidth;
+                ReportDocumentBorder.Height = pxHeight;
+                ReportOverlayCanvas.Width = pxWidth;
+                ReportOverlayCanvas.Height = pxHeight;
 
-            currentFrontLine = new Line
-            {
-                Stroke = Brushes.Red,
-                StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection { 2, 2 },
-                X1 = startPoint.X,
-                Y1 = 0,
-                X2 = startPoint.X,
-                Y2 = FrontCardOverlayCanvas.ActualHeight
-            };
-
-            FrontCardOverlayCanvas.Children.Add(currentFrontLine);
-            FrontCardOverlayCanvas.CaptureMouse();
-        }
-
-        private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!isDraggingFront || currentFrontLine == null || FrontCardOverlayCanvas == null) return;
-            Point currentPoint = e.GetPosition(FrontCardOverlayCanvas);
-            currentFrontLine.X1 = currentPoint.X;
-            currentFrontLine.X2 = currentPoint.X;
-        }
-
-        private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isDraggingFront)
-            {
-                isDraggingFront = false;
-                FrontCardOverlayCanvas?.ReleaseMouseCapture();
-                currentFrontLine = null;
-            }
-        }
-
-        // --- Back Card Events ---
-        private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (BackCardOverlayCanvas == null) return;
-            isDraggingBack = true;
-            Point startPoint = e.GetPosition(BackCardOverlayCanvas);
-
-            currentBackLine = new Line
-            {
-                Stroke = Brushes.Red,
-                StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection { 2, 2 },
-                X1 = startPoint.X,
-                Y1 = 0,
-                X2 = startPoint.X,
-                Y2 = BackCardOverlayCanvas.ActualHeight
-            };
-
-            BackCardOverlayCanvas.Children.Add(currentBackLine);
-            BackCardOverlayCanvas.CaptureMouse();
-        }
-
-        private void BackCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!isDraggingBack || currentBackLine == null || BackCardOverlayCanvas == null) return;
-            Point currentPoint = e.GetPosition(BackCardOverlayCanvas);
-            currentBackLine.X1 = currentPoint.X;
-            currentBackLine.X2 = currentPoint.X;
-        }
-
-        private void BackCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isDraggingBack)
-            {
-                isDraggingBack = false;
-                BackCardOverlayCanvas?.ReleaseMouseCapture();
-                currentBackLine = null;
-            }
-        }
-
-        // --- Report Window Events ---
-        private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (ReportOverlayCanvas == null) return;
-            isDraggingReport = true;
-            Point startPoint = e.GetPosition(ReportOverlayCanvas);
-
-            currentReportLine = new Line
-            {
-                Stroke = Brushes.Red,
-                StrokeThickness = 1,
-                StrokeDashArray = new DoubleCollection { 2, 2 },
-                X1 = startPoint.X,
-                Y1 = 0,
-                X2 = startPoint.X,
-                Y2 = ReportOverlayCanvas.ActualHeight
-            };
-
-            ReportOverlayCanvas.Children.Add(currentReportLine);
-            ReportOverlayCanvas.CaptureMouse();
-        }
-
-        private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (!isDraggingReport || currentReportLine == null || ReportOverlayCanvas == null) return;
-            Point currentPoint = e.GetPosition(ReportOverlayCanvas);
-            currentReportLine.X1 = currentPoint.X;
-            currentReportLine.X2 = currentPoint.X;
-        }
-
-        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isDraggingReport)
-            {
-                isDraggingReport = false;
-                ReportOverlayCanvas?.ReleaseMouseCapture();
-                currentReportLine = null;
+                DrawReportRulers(widthCm, heightCm);
             }
         }
     }
