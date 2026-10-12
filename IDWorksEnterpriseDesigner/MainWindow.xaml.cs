@@ -169,53 +169,70 @@ namespace IDWorksEnterpriseDesigner
         }
 
         // ==========================================
-        // MENU EVENT HANDLERS
+        // MENU EVENT HANDLERS (New Project Window Added)
         // ==========================================
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // New Project Window ခေါ်ယူရန်
-            Window newProjectWindow = new Window
+            // New Project Dialog Window ဖန်တီး၍ ပေါ်လာစေခြင်း
+            Window newProjectWin = new Window
             {
                 Title = "New Project",
-                Width = 380,
-                Height = 220,
+                Width = 350,
+                Height = 180,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 Owner = this,
                 ResizeMode = ResizeMode.NoResize,
                 Background = Brushes.WhiteSmoke
             };
 
-            StackPanel panel = new StackPanel { Margin = new Thickness(15) };
-    
-            panel.Children.Add(new TextBlock { Text = "Enter a name for the new project:", FontWeight = FontWeights.Bold, Margin = new Thickness(0, 0, 0, 8) });
-    
-            TextBox txtProjectName = new TextBox { Text = "Project1", Height = 24, VerticalContentAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 0, 15) };
-            panel.Children.Add(txtProjectName);
+            StackPanel mainPanel = new StackPanel { Margin = new Thickness(15) };
+            
+            mainPanel.Children.Add(new TextBlock 
+            { 
+                Text = "Enter project name:", 
+                FontWeight = FontWeights.Bold, 
+                Margin = new Thickness(0, 0, 0, 5) 
+            });
 
-            StackPanel buttonPanel = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-    
+            TextBox txtName = new TextBox 
+            { 
+                Text = "Project1", 
+                Height = 26, 
+                VerticalContentAlignment = VerticalAlignment.Center, 
+                Margin = new Thickness(0, 0, 0, 15) 
+            };
+            mainPanel.Children.Add(txtName);
+
+            StackPanel btnPanel = new StackPanel 
+            { 
+                Orientation = Orientation.Horizontal, 
+                HorizontalAlignment = HorizontalAlignment.Right 
+            };
+
             Button btnOk = new Button { Content = "OK", Width = 75, Height = 25, Margin = new Thickness(0, 0, 10, 0) };
             btnOk.Click += (s, args) => {
-                // ဤနေရာတွင် New Project တည်ဆောက်သည့် Logic ထည့်နိုင်ပါသည်
-                newProjectWindow.DialogResult = true;
-                newProjectWindow.Close();
+                newProjectWin.DialogResult = true;
+                newProjectWin.Close();
             };
 
             Button btnCancel = new Button { Content = "Cancel", Width = 75, Height = 25 };
-            btnCancel.Click += (s, args) => { newProjectWindow.Close(); };
+            btnCancel.Click += (s, args) => {
+                newProjectWin.Close();
+            };
 
-            buttonPanel.Children.Add(btnOk);
-            buttonPanel.Children.Add(btnCancel);
-            panel.Children.Add(buttonPanel);
+            btnPanel.Children.Add(btnOk);
+            btnPanel.Children.Add(btnCancel);
+            mainPanel.Children.Add(btnPanel);
 
-            newProjectWindow.Content = panel;
-            newProjectWindow.ShowDialog();
+            newProjectWin.Content = mainPanel;
+            newProjectWin.ShowDialog();
         }
+
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
         private void Exit_Click(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
 
         // ==========================================
-        // CANVAS MOUSE EVENT HANDLERS (Missing CS1061 Resolved)
+        // CANVAS MOUSE EVENT HANDLERS
         // ==========================================
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
