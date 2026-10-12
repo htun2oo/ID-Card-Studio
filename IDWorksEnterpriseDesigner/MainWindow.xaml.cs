@@ -12,10 +12,6 @@ namespace IDWorksEnterpriseDesigner
         // 1 cm = 37.8 pixels (96 DPI Standard)
         private const double CmToPixel = 37.8;
 
-        // တင်းကြပ်စွာ ခွဲခြားပြသရန် ကာလာနှစ်မျိုး
-        private readonly Brush primaryColor = new SolidColorBrush(Color.FromRgb(0, 0, 128));   // Navy/Dark Blue
-        private readonly Brush secondaryColor = new SolidColorBrush(Color.FromRgb(0, 0, 0));  // Black
-
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +33,7 @@ namespace IDWorksEnterpriseDesigner
                 ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // ရူလာစကေးများကို ကာလာနှစ်မျိုးဖြင့် ထင်းရှားစွာ ဆွဲပေးသည့် Function
+        // Card ရူလာများ၏ မူလအရောင်စံနှုန်းအတိုင်း (အနက်ရောင်နှင့် မီးခိုးရောင် Sub-ticks) တိကျစွာ ဆွဲပေးသည့် Function
         private void DrawReportRulers(double widthCm, double heightCm)
         {
             if (ReportTopRulerCanvas == null || ReportLeftRulerCanvas == null) return;
@@ -51,94 +47,94 @@ namespace IDWorksEnterpriseDesigner
             ReportTopRulerCanvas.Width = totalWidthPx + 50;
             ReportLeftRulerCanvas.Height = totalHeightPx + 50;
 
-            // 1. Top Horizontal Ruler (0 မှ 21 cm အထိ)
+            // 1. Top Horizontal Ruler (0 မှ widthCm အထိ)
             for (int cm = 0; cm <= (int)Math.Ceiling(widthCm); cm++)
             {
                 double startX = cm * CmToPixel;
 
-                // Main Cm Tick Line (အပြာရင့်ရောင်)
+                // Main Cm Tick Line (အနက်ရောင် - Card ရူလာစံအတိုင်း)
                 Line mainLine = new Line
                 {
-                    X1 = startX, Y1 = 12,
+                    X1 = startX, Y1 = 17,
                     X2 = startX, Y2 = 24,
-                    Stroke = primaryColor,
-                    StrokeThickness = 1.2
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
                 };
                 ReportTopRulerCanvas.Children.Add(mainLine);
 
-                // Cm Text Label (အပြာရင့်ရောင်)
+                // Cm Text Label
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
                     FontSize = 9,
-                    Foreground = primaryColor,
-                    FontWeight = FontWeights.Bold
+                    Foreground = Brushes.Black,
+                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
                 };
                 Canvas.SetLeft(text, startX - (cm >= 10 ? 6 : 3));
-                Canvas.SetTop(text, 1);
+                Canvas.SetTop(text, 2);
                 ReportTopRulerCanvas.Children.Add(text);
 
-                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ - အနက်ရောင်)
+                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ - မီးခိုးရောင် Sub-ticks များ)
                 if (cm < (int)Math.Ceiling(widthCm))
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subX = startX + (mm * (CmToPixel / 10.0));
-                        double tickHeight = (mm == 5) ? 7 : 4;
+                        double tickHeight = (mm == 5) ? 5 : 3;
 
                         Line subLine = new Line
                         {
                             X1 = subX, Y1 = 24 - tickHeight,
                             X2 = subX, Y2 = 24,
-                            Stroke = (mm == 5) ? primaryColor : secondaryColor,
-                            StrokeThickness = (mm == 5) ? 1.0 : 0.7
+                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
+                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
                         };
                         ReportTopRulerCanvas.Children.Add(subLine);
                     }
                 }
             }
 
-            // 2. Left Vertical Ruler (0 မှ 29.7 cm အထိ)
+            // 2. Left Vertical Ruler (0 မှ heightCm အထိ)
             for (int cm = 0; cm <= (int)Math.Ceiling(heightCm); cm++)
             {
                 double startY = cm * CmToPixel;
 
-                // Main Cm Tick Line (အပြာရင့်ရောင်)
+                // Main Cm Tick Line (အနက်ရောင်)
                 Line mainLine = new Line
                 {
-                    X1 = 12, Y1 = startY,
+                    X1 = 17, Y1 = startY,
                     X2 = 24, Y2 = startY,
-                    Stroke = primaryColor,
-                    StrokeThickness = 1.2
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
                 };
                 ReportLeftRulerCanvas.Children.Add(mainLine);
 
-                // Cm Text Label (အပြာရင့်ရောင်)
+                // Cm Text Label
                 TextBlock text = new TextBlock
                 {
                     Text = cm.ToString(),
                     FontSize = 9,
-                    Foreground = primaryColor,
-                    FontWeight = FontWeights.Bold
+                    Foreground = Brushes.Black,
+                    FontWeight = (cm == 0) ? FontWeights.Bold : FontWeights.Normal
                 };
-                Canvas.SetLeft(text, 2);
+                Canvas.SetLeft(text, cm >= 10 ? 2 : 4);
                 Canvas.SetTop(text, startY - 6);
                 ReportLeftRulerCanvas.Children.Add(text);
 
-                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ - အနက်ရောင်)
+                // Sub-ticks (0.1 cm / 1 mm အပိုင်းအစများ - မီးခိုးရောင် Sub-ticks များ)
                 if (cm < (int)Math.Ceiling(heightCm))
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
                         double subY = startY + (mm * (CmToPixel / 10.0));
-                        double tickWidth = (mm == 5) ? 7 : 4;
+                        double tickWidth = (mm == 5) ? 5 : 3;
 
                         Line subLine = new Line
                         {
                             X1 = 24 - tickWidth, Y1 = subY,
                             X2 = 24, Y2 = subY,
-                            Stroke = (mm == 5) ? primaryColor : secondaryColor,
-                            StrokeThickness = (mm == 5) ? 1.0 : 0.7
+                            Stroke = (mm == 5) ? Brushes.Black : Brushes.Gray,
+                            StrokeThickness = (mm == 5) ? 0.8 : 0.6
                         };
                         ReportLeftRulerCanvas.Children.Add(subLine);
                     }
