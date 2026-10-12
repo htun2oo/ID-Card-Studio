@@ -9,7 +9,6 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // 1 cm = 37.8 pixels (96 DPI Standard)
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180)); // Steel Blue
 
@@ -21,13 +20,31 @@ namespace IDWorksEnterpriseDesigner
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            // Card ရူလာများ (Front နှင့် Back)
-            DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 10.0, 6.0);
-            DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 10.0, 6.0);
-
-            // Report ရူလာ (A4 အရွယ်အစား: 21cm x 29.7cm)
+            DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
+            DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
         }
+
+        // Window Size ပြောင်းလဲသွားသည့်အခါ (Maximize/Restore) ရူလာများ အလိုအလျောက် အပြည့်ဆွဲပေးရန်
+        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
+        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
+        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
+        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
+        
+        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (ReportSizeComboBox != null && ReportSizeComboBox.SelectedItem is ComboBoxItem item)
+            {
+                string tag = item.Tag?.ToString();
+                double w = 21.0, h = 29.7;
+                if (tag == "A5") { w = 14.8; h = 21.0; }
+                else if (tag == "B5") { w = 17.6; h = 25.0; }
+                else if (tag == "Letter") { w = 21.59; h = 27.94; }
+                else if (tag == "Legal") { w = 21.59; h = 35.56; }
+                DrawReportRulers(w, h);
+            }
+        }
+        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
 
         // Scroll ပြုလုပ်စဉ် ရူလာများပါ လိုက်ပါရွှေ့လျားစေရန်
         private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
@@ -48,22 +65,25 @@ namespace IDWorksEnterpriseDesigner
             if (ReportLeftRulerScrollViewer != null) ReportLeftRulerScrollViewer.ScrollToVerticalOffset(e.VerticalOffset);
         }
 
-        // Card ရူလာများဆွဲသည့် Function (Zero အမှတ်ချိန်ညှိပြီး)
-        private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double widthCm, double heightCm)
+        // Card ရူလာများဆွဲသည့် Function (Maximize လုပ်သည့်အခါပါ အပြည့်အစုံ ဆွဲပေးနိုင်ရန်)
+        private void DrawCardRulers(Canvas topCanvas, Canvas leftCanvas, double maxCmX, double maxCmY)
         {
             if (topCanvas == null || leftCanvas == null) return;
 
             topCanvas.Children.Clear();
             leftCanvas.Children.Clear();
 
-            double totalWidthPx = widthCm * CmToPixel;
-            double totalHeightPx = heightCm * CmToPixel;
+            double topWidth = Math.Max(topCanvas.ActualWidth, maxCmX * CmToPixel + 100);
+            double leftHeight = Math.Max(leftCanvas.ActualHeight, maxCmY * CmToPixel + 100);
 
-            topCanvas.Width = totalWidthPx + 50;
-            leftCanvas.Height = totalHeightPx + 50;
+            topCanvas.Width = topWidth;
+            leftCanvas.Height = leftHeight;
+
+            int limitX = (int)Math.Ceiling(topWidth / CmToPixel);
+            int limitY = (int)Math.Ceiling(leftHeight / CmToPixel);
 
             // 1. Top Horizontal Ruler
-            for (int cm = 0; cm <= (int)Math.Ceiling(widthCm); cm++)
+            for (int cm = 0; cm <= limitX; cm++)
             {
                 double startX = cm * CmToPixel;
 
@@ -87,7 +107,7 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, 1);
                 topCanvas.Children.Add(text);
 
-                if (cm < (int)Math.Ceiling(widthCm))
+                if (cm < limitX)
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
@@ -107,7 +127,7 @@ namespace IDWorksEnterpriseDesigner
             }
 
             // 2. Left Vertical Ruler
-            for (int cm = 0; cm <= (int)Math.Ceiling(heightCm); cm++)
+            for (int cm = 0; cm <= limitY; cm++)
             {
                 double startY = cm * CmToPixel;
 
@@ -131,7 +151,7 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, startY - 7);
                 leftCanvas.Children.Add(text);
 
-                if (cm < (int)Math.Ceiling(heightCm))
+                if (cm < limitY)
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
@@ -162,11 +182,14 @@ namespace IDWorksEnterpriseDesigner
             double totalWidthPx = widthCm * CmToPixel;
             double totalHeightPx = heightCm * CmToPixel;
 
-            ReportTopRulerCanvas.Width = totalWidthPx + 50;
-            ReportLeftRulerCanvas.Height = totalHeightPx + 50;
+            ReportTopRulerCanvas.Width = Math.Max(ReportTopRulerCanvas.ActualWidth, totalWidthPx + 100);
+            ReportLeftRulerCanvas.Height = Math.Max(ReportLeftRulerCanvas.ActualHeight, totalHeightPx + 100);
+
+            int limitX = (int)Math.Ceiling(ReportTopRulerCanvas.Width / CmToPixel);
+            int limitY = (int)Math.Ceiling(ReportLeftRulerCanvas.Height / CmToPixel);
 
             // 1. Top Horizontal Ruler
-            for (int cm = 0; cm <= (int)Math.Ceiling(widthCm); cm++)
+            for (int cm = 0; cm <= limitX; cm++)
             {
                 double startX = cm * CmToPixel;
 
@@ -190,7 +213,7 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, 1);
                 ReportTopRulerCanvas.Children.Add(text);
 
-                if (cm < (int)Math.Ceiling(widthCm))
+                if (cm < limitX)
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
@@ -210,7 +233,7 @@ namespace IDWorksEnterpriseDesigner
             }
 
             // 2. Left Vertical Ruler
-            for (int cm = 0; cm <= (int)Math.Ceiling(heightCm); cm++)
+            for (int cm = 0; cm <= limitY; cm++)
             {
                 double startY = cm * CmToPixel;
 
@@ -234,7 +257,7 @@ namespace IDWorksEnterpriseDesigner
                 Canvas.SetTop(text, startY - 7);
                 ReportLeftRulerCanvas.Children.Add(text);
 
-                if (cm < (int)Math.Ceiling(heightCm))
+                if (cm < limitY)
                 {
                     for (int mm = 1; mm < 10; mm++)
                     {
