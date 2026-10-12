@@ -113,7 +113,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Top Ruler မှ အသစ်ဆွဲထုတ်ရန်
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -127,7 +126,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Left Ruler မှ အသစ်ဆွဲထုတ်ရန်
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas canvas)
@@ -141,7 +139,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Ruler ပေါ်မှ Mouse ဆွဲနေစဉ်
         private void Ruler_MouseMove(object sender, MouseEventArgs e)
         {
             if (isMouseDownOnRuler && activeCanvas != null)
@@ -159,7 +156,7 @@ namespace IDWorksEnterpriseDesigner
                         StrokeDashArray = new DoubleCollection(new double[] { 2, 2 })
                     };
 
-                    // Line ကို Mouse ဖြင့် ပြန်ဖျက်နိုင်ရန် Event ချိတ်ပေးခြင်း
+                    // Line ကို Mouse ဖြင့် ထပ်မံဖမ်းဆွဲနိုင်ရန် Event ချိတ်ပေးခြင်း
                     activeGuideLine.MouseLeftButtonDown += GuideLine_MouseLeftButtonDown;
 
                     Point cardPos = e.GetPosition(FrontCardOverlayCanvas);
@@ -200,7 +197,7 @@ namespace IDWorksEnterpriseDesigner
             e.Handled = true;
         }
 
-        // Card ပေါ်ရှိ ဇယားကွက်လိုင်း (Guide Line) ကို ကလစ်နှိပ်ပြီး ပြန်ဖယ်ရှားရန် (သို့မဟုတ် ရွှေ့ရန်)
+        // Card ပေါ်ရှိ ဇယားကွက်လိုင်းကို Mouse ဖြင့် ကလစ်နှိပ်ပြီး ဖမ်းဆွဲရန်
         private void GuideLine_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Line line)
@@ -212,15 +209,15 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // Card ပေါ်တွင် Mouse ဖြင့် Line ကို ဆွဲရွှေ့နေစဉ် (သို့မဟုတ် Ruler ဆီသို့ ပြန်တွန်းထုတ်နေစဉ်)
+        // Card ပေါ်တွင် Mouse ဖြင့် Line ကို ဆွဲရွှေ့နေစဉ် (Ruler သို့မဟုတ် အပြင်ဘက်သို့ ရောက်လျှင် ဖျက်ပစ်ရန်)
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (isDraggingExistingLine && selectedGuideLine != null)
             {
                 Point pos = e.GetPosition(FrontCardOverlayCanvas);
 
-                // အကယ်၍ Card ဧရိယာ အပြင်ဘက် (သို့မဟုတ် Ruler တည်ရှိရာ အနားသတ်များ) သို့ ရောက်သွားပါက Line ကို ဖျက်ပစ်မည်
-                if (pos.X < 0 || pos.Y < 0 || pos.X > FrontCardOverlayCanvas.ActualWidth || pos.Y > FrontCardOverlayCanvas.ActualHeight)
+                // အကယ်၍ Line ကို Card ဧရိယာ၏ အနားစွန်းများ (သို့မဟုတ် ပေတံတည်ရှိရာ အပြင်ဘက်) သို့ ပြန်ဆွဲထုတ်သွားပါက ဖျက်ပစ်မည်
+                if (pos.X < 5 || pos.Y < 5 || pos.X > FrontCardOverlayCanvas.ActualWidth - 5 || pos.Y > FrontCardOverlayCanvas.ActualHeight - 5)
                 {
                     FrontCardOverlayCanvas.Children.Remove(selectedGuideLine);
                     isDraggingExistingLine = false;
@@ -228,7 +225,7 @@ namespace IDWorksEnterpriseDesigner
                 }
                 else
                 {
-                    // Card အတွင်းတွင် ရှိနေသေးပါက နေရာရွှေ့ပြောင်းပေးမည်
+                    // Card အတွင်းတွင် ဆက်လက်ရွှေ့ပြောင်းပေးမည်
                     if (selectedGuideLine.X1 == selectedGuideLine.X2) // Vertical Line
                     {
                         selectedGuideLine.X1 = pos.X;
