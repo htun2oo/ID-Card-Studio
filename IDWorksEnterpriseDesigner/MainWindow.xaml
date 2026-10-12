@@ -546,11 +546,11 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
-                                    <ComboBoxItem Content="A4 (8.3 x 11.7 in)" Tag="A4" IsSelected="True"/>
-                                    <ComboBoxItem Content="A5 (5.8 x 8.3 in)" Tag="A5"/>
-                                    <ComboBoxItem Content="B5 (6.9 x 9.8 in)" Tag="B5"/>
-                                    <ComboBoxItem Content="Letter (8.5 x 11 in)" Tag="Letter"/>
-                                    <ComboBoxItem Content="Legal (8.5 x 14 in)" Tag="Legal"/>
+                                    <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" Tag="A4" IsSelected="True"/>
+                                    <ComboBoxItem Content="A5 (14.8 x 21.0 cm)" Tag="A5"/>
+                                    <ComboBoxItem Content="B5 (17.6 x 25.0 cm)" Tag="B5"/>
+                                    <ComboBoxItem Content="Letter (21.59 × 27.94 cm)" Tag="Letter"/>
+                                    <ComboBoxItem Content="Legal (21.59 × 35.56 cm)" Tag="Legal"/>
                                 </ComboBox>
                             </Grid>
 
