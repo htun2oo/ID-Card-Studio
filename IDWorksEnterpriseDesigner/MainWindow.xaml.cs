@@ -537,34 +537,7 @@ namespace IDWorksEnterpriseDesigner
 
             if (newProjectWin.ShowDialog() == true)
             {
-                if (ProjectWorkspace != null)
-                {
-                    ProjectWorkspace.Visibility = Visibility.Visible;
-                }
-
-                MenuCloseProject.Visibility = Visibility.Visible;
-                MenuSep1.Visibility = Visibility.Visible;
-                MenuSaveProject.Visibility = Visibility.Visible;
-                MenuSaveProjectAs.Visibility = Visibility.Visible;
-                MenuSep2.Visibility = Visibility.Visible;
-                MenuProjectProperties.Visibility = Visibility.Visible;
-                MenuSep3.Visibility = Visibility.Visible;
-                MenuPrintCard.Visibility = Visibility.Visible;
-                MenuSep4.Visibility = Visibility.Visible;
-                MenuDeleteProject.Visibility = Visibility.Visible;
-                MenuSep5.Visibility = Visibility.Visible;
-                MenuRecentFileItem.Visibility = Visibility.Visible;
-                MenuSep6.Visibility = Visibility.Visible;
-
-                MenuEdit.Visibility = Visibility.Visible;
-                MenuInsert.Visibility = Visibility.Visible;
-                MenuFormat.Visibility = Visibility.Visible;
-                MenuTools.Visibility = Visibility.Visible;
-                MenuWindow.Visibility = Visibility.Visible;
-
-                DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
-                DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
-                DrawReportRulers(21.0, 29.7);
+                ActivateProjectWorkspace();
             }
         }
 
@@ -578,35 +551,109 @@ namespace IDWorksEnterpriseDesigner
 
             if (newProjectWin.ShowDialog() == true)
             {
-                if (ProjectWorkspace != null)
-                {
-                    ProjectWorkspace.Visibility = Visibility.Visible;
-                }
-
-                MenuCloseProject.Visibility = Visibility.Visible;
-                MenuSep1.Visibility = Visibility.Visible;
-                MenuSaveProject.Visibility = Visibility.Visible;
-                MenuSaveProjectAs.Visibility = Visibility.Visible;
-                MenuSep2.Visibility = Visibility.Visible;
-                MenuProjectProperties.Visibility = Visibility.Visible;
-                MenuSep3.Visibility = Visibility.Visible;
-                MenuPrintCard.Visibility = Visibility.Visible;
-                MenuSep4.Visibility = Visibility.Visible;
-                MenuDeleteProject.Visibility = Visibility.Visible;
-                MenuSep5.Visibility = Visibility.Visible;
-                MenuRecentFileItem.Visibility = Visibility.Visible;
-                MenuSep6.Visibility = Visibility.Visible;
-
-                MenuEdit.Visibility = Visibility.Visible;
-                MenuInsert.Visibility = Visibility.Visible;
-                MenuFormat.Visibility = Visibility.Visible;
-                MenuTools.Visibility = Visibility.Visible;
-                MenuWindow.Visibility = Visibility.Visible;
-
-                DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
-                DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
-                DrawReportRulers(21.0, 29.7);
+                ActivateProjectWorkspace();
             }
+        }
+
+        private void ActivateProjectWorkspace()
+        {
+            if (ProjectWorkspace != null)
+            {
+                ProjectWorkspace.Visibility = Visibility.Visible;
+            }
+
+            MenuCloseProject.Visibility = Visibility.Visible;
+            MenuSep1.Visibility = Visibility.Visible;
+            MenuSaveProject.Visibility = Visibility.Visible;
+            MenuSaveProjectAs.Visibility = Visibility.Visible;
+            MenuSep2.Visibility = Visibility.Visible;
+            MenuProjectProperties.Visibility = Visibility.Visible;
+            MenuSep3.Visibility = Visibility.Visible;
+            MenuPrintCard.Visibility = Visibility.Visible;
+            MenuSep4.Visibility = Visibility.Visible;
+            MenuDeleteProject.Visibility = Visibility.Visible;
+            MenuSep5.Visibility = Visibility.Visible;
+            MenuRecentFileItem.Visibility = Visibility.Visible;
+            MenuSep6.Visibility = Visibility.Visible;
+
+            MenuEdit.Visibility = Visibility.Visible;
+            MenuInsert.Visibility = Visibility.Visible;
+            MenuFormat.Visibility = Visibility.Visible;
+            MenuTools.Visibility = Visibility.Visible;
+            MenuWindow.Visibility = Visibility.Visible;
+
+            DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
+            DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
+            DrawReportRulers(21.0, 29.7);
+        }
+
+        private void CloseProject_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectWorkspace != null)
+            {
+                ProjectWorkspace.Visibility = Visibility.Collapsed;
+            }
+
+            MenuCloseProject.Visibility = Visibility.Collapsed;
+            MenuSep1.Visibility = Visibility.Collapsed;
+            MenuSaveProject.Visibility = Visibility.Collapsed;
+            MenuSaveProjectAs.Visibility = Visibility.Collapsed;
+            MenuSep2.Visibility = Visibility.Collapsed;
+            MenuProjectProperties.Visibility = Visibility.Collapsed;
+            MenuSep3.Visibility = Visibility.Collapsed;
+            MenuPrintCard.Visibility = Visibility.Collapsed;
+            MenuSep4.Visibility = Visibility.Collapsed;
+            MenuDeleteProject.Visibility = Visibility.Collapsed;
+            MenuSep5.Visibility = Visibility.Collapsed;
+            MenuRecentFileItem.Visibility = Visibility.Collapsed;
+            MenuSep6.Visibility = Visibility.Collapsed;
+
+            MenuEdit.Visibility = Visibility.Collapsed;
+            MenuInsert.Visibility = Visibility.Collapsed;
+            MenuFormat.Visibility = Visibility.Collapsed;
+            MenuTools.Visibility = Visibility.Collapsed;
+            MenuWindow.Visibility = Visibility.Collapsed;
+        }
+
+        private void SaveProject_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Project saved successfully.", "Save Project", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void SaveProjectAs_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "ID Works Project Files (*.iwp)|*.iwp|All Files (*.*)|*.*"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                MessageBox.Show($"Project saved to: {saveFileDialog.FileName}", "Save Project As", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void ProjectProperties_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Project Properties configuration window.", "Properties", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void PrintSampleCard_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Printing sample card...", "Print", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void DeleteProject_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to delete this project?", "Delete Project", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                CloseProject_Click(sender, e);
+            }
+        }
+
+        private void RecentFile_Click(object sender, RoutedEventArgs e)
+        {
+            ActivateProjectWorkspace();
         }
 
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
