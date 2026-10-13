@@ -1,7 +1,8 @@
 <Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Datacard ID Works Enterprise Designer" Height="700" Width="1000">
+        Title="Datacard ID Works Enterprise Designer" Height="700" Width="1000"
+        Loaded="MainWindow_Loaded">
     
     <Window.Resources>
         <!-- Card Window အတွက် Context Menu အပြည့်အစုံ -->
@@ -47,15 +48,33 @@
     </Window.Resources>
 
     <Grid>
-        <!-- ဥပမာအနေဖြင့် Front Card နှင့် Back Card Border များတွင် ContextMenu ချိတ်ဆက်ပုံ -->
-        <!-- Front Card Border -->
-        <Border x:Name="FrontDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" Width="567" Height="357" Background="White">
-            <!-- ဤနေရာတွင် Card အတွင်းပိုင်း Canvas များနှင့် Overlay များ ရှိပါမည် -->
+        <!-- Card (Front) Border တွင် Context Menu ချိတ်ဆက်ခြင်း -->
+        <Border x:Name="FrontDocumentBorder" ContextMenu="{StaticResource CardContextMenu}">
+            <!-- Front Card Overlay Canvas -->
+            <Canvas x:Name="FrontCardOverlayCanvas"/>
         </Border>
 
-        <!-- Back Card Border -->
-        <Border x:Name="BackDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" Width="567" Height="357" Background="White">
-            <!-- ဤနေရာတွင် Back Card အတွင်းပိုင်း Canvas များနှင့် Overlay များ ရှိပါမည် -->
+        <!-- Card (Back) Border တွင် Context Menu ချိတ်ဆက်ခြင်း -->
+        <Border x:Name="BackDocumentBorder" ContextMenu="{StaticResource CardContextMenu}">
+            <!-- Back Card Overlay Canvas -->
+            <Canvas x:Name="BackCardOverlayCanvas"/>
         </Border>
+
+        <!-- ReportControls (Error မတက်စေရန် မူလအတိုင်း ထည့်သွင်းထားရမည့် Controls များ) -->
+        <ComboBox x:Name="ReportSizeComboBox" SelectionChanged="ReportSizeComboBox_SelectionChanged">
+            <ComboBoxItem Tag="A4" IsSelected="True">A4 (21.0 x 29.7 cm)</ComboBoxItem>
+            <ComboBoxItem Tag="A5">A5</ComboBoxItem>
+            <ComboBoxItem Tag="B5">B5</ComboBoxItem>
+            <ComboBoxItem Tag="Letter">Letter</ComboBoxItem>
+            <ComboBoxItem Tag="Legal">Legal</ComboBoxItem>
+        </ComboBox>
+
+        <Border x:Name="ReportDocumentBorder">
+            <Canvas x:Name="ReportOverlayCanvas"/>
+        </Border>
+
+        <!-- Report Ruler Canvases -->
+        <Canvas x:Name="ReportTopRulerCanvas"/>
+        <Canvas x:Name="ReportLeftRulerCanvas"/>
     </Grid>
 </Window>
