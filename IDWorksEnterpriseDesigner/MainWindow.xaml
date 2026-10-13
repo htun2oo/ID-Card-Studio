@@ -48,33 +48,11 @@
     </Window.Resources>
 
     <Grid>
-        <!-- Card (Front) Border တွင် Context Menu ချိတ်ဆက်ခြင်း -->
-        <Border x:Name="FrontDocumentBorder" ContextMenu="{StaticResource CardContextMenu}">
-            <!-- Front Card Overlay Canvas -->
-            <Canvas x:Name="FrontCardOverlayCanvas"/>
-        </Border>
+        <!-- ဤနေရာတွင် သင့်၏ မူလ Grid Layout များနှင့် Ruler/ScrollViewer များကို ထည့်သွင်းထားပြီး -->
+        <!-- Front Card Border တွင် ContextMenu ချိတ်ဆက်ရန် -->
+        <!-- <Border x:Name="FrontDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" ...> -->
 
-        <!-- Card (Back) Border တွင် Context Menu ချိတ်ဆက်ခြင်း -->
-        <Border x:Name="BackDocumentBorder" ContextMenu="{StaticResource CardContextMenu}">
-            <!-- Back Card Overlay Canvas -->
-            <Canvas x:Name="BackCardOverlayCanvas"/>
-        </Border>
-
-        <!-- ReportControls (Error မတက်စေရန် မူလအတိုင်း ထည့်သွင်းထားရမည့် Controls များ) -->
-        <ComboBox x:Name="ReportSizeComboBox" SelectionChanged="ReportSizeComboBox_SelectionChanged">
-            <ComboBoxItem Tag="A4" IsSelected="True">A4 (21.0 x 29.7 cm)</ComboBoxItem>
-            <ComboBoxItem Tag="A5">A5</ComboBoxItem>
-            <ComboBoxItem Tag="B5">B5</ComboBoxItem>
-            <ComboBoxItem Tag="Letter">Letter</ComboBoxItem>
-            <ComboBoxItem Tag="Legal">Legal</ComboBoxItem>
-        </ComboBox>
-
-        <Border x:Name="ReportDocumentBorder">
-            <Canvas x:Name="ReportOverlayCanvas"/>
-        </Border>
-
-        <!-- Report Ruler Canvases -->
-        <Canvas x:Name="ReportTopRulerCanvas"/>
-        <Canvas x:Name="ReportLeftRulerCanvas"/>
+        <!-- Back Card Border တွင် ContextMenu ချိတ်ဆက်ရန် -->
+        <!-- <Border x:Name="BackDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" ...> -->
     </Grid>
 </Window>
