@@ -62,10 +62,7 @@
 
                         <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="FrontMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border x:Name="FrontDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="FrontCardOverlayCanvas" Width="340" Height="215"
-                                        MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
-                                        MouseMove="FrontCardOverlayCanvas_MouseMove"
-                                        MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"/>
+                                <Canvas x:Name="FrontCardOverlayCanvas" Width="340" Height="215"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
@@ -104,10 +101,7 @@
 
                         <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="BackMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border x:Name="BackDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="BackCardOverlayCanvas" Width="340" Height="215"
-                                        MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
-                                        MouseMove="BackCardOverlayCanvas_MouseMove"
-                                        MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"/>
+                                <Canvas x:Name="BackCardOverlayCanvas" Width="340" Height="215"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
@@ -148,10 +142,7 @@
 
                         <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="ReportMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border x:Name="ReportDocumentBorder" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="ReportOverlayCanvas"
-                                        MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
-                                        MouseMove="ReportOverlayCanvas_MouseMove"
-                                        MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"/>
+                                <Canvas x:Name="ReportOverlayCanvas"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
