@@ -29,12 +29,24 @@
         <GroupBox Grid.Row="1" Header="Initial Components" Padding="8" Margin="0,0,85,0">
             <StackPanel>
                 <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" Margin="0,0,0,6"/>
-                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,6" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
+                
+                <!-- Card Design with Custom Icon Options -->
+                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="False" Margin="0,0,0,4" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
                 
                 <StackPanel Margin="18,0,0,6">
-                    <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True" Margin="0,0,0,4"/>
-                    <RadioButton x:Name="PortraitRadio" Content="Portrait" Margin="0,0,0,4"/>
-                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" IsEnabled="False"/>
+                    <!-- Landscape Option with Icon -->
+                    <DockPanel Margin="0,0,0,4">
+                        <Border Width="16" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True" IsEnabled="False"/>
+                    </DockPanel>
+                    
+                    <!-- Portrait Option with Icon -->
+                    <DockPanel Margin="0,0,0,4">
+                        <Border Width="10" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="3,0,9,0" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="PortraitRadio" Content="Portrait" IsEnabled="False"/>
+                    </DockPanel>
+                    
+                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" IsEnabled="False" Margin="0,2,0,0"/>
                 </StackPanel>
                 
                 <CheckBox x:Name="ReportCheckBox" Content="Report Design"/>
