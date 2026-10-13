@@ -13,16 +13,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Project Name Section -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
-            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
-        </StackPanel>
-
-        <!-- Buttons Column (Right side) -->
-        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75">
+        <!-- Buttons Column (Right side) - Layout တွင် အရင်စီစဉ်ပေးခြင်းဖြင့် TextBox က နေရာလွတ်ကို အပြည့်ယူစေရန် -->
+        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,0,0,0">
             <Button Content="OK" IsDefault="True" Height="24" Margin="0,0,0,6" Click="OkButton_Click"/>
             <Button Content="Cancel" IsCancel="True" Height="24" Click="CancelButton_Click"/>
+        </StackPanel>
+
+        <!-- Project Name Section (OK ခလုတ်အတွက် ဘယ်ဘက်တွင် Margin 85 ချန်ထားခြင်းဖြင့် အလျားပြည့်စေရန်) -->
+        <StackPanel Grid.Row="0" Margin="0,0,85,10">
+            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Initial Components GroupBox -->
@@ -49,7 +49,7 @@
                     <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
                 </StackPanel>
                 
-                <!-- Report Design positioned correctly at the bottom -->
+                <!-- Report Design -->
                 <CheckBox x:Name="ReportCheckBox" Content="Report Design" Margin="0,4,0,0"/>
             </StackPanel>
         </GroupBox>
