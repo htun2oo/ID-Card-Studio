@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -543,13 +544,24 @@ namespace IDWorksEnterpriseDesigner
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            Views.NewProjectWindow newProjectWin = new Views.NewProjectWindow
+            // အကယ်၍ Save လုပ်ထားသော Project များ မရှိသေးပါက list ကို null သို့မဟုတ် empty ထားနိုင်သည်
+            List<string> existingProjects = new List<string>
             {
-                Owner = this,
-                Title = "Open Project"
+                "Sample",
+                "Sample Badge",
+                "Sample Corporate",
+                "Sample Government",
+                "Sample Healthcare",
+                "Sample Loyalty",
+                "Sample University"
             };
 
-            if (newProjectWin.ShowDialog() == true)
+            Views.OpenProjectWindow openProjectWin = new Views.OpenProjectWindow(existingProjects)
+            {
+                Owner = this
+            };
+
+            if (openProjectWin.ShowDialog() == true)
             {
                 ActivateProjectWorkspace();
             }
