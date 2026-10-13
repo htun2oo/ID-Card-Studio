@@ -61,7 +61,7 @@ namespace IDWorksEnterpriseDesigner
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Double-click ဖြင့်လည်း ဖျက်နိုင်ရန်
+            // မျဉ်းပေါ်တွင် Mouse ဖြင့် Double-Click နှိပ်ပါက ဖျက်ပစ်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -71,6 +71,20 @@ namespace IDWorksEnterpriseDesigner
                 }
             };
 
+            // မူလရှိနေပြီးသား မျဉ်းများကိုပါ ကလစ်နှိပ်၍ ပြန်လည်ဆွဲယူဖျက်နိုင်ရန် MouseDown Event ထည့်သွင်းခြင်း
+            draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
+            {
+                if (ev.ClickCount == 1 && s is Line line && line.Parent is Canvas parentCanvas)
+                {
+                    draggedGuideLine = line;
+                    activeOverlayCanvas = parentCanvas;
+                    isDraggingGuide = true;
+                    isHorizontalGuide = (line.Y1 == line.Y2);
+                    hasEnteredCanvas = true; // တခါတည်း Canvas ထဲမှာ ရှိပြီးသားဖြစ်므로 True ဟု သတ်မှတ်ခြင်း
+                    ev.Handled = true;
+                }
+            };
+            
             if (isHorizontalGuide)
             {
                 draggedGuideLine.X1 = 0;
