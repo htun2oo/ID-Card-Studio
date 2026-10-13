@@ -1,3 +1,11 @@
+<Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
+        WindowStartupLocation="CenterScreen">
 <!-- Top Menu Bar (ပရောဂျက်ဖွင့်ပြီးနောက် မီနူးအပြည့်အစုံပေါ်စေရန်) -->
 <Menu DockPanel.Dock="Top" Background="#F0F0F0">
     <MenuItem Header="File">
