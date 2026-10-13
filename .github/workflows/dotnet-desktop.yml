@@ -32,14 +32,14 @@ jobs:
         # Certificate ဖန်တီးခြင်း
         $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDWorksEnterprise" -CertStoreLocation cert:\CurrentUser\My
 
-        # Certificate ကို Trusted Root သို့ ထည့်သွင်းခြင်း (UnknownError ကို ကာကွယ်ရန်)
+        # Local Certificate Store သို့ ထည့်သွင်းခြင်း
         $certStore = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root", "CurrentUser")
         $certStore.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
         $certStore.Add($cert)
         $certStore.Close()
 
-        # Executable ဖိုင်ကို လက်မှတ်ထိုးခြင်း (Timestamp Server ထည့်သွင်းခြင်းဖြင့် Error ကင်းဝေးစေရန်)
-        Set-AuthenticodeSignature -FilePath "IDWorksEnterpriseDesigner.exe" -Certificate $cert -TimestampServer "http://timestamp.digicert.com"
+    # Timestamp Server မပါဘဲ အော့ဖ်လိုင်း လက်မှတ်ထိုးခြင်း (အင်တာနက်လိုင်းမကောင်းချိန်တွင် ချက်ချင်းပြီးမြောက်စေရန်)
+    Set-AuthenticodeSignature -FilePath "IDWorksEnterpriseDesigner.exe" -Certificate $cert
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@main
