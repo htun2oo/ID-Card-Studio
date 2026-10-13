@@ -32,15 +32,13 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
-            // Card (Front) Rulers
+            // Ruler Canvas များမှ Guide Line စတင်ဆွဲထုတ်ရန် Event ချိတ်ဆက်ခြင်း
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, FrontCardOverlayCanvas);
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, FrontCardOverlayCanvas);
 
-            // Card (Back) Rulers
             BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, BackCardOverlayCanvas);
             BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, BackCardOverlayCanvas);
 
-            // Report Rulers
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, ReportOverlayCanvas);
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, ReportOverlayCanvas);
         }
@@ -57,12 +55,12 @@ namespace IDWorksEnterpriseDesigner
 
             draggedGuideLine = new Line
             {
-                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Photoshop ကဲ့သို့ ထင်းရှားသော Blue မျဉ်း
+                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Photoshop ကဲ့သို့ ထင်းရှားသော Blue Guide Color
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Guide Line ပေါ်တွင် Mouse ဖြင့် Double Click (နှစ်ချက်ကလစ်) နှိပ်လျှင် ဖျက်ပစ်ရန်
+            // Guide Line ပေါ်တွင် Mouse ဖြင့် Double-Click နှိပ်၍လည်း ဖျက်ပစ်နိုင်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -100,7 +98,7 @@ namespace IDWorksEnterpriseDesigner
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // Document ဧရိယာအပြင်ဘက်သို့ ဆွဲထုတ်မိပါက Guide Line ကို အလိုအလျောက် ဖယ်ရှားရန်
+            // Photoshop ကဲ့သို့ Guide Line ကို Ruler (သို့မဟုတ် ဧရိယာအပြင်ဘက်) သို့ ပြန်လည်ဆွဲယူပါက အလိုအလျောက် ပျက်ပြယ်သွားစေရန်
             if (mousePos.X < 0 || mousePos.Y < 0 || mousePos.X > activeOverlayCanvas.Width || mousePos.Y > activeOverlayCanvas.Height)
             {
                 activeOverlayCanvas.Children.Remove(draggedGuideLine);
@@ -417,58 +415,15 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            Window newProjectWin = new Window
+            Views.NewProjectWindow newProjectWin = new Views.NewProjectWindow
             {
-                Title = "New Project",
-                Width = 350,
-                Height = 180,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner,
-                Owner = this,
-                ResizeMode = ResizeMode.NoResize,
-                Background = Brushes.WhiteSmoke
+                Owner = this
             };
 
-            StackPanel mainPanel = new StackPanel { Margin = new Thickness(15) };
-            
-            mainPanel.Children.Add(new TextBlock 
-            { 
-                Text = "Enter project name:", 
-                FontWeight = FontWeights.Bold, 
-                Margin = new Thickness(0, 0, 0, 5) 
-            });
-
-            TextBox txtName = new TextBox 
-            { 
-                Text = "Project1", 
-                Height = 26, 
-                VerticalContentAlignment = VerticalAlignment.Center, 
-                Margin = new Thickness(0, 0, 0, 15) 
-            };
-            mainPanel.Children.Add(txtName);
-
-            StackPanel btnPanel = new StackPanel 
-            { 
-                Orientation = Orientation.Horizontal, 
-                HorizontalAlignment = HorizontalAlignment.Right 
-            };
-
-            Button btnOk = new Button { Content = "OK", Width = 75, Height = 25, Margin = new Thickness(0, 0, 10, 0) };
-            btnOk.Click += (s, args) => {
-                newProjectWin.DialogResult = true;
-                newProjectWin.Close();
-            };
-
-            Button btnCancel = new Button { Content = "Cancel", Width = 75, Height = 25 };
-            btnCancel.Click += (s, args) => {
-                newProjectWin.Close();
-            };
-
-            btnPanel.Children.Add(btnOk);
-            btnPanel.Children.Add(btnCancel);
-            mainPanel.Children.Add(btnPanel);
-
-            newProjectWin.Content = mainPanel;
-            newProjectWin.ShowDialog();
+            if (newProjectWin.ShowDialog() == true)
+            {
+                // New project logic here if needed
+            }
         }
 
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
