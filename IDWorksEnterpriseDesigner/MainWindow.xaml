@@ -12,24 +12,33 @@
             <MenuItem Header="File">
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" />
-                <MenuItem Header="Close Project" />
+                
+                <!-- ပရောဂျက်ဖွင့်ပြီးမှ ပေါ်လာမည့် မီနူးများ -->
+                <MenuItem x:Name="MenuCloseProject" Header="Close Project" Visibility="Collapsed" />
+                <Separator x:Name="MenuSep1" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuSaveProject" Header="Save Project" InputGestureText="Ctrl+S" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuSaveProjectAs" Header="Save Project As..." Visibility="Collapsed" />
+                <Separator x:Name="MenuSep2" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuProjectProperties" Header="Project Properties..." InputGestureText="F7" Visibility="Collapsed" />
+                <Separator x:Name="MenuSep3" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuPrintCard" Header="Print Sample Card..." InputGestureText="Ctrl+P" Visibility="Collapsed" />
+                <MenuItem Header="Preview Sample Report..." IsEnabled="False" Foreground="Gray" Visibility="Collapsed" />
+                <MenuItem Header="Report Page Setup..." IsEnabled="False" Foreground="Gray" Click="ReportPageSetup_Click" Visibility="Collapsed" />
+                <Separator x:Name="MenuSep4" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuDeleteProject" Header="Delete Project" Visibility="Collapsed" />
+                <Separator x:Name="MenuSep5" Visibility="Collapsed" />
+                <MenuItem x:Name="MenuRecentFileItem" Header="1 C:\Users\...\Sample\Sample.iwp" Visibility="Collapsed" />
+                <Separator x:Name="MenuSep6" Visibility="Collapsed" />
+
+                <!-- ပရောဂျက်မဖွင့်မီ ပုံသေပါရှိမည့် မီနူးများ -->
                 <Separator />
-                <MenuItem Header="Save Project" InputGestureText="Ctrl+S" />
-                <MenuItem Header="Save Project As..." />
-                <Separator />
-                <MenuItem Header="Project Properties..." InputGestureText="F7" />
-                <Separator />
-                <MenuItem Header="Print Sample Card..." InputGestureText="Ctrl+P" />
-                <MenuItem Header="Preview Sample Report..." IsEnabled="False" Foreground="Gray" />
-                <MenuItem Header="Report Page Setup..." IsEnabled="False" Foreground="Gray" Click="ReportPageSetup_Click" />
-                <Separator />
-                <MenuItem Header="Delete Project" />
-                <Separator />
-                <MenuItem Header="1 C:\Users\...\Sample\Sample.iwp" />
+                <MenuItem Header="Recent File" IsEnabled="False" Foreground="Gray" />
                 <Separator />
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
-            <MenuItem Header="Edit">
+
+            <!-- Project ဖွင့်မှ ပေါ်လာမည့် Edit မီနူး -->
+            <MenuItem x:Name="MenuEdit" Header="Edit" Visibility="Collapsed">
                 <MenuItem Header="Cut" InputGestureText="Ctrl+X" IsEnabled="False" />
                 <MenuItem Header="Copy" InputGestureText="Ctrl+C" IsEnabled="False" />
                 <MenuItem Header="Paste" InputGestureText="Ctrl+V" IsEnabled="False" />
@@ -37,23 +46,27 @@
                 <MenuItem Header="Delete" InputGestureText="Del" IsEnabled="False" />
                 <MenuItem Header="Select All" InputGestureText="Ctrl+A" IsEnabled="False" />
             </MenuItem>
+
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars" />
             </MenuItem>
-            <MenuItem Header="Insert">
+
+            <!-- Project ဖွင့်မှ ပေါ်လာမည့် အခြား မီနူးများ -->
+            <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
                 <MenuItem Header="Text Field" />
                 <MenuItem Header="Photo Field" />
             </MenuItem>
-            <MenuItem Header="Format">
+            <MenuItem x:Name="MenuFormat" Header="Format" Visibility="Collapsed">
                 <MenuItem Header="Align" />
             </MenuItem>
-            <MenuItem Header="Tools">
+            <MenuItem x:Name="MenuTools" Header="Tools" Visibility="Collapsed">
                 <MenuItem Header="Options..." />
             </MenuItem>
-            <MenuItem Header="Window">
+            <MenuItem x:Name="MenuWindow" Header="Window" Visibility="Collapsed">
                 <MenuItem Header="Cascade" />
                 <MenuItem Header="Tile" />
             </MenuItem>
+
             <MenuItem Header="Help">
                 <MenuItem Header="Online Help..." InputGestureText="F1" />
             </MenuItem>
