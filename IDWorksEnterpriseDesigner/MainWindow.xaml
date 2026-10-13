@@ -4,49 +4,6 @@
         Title="Datacard ID Works Enterprise Designer" Height="700" Width="1000"
         Loaded="MainWindow_Loaded">
 
-    <Window.Resources>
-        <!-- Card Window အတွက် Context Menu အပြည့်အစုံ -->
-        <ContextMenu x:Key="CardContextMenu">
-            <MenuItem Header="Cut" IsEnabled="False"/>
-            <MenuItem Header="Copy" IsEnabled="False"/>
-            <MenuItem Header="Paste" IsEnabled="False"/>
-            <Separator/>
-            <MenuItem Header="Insert Text Field"/>
-            <MenuItem Header="Insert Photo Field"/>
-            <MenuItem Header="Insert Date Field"/>
-            <MenuItem Header="Insert Signature Field"/>
-            <MenuItem Header="Insert Bar Code Field"/>
-            <MenuItem Header="Insert Magnetic Stripe Field"/>
-            <MenuItem Header="Insert Smart Card Field"/>
-            <MenuItem Header="Insert Variable Graphic Field"/>
-            <Separator/>
-            <MenuItem Header="Insert Static Text Field"/>
-            <MenuItem Header="Insert Static Graphic Field"/>
-            <MenuItem Header="Insert Non-Printable Area"/>
-            <MenuItem Header="Insert Shape">
-                <MenuItem Header="Line"/>
-                <MenuItem Header="Rectangle"/>
-                <MenuItem Header="Ellipse"/>
-            </MenuItem>
-            <Separator/>
-            <MenuItem Header="Select Fields">
-                <MenuItem Header="None"/>
-            </MenuItem>
-            <MenuItem Header="Select All Fields" IsEnabled="False"/>
-            <Separator/>
-            <MenuItem Header="Field Names"/>
-            <MenuItem Header="Sample Data" IsCheckable="True" IsChecked="True"/>
-            <Separator/>
-            <MenuItem Header="Portrait"/>
-            <MenuItem Header="Landscape" IsCheckable="True" IsChecked="True"/>
-            <Separator/>
-            <MenuItem Header="Save Project"/>
-            <MenuItem Header="Print Sample Card..."/>
-            <Separator/>
-            <MenuItem Header="Card Properties..."/>
-        </ContextMenu>
-    </Window.Resources>
-
     <DockPanel LastChildFill="True">
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top">
@@ -104,8 +61,11 @@
                         </ScrollViewer>
 
                         <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="FrontMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Border x:Name="FrontDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10" ContextMenu="{StaticResource CardContextMenu}">
-                                <Canvas x:Name="FrontCardOverlayCanvas" Width="340" Height="215"/>
+                            <Border x:Name="FrontDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
+                                <Canvas x:Name="FrontCardOverlayCanvas" Width="340" Height="215"
+                                        MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
+                                        MouseMove="FrontCardOverlayCanvas_MouseMove"
+                                        MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
@@ -143,8 +103,11 @@
                         </ScrollViewer>
 
                         <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="BackMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Border x:Name="BackDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10" ContextMenu="{StaticResource CardContextMenu}">
-                                <Canvas x:Name="BackCardOverlayCanvas" Width="340" Height="215"/>
+                            <Border x:Name="BackDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
+                                <Canvas x:Name="BackCardOverlayCanvas" Width="340" Height="215"
+                                        MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
+                                        MouseMove="BackCardOverlayCanvas_MouseMove"
+                                        MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
@@ -185,7 +148,10 @@
 
                         <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="ReportMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                             <Border x:Name="ReportDocumentBorder" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="ReportOverlayCanvas"/>
+                                <Canvas x:Name="ReportOverlayCanvas"
+                                        MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
+                                        MouseMove="ReportOverlayCanvas_MouseMove"
+                                        MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"/>
                             </Border>
                         </ScrollViewer>
                     </Grid>
