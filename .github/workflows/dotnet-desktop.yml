@@ -38,8 +38,8 @@ jobs:
         $certStore.Add($cert)
         $certStore.Close()
 
-    # Timestamp Server မပါဘဲ အော့ဖ်လိုင်း လက်မှတ်ထိုးခြင်း (အင်တာနက်လိုင်းမကောင်းချိန်တွင် ချက်ချင်းပြီးမြောက်စေရန်)
-    Set-AuthenticodeSignature -FilePath "IDWorksEnterpriseDesigner.exe" -Certificate $cert
+        # Timestamp Server မပါဘဲ အော့ဖ်လိုင်း လက်မှတ်ထိုးခြင်း (Publish လုပ်ထားသော Path ကို သေချာညွှန်ပေးခြင်း)
+        Set-AuthenticodeSignature -FilePath "./publish/IDWorksEnterpriseDesigner.exe" -Certificate $cert
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@main
