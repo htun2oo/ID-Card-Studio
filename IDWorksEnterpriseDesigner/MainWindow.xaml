@@ -45,9 +45,9 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main Workspace Area -->
+        <!-- Main Workspace Area (Initially Collapsed) -->
         <Grid x:Name="MdiHostGrid" Background="#808080">
-            <Grid x:Name="ProjectWorkspace">
+            <Grid x:Name="ProjectWorkspace" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1.4*"/>
