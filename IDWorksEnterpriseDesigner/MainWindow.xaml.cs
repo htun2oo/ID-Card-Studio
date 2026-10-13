@@ -32,13 +32,21 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
-            // Ruler Canvas များမှ Guide Line စတင်ဆွဲထုတ်ရန် Event ချိတ်ဆက်ခြင်း
+            // Front Rulers (ScrollViewer နှင့် Canvas နှစ်ခုစလုံးတွင် Event ဖမ်းယူရန်)
+            FrontTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
+            FrontLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
 
+            // Back Rulers
+            BackTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, BackCardOverlayCanvas); ev.Handled = true; };
+            BackLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, BackCardOverlayCanvas); ev.Handled = true; };
             BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, BackCardOverlayCanvas); ev.Handled = true; };
             BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, BackCardOverlayCanvas); ev.Handled = true; };
 
+            // Report Rulers
+            ReportTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
+            ReportLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
         }
