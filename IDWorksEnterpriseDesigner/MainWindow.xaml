@@ -95,7 +95,49 @@
                                     <!-- Front Card Canvas -->
                                     <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
-                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1">
+                                                <Border.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="Cut" IsEnabled="False"/>
+                                                        <MenuItem Header="Copy" IsEnabled="False"/>
+                                                        <MenuItem Header="Paste" IsEnabled="False"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Insert Text Field"/>
+                                                        <MenuItem Header="Insert Photo Field"/>
+                                                        <MenuItem Header="Insert Date Field"/>
+                                                        <MenuItem Header="Insert Signature Field"/>
+                                                        <MenuItem Header="Insert Bar Code Field"/>
+                                                        <MenuItem Header="Insert Magnetic Stripe Field"/>
+                                                        <MenuItem Header="Insert Smart Card Field"/>
+                                                        <MenuItem Header="Insert Variable Graphic Field"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Insert Static Text Field"/>
+                                                        <MenuItem Header="Insert Static Graphic Field"/>
+                                                        <MenuItem Header="Insert Non-Printable Area"/>
+                                                        <MenuItem Header="Insert Shape">
+                                                            <MenuItem Header="Line"/>
+                                                            <MenuItem Header="Rectangle"/>
+                                                            <MenuItem Header="Ellipse"/>
+                                                        </MenuItem>
+                                                        <Separator/>
+                                                        <MenuItem Header="Select Fields">
+                                                            <MenuItem Header="None"/>
+                                                        </MenuItem>
+                                                        <MenuItem Header="Select All Fields" IsEnabled="False"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Field Names"/>
+                                                        <MenuItem Header="Sample Data" IsCheckable="True" IsChecked="True"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Portrait"/>
+                                                        <MenuItem Header="Landscape" IsCheckable="True" IsChecked="True"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Save Project"/>
+                                                        <MenuItem Header="Print Sample Card..."/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Card Properties..."/>
+                                                    </ContextMenu>
+                                                </Border.ContextMenu>
+                                            </Border>
                                             <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
                                                     MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
                                                     MouseMove="FrontCardOverlayCanvas_MouseMove"
@@ -143,7 +185,49 @@
                                     <!-- Back Card Canvas -->
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
-                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1">
+                                                <Border.ContextMenu>
+                                                    <ContextMenu>
+                                                        <MenuItem Header="Cut" IsEnabled="False"/>
+                                                        <MenuItem Header="Copy" IsEnabled="False"/>
+                                                        <MenuItem Header="Paste" IsEnabled="False"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Insert Text Field"/>
+                                                        <MenuItem Header="Insert Photo Field"/>
+                                                        <MenuItem Header="Insert Date Field"/>
+                                                        <MenuItem Header="Insert Signature Field"/>
+                                                        <MenuItem Header="Insert Bar Code Field"/>
+                                                        <MenuItem Header="Insert Magnetic Stripe Field"/>
+                                                        <MenuItem Header="Insert Smart Card Field"/>
+                                                        <MenuItem Header="Insert Variable Graphic Field"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Insert Static Text Field"/>
+                                                        <MenuItem Header="Insert Static Graphic Field"/>
+                                                        <MenuItem Header="Insert Non-Printable Area"/>
+                                                        <MenuItem Header="Insert Shape">
+                                                            <MenuItem Header="Line"/>
+                                                            <MenuItem Header="Rectangle"/>
+                                                            <MenuItem Header="Ellipse"/>
+                                                        </MenuItem>
+                                                        <Separator/>
+                                                        <MenuItem Header="Select Fields">
+                                                            <MenuItem Header="None"/>
+                                                        </MenuItem>
+                                                        <MenuItem Header="Select All Fields" IsEnabled="False"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Field Names"/>
+                                                        <MenuItem Header="Sample Data" IsCheckable="True" IsChecked="True"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Portrait"/>
+                                                        <MenuItem Header="Landscape" IsCheckable="True" IsChecked="True"/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Save Project"/>
+                                                        <MenuItem Header="Print Sample Card..."/>
+                                                        <Separator/>
+                                                        <MenuItem Header="Card Properties..."/>
+                                                    </ContextMenu>
+                                                </Border.ContextMenu>
+                                            </Border>
                                             <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
                                                     MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
                                                     MouseMove="BackCardOverlayCanvas_MouseMove"
