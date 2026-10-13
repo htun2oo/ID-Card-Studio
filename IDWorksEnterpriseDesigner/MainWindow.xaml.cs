@@ -29,10 +29,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
-            DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
-            DrawReportRulers(21.0, 29.7);
-
             // Ruler Canvas များမှ Guide Line အသစ်စတင်ဆွဲထုတ်ရန်
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
@@ -53,7 +49,6 @@ namespace IDWorksEnterpriseDesigner
         {
             if (overlayCanvas == null) return;
 
-            // Mouse ဖြင့် မျဉ်းအနီး (၅ ပစ်ဇယ်ခန့်အကွာ) သို့ ရောက်သည်နှင့် Cursor ပြောင်းလဲရန်
             overlayCanvas.MouseMove += (s, ev) =>
             {
                 if (isDraggingGuide) return;
@@ -95,7 +90,6 @@ namespace IDWorksEnterpriseDesigner
                 }
             };
 
-            // မျဉ်းအနီးတွင် ကလစ်နှိပ်ကာ Drag ဆွဲ၍ ပြန်လည်ပို့ဆောင်နိုင်ရန်
             overlayCanvas.MouseLeftButtonDown += (s, ev) =>
             {
                 Point mousePos = ev.GetPosition(overlayCanvas);
@@ -155,7 +149,6 @@ namespace IDWorksEnterpriseDesigner
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Double-click ဖြင့်လည်း ဖျက်နိုင်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -206,7 +199,6 @@ namespace IDWorksEnterpriseDesigner
                 hasEnteredCanvas = true;
             }
 
-            // Ruler ဘက်သို့ (အပြင်ဘက်သို့) ပြန်လည်ဆွဲထုတ်ပါက ဖျက်ပစ်ရန်
             if (hasEnteredCanvas)
             {
                 if (isHorizontalGuide)
@@ -546,9 +538,17 @@ namespace IDWorksEnterpriseDesigner
                 Owner = this
             };
 
+            // New Project Window တွင် OK / Create နှိပ်မှသာ Workspace ဧရိယာများကို ပေါ်လာစေရန်
             if (newProjectWin.ShowDialog() == true)
             {
-                // New project logic
+                if (ProjectWorkspace != null)
+                {
+                    ProjectWorkspace.Visibility = Visibility.Visible;
+                }
+
+                DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
+                DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
+                DrawReportRulers(21.0, 29.7);
             }
         }
 
