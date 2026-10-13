@@ -27,10 +27,19 @@ jobs:
 
     # Self-Signed Certificate ဖန်တီးပြီး Executable (.exe) ကို Sign ပြုလုပ်ခြင်း
     - name: Sign Executable File
-      shell: powershell
+      shell: pwsh
       run: |
-        $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDWorksEnterprise" -CertStoreLocation cert:\CurrentUser\My
-        Set-AuthenticodeSignature -FilePath "./publish/IDWorksEnterpriseDesigner.exe" -Certificate $cert
+        # Certificate ဖန်တီးခြင်း
+    $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDWorksEnterprise" -CertStoreLocation cert:\CurrentUser\My
+
+    # Certificate ကို Trusted Root သို့ ထည့်သွင်းခြင်း (UnknownError ကို ကာကွယ်ရန်)
+    $certStore = New-Object System.Security.Cryptography.X509Certificates.X509Store("Root", "CurrentUser")
+    $certStore.Open([System.Security.Cryptography.X509Certificates.OpenFlags]::ReadWrite)
+    $certStore.Add($cert)
+    $certStore.Close()
+
+    # Executable ဖိုင်ကို လက်မှတ်ထိုးခြင်း (Timestamp Server ထည့်သွင်းခြင်းဖြင့် Error ကင်းဝေးစေရန်)
+    Set-AuthenticodeSignature -FilePath "IDWorksEnterpriseDesigner.exe" -Certificate $cert -TimestampServer "http://timestamp.digicert.com"
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@main
