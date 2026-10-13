@@ -14,6 +14,7 @@ namespace IDWorksEnterpriseDesigner
 
         private bool isDraggingGuide = false;
         private bool isHorizontalGuide = true;
+        private bool hasEnteredCanvas = false; // Canvas အတွင်းသို့ ရောက်ရှိပြီးသားဖြစ်ကြောင်း မှတ်သားရန်
         private Line? draggedGuideLine = null;
         private Canvas? activeOverlayCanvas = null;
 
@@ -49,6 +50,7 @@ namespace IDWorksEnterpriseDesigner
             isDraggingGuide = true;
             isHorizontalGuide = isHorizontal;
             activeOverlayCanvas = targetCanvas;
+            hasEnteredCanvas = false; // အသစ်စတင်ဆွဲထုတ်ချိန်တွင် False ဟု သတ်မှတ်ခြင်း
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
@@ -59,6 +61,7 @@ namespace IDWorksEnterpriseDesigner
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
+            // Double-click ဖြင့်လည်း ဖျက်နိုင်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -96,21 +99,45 @@ namespace IDWorksEnterpriseDesigner
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
 
-            // MainWindow ၏ Mouse ပုံစံဖြင့် တွက်ချက်ခြင်း
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // Photoshop ကဲ့သို့ Grid Line ကို အပေါ်ဘက် (Top Ruler) သို့မဟုတ် ဘယ်ဘက် (Left Ruler) အပြင်ဘက်သို့ 
-            // (ဥပမာ: Y < 0 သို့မဟုတ် X < 0 သို့မဟုတ် Canvas အကျယ်/အမြင့်ထက် ကျော်လွန်၍) ဆွဲထုတ်သွားပါက အလိုအလျောက် ဖျက်ပစ်ရန်
-            if (mousePos.X < -5 || mousePos.Y < -5 || mousePos.X > activeOverlayCanvas.Width + 5 || mousePos.Y > activeOverlayCanvas.Height + 5)
+            // Mouse သည် Canvas အတွင်း ရောက်ရှိနေခြင်း ရှိမရှိ စစ်ဆေးခြင်း
+            bool isInside = mousePos.X >= 0 && mousePos.Y >= 0 && mousePos.X <= activeOverlayCanvas.Width && mousePos.Y <= activeOverlayCanvas.Height;
+
+            if (isInside)
             {
-                activeOverlayCanvas.Children.Remove(draggedGuideLine);
-                isDraggingGuide = false;
-                draggedGuideLine = null;
-                activeOverlayCanvas.Cursor = Cursors.Arrow;
-                ReleaseMouseCapture();
-                return;
+                hasEnteredCanvas = true;
             }
-            
+
+            // Canvas ထဲသို့ တစ်ကြိမ်ဝင်ရောက်ပြီးမှ Ruler ဘက်သို့ (အပြင်ဘက်သို့) ပြန်လည်ဆွဲထုတ်ပါက ဖျက်ပစ်ရန်
+            if (hasEnteredCanvas)
+            {
+                if (isHorizontalGuide)
+                {
+                    if (mousePos.Y < -10 || mousePos.Y > activeOverlayCanvas.Height + 10)
+                    {
+                        activeOverlayCanvas.Children.Remove(draggedGuideLine);
+                        isDraggingGuide = false;
+                        draggedGuideLine = null;
+                        activeOverlayCanvas.Cursor = Cursors.Arrow;
+                        ReleaseMouseCapture();
+                        return;
+                    }
+                }
+                else
+                {
+                    if (mousePos.X < -10 || mousePos.X > activeOverlayCanvas.Width + 10)
+                    {
+                        activeOverlayCanvas.Children.Remove(draggedGuideLine);
+                        isDraggingGuide = false;
+                        draggedGuideLine = null;
+                        activeOverlayCanvas.Cursor = Cursors.Arrow;
+                        ReleaseMouseCapture();
+                        return;
+                    }
+                }
+            }
+
             if (isHorizontalGuide)
             {
                 double newY = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
@@ -441,6 +468,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
-        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseEventArgs e) { }
+        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
     }
 }
