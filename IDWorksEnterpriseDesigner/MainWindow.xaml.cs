@@ -14,7 +14,7 @@ namespace IDWorksEnterpriseDesigner
 
         private bool isDraggingGuide = false;
         private bool isHorizontalGuide = true;
-        private bool hasEnteredCanvas = false; // Canvas အတွင်းသို့ ရောက်ရှိပြီးသားဖြစ်ကြောင်း မှတ်သားရန်
+        private bool hasEnteredCanvas = false;
         private Line? draggedGuideLine = null;
         private Canvas? activeOverlayCanvas = null;
 
@@ -33,6 +33,7 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
+            // Ruler Canvas များမှ Guide Line အသစ်စတင်ဆွဲထုတ်ရန်
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
 
@@ -41,6 +42,43 @@ namespace IDWorksEnterpriseDesigner
 
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
+
+            // Canvas ပေါ်ရှိ Grid Line များအတွက် Cursor နှင့် Dragging interactions ချိတ်ဆက်ခြင်း
+            SetupCanvasGuideInteractions(FrontCardOverlayCanvas);
+            SetupCanvasGuideInteractions(BackCardOverlayCanvas);
+            SetupCanvasGuideInteractions(ReportOverlayCanvas);
+        }
+
+        private void SetupCanvasGuideInteractions(Canvas overlayCanvas)
+        {
+            if (overlayCanvas == null) return;
+
+            // Grid Line ပေါ်သို့ Mouse တင်လိုက်စဉ် Cursor ပြောင်းလဲရန်
+            overlayCanvas.MouseMove += (s, ev) =>
+            {
+                if (ev.OriginalSource is Line line)
+                {
+                    overlayCanvas.Cursor = (line.Y1 == line.Y2) ? Cursors.SizeNS : Cursors.SizeWE;
+                }
+                else if (!isDraggingGuide)
+                {
+                    overlayCanvas.Cursor = Cursors.Arrow;
+                }
+            };
+
+            // Grid Line ကို ကလစ်နှိပ်ပြီး Drag ဆွဲကာ ဖယ်ရှားနိုင်ရန်
+            overlayCanvas.MouseLeftButtonDown += (s, ev) =>
+            {
+                if (ev.OriginalSource is Line line && line.Parent is Canvas parentCanvas)
+                {
+                    draggedGuideLine = line;
+                    activeOverlayCanvas = parentCanvas;
+                    isDraggingGuide = true;
+                    isHorizontalGuide = (line.Y1 == line.Y2);
+                    hasEnteredCanvas = true;
+                    ev.Handled = true;
+                }
+            };
         }
 
         private void StartDragGuide(MouseButtonEventArgs e, bool isHorizontal, Canvas targetCanvas)
@@ -50,7 +88,7 @@ namespace IDWorksEnterpriseDesigner
             isDraggingGuide = true;
             isHorizontalGuide = isHorizontal;
             activeOverlayCanvas = targetCanvas;
-            hasEnteredCanvas = false; // အသစ်စတင်ဆွဲထုတ်ချိန်တွင် False ဟု သတ်မှတ်ခြင်း
+            hasEnteredCanvas = false;
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
@@ -61,7 +99,7 @@ namespace IDWorksEnterpriseDesigner
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // မျဉ်းပေါ်တွင် Mouse ဖြင့် Double-Click နှိပ်ပါက ဖျက်ပစ်ရန်
+            // Double-click ဖြင့်လည်း ဖျက်နိုင်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -71,20 +109,6 @@ namespace IDWorksEnterpriseDesigner
                 }
             };
 
-            // မူလရှိနေပြီးသား မျဉ်းများကိုပါ ကလစ်နှိပ်၍ ပြန်လည်ဆွဲယူဖျက်နိုင်ရန် MouseDown Event ထည့်သွင်းခြင်း
-            draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
-            {
-                if (ev.ClickCount == 1 && s is Line line && line.Parent is Canvas parentCanvas)
-                {
-                    draggedGuideLine = line;
-                    activeOverlayCanvas = parentCanvas;
-                    isDraggingGuide = true;
-                    isHorizontalGuide = (line.Y1 == line.Y2);
-                    hasEnteredCanvas = true; // တခါတည်း Canvas ထဲမှာ ရှိပြီးသားဖြစ်므로 True ဟု သတ်မှတ်ခြင်း
-                    ev.Handled = true;
-                }
-            };
-            
             if (isHorizontalGuide)
             {
                 draggedGuideLine.X1 = 0;
@@ -104,7 +128,11 @@ namespace IDWorksEnterpriseDesigner
                 activeOverlayCanvas.Cursor = Cursors.SizeWE;
             }
 
-            activeOverlayCanvas.Children.Add(draggedGuideLine);
+            if (!activeOverlayCanvas.Children.Contains(draggedGuideLine))
+            {
+                activeOverlayCanvas.Children.Add(draggedGuideLine);
+            }
+
             Mouse.Capture(this);
             e.Handled = true;
         }
@@ -115,7 +143,6 @@ namespace IDWorksEnterpriseDesigner
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // Mouse သည် Canvas အတွင်း ရောက်ရှိနေခြင်း ရှိမရှိ စစ်ဆေးခြင်း
             bool isInside = mousePos.X >= 0 && mousePos.Y >= 0 && mousePos.X <= activeOverlayCanvas.Width && mousePos.Y <= activeOverlayCanvas.Height;
 
             if (isInside)
@@ -123,7 +150,7 @@ namespace IDWorksEnterpriseDesigner
                 hasEnteredCanvas = true;
             }
 
-            // Canvas ထဲသို့ တစ်ကြိမ်ဝင်ရောက်ပြီးမှ Ruler ဘက်သို့ (အပြင်ဘက်သို့) ပြန်လည်ဆွဲထုတ်ပါက ဖျက်ပစ်ရန်
+            // Ruler ဘက်သို့ (အပြင်ဘက်သို့) ပြန်လည်ဆွဲထုတ်ပါက ဖျက်ပစ်ရန်
             if (hasEnteredCanvas)
             {
                 if (isHorizontalGuide)
