@@ -33,14 +33,14 @@ namespace IDWorksEnterpriseDesigner
             DrawReportRulers(21.0, 29.7);
 
             // Ruler Canvas များမှ Guide Line စတင်ဆွဲထုတ်ရန် Event ချိတ်ဆက်ခြင်း
-            FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, FrontCardOverlayCanvas);
-            FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, FrontCardOverlayCanvas);
+            FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
+            FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
 
-            BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, BackCardOverlayCanvas);
-            BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, BackCardOverlayCanvas);
+            BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, BackCardOverlayCanvas); ev.Handled = true; };
+            BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, BackCardOverlayCanvas); ev.Handled = true; };
 
-            ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, ReportOverlayCanvas);
-            ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, ReportOverlayCanvas);
+            ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
+            ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
         }
 
         private void StartDragGuide(MouseButtonEventArgs e, bool isHorizontal, Canvas targetCanvas)
