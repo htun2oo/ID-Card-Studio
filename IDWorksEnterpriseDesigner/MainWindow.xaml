@@ -48,11 +48,134 @@
     </Window.Resources>
 
     <Grid>
-        <!-- ဤနေရာတွင် သင့်၏ မူလ Grid Layout များနှင့် Ruler/ScrollViewer များကို ထည့်သွင်းထားပြီး -->
-        <!-- Front Card Border တွင် ContextMenu ချိတ်ဆက်ရန် -->
-        <!-- <Border x:Name="FrontDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" ...> -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <!-- Back Card Border တွင် ContextMenu ချိတ်ဆက်ရန် -->
-        <!-- <Border x:Name="BackDocumentBorder" ContextMenu="{StaticResource CardContextMenu}" ...> -->
+        <!-- Front Card Section -->
+        <DockPanel Grid.Row="0" Grid.Column="0" Margin="5">
+            <TextBlock Text="Card" FontWeight="Bold" DockPanel.Dock="Top"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Front Top Ruler -->
+                <ScrollViewer x:Name="FrontTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                    <Canvas x:Name="FrontTopRulerCanvas" Height="30" SizeChanged="FrontTopRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+                
+                <!-- Front Left Ruler -->
+                <ScrollViewer x:Name="FrontLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <Canvas x:Name="FrontLeftRulerCanvas" Width="30" SizeChanged="FrontLeftRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+
+                <!-- Front Main ScrollViewer & Border with ContextMenu -->
+                <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="FrontMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border x:Name="FrontDocumentBorder" Width="567" Height="357" Background="White" BorderBrush="Gray" BorderThickness="1" ContextMenu="{StaticResource CardContextMenu}">
+                        <Canvas x:Name="FrontCardOverlayCanvas" Width="567" Height="357"
+                                MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
+                                MouseMove="FrontCardOverlayCanvas_MouseMove"
+                                MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"/>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+
+        <!-- Back Card Section -->
+        <DockPanel Grid.Row="1" Grid.Column="0" Margin="5">
+            <TextBlock Text="Card (back side)" FontWeight="Bold" DockPanel.Dock="Top"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Back Top Ruler -->
+                <ScrollViewer x:Name="BackTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                    <Canvas x:Name="BackTopRulerCanvas" Height="30" SizeChanged="BackTopRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+                
+                <!-- Back Left Ruler -->
+                <ScrollViewer x:Name="BackLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <Canvas x:Name="BackLeftRulerCanvas" Width="30" SizeChanged="BackLeftRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+
+                <!-- Back Main ScrollViewer & Border with ContextMenu -->
+                <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="BackMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border x:Name="BackDocumentBorder" Width="567" Height="357" Background="White" BorderBrush="Gray" BorderThickness="1" ContextMenu="{StaticResource CardContextMenu}">
+                        <Canvas x:Name="BackCardOverlayCanvas" Width="567" Height="357"
+                                MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
+                                MouseMove="BackCardOverlayCanvas_MouseMove"
+                                MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"/>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
+
+        <!-- Production Form Section -->
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="5">
+            <TextBlock Text="Production Form" FontWeight="Bold" DockPanel.Dock="Top"/>
+            <Border Background="White" BorderBrush="Gray" BorderThickness="1"/>
+        </DockPanel>
+
+        <!-- Report Section -->
+        <DockPanel Grid.Row="1" Grid.Column="1" Margin="5">
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                <TextBlock Text="Report" FontWeight="Bold" VerticalAlignment="Center"/>
+                <ComboBox x:Name="ReportSizeComboBox" Width="180" SelectionChanged="ReportSizeComboBox_SelectionChanged" DockPanel.Dock="Right">
+                    <ComboBoxItem Tag="A4" IsSelected="True">A4 (21.0 x 29.7 cm)</ComboBoxItem>
+                    <ComboBoxItem Tag="A5">A5</ComboBoxItem>
+                    <ComboBoxItem Tag="B5">B5</ComboBoxItem>
+                    <ComboBoxItem Tag="Letter">Letter</ComboBoxItem>
+                    <ComboBoxItem Tag="Legal">Legal</ComboBoxItem>
+                </ComboBox>
+            </DockPanel>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Report Top Ruler -->
+                <ScrollViewer x:Name="ReportTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                    <Canvas x:Name="ReportTopRulerCanvas" Height="30" SizeChanged="ReportTopRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+                
+                <!-- Report Left Ruler -->
+                <ScrollViewer x:Name="ReportLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                    <Canvas x:Name="ReportLeftRulerCanvas" Width="30" SizeChanged="ReportLeftRulerCanvas_SizeChanged"/>
+                </ScrollViewer>
+
+                <!-- Report Main ScrollViewer & Border -->
+                <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="ReportMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <Border x:Name="ReportDocumentBorder" Background="White" BorderBrush="Gray" BorderThickness="1">
+                        <Canvas x:Name="ReportOverlayCanvas"
+                                MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
+                                MouseMove="ReportOverlayCanvas_MouseMove"
+                                MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"/>
+                    </Border>
+                </ScrollViewer>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
