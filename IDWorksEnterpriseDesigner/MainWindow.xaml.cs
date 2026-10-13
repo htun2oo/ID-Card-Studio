@@ -43,7 +43,7 @@ namespace IDWorksEnterpriseDesigner
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
 
-            // Canvas ပေါ်ရှိ Grid Line များအတွက် Cursor နှင့် Dragging interactions ချိတ်ဆက်ခြင်း
+            // Canvas ပေါ်ရှိ Grid Line များအတွက် Proximity Cursor နှင့် Dragging interactions ချိတ်ဆက်ခြင်း
             SetupCanvasGuideInteractions(FrontCardOverlayCanvas);
             SetupCanvasGuideInteractions(BackCardOverlayCanvas);
             SetupCanvasGuideInteractions(ReportOverlayCanvas);
@@ -53,28 +53,84 @@ namespace IDWorksEnterpriseDesigner
         {
             if (overlayCanvas == null) return;
 
-            // Grid Line ပေါ်သို့ Mouse တင်လိုက်စဉ် Cursor ပြောင်းလဲရန်
+            // Mouse ဖြင့် မျဉ်းအနီး (၅ ပစ်ဇယ်ခန့်အကွာ) သို့ ရောက်သည်နှင့် Cursor ပြောင်းလဲရန်
             overlayCanvas.MouseMove += (s, ev) =>
             {
-                if (ev.OriginalSource is Line line)
+                if (isDraggingGuide) return;
+
+                Point mousePos = ev.GetPosition(overlayCanvas);
+                Line? targetLine = null;
+
+                foreach (var child in overlayCanvas.Children)
                 {
-                    overlayCanvas.Cursor = (line.Y1 == line.Y2) ? Cursors.SizeNS : Cursors.SizeWE;
+                    if (child is Line line)
+                    {
+                        bool isHorizontal = (line.Y1 == line.Y2);
+                        if (isHorizontal)
+                        {
+                            if (Math.Abs(mousePos.Y - line.Y1) <= 5 && mousePos.X >= 0 && mousePos.X <= overlayCanvas.Width)
+                            {
+                                targetLine = line;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (Math.Abs(mousePos.X - line.X1) <= 5 && mousePos.Y >= 0 && mousePos.Y <= overlayCanvas.Height)
+                            {
+                                targetLine = line;
+                                break;
+                            }
+                        }
+                    }
                 }
-                else if (!isDraggingGuide)
+
+                if (targetLine != null)
+                {
+                    overlayCanvas.Cursor = (targetLine.Y1 == targetLine.Y2) ? Cursors.SizeNS : Cursors.SizeWE;
+                }
+                else
                 {
                     overlayCanvas.Cursor = Cursors.Arrow;
                 }
             };
 
-            // Grid Line ကို ကလစ်နှိပ်ပြီး Drag ဆွဲကာ ဖယ်ရှားနိုင်ရန်
+            // မျဉ်းအနီးတွင် ကလစ်နှိပ်ကာ Drag ဆွဲ၍ ပြန်လည်ပို့ဆောင်နိုင်ရန်
             overlayCanvas.MouseLeftButtonDown += (s, ev) =>
             {
-                if (ev.OriginalSource is Line line && line.Parent is Canvas parentCanvas)
+                Point mousePos = ev.GetPosition(overlayCanvas);
+                Line? targetLine = null;
+
+                foreach (var child in overlayCanvas.Children)
                 {
-                    draggedGuideLine = line;
+                    if (child is Line line)
+                    {
+                        bool isHorizontal = (line.Y1 == line.Y2);
+                        if (isHorizontal)
+                        {
+                            if (Math.Abs(mousePos.Y - line.Y1) <= 6 && mousePos.X >= 0 && mousePos.X <= overlayCanvas.Width)
+                            {
+                                targetLine = line;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (Math.Abs(mousePos.X - line.X1) <= 6 && mousePos.Y >= 0 && mousePos.Y <= overlayCanvas.Height)
+                            {
+                                targetLine = line;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (targetLine != null && targetLine.Parent is Canvas parentCanvas)
+                {
+                    draggedGuideLine = targetLine;
                     activeOverlayCanvas = parentCanvas;
                     isDraggingGuide = true;
-                    isHorizontalGuide = (line.Y1 == line.Y2);
+                    isHorizontalGuide = (targetLine.Y1 == targetLine.Y2);
                     hasEnteredCanvas = true;
                     ev.Handled = true;
                 }
