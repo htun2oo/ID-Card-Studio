@@ -38,6 +38,27 @@
             </MenuItem>
         </Menu>
 
+        <!-- ToolBar Tray -->
+        <ToolBarTray DockPanel.Dock="Top" Background="#F0F0F0">
+            <ToolBar Background="#F0F0F0" Band="1" BandIndex="1">
+                <Button Content="🗂️" ToolTip="New Project" Click="NewProject_Click"/>
+                <Button Content="📂" ToolTip="Open Project"/>
+                <Button Content="💾" ToolTip="Save"/>
+                <Separator/>
+                <Button Content="🖨️" ToolTip="Print"/>
+                <Separator/>
+                <Button Content="❓" ToolTip="Help"/>
+            </ToolBar>
+            <ToolBar Background="#F0F0F0" Band="1" BandIndex="2">
+                <Button Content="✂️" ToolTip="Cut" IsEnabled="False"/>
+                <Button Content="📋" ToolTip="Copy" IsEnabled="False"/>
+                <Button Content="📄" ToolTip="Paste" IsEnabled="False"/>
+                <Separator/>
+                <Button Content="↩️" ToolTip="Undo"/>
+                <Button Content="↪️" ToolTip="Redo"/>
+            </ToolBar>
+        </ToolBarTray>
+
         <!-- Status Bar -->
         <StatusBar DockPanel.Dock="Bottom" Height="24" Background="#F0F0F0">
             <StatusBarItem>
