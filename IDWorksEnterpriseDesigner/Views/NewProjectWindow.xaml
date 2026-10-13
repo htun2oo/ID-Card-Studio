@@ -4,23 +4,41 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="New Project" Height="190" Width="360"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
-        Background="WhiteSmoke">
-    <Grid Margin="15">
+        Title="New Project" Height="270" Width="380"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Enter project name:" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
-        
-        <TextBox x:Name="ProjectNameTextBox" Text="Project1" Height="26" VerticalContentAlignment="Center" Margin="0,0,0,15" Grid.Row="1"/>
-
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2">
-            <Button Content="OK" Width="75" Height="25" Margin="0,0,10,0" Click="OkButton_Click"/>
-            <Button Content="Cancel" Width="75" Height="25" Click="CancelButton_Click"/>
+        <!-- Project Name Section -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
         </StackPanel>
+
+        <!-- Buttons Column (Right side) -->
+        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75">
+            <Button Content="OK" IsDefault="True" Height="24" Margin="0,0,0,6" Click="OkButton_Click"/>
+            <Button Content="Cancel" IsCancel="True" Height="24" Click="CancelButton_Click"/>
+        </StackPanel>
+
+        <!-- Initial Components GroupBox -->
+        <GroupBox Grid.Row="1" Header="Initial Components" Padding="8" Margin="0,0,85,0">
+            <StackPanel>
+                <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" Margin="0,0,0,6"/>
+                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,6" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
+                
+                <StackPanel Margin="18,0,0,6">
+                    <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True" Margin="0,0,0,4"/>
+                    <RadioButton x:Name="PortraitRadio" Content="Portrait" Margin="0,0,0,4"/>
+                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" IsEnabled="False"/>
+                </StackPanel>
+                
+                <CheckBox x:Name="ReportCheckBox" Content="Report Design"/>
+            </StackPanel>
+        </GroupBox>
     </Grid>
 </Window>
