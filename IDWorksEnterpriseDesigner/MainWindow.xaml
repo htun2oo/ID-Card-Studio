@@ -11,7 +11,7 @@
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
             <MenuItem Header="File">
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
-                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" />
+                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" Click="OpenProject_Click" />
                 
                 <!-- ပရောဂျက်ဖွင့်ပြီးမှ ပေါ်လာမည့် မီနူးများ -->
                 <MenuItem x:Name="MenuCloseProject" Header="Close Project" Visibility="Collapsed" />
@@ -76,7 +76,7 @@
         <ToolBarTray DockPanel.Dock="Top" Background="#F0F0F0">
             <ToolBar Background="#F0F0F0" Band="1" BandIndex="1">
                 <Button Content="🗂️" ToolTip="New Project" Click="NewProject_Click"/>
-                <Button Content="📂" ToolTip="Open Project"/>
+                <Button Content="📂" ToolTip="Open Project" Click="OpenProject_Click"/>
                 <Button Content="💾" ToolTip="Save Project"/>
                 <Button Content="🖨️" ToolTip="Print"/>
                 <Separator/>
