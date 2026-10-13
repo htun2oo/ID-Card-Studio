@@ -9,53 +9,60 @@
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
-                <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
+            <MenuItem Header="File">
+                <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
+                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" />
                 <Separator />
-                <MenuItem Header="_Close Project" />
-                <MenuItem Header="_Save Project" />
-                <MenuItem Header="Save Project _As..." />
-                <MenuItem Header="Project _Properties..." />
+                <MenuItem Header="Close Project" />
+                <MenuItem Header="Save Project" />
+                <MenuItem Header="Save Project As..." />
+                <MenuItem Header="Project Properties..." />
                 <Separator />
-                <MenuItem Header="_Print Sample Card..." />
-                <MenuItem Header="Pre_view Sample Report..." />
-                <MenuItem Header="Report Page Set_up..." Click="ReportPageSetup_Click" />
+                <MenuItem Header="Print Sample Card..." />
+                <MenuItem Header="Preview Sample Report..." />
+                <MenuItem Header="Report Page Setup..." Click="ReportPageSetup_Click" />
                 <Separator />
-                <MenuItem Header="_Delete Project..." />
+                <MenuItem Header="Delete Project..." />
                 <Separator />
-                <MenuItem Header="E_xit" Click="Exit_Click" />
+                <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
-            <MenuItem Header="_Edit" />
-            <MenuItem Header="_View">
+            <MenuItem Header="View">
                 <MenuItem Header="Toolbars" />
             </MenuItem>
-            <MenuItem Header="F_ormat" />
-            <MenuItem Header="_Tools" />
-            <MenuItem Header="_Window" />
-            <MenuItem Header="_Help">
-                <MenuItem Header="_Online Help..." InputGestureText="F1" />
+            <MenuItem Header="Help">
+                <MenuItem Header="Online Help..." InputGestureText="F1" />
             </MenuItem>
         </Menu>
 
-        <!-- ToolBar Tray -->
+        <!-- ToolBar Tray (ပုံပါအတိုင်း အိုင်ကွန်ခလုတ်များ အပြည့်အစုံ) -->
         <ToolBarTray DockPanel.Dock="Top" Background="#F0F0F0">
             <ToolBar Background="#F0F0F0" Band="1" BandIndex="1">
                 <Button Content="🗂️" ToolTip="New Project" Click="NewProject_Click"/>
                 <Button Content="📂" ToolTip="Open Project"/>
-                <Button Content="💾" ToolTip="Save"/>
-                <Separator/>
+                <Button Content="💾" ToolTip="Save Project"/>
                 <Button Content="🖨️" ToolTip="Print"/>
                 <Separator/>
                 <Button Content="❓" ToolTip="Help"/>
-            </ToolBar>
-            <ToolBar Background="#F0F0F0" Band="1" BandIndex="2">
+                <Separator/>
                 <Button Content="✂️" ToolTip="Cut" IsEnabled="False"/>
                 <Button Content="📋" ToolTip="Copy" IsEnabled="False"/>
                 <Button Content="📄" ToolTip="Paste" IsEnabled="False"/>
                 <Separator/>
                 <Button Content="↩️" ToolTip="Undo"/>
                 <Button Content="↪️" ToolTip="Redo"/>
+                <Separator/>
+                <Button Content="🔍" ToolTip="Zoom In"/>
+                <Button Content="🔎" ToolTip="Zoom Out"/>
+                <Separator/>
+                <Button Content="📐" ToolTip="Rulers"/>
+                <Button Content="📏" ToolTip="Grid Lines"/>
+                <Separator/>
+                <ComboBox Width="70" Height="22" SelectedIndex="0">
+                    <ComboBoxItem Content="100%"/>
+                    <ComboBoxItem Content="75%"/>
+                    <ComboBoxItem Content="50%"/>
+                    <ComboBoxItem Content="25%"/>
+                </ComboBox>
             </ToolBar>
         </ToolBarTray>
 
@@ -66,8 +73,9 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main Workspace Area (Initially Collapsed) -->
+        <!-- Main Workspace Area (စတင်ဖွင့်ချိန်တွင် အလွတ်မီးခိုးရောင်နောက်ခံသာပေါ်နေမည်) -->
         <Grid x:Name="MdiHostGrid" Background="#808080">
+            <!-- ProjectWorkspace ကို Collapsed ပြုလုပ်ထားသဖြင့် ပုံပါအတိုင်း အလွတ်ပေါ်နေမည် -->
             <Grid x:Name="ProjectWorkspace" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
