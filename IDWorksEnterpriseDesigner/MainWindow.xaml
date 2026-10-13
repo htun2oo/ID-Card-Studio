@@ -13,16 +13,7 @@
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" />
                 <Separator />
-                <MenuItem Header="Close Project" />
-                <MenuItem Header="Save Project" />
-                <MenuItem Header="Save Project As..." />
-                <MenuItem Header="Project Properties..." />
-                <Separator />
-                <MenuItem Header="Print Sample Card..." />
-                <MenuItem Header="Preview Sample Report..." />
-                <MenuItem Header="Report Page Setup..." Click="ReportPageSetup_Click" />
-                <Separator />
-                <MenuItem Header="Delete Project..." />
+                <MenuItem Header="Recent File" IsEnabled="False" />
                 <Separator />
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
@@ -34,7 +25,7 @@
             </MenuItem>
         </Menu>
 
-        <!-- ToolBar Tray (ပုံပါအတိုင်း အိုင်ကွန်ခလုတ်များ အပြည့်အစုံ) -->
+        <!-- ToolBar Tray -->
         <ToolBarTray DockPanel.Dock="Top" Background="#F0F0F0">
             <ToolBar Background="#F0F0F0" Band="1" BandIndex="1">
                 <Button Content="🗂️" ToolTip="New Project" Click="NewProject_Click"/>
@@ -73,9 +64,8 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main Workspace Area (စတင်ဖွင့်ချိန်တွင် အလွတ်မီးခိုးရောင်နောက်ခံသာပေါ်နေမည်) -->
+        <!-- Main Workspace Area -->
         <Grid x:Name="MdiHostGrid" Background="#808080">
-            <!-- ProjectWorkspace ကို Collapsed ပြုလုပ်ထားသဖြင့် ပုံပါအတိုင်း အလွတ်ပေါ်နေမည် -->
             <Grid x:Name="ProjectWorkspace" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
