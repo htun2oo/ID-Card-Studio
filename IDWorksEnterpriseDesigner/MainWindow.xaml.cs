@@ -1,3 +1,14 @@
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+
+namespace IDWorksEnterpriseDesigner
+{
+    public partial class MainWindow : Window
+    {
 private void NewProject_Click(object sender, RoutedEventArgs e)
 {
     Views.NewProjectWindow newProjectWin = new Views.NewProjectWindow
