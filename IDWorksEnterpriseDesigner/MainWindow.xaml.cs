@@ -32,12 +32,15 @@ namespace IDWorksEnterpriseDesigner
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
+            // Card (Front) Rulers
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, FrontCardOverlayCanvas);
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, FrontCardOverlayCanvas);
 
+            // Card (Back) Rulers
             BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, BackCardOverlayCanvas);
             BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, BackCardOverlayCanvas);
 
+            // Report Rulers
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, true, ReportOverlayCanvas);
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => StartDragGuide(ev, false, ReportOverlayCanvas);
         }
@@ -54,11 +57,12 @@ namespace IDWorksEnterpriseDesigner
 
             draggedGuideLine = new Line
             {
-                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)),
+                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Photoshop ကဲ့သို့ ထင်းရှားသော Blue မျဉ်း
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
+            // Guide Line ပေါ်တွင် Mouse ဖြင့် Double Click (နှစ်ချက်ကလစ်) နှိပ်လျှင် ဖျက်ပစ်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -96,6 +100,7 @@ namespace IDWorksEnterpriseDesigner
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
+            // Document ဧရိယာအပြင်ဘက်သို့ ဆွဲထုတ်မိပါက Guide Line ကို အလိုအလျောက် ဖယ်ရှားရန်
             if (mousePos.X < 0 || mousePos.Y < 0 || mousePos.X > activeOverlayCanvas.Width || mousePos.Y > activeOverlayCanvas.Height)
             {
                 activeOverlayCanvas.Children.Remove(draggedGuideLine);
