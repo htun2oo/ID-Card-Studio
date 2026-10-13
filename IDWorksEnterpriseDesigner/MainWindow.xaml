@@ -1,153 +1,241 @@
 <Window x:Class="IDWorksEnterpriseDesigner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Datacard ID Works Enterprise Designer" Height="700" Width="1000"
-        Loaded="MainWindow_Loaded">
-
-    <DockPanel LastChildFill="True">
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel>
         <!-- Top Menu Bar -->
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="New Project..." Click="NewProject_Click"/>
-                <Separator/>
-                <MenuItem Header="Exit" Click="Exit_Click"/>
+        <Menu DockPanel.Dock="Top" Background="#F0F0F0">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
+                <MenuItem Header="_Open Project..." InputGestureText="Ctrl+O" />
+                <Separator />
+                <MenuItem Header="_Close Project" />
+                <MenuItem Header="_Save Project" />
+                <MenuItem Header="Save Project _As..." />
+                <MenuItem Header="Project _Properties..." />
+                <Separator />
+                <MenuItem Header="_Print Sample Card..." />
+                <MenuItem Header="Pre_view Sample Report..." />
+                <MenuItem Header="Report Page Set_up..." Click="ReportPageSetup_Click" />
+                <Separator />
+                <MenuItem Header="_Delete Project..." />
+                <Separator />
+                <MenuItem Header="E_xit" Click="Exit_Click" />
             </MenuItem>
-            <MenuItem Header="Edit"/>
-            <MenuItem Header="View"/>
-            <MenuItem Header="Format"/>
-            <MenuItem Header="Tools"/>
-            <MenuItem Header="Window"/>
-            <MenuItem Header="Help"/>
+            <MenuItem Header="_Edit" />
+            <MenuItem Header="_View">
+                <MenuItem Header="Toolbars" />
+            </MenuItem>
+            <MenuItem Header="F_ormat" />
+            <MenuItem Header="_Tools" />
+            <MenuItem Header="_Window" />
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Online Help..." InputGestureText="F1" />
+            </MenuItem>
         </Menu>
 
-        <!-- Bottom Status Bar -->
-        <StatusBar DockPanel.Dock="Bottom" Height="25">
+        <!-- Status Bar -->
+        <StatusBar DockPanel.Dock="Bottom" Height="24" Background="#F0F0F0">
             <StatusBarItem>
-                <TextBlock Text="For Help, press F1"/>
+                <TextBlock Text="For Help, press F1" FontSize="11" />
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main Workspace Grid -->
-        <Grid Margin="5">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <!-- Main Workspace Area -->
+        <Grid x:Name="MdiHostGrid" Background="#808080">
+            <Grid x:Name="ProjectWorkspace">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.4*"/>
+                </Grid.ColumnDefinitions>
 
-            <!-- Front Card Section -->
-            <DockPanel Grid.Row="0" Grid.Column="0" Margin="3">
-                <TextBlock Text="Card" FontWeight="Bold" Foreground="#002D62" DockPanel.Dock="Top" Margin="2,0,0,2"/>
-                <Border BorderBrush="#ABADB3" BorderThickness="1" Background="#F0F0F0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <!-- Left Column: Card Windows (Front & Back) -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                        <ScrollViewer x:Name="FrontTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                            <Canvas x:Name="FrontTopRulerCanvas" Height="30" SizeChanged="FrontTopRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
-                        
-                        <ScrollViewer x:Name="FrontLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                            <Canvas x:Name="FrontLeftRulerCanvas" Width="30" SizeChanged="FrontLeftRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
+                    <!-- 1. Card Window (Front) -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Front Top Ruler -->
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
+                                        <ScrollViewer x:Name="FrontTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                            <Canvas x:Name="FrontTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="FrontTopRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
 
-                        <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="FrontMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Border x:Name="FrontDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="FrontCardOverlayCanvas" Width="340" Height="215"/>
+                                    <!-- Front Left Ruler -->
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
+                                        <ScrollViewer x:Name="FrontLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                            <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="FrontLeftRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
+
+                                    <!-- Front Card Canvas -->
+                                    <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
+                                                    MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="FrontCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
                             </Border>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
-            </DockPanel>
+                        </DockPanel>
+                    </Border>
 
-            <!-- Production Form Section -->
-            <DockPanel Grid.Row="0" Grid.Column="1" Margin="3">
-                <TextBlock Text="Production Form" FontWeight="Bold" Foreground="#002D62" DockPanel.Dock="Top" Margin="2,0,0,2"/>
-                <Border BorderBrush="#ABADB3" BorderThickness="1" Background="White">
-                    <Grid/>
-                </Border>
-            </DockPanel>
+                    <!-- 2. Card Window (Back) -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+                                    
+                                    <!-- Back Top Ruler -->
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
+                                        <ScrollViewer x:Name="BackTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                            <Canvas x:Name="BackTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="BackTopRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
 
-            <!-- Back Card Section -->
-            <DockPanel Grid.Row="1" Grid.Column="0" Margin="3">
-                <TextBlock Text="Card (back side)" FontWeight="Bold" Foreground="#002D62" DockPanel.Dock="Top" Margin="2,0,0,2"/>
-                <Border BorderBrush="#ABADB3" BorderThickness="1" Background="#F0F0F0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                                    <!-- Back Left Ruler -->
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
+                                        <ScrollViewer x:Name="BackLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                            <Canvas x:Name="BackLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="BackLeftRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
 
-                        <ScrollViewer x:Name="BackTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                            <Canvas x:Name="BackTopRulerCanvas" Height="30" SizeChanged="BackTopRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
-                        
-                        <ScrollViewer x:Name="BackLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                            <Canvas x:Name="BackLeftRulerCanvas" Width="30" SizeChanged="BackLeftRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
-
-                        <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="BackMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Border x:Name="BackDocumentBorder" Width="340" Height="215" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="BackCardOverlayCanvas" Width="340" Height="215"/>
+                                    <!-- Back Card Canvas -->
+                                    <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
+                                                    MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="BackCardOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
                             </Border>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
-            </DockPanel>
+                        </DockPanel>
+                    </Border>
+                </Grid>
 
-            <!-- Report Section -->
-            <DockPanel Grid.Row="1" Grid.Column="1" Margin="3">
-                <DockPanel DockPanel.Dock="Top" LastChildFill="False" Margin="2,0,0,2">
-                    <TextBlock Text="Report" FontWeight="Bold" Foreground="#002D62" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="ReportSizeComboBox" Width="180" SelectionChanged="ReportSizeComboBox_SelectionChanged" DockPanel.Dock="Right">
-                        <ComboBoxItem Tag="A4" IsSelected="True">A4 (21.0 x 29.7 cm)</ComboBoxItem>
-                        <ComboBoxItem Tag="A5">A5</ComboBoxItem>
-                        <ComboBoxItem Tag="B5">B5</ComboBoxItem>
-                        <ComboBoxItem Tag="Letter">Letter</ComboBoxItem>
-                        <ComboBoxItem Tag="Legal">Legal</ComboBoxItem>
-                    </ComboBox>
-                </DockPanel>
-                
-                <Border BorderBrush="#ABADB3" BorderThickness="1" Background="#F0F0F0">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <!-- Right Column: Production Form and Report Windows -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1.2*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                        <ScrollViewer x:Name="ReportTopRulerScrollViewer" Grid.Row="0" Grid.Column="1" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                            <Canvas x:Name="ReportTopRulerCanvas" Height="30" SizeChanged="ReportTopRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
-                        
-                        <ScrollViewer x:Name="ReportLeftRulerScrollViewer" Grid.Row="1" Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                            <Canvas x:Name="ReportLeftRulerCanvas" Width="30" SizeChanged="ReportLeftRulerCanvas_SizeChanged"/>
-                        </ScrollViewer>
+                    <!-- Production Form Window -->
+                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            </Grid>
+                            <Border Background="White" Margin="4"/>
+                        </DockPanel>
+                    </Border>
 
-                        <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" ScrollChanged="ReportMainScrollViewer_ScrollChanged" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                            <Border x:Name="ReportDocumentBorder" Background="White" BorderBrush="Gray" BorderThickness="1" Margin="10">
-                                <Canvas x:Name="ReportOverlayCanvas"/>
+                    <!-- 3. Report Window -->
+                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                        <DockPanel>
+                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="170"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
+                                    <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" Tag="A4" IsSelected="True"/>
+                                    <ComboBoxItem Content="A5 (14.8 x 21.0 cm)" Tag="A5"/>
+                                    <ComboBoxItem Content="B5 (17.6 x 25.0 cm)" Tag="B5"/>
+                                    <ComboBoxItem Content="Letter (8.5 x 11 in)" Tag="Letter"/>
+                                    <ComboBoxItem Content="Legal (8.5 x 14 in)" Tag="Legal"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <Border Background="#CCCCCC" Padding="4">
+                                <Grid Background="#E6E6E6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
+
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
+                                        <ScrollViewer x:Name="ReportTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                            <Canvas x:Name="ReportTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="ReportTopRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
+
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
+                                        <ScrollViewer x:Name="ReportLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                            <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="ReportLeftRulerCanvas_SizeChanged"/>
+                                        </ScrollViewer>
+                                    </Border>
+
+                                    <!-- Report Document Canvas -->
+                                    <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" 
+                                                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
+                                                  Background="#D6D6D6" ScrollChanged="ReportMainScrollViewer_ScrollChanged">
+                                        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
+                                            <Border x:Name="ReportDocumentBorder" Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent"
+                                                    MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
+                                                    MouseMove="ReportOverlayCanvas_MouseMove"
+                                                    MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"
+                                                    IsHitTestVisible="True"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
                             </Border>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
-            </DockPanel>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>
