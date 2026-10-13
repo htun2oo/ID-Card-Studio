@@ -13,13 +13,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Buttons Column (Right side) - Layout တွင် အရင်စီစဉ်ပေးခြင်းဖြင့် TextBox က နေရာလွတ်ကို အပြည့်ယူစေရန် -->
-        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,0,0,0">
+        <!-- Buttons Column (Right side) -->
+        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75">
             <Button Content="OK" IsDefault="True" Height="24" Margin="0,0,0,6" Click="OkButton_Click"/>
             <Button Content="Cancel" IsCancel="True" Height="24" Click="CancelButton_Click"/>
         </StackPanel>
 
-        <!-- Project Name Section (OK ခလုတ်အတွက် ဘယ်ဘက်တွင် Margin 85 ချန်ထားခြင်းဖြင့် အလျားပြည့်စေရန်) -->
+        <!-- Project Name Section -->
         <StackPanel Grid.Row="0" Margin="0,0,85,10">
             <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
             <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
@@ -30,17 +30,14 @@
             <StackPanel>
                 <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,6"/>
                 
-                <!-- Card Design with Custom Icon Options -->
                 <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,4" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
                 
                 <StackPanel Margin="18,0,0,6">
-                    <!-- Landscape Option with Icon -->
                     <DockPanel Margin="0,0,0,4">
                         <Border Width="16" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True"/>
                     </DockPanel>
                     
-                    <!-- Portrait Option with Icon -->
                     <DockPanel Margin="0,0,0,4">
                         <Border Width="10" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="3,0,9,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="PortraitRadio" Content="Portrait"/>
@@ -49,7 +46,6 @@
                     <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
                 </StackPanel>
                 
-                <!-- Report Design -->
                 <CheckBox x:Name="ReportCheckBox" Content="Report Design" Margin="0,4,0,0"/>
             </StackPanel>
         </GroupBox>
