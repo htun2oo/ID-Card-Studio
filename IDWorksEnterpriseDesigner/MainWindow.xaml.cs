@@ -26,27 +26,19 @@ namespace IDWorksEnterpriseDesigner
             this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object, RoutedEventArgs e)
         {
             DrawCardRulers(FrontTopRulerCanvas, FrontLeftRulerCanvas, 15.0, 10.0);
             DrawCardRulers(BackTopRulerCanvas, BackLeftRulerCanvas, 15.0, 10.0);
             DrawReportRulers(21.0, 29.7);
 
-            // Front Rulers (ScrollViewer နှင့် Canvas နှစ်ခုစလုံးတွင် Event ဖမ်းယူရန်)
-            FrontTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
-            FrontLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
+            // Ruler Canvas နှင့် ScrollViewer များတွင် Mouse Down Event များ ချိတ်ဆက်ခြင်း
             FrontTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, FrontCardOverlayCanvas); ev.Handled = true; };
             FrontLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, FrontCardOverlayCanvas); ev.Handled = true; };
 
-            // Back Rulers
-            BackTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, BackCardOverlayCanvas); ev.Handled = true; };
-            BackLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, BackCardOverlayCanvas); ev.Handled = true; };
             BackTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, BackCardOverlayCanvas); ev.Handled = true; };
             BackLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, BackCardOverlayCanvas); ev.Handled = true; };
 
-            // Report Rulers
-            ReportTopRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
-            ReportLeftRulerScrollViewer.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
             ReportTopRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, true, ReportOverlayCanvas); ev.Handled = true; };
             ReportLeftRulerCanvas.MouseLeftButtonDown += (s, ev) => { StartDragGuide(ev, false, ReportOverlayCanvas); ev.Handled = true; };
         }
@@ -59,16 +51,17 @@ namespace IDWorksEnterpriseDesigner
             isHorizontalGuide = isHorizontal;
             activeOverlayCanvas = targetCanvas;
 
+            // Mouse တည်နေရာကို Document Canvas ၏ ပုံမှန်အစ (0,0) သို့မဟုတ် လက်ရှိနေရာသို့ ညှိယူခြင်း
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
             draggedGuideLine = new Line
             {
-                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Photoshop ကဲ့သို့ ထင်းရှားသော Blue Guide Color
+                Stroke = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Photoshop ကဲ့သို့ Blue Guide Line
                 StrokeThickness = 1,
                 StrokeDashArray = new DoubleCollection { 4, 2 }
             };
 
-            // Guide Line ပေါ်တွင် Mouse ဖြင့် Double-Click နှိပ်၍လည်း ဖျက်ပစ်နိုင်ရန်
+            // Guide Line ပေါ်တွင် Mouse ဖြင့် Double-Click နှိပ်ပါက ဖျက်ပစ်ရန်
             draggedGuideLine.MouseLeftButtonDown += (s, ev) =>
             {
                 if (ev.ClickCount == 2 && s is Line line && line.Parent is Canvas parentCanvas)
@@ -82,16 +75,19 @@ namespace IDWorksEnterpriseDesigner
             {
                 draggedGuideLine.X1 = 0;
                 draggedGuideLine.X2 = activeOverlayCanvas.Width;
-                draggedGuideLine.Y1 = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
-                draggedGuideLine.Y2 = draggedGuideLine.Y1;
+                // အစပိုင်းတွင် အပြင်ဘက်ရောက်နေပါက 0 သို့မဟုတ် ဓမ္မတာနေရာတွင် စတင်ရန်
+                double initialY = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
+                draggedGuideLine.Y1 = initialY;
+                draggedGuideLine.Y2 = initialY;
                 activeOverlayCanvas.Cursor = Cursors.SizeNS;
             }
             else
             {
                 draggedGuideLine.Y1 = 0;
                 draggedGuideLine.Y2 = activeOverlayCanvas.Height;
-                draggedGuideLine.X1 = Math.Clamp(mousePos.X, 0, activeOverlayCanvas.Width);
-                draggedGuideLine.X2 = draggedGuideLine.X1;
+                double initialX = Math.Clamp(mousePos.X, 0, activeOverlayCanvas.Width);
+                draggedGuideLine.X1 = initialX;
+                draggedGuideLine.X2 = initialX;
                 activeOverlayCanvas.Cursor = Cursors.SizeWE;
             }
 
@@ -106,19 +102,9 @@ namespace IDWorksEnterpriseDesigner
 
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
-            // Photoshop ကဲ့သို့ Guide Line ကို Ruler (သို့မဟုတ် ဧရိယာအပြင်ဘက်) သို့ ပြန်လည်ဆွဲယူပါက အလိုအလျောက် ပျက်ပြယ်သွားစေရန်
-            if (mousePos.X < 0 || mousePos.Y < 0 || mousePos.X > activeOverlayCanvas.Width || mousePos.Y > activeOverlayCanvas.Height)
-            {
-                activeOverlayCanvas.Children.Remove(draggedGuideLine);
-                isDraggingGuide = false;
-                draggedGuideLine = null;
-                activeOverlayCanvas.Cursor = Cursors.Arrow;
-                ReleaseMouseCapture();
-                return;
-            }
-
             if (isHorizontalGuide)
             {
+                // Document Canvas အတွင်းတွင်သာ မျဉ်းပါသွားစေရန် Clamp ပြုလုပ်ခြင်း
                 double newY = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
                 draggedGuideLine.Y1 = newY;
                 draggedGuideLine.Y2 = newY;
@@ -430,7 +416,7 @@ namespace IDWorksEnterpriseDesigner
 
             if (newProjectWin.ShowDialog() == true)
             {
-                // New project logic here if needed
+                // New project logic
             }
         }
 
