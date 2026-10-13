@@ -96,8 +96,21 @@ namespace IDWorksEnterpriseDesigner
         {
             if (!isDraggingGuide || draggedGuideLine == null || activeOverlayCanvas == null) return;
 
+            // MainWindow ၏ Mouse ပုံစံဖြင့် တွက်ချက်ခြင်း
             Point mousePos = e.GetPosition(activeOverlayCanvas);
 
+            // Photoshop ကဲ့သို့ Grid Line ကို အပေါ်ဘက် (Top Ruler) သို့မဟုတ် ဘယ်ဘက် (Left Ruler) အပြင်ဘက်သို့ 
+            // (ဥပမာ: Y < 0 သို့မဟုတ် X < 0 သို့မဟုတ် Canvas အကျယ်/အမြင့်ထက် ကျော်လွန်၍) ဆွဲထုတ်သွားပါက အလိုအလျောက် ဖျက်ပစ်ရန်
+            if (mousePos.X < -5 || mousePos.Y < -5 || mousePos.X > activeOverlayCanvas.Width + 5 || mousePos.Y > activeOverlayCanvas.Height + 5)
+            {
+                activeOverlayCanvas.Children.Remove(draggedGuideLine);
+                isDraggingGuide = false;
+                draggedGuideLine = null;
+                activeOverlayCanvas.Cursor = Cursors.Arrow;
+                ReleaseMouseCapture();
+                return;
+            }
+            
             if (isHorizontalGuide)
             {
                 double newY = Math.Clamp(mousePos.Y, 0, activeOverlayCanvas.Height);
