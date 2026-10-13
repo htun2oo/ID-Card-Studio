@@ -513,7 +513,7 @@ namespace IDWorksEnterpriseDesigner
                 switch (tag)
                 {
                     case "A4": widthCm = 21.0; heightCm = 29.7; break;
-                    case "A5": widthItem = 14.8; heightCm = 21.0; break;
+                    case "A5": widthCm = 14.8; heightCm = 21.0; break;
                     case "B5": widthCm = 17.6; heightCm = 25.0; break;
                     case "Letter": widthCm = 21.59; heightCm = 27.94; break;
                     case "Legal": widthCm = 21.59; heightCm = 35.56; break;
