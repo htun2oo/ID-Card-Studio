@@ -14,10 +14,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="MenuItem">
                         <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
-                            <Grid>
+                            <Grid Margin="2,0,0,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="20" MinWidth="20" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="6"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="20"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -56,10 +56,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="MenuItem">
                         <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
-                            <Grid>
+                            <Grid Margin="2,0,0,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="20" MinWidth="20" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="6"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="20"/>
                                     <ColumnDefinition Width="Auto"/>
