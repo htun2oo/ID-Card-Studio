@@ -111,6 +111,8 @@
                     <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
+                <!-- Toolbars နှင့် Show Welcome on startup ကြားတွင် Separator ထည့်သွင်းထားသည် -->
+                <Separator />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
