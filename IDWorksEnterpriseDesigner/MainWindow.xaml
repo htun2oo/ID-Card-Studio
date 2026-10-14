@@ -17,7 +17,7 @@
             </Style.Resources>
         </Style>
 
-        <!-- Radio / Dot Style (အပေါ်အောက် အကွာအဝေးနှင့် Size ကို အခြားမီနူးများနှင့် တူညီစေရန် ချိန်ညှိထားသည်) -->
+        <!-- Radio / Dot Style (ပံုမှန် MenuItem များနှင့် Margin နှင့် Column Alignment အတိအကျ ညီစေရန် ချိန်ညှိထားသည်) -->
         <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
             <Setter Property="IsCheckable" Value="True"/>
             <Setter Property="Template">
@@ -26,13 +26,16 @@
                         <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24" MinWidth="24"/>
+                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
                                     <ColumnDefinition Width="4"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="17"/>
                                 </Grid.ColumnDefinitions>
                                 
                                 <!-- အစက် (Dot) ပုံစံလေးကို IsChecked ဖြစ်မှ ပြသမည် -->
-                                <Ellipse x:Name="BulletMark" Grid.Column="0" Width="6" Height="6" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <Ellipse x:Name="BulletMark" Grid.Column="0" Width="5" Height="5" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 
                                 <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
                             </Grid>
