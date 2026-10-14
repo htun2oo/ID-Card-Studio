@@ -17,7 +17,7 @@
             </Style.Resources>
         </Style>
 
-        <!-- Radio / Dot Style (ပံုမှန် MenuItem များနှင့် Margin နှင့် Column Alignment အတိအကျ ညီစေရန် ချိန်ညှိထားသည်) -->
+        <!-- Radio / Dot Style (ပုံမှန် MenuItem များနှင့် Margin နှင့် Column Alignment အတိအကျ ညီစေရန် ချိန်ညှိထားသည်) -->
         <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
             <Setter Property="IsCheckable" Value="True"/>
             <Setter Property="Template">
@@ -129,8 +129,11 @@
                 <MenuItem Header="Tile" />
             </MenuItem>
 
+            <!-- Help Menu ပြင်ဆင်ချက် -->
             <MenuItem Header="Help">
-                <MenuItem Header="Online Help..." InputGestureText="F1" />
+                <MenuItem Header="Online Help..." InputGestureText="F1" Click="OnlineHelp_Click" />
+                <Separator />
+                <MenuItem Header="About..." Click="About_Click" />
             </MenuItem>
         </Menu>
 
