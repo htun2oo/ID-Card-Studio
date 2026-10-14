@@ -16,6 +16,39 @@
                 <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="Transparent"/>
             </Style.Resources>
         </Style>
+
+        <!-- Radio / Dot Style (အမှန်ခြစ်အစား အစက်ပုံစံပြရန်) -->
+        <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
+            <Setter Property="IsCheckable" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Border" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" MinWidth="24"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!-- အစက် (Dot) ပုံစံလေးကို IsChecked ဖြစ်မှ ပြသမည် -->
+                                <Ellipse x:Name="BulletMark" Grid.Column="0" Width="6" Height="6" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                
+                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="BulletMark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#E5F3FF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <!-- Keyboard Shortcuts (Ctrl+N နှင့် Ctrl+O အလုပ်လုပ်စေရန်) -->
@@ -72,8 +105,9 @@
                     <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
                     <Separator />
-                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
-                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
+                    <!-- ဤနေရာတွင် Bullet/Dot ပုံစံ Style ကို အသုံးပြုထားပါသည် -->
+                    <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
+                    <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
