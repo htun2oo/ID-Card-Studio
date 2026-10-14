@@ -52,7 +52,7 @@
             </MenuItem>
 
             <MenuItem Header="View">
-                <MenuItem Header="Toolbars" />
+                <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
