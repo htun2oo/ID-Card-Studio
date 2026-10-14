@@ -557,7 +557,6 @@ namespace IDWorksEnterpriseDesigner
         {
             List<string> existingProjects = new List<string>
             {
-                "Sample",
                 "Sample Badge",
                 "Sample Corporate",
                 "Sample Government",
