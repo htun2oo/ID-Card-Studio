@@ -678,8 +678,8 @@ namespace IDWorksEnterpriseDesigner
         {
             if (LargeToolbarMenu != null && SmallToolbarMenu != null)
             {
-                LargeToolbarMenu.Header = "•  Large Toolbar Buttons";
-                SmallToolbarMenu.Header = "    Small Toolbar Buttons";
+                LargeToolbarMenu.IsChecked = true;
+                SmallToolbarMenu.IsChecked = false;
             }
         }
 
@@ -687,8 +687,8 @@ namespace IDWorksEnterpriseDesigner
         {
             if (LargeToolbarMenu != null && SmallToolbarMenu != null)
             {
-                LargeToolbarMenu.Header = "    Large Toolbar Buttons";
-                SmallToolbarMenu.Header = "•  Small Toolbar Buttons";
+                LargeToolbarMenu.IsChecked = false;
+                SmallToolbarMenu.IsChecked = true;
             }
         }
 
