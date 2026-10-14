@@ -17,7 +17,7 @@
             </Style.Resources>
         </Style>
 
-        <!-- Radio / Dot Style (Large/Small Buttons အတွက် အစက်ပြရန်) -->
+        <!-- Radio / Dot Style (အထက်ပါ စာကြောင်းများနှင့် ဘေးတိုက် တိကျစွာ ညီစေရန် ချိန်ညှိထားသည်) -->
         <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
             <Setter Property="IsCheckable" Value="True"/>
             <Setter Property="Template">
@@ -26,8 +26,8 @@
                         <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="22" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="12"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="20"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -111,7 +111,6 @@
                     <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
-                <!-- Toolbars နှင့် Show Welcome on startup ကြားတွင် Separator ထည့်သွင်းထားသည် -->
                 <Separator />
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
