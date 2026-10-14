@@ -112,7 +112,7 @@ namespace IDWorksEnterpriseDesigner
             // Report Size Selection Changed
         }
 
-        // --- Ruler Drawing Logic ---
+        // --- Ruler Drawing Logic (Centimeter Scale: 1 cm = 37.8 pixels) ---
 
         private void DrawTopRuler(Canvas canvas, double width)
         {
@@ -120,9 +120,13 @@ namespace IDWorksEnterpriseDesigner
             canvas.Children.Clear();
             canvas.Width = Math.Max(width, 1000);
 
-            for (double i = 0; i < canvas.Width; i += 10)
+            double cmPixels = 37.8;
+
+            for (double i = 0; i < canvas.Width; i += (cmPixels / 2))
             {
-                double tickHeight = (i % 100 == 0) ? 12 : ((i % 50 == 0) ? 8 : 4);
+                int tickIndex = (int)Math.Round(i / cmPixels * 2);
+                double tickHeight = (tickIndex % 2 == 0) ? 12 : 6;
+
                 var line = new Line
                 {
                     X1 = i, Y1 = 24,
@@ -132,11 +136,11 @@ namespace IDWorksEnterpriseDesigner
                 };
                 canvas.Children.Add(line);
 
-                if (i % 100 == 0 && i > 0)
+                if (tickIndex % 2 == 0 && i > 0)
                 {
                     var textBlock = new TextBlock
                     {
-                        Text = (i / 100).ToString(),
+                        Text = (tickIndex / 2).ToString(),
                         FontSize = 9,
                         FontFamily = new FontFamily("Arial")
                     };
@@ -153,9 +157,13 @@ namespace IDWorksEnterpriseDesigner
             canvas.Children.Clear();
             canvas.Height = Math.Max(height, 1000);
 
-            for (double i = 0; i < canvas.Height; i += 10)
+            double cmPixels = 37.8;
+
+            for (double i = 0; i < canvas.Height; i += (cmPixels / 2))
             {
-                double tickWidth = (i % 100 == 0) ? 12 : ((i % 50 == 0) ? 8 : 4);
+                int tickIndex = (int)Math.Round(i / cmPixels * 2);
+                double tickWidth = (tickIndex % 2 == 0) ? 12 : 6;
+
                 var line = new Line
                 {
                     X1 = 24, Y1 = i,
@@ -165,11 +173,11 @@ namespace IDWorksEnterpriseDesigner
                 };
                 canvas.Children.Add(line);
 
-                if (i % 100 == 0 && i > 0)
+                if (tickIndex % 2 == 0 && i > 0)
                 {
                     var textBlock = new TextBlock
                     {
-                        Text = (i / 100).ToString(),
+                        Text = (tickIndex / 2).ToString(),
                         FontSize = 9,
                         FontFamily = new FontFamily("Arial")
                     };
