@@ -61,9 +61,10 @@
                     <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
                     <Separator />
-                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" />
-                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" GroupName="ToolbarSize" />
+                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="True" GroupName="ToolbarSize" />
                 </MenuItem>
+                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
             <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
