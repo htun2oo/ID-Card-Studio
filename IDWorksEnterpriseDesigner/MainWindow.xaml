@@ -3,65 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IDWorksEnterpriseDesigner"
         mc:Ignorable="d"
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
-
-    <Window.Resources>
-        <!-- MenuItem အမှန်ခြစ်ဘေးမှ အပြာရောင် Background Highlight Box ကို ဖျောက်ရန် Style -->
-        <Style TargetType="MenuItem">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="Transparent"/>
-            </Style.Resources>
-        </Style>
-
-        <!-- Radio / Dot Style (Large/Small Buttons အတွက် အစက်ပြရန်) -->
-        <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
-            <Setter Property="IsCheckable" Value="True"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="MenuItem">
-                        <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="22" MinWidth="22" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="12"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="17"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <!-- အစက် (Dot) ပုံစံလေးကို IsChecked ဖြစ်မှ ပြသမည် -->
-                                <Ellipse x:Name="BulletMark" Grid.Column="0" Width="5" Height="5" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                
-                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="BulletMark" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#E5F3FF"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
-    <!-- Keyboard Shortcuts (Ctrl+N, Ctrl+O နှင့် F1 အလုပ်လုပ်စေရန် x:Static အသုံးပြုထားသည်) -->
-    <Window.InputBindings>
-        <KeyBinding Key="N" Modifiers="Control" Command="{x:Static local:MainWindow.NewProjectCommand}" />
-        <KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.OpenProjectCommand}" />
-        <KeyBinding Key="F1" Command="{x:Static local:MainWindow.OnlineHelpCommand}" />
-    </Window.InputBindings>
-
     <DockPanel>
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
@@ -101,20 +45,7 @@
             </MenuItem>
 
             <MenuItem Header="View">
-                <MenuItem Header="Toolbars">
-                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
-                    <Separator />
-                    <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
-                    <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
-                </MenuItem>
-                <Separator />
-                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Toolbars" />
             </MenuItem>
 
             <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
@@ -133,9 +64,7 @@
             </MenuItem>
 
             <MenuItem Header="Help">
-                <MenuItem Header="Online Help..." InputGestureText="F1" Click="OnlineHelp_Click" />
-                <Separator />
-                <MenuItem Header="About..." Click="About_Click" />
+                <MenuItem Header="Online Help..." InputGestureText="F1" />
             </MenuItem>
         </Menu>
 
@@ -147,7 +76,7 @@
                 <Button Content="💾" ToolTip="Save Project" Click="SaveProject_Click"/>
                 <Button Content="🖨️" ToolTip="Print" Click="PrintSampleCard_Click"/>
                 <Separator/>
-                <Button Content="❓" ToolTip="Help" Click="OnlineHelp_Click"/>
+                <Button Content="❓" ToolTip="Help"/>
                 <Separator/>
                 <Button Content="✂️" ToolTip="Cut" IsEnabled="False"/>
                 <Button Content="📋" ToolTip="Copy" IsEnabled="False"/>
