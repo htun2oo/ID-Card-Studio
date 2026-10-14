@@ -8,53 +8,13 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!-- MenuItem ၏ Checkmark ကွက်ငယ်တွင် အပြာရောင် Background မပေါ်စေရန် Custom Template -->
-        <ControlTemplate x:Key="{x:Static MenuItem.CheckMarkKey}" TargetType="Rectangle">
-            <Viewbox Width="11" Height="11">
-                <Path Data="M 0 4 L 4 8 L 10 1" Stroke="Black" StrokeThickness="1.5" />
-            </Viewbox>
-        </ControlTemplate>
-
+        <!-- MenuItem အမှန်ခြစ်ဘေးမှ အပြာရောင် Background Highlight Box ကို ဖျောက်ရန် Style -->
         <Style TargetType="MenuItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="MenuItem">
-                        <Border x:Name="Border" Background="Transparent" SnapsToDevicePixels="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="4"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="17"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!-- Icon သို့မဟုတ် Checkmark ကွက်ငယ် -->
-                                <Border x:Name="Check" Grid.Column="0" Width="22" Height="22" Background="Transparent">
-                                    <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                                <Path x:Name="CheckMark" Grid.Column="0" Width="10" Height="10" Data="M 1 4 L 4 7 L 9 1" Stroke="Black" StrokeThickness="1.5" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
-                                <Popup x:Name="Popup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsSubmenuOpen}" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
-                                    <Border x:Name="SubMenuBorder" Background="#F0F0F0" BorderBrush="#999999" BorderThickness="1">
-                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
-                                    </Border>
-                                </Popup>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#E5F3FF"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
         </Style>
     </Window.Resources>
 
