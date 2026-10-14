@@ -10,7 +10,6 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Keyboard Shortcuts အတွက် Commands များကို ကြေညာခြင်း
         public ICommand NewProjectCommand { get; }
         public ICommand OpenProjectCommand { get; }
 
@@ -27,11 +26,9 @@ namespace IDWorksEnterpriseDesigner
         {
             InitializeComponent();
 
-            // Commands များကို သက်ဆိုင်ရာ Methods များသို့ ချိတ်ဆက်ခြင်း
             NewProjectCommand = new RelayCommand(o => NewProject_Click(this, new RoutedEventArgs()));
             OpenProjectCommand = new RelayCommand(o => OpenProject_Click(this, new RoutedEventArgs()));
 
-            // Window တွင် Command များ binding ဖြစ်စေရန် DataContext ကို သတ်မှတ်ခြင်း
             this.DataContext = this;
 
             this.Loaded += MainWindow_Loaded;
@@ -677,6 +674,24 @@ namespace IDWorksEnterpriseDesigner
             ActivateProjectWorkspace();
         }
 
+        private void LargeToolbar_Click(object sender, RoutedEventArgs e)
+        {
+            if (LargeToolbarMenu != null && SmallToolbarMenu != null)
+            {
+                LargeToolbarMenu.Header = "•  Large Toolbar Buttons";
+                SmallToolbarMenu.Header = "    Small Toolbar Buttons";
+            }
+        }
+
+        private void SmallToolbar_Click(object sender, RoutedEventArgs e)
+        {
+            if (LargeToolbarMenu != null && SmallToolbarMenu != null)
+            {
+                LargeToolbarMenu.Header = "    Large Toolbar Buttons";
+                SmallToolbarMenu.Header = "•  Small Toolbar Buttons";
+            }
+        }
+
         private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
         private void Exit_Click(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
 
@@ -693,7 +708,6 @@ namespace IDWorksEnterpriseDesigner
         private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
     }
 
-    // RelayCommand Helper Class
     public class RelayCommand : ICommand
     {
         private readonly Action<object?> _execute;
