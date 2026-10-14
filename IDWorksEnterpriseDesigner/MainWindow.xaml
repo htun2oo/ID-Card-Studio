@@ -7,6 +7,17 @@
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <!-- MenuItem အမှန်ခြစ်ဘေးမှ အပြာရောင် Background Highlight Box ကို ဖျောက်ရန် Style -->
+        <Style TargetType="MenuItem">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
     <!-- Keyboard Shortcuts (Ctrl+N နှင့် Ctrl+O အလုပ်လုပ်စေရန်) -->
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
@@ -53,18 +64,18 @@
 
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars">
-                    <MenuItem Header="✓  Project Toolbar" />
-                    <MenuItem Header="✓  Edit Toolbar" />
-                    <MenuItem Header="✓  View Toolbar" />
-                    <MenuItem Header="✓  Zoom Toolbar" />
-                    <MenuItem Header="✓  Properties Toolbar" />
-                    <MenuItem Header="✓  Application Toolbar" />
-                    <MenuItem Header="✓  Tools Toolbar" />
+                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
                     <Separator />
                     <MenuItem Header="•  Large Toolbar Buttons" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="    Small Toolbar Buttons" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
-                <MenuItem Header="✓  Show Welcome on startup" />
+                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
 
             <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
