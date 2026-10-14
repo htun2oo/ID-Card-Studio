@@ -1,0 +1,75 @@
+<Window x:Class="IDWorksEnterpriseDesigner.Views.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ID Works Designer Help" Height="520" Width="720"
+        WindowStartupLocation="CenterOwner">
+    <DockPanel Background="#F0F0F0">
+        <!-- Top Toolbar -->
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Content="🗂️ Hide" Margin="2"/>
+                <Button Content="⬅️ Back" Margin="2"/>
+                <Button Content="🖨️ Print" Margin="2"/>
+                <Button Content="📄 Options" Margin="2"/>
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Main Splitter Content -->
+        <Grid Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Panel: Tabs & TreeView -->
+            <DockPanel Grid.Column="0" Background="White" LastChildFill="True">
+                <TabControl DockPanel.Dock="Top" Height="26">
+                    <TabItem Header="Contents"/>
+                    <TabItem Header="Index"/>
+                    <TabItem Header="Search"/>
+                </TabControl>
+                <TreeView Margin="4">
+                    <TreeViewItem Header="❓ About the Welcome dialog box" IsExpanded="True"/>
+                    <TreeViewItem Header="📖 Creating, opening, and saving projects"/>
+                    <TreeViewItem Header="📖 Creating, opening, and deleting cards"/>
+                    <TreeViewItem Header="📖 Designing a card"/>
+                    <TreeViewItem Header="📖 Creating, opening, and deleting reports"/>
+                    <TreeViewItem Header="📖 Designing a report"/>
+                    <TreeViewItem Header="📖 Creating, opening, and deleting Production Forms"/>
+                    <TreeViewItem Header="📖 Designing a Production Form"/>
+                    <TreeViewItem Header="📖 Working with fields"/>
+                    <TreeViewItem Header="📖 Working with a data source"/>
+                    <TreeViewItem Header="📖 Setting production options"/>
+                    <TreeViewItem Header="📖 Changing your password"/>
+                    <TreeViewItem Header="📖 Support options"/>
+                </TreeView>
+            </DockPanel>
+
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch" Background="#E0E0E0"/>
+
+            <!-- Right Panel: Help Documentation Viewer -->
+            <DockPanel Grid.Column="2" Background="White" LastChildFill="True">
+                <!-- Navigation Sub-bar inside viewer -->
+                <ToolBar DockPanel.Dock="Top" Background="White">
+                    <Button Content="◀ Previous"/>
+                    <Button Content="Next ▶"/>
+                    <Separator/>
+                    <ComboBox Width="130" SelectedIndex="0">
+                        <ComboBoxItem Content="Creating, open..."/>
+                    </ComboBox>
+                </ToolBar>
+
+                <ScrollViewer Padding="12" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="About the Welcome dialog box" FontSize="18" FontWeight="Bold" Foreground="#000080" Margin="0,0,0,10"/>
+                        <Separator Background="#000080" Height="2" Margin="0,0,0,15"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="12" LineHeight="18">
+                            The Welcome dialog box provides a fast and easy way to open existing projects and, in the Designer application, to create new projects. You can choose to show or hide the Welcome dialog box. The selections you make apply only to your user name and only to the current application. For example, you could choose to show the Welcome dialog box for the...
+                        </TextBlock>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Grid>
+    </DockPanel>
+</Window>
