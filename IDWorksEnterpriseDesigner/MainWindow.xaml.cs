@@ -112,7 +112,7 @@ namespace IDWorksEnterpriseDesigner
             // Report Size Selection Changed
         }
 
-        // --- Ruler Drawing Logic (Centimeter Scale: 1 cm = 37.8 pixels) ---
+        // --- Ruler Drawing Logic (Enhanced Centimeter Scale: 1 cm = 37.8 pixels) ---
 
         private void DrawTopRuler(Canvas canvas, double width)
         {
@@ -122,30 +122,48 @@ namespace IDWorksEnterpriseDesigner
 
             double cmPixels = 37.8;
 
-            for (double i = 0; i < canvas.Width; i += (cmPixels / 2))
+            // Draw baseline for the ruler
+            var baseLine = new Line
             {
-                int tickIndex = (int)Math.Round(i / cmPixels * 2);
-                double tickHeight = (tickIndex % 2 == 0) ? 12 : 6;
+                X1 = 0, Y1 = 24,
+                X2 = canvas.Width, Y2 = 24,
+                Stroke = Brushes.Gray,
+                StrokeThickness = 0.5
+            };
+            canvas.Children.Add(baseLine);
+
+            for (double i = 0; i < canvas.Width; i += (cmPixels / 4))
+            {
+                int tickIndex = (int)Math.Round(i / (cmPixels / 4));
+                double tickHeight = 4;
+
+                if (tickIndex % 4 == 0) tickHeight = 12;      // 1 cm mark (Long)
+                else if (tickIndex % 2 == 0) tickHeight = 8;  // 0.5 cm mark (Medium)
 
                 var line = new Line
                 {
                     X1 = i, Y1 = 24,
                     X2 = i, Y2 = 24 - tickHeight,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 0.5
+                    StrokeThickness = 0.7
                 };
                 canvas.Children.Add(line);
 
-                if (tickIndex % 2 == 0 && i > 0)
+                if (tickIndex % 4 == 0)
                 {
+                    int cmValue = tickIndex / 4;
                     var textBlock = new TextBlock
                     {
-                        Text = (tickIndex / 2).ToString(),
-                        FontSize = 9,
-                        FontFamily = new FontFamily("Arial")
+                        Text = cmValue.ToString(),
+                        FontSize = 10,
+                        FontWeight = FontWeights.SemiBold,
+                        FontFamily = new FontFamily("Arial"),
+                        Foreground = Brushes.Black
                     };
-                    Canvas.SetLeft(textBlock, i - 4);
-                    Canvas.SetTop(textBlock, 2);
+                    
+                    double xOffset = (cmValue == 0) ? 2 : (cmValue < 10 ? 4 : 7);
+                    Canvas.SetLeft(textBlock, i - xOffset);
+                    Canvas.SetTop(textBlock, 1);
                     canvas.Children.Add(textBlock);
                 }
             }
@@ -159,28 +177,45 @@ namespace IDWorksEnterpriseDesigner
 
             double cmPixels = 37.8;
 
-            for (double i = 0; i < canvas.Height; i += (cmPixels / 2))
+            // Draw baseline for the vertical ruler
+            var baseLine = new Line
             {
-                int tickIndex = (int)Math.Round(i / cmPixels * 2);
-                double tickWidth = (tickIndex % 2 == 0) ? 12 : 6;
+                X1 = 24, Y1 = 0,
+                X2 = 24, Y2 = canvas.Height,
+                Stroke = Brushes.Gray,
+                StrokeThickness = 0.5
+            };
+            canvas.Children.Add(baseLine);
+
+            for (double i = 0; i < canvas.Height; i += (cmPixels / 4))
+            {
+                int tickIndex = (int)Math.Round(i / (cmPixels / 4));
+                double tickWidth = 4;
+
+                if (tickIndex % 4 == 0) tickWidth = 12;
+                else if (tickIndex % 2 == 0) tickWidth = 8;
 
                 var line = new Line
                 {
                     X1 = 24, Y1 = i,
                     X2 = 24 - tickWidth, Y2 = i,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 0.5
+                    StrokeThickness = 0.7
                 };
                 canvas.Children.Add(line);
 
-                if (tickIndex % 2 == 0 && i > 0)
+                if (tickIndex % 4 == 0)
                 {
+                    int cmValue = tickIndex / 4;
                     var textBlock = new TextBlock
                     {
-                        Text = (tickIndex / 2).ToString(),
-                        FontSize = 9,
-                        FontFamily = new FontFamily("Arial")
+                        Text = cmValue.ToString(),
+                        FontSize = 10,
+                        FontWeight = FontWeights.SemiBold,
+                        FontFamily = new FontFamily("Arial"),
+                        Foreground = Brushes.Black
                     };
+                    
                     Canvas.SetLeft(textBlock, 2);
                     Canvas.SetTop(textBlock, i - 6);
                     canvas.Children.Add(textBlock);
