@@ -112,7 +112,7 @@ namespace IDWorksEnterpriseDesigner
             // Report Size Selection Changed
         }
 
-        // --- Ruler Drawing Logic (Enhanced Centimeter Scale: 1 cm = 37.8 pixels) ---
+        // --- Ruler Drawing Logic (1 cm = 10 ticks / mm scale) ---
 
         private void DrawTopRuler(Canvas canvas, double width)
         {
@@ -121,6 +121,7 @@ namespace IDWorksEnterpriseDesigner
             canvas.Width = Math.Max(width, 1000);
 
             double cmPixels = 37.8;
+            double mmPixels = cmPixels / 10.0; // 1 mm per tick (10 ticks per cm)
 
             // Draw baseline for the ruler
             var baseLine = new Line
@@ -132,26 +133,33 @@ namespace IDWorksEnterpriseDesigner
             };
             canvas.Children.Add(baseLine);
 
-            for (double i = 0; i < canvas.Width; i += (cmPixels / 4))
+            for (double i = 0; i < canvas.Width; i += mmPixels)
             {
-                int tickIndex = (int)Math.Round(i / (cmPixels / 4));
-                double tickHeight = 4;
+                int tickIndex = (int)Math.Round(i / mmPixels);
+                double tickHeight = 3; // very small tick for millimeters (1, 2, 3, 4, 6, 7, 8, 9)
 
-                if (tickIndex % 4 == 0) tickHeight = 12;      // 1 cm mark (Long)
-                else if (tickIndex % 2 == 0) tickHeight = 8;  // 0.5 cm mark (Medium)
+                if (tickIndex % 10 == 0)
+                {
+                    tickHeight = 12; // 1 cm mark (Long)
+                }
+                else if (tickIndex % 5 == 0)
+                {
+                    tickHeight = 8;  // 0.5 cm mark (Medium)
+                }
 
                 var line = new Line
                 {
                     X1 = i, Y1 = 24,
                     X2 = i, Y2 = 24 - tickHeight,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 0.7
+                    StrokeThickness = 0.6
                 };
                 canvas.Children.Add(line);
 
-                if (tickIndex % 4 == 0)
+                // Add numbers for every 1 cm (every 10 ticks)
+                if (tickIndex % 10 == 0)
                 {
-                    int cmValue = tickIndex / 4;
+                    int cmValue = tickIndex / 10;
                     var textBlock = new TextBlock
                     {
                         Text = cmValue.ToString(),
@@ -176,6 +184,7 @@ namespace IDWorksEnterpriseDesigner
             canvas.Height = Math.Max(height, 1000);
 
             double cmPixels = 37.8;
+            double mmPixels = cmPixels / 10.0;
 
             // Draw baseline for the vertical ruler
             var baseLine = new Line
@@ -187,26 +196,32 @@ namespace IDWorksEnterpriseDesigner
             };
             canvas.Children.Add(baseLine);
 
-            for (double i = 0; i < canvas.Height; i += (cmPixels / 4))
+            for (double i = 0; i < canvas.Height; i += mmPixels)
             {
-                int tickIndex = (int)Math.Round(i / (cmPixels / 4));
-                double tickWidth = 4;
+                int tickIndex = (int)Math.Round(i / mmPixels);
+                double tickWidth = 3;
 
-                if (tickIndex % 4 == 0) tickWidth = 12;
-                else if (tickIndex % 2 == 0) tickWidth = 8;
+                if (tickIndex % 10 == 0)
+                {
+                    tickWidth = 12;
+                }
+                else if (tickIndex % 5 == 0)
+                {
+                    tickWidth = 8;
+                }
 
                 var line = new Line
                 {
                     X1 = 24, Y1 = i,
                     X2 = 24 - tickWidth, Y2 = i,
                     Stroke = Brushes.Black,
-                    StrokeThickness = 0.7
+                    StrokeThickness = 0.6
                 };
                 canvas.Children.Add(line);
 
-                if (tickIndex % 4 == 0)
+                if (tickIndex % 10 == 0)
                 {
-                    int cmValue = tickIndex / 4;
+                    int cmValue = tickIndex / 10;
                     var textBlock = new TextBlock
                     {
                         Text = cmValue.ToString(),
