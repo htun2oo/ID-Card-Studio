@@ -8,40 +8,8 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <!-- MenuItem အမှန်ခြစ်ဘေးမှ အပြာရောင် Background Highlight Box ကို ဖျောက်ရန်နှင့် အကွာအဝေးတူညီစေရန် Style -->
+        <!-- MenuItem အမှန်ခြစ်ဘေးမှ အပြာရောင် Background Highlight Box ကို ဖျောက်ရန် Style -->
         <Style TargetType="MenuItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="MenuItem">
-                        <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
-                            <Grid Margin="2,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" MinWidth="20" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="6"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="17"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <!-- ပုံမှန် Checkmark -->
-                                <Path x:Name="CheckMark" Grid.Column="0" Width="7" Height="7" Data="M 0,4 L 2,2 L 5,5 L 10,0 L 12,2 L 5,9 Z" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                
-                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
-                                <TextBlock x:Name="InputGestureText" Grid.Column="4" Text="{TemplateBinding InputGestureText}" Margin="5,0,0,0" VerticalAlignment="Center" Foreground="Gray"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Border" Property="Background" Value="#E5F3FF"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
             <Style.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
@@ -49,17 +17,17 @@
             </Style.Resources>
         </Style>
 
-        <!-- Radio / Dot Style (Large/Small Buttons အတွက်) -->
+        <!-- Radio / Dot Style (Large/Small Buttons အတွက် အစက်ပြရန်) -->
         <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
             <Setter Property="IsCheckable" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="MenuItem">
                         <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
-                            <Grid Margin="2,0,0,0">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20" MinWidth="20" SharedSizeGroup="MenuItemIconColumnGroup"/>
-                                    <ColumnDefinition Width="6"/>
+                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="4"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="20"/>
                                     <ColumnDefinition Width="Auto"/>
