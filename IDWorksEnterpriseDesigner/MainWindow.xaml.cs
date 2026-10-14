@@ -3,6 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Globalization;
 
 namespace IDWorksEnterpriseDesigner
 {
@@ -109,24 +112,92 @@ namespace IDWorksEnterpriseDesigner
             // Report Size Selection Changed
         }
 
-        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        // --- Ruler Drawing Logic ---
+
+        private void DrawTopRuler(Canvas canvas, double width)
+        {
+            if (canvas == null) return;
+            canvas.Children.Clear();
+            canvas.Width = Math.Max(width, 1000);
+
+            for (double i = 0; i < canvas.Width; i += 10)
+            {
+                double tickHeight = (i % 100 == 0) ? 12 : ((i % 50 == 0) ? 8 : 4);
+                var line = new Line
+                {
+                    X1 = i, Y1 = 24,
+                    X2 = i, Y2 = 24 - tickHeight,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 0.5
+                };
+                canvas.Children.Add(line);
+
+                if (i % 100 == 0 && i > 0)
+                {
+                    var textBlock = new TextBlock
+                    {
+                        Text = (i / 100).ToString(),
+                        FontSize = 9,
+                        FontFamily = new FontFamily("Arial")
+                    };
+                    Canvas.SetLeft(textBlock, i - 4);
+                    Canvas.SetTop(textBlock, 2);
+                    canvas.Children.Add(textBlock);
+                }
+            }
+        }
+
+        private void DrawLeftRuler(Canvas canvas, double height)
+        {
+            if (canvas == null) return;
+            canvas.Children.Clear();
+            canvas.Height = Math.Max(height, 1000);
+
+            for (double i = 0; i < canvas.Height; i += 10)
+            {
+                double tickWidth = (i % 100 == 0) ? 12 : ((i % 50 == 0) ? 8 : 4);
+                var line = new Line
+                {
+                    X1 = 24, Y1 = i,
+                    X2 = 24 - tickWidth, Y2 = i,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 0.5
+                };
+                canvas.Children.Add(line);
+
+                if (i % 100 == 0 && i > 0)
+                {
+                    var textBlock = new TextBlock
+                    {
+                        Text = (i / 100).ToString(),
+                        FontSize = 9,
+                        FontFamily = new FontFamily("Arial")
+                    };
+                    Canvas.SetLeft(textBlock, 2);
+                    Canvas.SetTop(textBlock, i - 6);
+                    canvas.Children.Add(textBlock);
+                }
+            }
+        }
+
+        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(FrontTopRulerCanvas, e.NewSize.Width);
+        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(FrontLeftRulerCanvas, e.NewSize.Height);
         private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
         
         private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
         private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
 
-        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(BackTopRulerCanvas, e.NewSize.Width);
+        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(BackLeftRulerCanvas, e.NewSize.Height);
         private void BackMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
 
         private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void BackCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
         private void BackCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
 
-        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(ReportTopRulerCanvas, e.NewSize.Width);
+        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(ReportLeftRulerCanvas, e.NewSize.Height);
         private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
 
         private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
