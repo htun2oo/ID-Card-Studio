@@ -25,7 +25,14 @@ namespace IDWorksEnterpriseDesigner
 
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // New Project Event Handler
+            // Views ဖိုင်တွဲအောက်ရှိ NewProjectWindow ကို ခေါ်ယူခြင်း
+            var dialog = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
+            dialog.Owner = this;
+            if (dialog.ShowDialog() == true)
+            {
+                // OK နှိပ်ပြီးပါက Workspace ကို ပေါ်လာစေရန်
+                ProjectWorkspace.Visibility = Visibility.Visible;
+            }
         }
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
