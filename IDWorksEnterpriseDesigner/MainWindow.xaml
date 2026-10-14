@@ -7,11 +7,11 @@
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
 
-        <!-- Keyboard Shortcuts (Ctrl+N နှင့် Ctrl+O အလုပ်လုပ်စေရန်) -->
-            <Window.InputBindings>
-                <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
-                <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenProjectCommand}" />
-            </Window.InputBindings>
+    <!-- Keyboard Shortcuts (Ctrl+N နှင့် Ctrl+O အလုပ်လုပ်စေရန်) -->
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
+        <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenProjectCommand}" />
+    </Window.InputBindings>
 
     <DockPanel>
         <!-- Top Menu Bar -->
