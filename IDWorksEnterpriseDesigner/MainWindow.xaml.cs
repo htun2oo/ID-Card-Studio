@@ -10,6 +10,10 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
+        // Keyboard Shortcuts အတွက် Commands များကို ကြေညာခြင်း
+        public ICommand NewProjectCommand { get; }
+        public ICommand OpenProjectCommand { get; }
+        
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180));
 
