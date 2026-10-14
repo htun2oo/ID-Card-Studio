@@ -7,6 +7,56 @@
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <!-- MenuItem ဘေးမှ အပြာရောင် ကာလာဘောက်စ် (Background Highlight) ကို ဖယ်ရှားရန် Style -->
+        <Style TargetType="MenuItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="templateBorder" Background="Transparent" SnapsToDevicePixels="True">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24" MinWidth="24" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="17"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Icon သို့မဟုတ် Checkmark (အစက် သို့မဟုတ် အမှန်ခြစ်) ပြသရန် -->
+                                <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                
+                                <Border x:Name="CheckFlag" Grid.Column="0" Width="14" Height="14" Visibility="Collapsed" Background="Transparent">
+                                    <Path x:Name="CheckMark" Data="M 3.5 7 L 6 9.5 L 10.5 4" Stroke="Black" StrokeThickness="1.5" Visibility="Collapsed"/>
+                                </Border>
+
+                                <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
+                                <Popup x:Name="Popup" AllowsTransparency="True" Focusable="False" IsOpen="{TemplateBinding IsSubmenuOpen}" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                                    <Border x:Name="SubMenuBorder" Background="#F0F0F0" BorderBrush="#999999" BorderThickness="1">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="CheckFlag" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="Role" Value="SubmenuItem">
+                                <Setter TargetName="templateBorder" Property="Background" Value="Transparent"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="templateBorder" Property="Background" Value="#E5F3FF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <!-- Keyboard Shortcuts (Ctrl+N နှင့် Ctrl+O အလုပ်လုပ်စေရန်) -->
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
@@ -61,8 +111,8 @@
                     <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
                     <Separator />
-                    <MenuItem Header="•  Large Toolbar Buttons" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
-                    <MenuItem Header="    Small Toolbar Buttons" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
+                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
+                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
                 <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
             </MenuItem>
