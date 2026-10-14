@@ -17,13 +17,13 @@
             </Style.Resources>
         </Style>
 
-        <!-- Radio / Dot Style (အမှန်ခြစ်အစား အစက်ပုံစံပြရန်) -->
+        <!-- Radio / Dot Style (အပေါ်အောက် အကွာအဝေးနှင့် Size ကို အခြားမီနူးများနှင့် တူညီစေရန် ချိန်ညှိထားသည်) -->
         <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
             <Setter Property="IsCheckable" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="MenuItem">
-                        <Border x:Name="Border" Background="Transparent" SnapsToDevicePixels="True">
+                        <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="24" MinWidth="24"/>
@@ -105,7 +105,6 @@
                     <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
                     <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
                     <Separator />
-                    <!-- ဤနေရာတွင် Bullet/Dot ပုံစံ Style ကို အသုံးပြုထားပါသည် -->
                     <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
