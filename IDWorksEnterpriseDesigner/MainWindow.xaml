@@ -53,6 +53,17 @@
 
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars" />
+                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
+                    <Separator />
+                    <MenuItem Header="Large Toolbar Buttons" IsCheckable="True" />
+                    <MenuItem Header="Small Toolbar Buttons" IsCheckable="True" IsChecked="True" />
+                </MenuItem>
             </MenuItem>
 
             <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
