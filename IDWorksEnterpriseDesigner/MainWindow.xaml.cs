@@ -13,7 +13,7 @@ namespace IDWorksEnterpriseDesigner
         // Keyboard Shortcuts အတွက် Commands များကို ကြေညာခြင်း
         public ICommand NewProjectCommand { get; }
         public ICommand OpenProjectCommand { get; }
-        
+
         private const double CmToPixel = 37.8;
         private readonly Brush subTickColor = new SolidColorBrush(Color.FromRgb(70, 130, 180));
 
@@ -26,8 +26,15 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
+
+            // Commands များကို သက်ဆိုင်ရာ Methods များသို့ ချိတ်ဆက်ခြင်း
+            NewProjectCommand = new RelayCommand(o => NewProject_Click(this, new RoutedEventArgs()));
+            OpenProjectCommand = new RelayCommand(o => OpenProject_Click(this, new RoutedEventArgs()));
+
+            // Window တွင် Command များ binding ဖြစ်စေရန် DataContext ကို သတ်မှတ်ခြင်း
+            this.DataContext = this;
+
             this.Loaded += MainWindow_Loaded;
-            
             this.MouseMove += MainWindow_MouseMove;
             this.MouseLeftButtonUp += MainWindow_MouseLeftButtonUp;
         }
@@ -548,7 +555,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            // အကယ်၍ Save လုပ်ထားသော Project များ မရှိသေးပါက list ကို null သို့မဟုတ် empty ထားနိုင်သည်
             List<string> existingProjects = new List<string>
             {
                 "Sample",
@@ -686,5 +692,28 @@ namespace IDWorksEnterpriseDesigner
         private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
         private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
         private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+    }
+
+    // RelayCommand Helper Class
+    public class RelayCommand : ICommand
+    {
+        private readonly Action<object?> _execute;
+        private readonly Func<object?, bool>? _canExecute;
+
+        public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public bool CanExecute(object? parameter) => _canExecute == null || _canExecute(parameter);
+
+        public void Execute(object? parameter) => _execute(parameter);
     }
 }
