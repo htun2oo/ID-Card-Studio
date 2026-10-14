@@ -133,21 +133,12 @@ namespace IDWorksEnterpriseDesigner
         private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
         private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
 
-        // Help Menu Event Handlers
+        // Help Menu & F1 Shortcut Event Handler
         private void OnlineHelp_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = "https://www.google.com",
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Unable to open help: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            var helpWindow = new IDWorksEnterpriseDesigner.Views.HelpWindow();
+            helpWindow.Owner = this;
+            helpWindow.Show();
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
