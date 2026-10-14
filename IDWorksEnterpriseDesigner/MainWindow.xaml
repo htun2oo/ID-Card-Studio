@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IDWorksEnterpriseDesigner"
         mc:Ignorable="d"
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
@@ -54,11 +55,11 @@
         </Style>
     </Window.Resources>
 
-    <!-- Keyboard Shortcuts (Ctrl+N, Ctrl+O နှင့် F1 အလုပ်လုပ်စေရန်) -->
+    <!-- Keyboard Shortcuts (Ctrl+N, Ctrl+O နှင့် F1 အလုပ်လုပ်စေရန် x:Static အသုံးပြုထားသည်) -->
     <Window.InputBindings>
-        <KeyBinding Key="N" Modifiers="Control" Command="{Binding NewProjectCommand}" />
-        <KeyBinding Key="O" Modifiers="Control" Command="{Binding OpenProjectCommand}" />
-        <KeyBinding Key="F1" Command="{Binding OnlineHelpCommand}" />
+        <KeyBinding Key="N" Modifiers="Control" Command="{x:Static local:MainWindow.NewProjectCommand}" />
+        <KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.OpenProjectCommand}" />
+        <KeyBinding Key="F1" Command="{x:Static local:MainWindow.OnlineHelpCommand}" />
     </Window.InputBindings>
 
     <DockPanel>
