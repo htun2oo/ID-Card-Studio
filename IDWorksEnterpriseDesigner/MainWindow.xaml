@@ -320,7 +320,7 @@
                                 </Grid>
                             </Border>
                         </DockPanel>
-                    </Grid>
+                    </Border>
                 </Grid>
             </Grid>
         </Grid>
