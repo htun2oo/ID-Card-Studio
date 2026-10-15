@@ -4,49 +4,53 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="New Project" Height="300" Width="400"
+        Title="New Project" Height="305" Width="380"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Buttons Column (Right side) -->
-        <StackPanel Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75">
-            <Button Content="OK" IsDefault="True" Height="24" Margin="0,0,0,6" Click="OkButton_Click"/>
-            <Button Content="Cancel" IsCancel="True" Height="24" Click="CancelButton_Click"/>
-        </StackPanel>
+        <!-- Project Name Label -->
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Project Name:" Margin="0,0,0,2"/>
 
-        <!-- Project Name Section -->
-        <StackPanel Grid.Row="0" Margin="0,0,85,10">
-            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
-        </StackPanel>
+        <!-- Project Name TextBox (Row 1, Column 0) -->
+        <TextBox Grid.Row="1" Grid.Column="0" x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center" Margin="0,0,12,0"/>
 
-        <!-- Initial Components GroupBox -->
-        <GroupBox Grid.Row="1" Header="Initial Components" Padding="8" Margin="0,0,85,0">
+        <!-- OK Button (Row 1, Column 1 - TextBox ၏ အပေါ်ဘက်နှင့် တစ်တန်းတည်း ကျမည်) -->
+        <Button Grid.Row="1" Grid.Column="1" Content="OK" IsDefault="True" Width="75" Height="24" Click="OkButton_Click" VerticalAlignment="Top"/>
+
+        <!-- Cancel Button (Row 2, Column 1 - OK ခလုတ်၏ အောက်ဘက်တွင် ရှိမည်) -->
+        <Button Grid.Row="2" Grid.Column="1" Content="Cancel" IsCancel="True" Width="75" Height="24" Click="CancelButton_Click" VerticalAlignment="Top" Margin="0,6,0,0"/>
+
+        <!-- Initial Components GroupBox (Row 2, Column 0) -->
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Initial Components" Padding="8,4" Margin="0,8,12,0">
             <StackPanel>
-                <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,6"/>
+                <CheckBox x:Name="ProdFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,4"/>
                 
-                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,4" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
+                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,2" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
                 
-                <StackPanel Margin="30,0,0,6">
-                    <DockPanel Margin="0,0,0,4">
+                <StackPanel Margin="24,0,0,4">
+                    <DockPanel Margin="0,0,0,2">
                         <Border Width="16" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True"/>
                     </DockPanel>
                     
-                    <DockPanel Margin="0,0,0,4">
+                    <DockPanel Margin="0,0,0,2">
                         <Border Width="10" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="3,0,9,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="PortraitRadio" Content="Portrait"/>
                     </DockPanel>
                     
-                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
+                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,2"/>
                 </StackPanel>
                 
-                <CheckBox x:Name="ReportCheckBox" Content="Report Design" Margin="0,4,0,0"/>
+                <CheckBox x:Name="ReportCheckBox" Content="Report Design" Margin="0,2,0,0"/>
             </StackPanel>
         </GroupBox>
     </Grid>
