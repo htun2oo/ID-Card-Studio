@@ -55,19 +55,19 @@
 
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars">
-                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" />
+                    <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="Edit Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="View Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="Zoom Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="Properties Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="Application Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
+                    <MenuItem Header="Tools Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
                     <Separator />
                     <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
             </MenuItem>
 
             <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
@@ -320,7 +320,7 @@
                                 </Grid>
                             </Border>
                         </DockPanel>
-                    </Border>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
