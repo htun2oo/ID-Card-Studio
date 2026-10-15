@@ -32,7 +32,7 @@
                 
                 <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Margin="0,0,0,4" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged"/>
                 
-                <StackPanel Margin="18,0,0,6">
+                <StackPanel Margin="24,0,0,6">
                     <DockPanel Margin="0,0,0,4">
                         <Border Width="16" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="LandscapeRadio" Content="Landscape" IsChecked="True"/>
