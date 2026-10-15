@@ -1,1 +1,51 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Standard Button Style (Toolbar နှင့် အခြားခလုတ်များအတွက် သပ်ရပ်သောပုံစံ) -->
+    <Style TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#ABADB3"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4,2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="2" 
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" 
+                                          Focusable="False" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Mouse တင်လိုက်သည့်အခါ (Hover) -->
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="#E5F3FF"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#99C1F1"/>
+                        </Trigger>
+                        <!-- နှိပ်လိုက်သည့်အခါ (Pressed) -->
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="#CCE4FF"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#66B1F1"/>
+                        </Trigger>
+                        <!-- IsEnabled ပိတ်ထားသည့်အခါ (Disabled) -->
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Background" Value="#F4F4F4"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="#ADB2B5"/>
+                            <Setter Property="Foreground" Value="#ADADAD"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
+</ResourceDictionary>
