@@ -1,8 +1,18 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- Checkable MenuItem Style (ဒေါင်လိုက်မျဉ်းမပါဘဲ အမှန်ခြစ်သီးသန့် သပ်ရပ်စွာပေါ်စေရန်) -->
-    <Style x:Key="CheckMenuItemStyle" TargetType="MenuItem">
+    <!-- Base implicit style for all MenuItems to clear system highlight and submenu gutter lines -->
+    <Style TargetType="MenuItem">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="Transparent"/>
+            <SolidColorBrush x:Key="{x:Static SystemColors.MenuBarBrushKey}" Color="Transparent"/>
+        </Style.Resources>
+    </Style>
+
+    <!-- Checkable MenuItem Style (ဒေါင်လိုက်မျဉ်းလုံးဝမပါဘဲ အမှန်ခြစ်သီးသန့်ပေါ်စေရန်) -->
+    <Style x:Key="CheckMenuItemStyle" TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="IsCheckable" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -10,7 +20,7 @@
                     <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26" MinWidth="26" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                <ColumnDefinition Width="26" MinWidth="26"/>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="20"/>
@@ -18,7 +28,7 @@
                                 <ColumnDefinition Width="17"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- အမှန်ခြစ် (Checkmark) များကို IsChecked ဖြစ်မှ ပြသမည် (မျဉ်းမပါပါ) -->
+                            <!-- အမှန်ခြစ် (Checkmark) များကို IsChecked ဖြစ်မှ ပြသမည် -->
                             <TextBlock x:Name="CheckMark" Grid.Column="0" Text="✓" FontSize="12" FontWeight="Bold" Foreground="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             
                             <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
@@ -38,7 +48,7 @@
     </Style>
 
     <!-- Radio / Dot Style (Large/Small Buttons အတွက် အစက်ပြရန်) -->
-    <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
+    <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
         <Setter Property="IsCheckable" Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -46,7 +56,7 @@
                     <Border x:Name="Border" Background="Transparent" Height="22" SnapsToDevicePixels="True">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26" MinWidth="26" SharedSizeGroup="MenuItemIconColumnGroup"/>
+                                <ColumnDefinition Width="26" MinWidth="26"/>
                                 <ColumnDefinition Width="10"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="20"/>
@@ -54,7 +64,7 @@
                                 <ColumnDefinition Width="17"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- အစက် (Dot) ပုံစံလေးကို IsChecked ဖြစ်မှ ပြသမည် (မျဉ်းမပါပါ) -->
+                            <!-- အစက် (Dot) ပုံစံလေးကို IsChecked ဖြစ်မှ ပြသမည် -->
                             <Ellipse x:Name="BulletMark" Grid.Column="0" Width="5" Height="5" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             
                             <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
