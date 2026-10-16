@@ -1,7 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <!-- Checkable MenuItem Style (ဒုတိယပုံကဲ့သို့ သပ်ရပ်သော မီးခိုးရောင်ဖျော့ ဒေါင်လိုက်မျဉ်းပါရှိခြင်း) -->
+    <!-- Checkable MenuItem Style (တစ်လိုင်းတည်းသာ သပ်ရပ်စွာပေါ်စေရန်) -->
     <Style x:Key="CheckMenuItemStyle" TargetType="MenuItem">
         <Setter Property="IsCheckable" Value="True"/>
         <Setter Property="Template">
@@ -18,12 +18,12 @@
                                 <ColumnDefinition Width="17"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- ဒေါင်လိုက်မျဉ်း၏အရောင်ကို ဒုတိယပုံကဲ့သို့ သပ်ရပ်သော မီးခိုးရောင်ဖျော့ (#D1D1D1) သို့ပြောင်းလဲခြင်း -->
-                            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="#D1D1D1" BorderThickness="0,0,1,0"/>
+                            <!-- ထပ်နေသော ဒေါင်လိုက်မျဉ်းနှစ်လိုင်း မဖြစ်စေရန် Custom Border ကို ဖယ်ရှားပြီးပါပြီ -->
 
                             <!-- အမှန်ခြစ် (Checkmark) -->
                             <TextBlock x:Name="CheckMark" Grid.Column="0" Text="✓" FontSize="12" FontWeight="Bold" Foreground="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             
+                            <!-- Header Text -->
                             <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
@@ -40,7 +40,7 @@
         </Setter>
     </Style>
 
-    <!-- Radio / Dot Style (ဒုတိယပုံကဲ့သို့ သပ်ရပ်သော မီးခိုးရောင်ဖျော့ ဒေါင်လိုက်မျဉ်းပါရှိခြင်း) -->
+    <!-- Radio / Dot Style (တစ်လိုင်းတည်းသာ သပ်ရပ်စွာပေါ်စေရန်) -->
     <Style x:Key="RadioMenuItemStyle" TargetType="MenuItem">
         <Setter Property="IsCheckable" Value="True"/>
         <Setter Property="Template">
@@ -57,12 +57,10 @@
                                 <ColumnDefinition Width="17"/>
                             </Grid.ColumnDefinitions>
                             
-                            <!-- ဒေါင်လိုက်မျဉ်း၏အရောင်ကို ဒုတိယပုံကဲ့သို့ သပ်ရပ်သော မီးခိုးရောင်ဖျော့ (#D1D1D1) သို့ပြောင်းလဲခြင်း -->
-                            <Border Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" BorderBrush="#D1D1D1" BorderThickness="0,0,1,0"/>
-
                             <!-- အစက် (Dot) -->
                             <Ellipse x:Name="BulletMark" Grid.Column="0" Width="5" Height="5" Fill="Black" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             
+                            <!-- Header Text -->
                             <ContentPresenter Grid.Column="2" Content="{TemplateBinding Header}" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
