@@ -297,8 +297,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Guide Line Hover & Click-to-Move Logic on Canvas ---
-
+        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Optimized Tolerance) ---
         private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender is Canvas guidesCanvas && !isDraggingGuide)
