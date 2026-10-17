@@ -206,6 +206,9 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
+                // Dragging စတင်ချိန်တွင် Cursor ကို အမြှားနှစ်ဖက်ပုံစံသို့ တိုက်ရိုက်သတ်မှတ်မည်
+                activeGuidesCanvas.Cursor = Cursors.SizeNS;
+
                 this.CaptureMouse();
                 e.Handled = true;
             }
@@ -220,6 +223,9 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
+                // Dragging စတင်ချိန်တွင် Cursor ကို အမြှားနှစ်ဖက်ပုံစံသို့ တိုက်ရိုက်သတ်မှတ်မည်
+                activeGuidesCanvas.Cursor = Cursors.SizeWE;
+
                 this.CaptureMouse();
                 e.Handled = true;
             }
@@ -231,6 +237,9 @@ namespace IDWorksEnterpriseDesigner
 
             if (isDraggingGuide && activeGuidesCanvas != null)
             {
+                // Dragging လုပ်နေစဉ်အတွင်း Cursor ပုံစံ ပျောက်မသွားစေရန် အမြဲထိန်းသိမ်းထားမည်
+                activeGuidesCanvas.Cursor = isVerticalGuide ? Cursors.SizeWE : Cursors.SizeNS;
+                
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
                 bool hasLeftRuler = isVerticalGuide ? (pos.X >= 0) : (pos.Y >= 0);
@@ -290,6 +299,9 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
                 }
 
+                // Dragging ပြီးဆုံးသောအခါ Canvas Cursor ကို မူလအခြေအနေသို့ ပြန်ပြောင်းမည်
+                activeGuidesCanvas.Cursor = Cursors.Arrow;
+                
                 this.ReleaseMouseCapture();
                 isDraggingGuide = false;
                 activeGuideLine = null;
@@ -347,6 +359,9 @@ namespace IDWorksEnterpriseDesigner
                             isVerticalGuide = isVert;
                             isDraggingGuide = true;
 
+                            // ရှိပြီးသား Guide Line ကို ကလစ်ဖိ၍ ရွှေ့ချိန်တွင်လည်း Cursor ကို မြှားနှစ်ဖက်ပုံစံသို့ ချက်ချင်းပြောင်းမည်
+                            activeGuidesCanvas.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
+                            
                             this.CaptureMouse();
                             e.Handled = true;
                             return;
