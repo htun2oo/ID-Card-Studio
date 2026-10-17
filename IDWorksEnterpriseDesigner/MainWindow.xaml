@@ -18,8 +18,11 @@
         <!-- Top Menu Bar -->
         <Menu DockPanel.Dock="Top" Background="#F0F0F0">
             <MenuItem Header="File">
-                <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
-                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" Click="OpenProject_Click" />
+                <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" Command="{x:Static local:MainWindow.NewProjectCommand}" />
+                <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" Click="OpenProject_Click" Command="{x:Static local:MainWindow.OpenProjectCommand}" />
+                <Separator />
+                <MenuItem Header="Recent File" IsEnabled="False" Foreground="Gray" />
+                <Separator />
                 <MenuItem x:Name="MenuCloseProject" Header="Close Project" Click="CloseProject_Click" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep1" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuSaveProject" Header="Save Project" InputGestureText="Ctrl+S" Click="SaveProject_Click" Visibility="Collapsed" />
