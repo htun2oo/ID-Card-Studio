@@ -23,6 +23,11 @@ namespace IDWorksEnterpriseDesigner
         public MainWindow()
         {
             InitializeComponent();
+
+            // Ctrl+N, Ctrl+O နှင့် F1 Shortcuts များကို ကီးဘုတ်မှ တိုက်ရိုက်အသုံးပြုနိုင်ရန် ချိတ်ဆက်ခြင်း
+            CommandBindings.Add(new CommandBinding(NewProjectCommand, (s, e) => NewProject_Click(s, e)));
+            CommandBindings.Add(new CommandBinding(OpenProjectCommand, (s, e) => OpenProject_Click(s, e)));
+            CommandBindings.Add(new CommandBinding(OnlineHelpCommand, (s, e) => OnlineHelp_Click(s, e)));
         }
 
         // --- Menu and Toolbar Click Event Handlers ---
