@@ -95,6 +95,14 @@ namespace IDWorksEnterpriseDesigner
             LargeToolbarMenu.IsChecked = false; 
         }
 
+        private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+
+        // --- ScrollViewer ScrollChanged Events ---
+        private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
+        private void BackMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
+        private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
+
+        // --- Ruler Drawing Logic ---
         private void DrawHorizontalRuler(Canvas canvas)
         {
             for (int i = canvas.Children.Count - 1; i >= 0; i--)
