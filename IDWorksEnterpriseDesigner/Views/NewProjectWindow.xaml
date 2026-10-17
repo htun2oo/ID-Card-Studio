@@ -6,7 +6,9 @@
         mc:Ignorable="d"
         Title="New Project" Height="300" Width="395"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="12">
+
+    <!-- Grid တွင် FocusManager ထည့်သွင်းထားသောကြောင့် ProjectNameTextBox သို့ Focus အလိုအလျောက် ရောက်ရှိမည်ဖြစ်သည် -->
+    <Grid Margin="12" FocusManager.FocusedElement="{Binding ElementName=ProjectNameTextBox}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
