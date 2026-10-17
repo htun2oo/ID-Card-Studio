@@ -9,12 +9,10 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Static Commands for Keyboard Shortcuts
         public static readonly RoutedCommand NewProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OpenProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OnlineHelpCommand = new RoutedCommand();
 
-        // Photoshop-style Guide Variables
         private bool isDraggingGuide = false;
         private bool isVerticalGuide = false; 
         private Line? activeGuideLine = null;
@@ -26,7 +24,6 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
         }
 
-        // --- Menu and Toolbar Click Event Handlers ---
         private void NewProject_Click(object sender, RoutedEventArgs e) 
         { 
             ProjectWorkspace.Visibility = Visibility.Visible; 
@@ -98,12 +95,8 @@ namespace IDWorksEnterpriseDesigner
             LargeToolbarMenu.IsChecked = false; 
         }
 
-        private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
-
-        // --- Ruler Drawing Helper Methods ---
         private void DrawHorizontalRuler(Canvas canvas)
         {
-            // Keep existing children (Grid TextBlocks), remove previous tick lines
             for (int i = canvas.Children.Count - 1; i >= 0; i--)
             {
                 if (canvas.Children[i] is Line)
@@ -112,14 +105,13 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
 
-            double step = 37.8; // 1 unit distance in pixels
+            double step = 37.8;
             double width = Math.Max(canvas.ActualWidth, 1000);
 
             for (double x = 0; x <= width; x += step / 10.0)
             {
                 bool isMajor = Math.Abs((x % step)) < 0.1 || Math.Abs((x % step) - step) < 0.1;
                 bool isHalf = Math.Abs((x % (step / 2.0))) < 0.1 || Math.Abs((x % (step / 2.0)) - (step / 2.0)) < 0.1;
-
                 double tickHeight = isMajor ? 12 : (isHalf ? 8 : 4);
 
                 Line tick = new Line
@@ -137,7 +129,6 @@ namespace IDWorksEnterpriseDesigner
 
         private void DrawVerticalRuler(Canvas canvas)
         {
-            // Keep existing children (Grid TextBlocks), remove previous tick lines
             for (int i = canvas.Children.Count - 1; i >= 0; i--)
             {
                 if (canvas.Children[i] is Line)
@@ -146,14 +137,13 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
 
-            double step = 37.8; // 1 unit distance in pixels
+            double step = 37.8;
             double height = Math.Max(canvas.ActualHeight, 1000);
 
             for (double y = 0; y <= height; y += step / 10.0)
             {
                 bool isMajor = Math.Abs((y % step)) < 0.1 || Math.Abs((y % step) - step) < 0.1;
                 bool isHalf = Math.Abs((y % (step / 2.0))) < 0.1 || Math.Abs((y % (step / 2.0)) - (step / 2.0)) < 0.1;
-
                 double tickWidth = isMajor ? 12 : (isHalf ? 8 : 4);
 
                 Line tick = new Line
@@ -169,7 +159,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Ruler SizeChanged Events ---
         private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(FrontTopRulerCanvas); }
         private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(FrontLeftRulerCanvas); }
         private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(BackTopRulerCanvas); }
@@ -177,18 +166,13 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- ScrollViewer ScrollChanged Events ---
-        private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
-        private void BackMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
-        private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
-
-        // --- Photoshop-style Guide Logic ---
+        // --- Photoshop-style Drag & Drop Guide Logic ---
 
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
-                Point pos = e.GetPosition(guidesCanvas);
+                Point pos = Mouse.GetPosition(guidesCanvas);
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = true;
                 isDraggingGuide = true;
@@ -205,7 +189,8 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                guidesCanvas.CaptureMouse();
+                ruler.CaptureMouse();
+                e.Handled = true;
             }
         }
 
@@ -213,7 +198,7 @@ namespace IDWorksEnterpriseDesigner
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
-                Point pos = e.GetPosition(guidesCanvas);
+                Point pos = Mouse.GetPosition(guidesCanvas);
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = false;
                 isDraggingGuide = true;
@@ -230,7 +215,46 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                guidesCanvas.CaptureMouse();
+                ruler.CaptureMouse();
+                e.Handled = true;
+            }
+        }
+
+        private void Ruler_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDraggingGuide && activeGuideLine != null && activeGuidesCanvas != null)
+            {
+                Point pos = Mouse.GetPosition(activeGuidesCanvas);
+                if (isVerticalGuide)
+                {
+                    activeGuideLine.X1 = pos.X;
+                    activeGuideLine.X2 = pos.X;
+                }
+                else
+                {
+                    activeGuideLine.Y1 = pos.Y;
+                    activeGuideLine.Y2 = pos.Y;
+                }
+            }
+        }
+
+        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingGuide && activeGuidesCanvas != null && sender is FrameworkElement fe)
+            {
+                Point pos = Mouse.GetPosition(activeGuidesCanvas);
+                bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
+                                                   : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
+
+                if (outOfBounds && activeGuideLine != null)
+                {
+                    activeGuidesCanvas.Children.Remove(activeGuideLine);
+                }
+
+                fe.ReleaseMouseCapture();
+                isDraggingGuide = false;
+                activeGuideLine = null;
+                activeGuidesCanvas = null;
             }
         }
 
@@ -297,7 +321,6 @@ namespace IDWorksEnterpriseDesigner
             if (isDraggingGuide && activeGuidesCanvas != null)
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
-
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
