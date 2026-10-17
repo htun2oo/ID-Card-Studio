@@ -187,7 +187,9 @@
                                     <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent" IsHitTestVisible="True"/>
+                                            <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent" IsHitTestVisible="True"
+                                                MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                MouseMove="GuidesCanvas_MouseMove"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Grid>
@@ -265,7 +267,9 @@
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent" IsHitTestVisible="True"/>
+                                            <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent" IsHitTestVisible="True"
+                                                MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                MouseMove="GuidesCanvas_MouseMove"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Grid>
@@ -377,7 +381,9 @@
                                                   Background="#D6D6D6" ScrollChanged="ReportMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
-                                            <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent" IsHitTestVisible="True"/>
+                                            <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent" IsHitTestVisible="True"
+                                                MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                MouseMove="GuidesCanvas_MouseMove"/>
                                         </Grid>
                                     </ScrollViewer>
                                 </Grid>
