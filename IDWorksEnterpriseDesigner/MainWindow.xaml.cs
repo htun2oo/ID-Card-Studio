@@ -24,10 +24,10 @@ namespace IDWorksEnterpriseDesigner
         {
             InitializeComponent();
 
-            // Ctrl+N, Ctrl+O နှင့် F1 Shortcuts များအတွက် CommandBindings
-            CommandBindings.Add(new CommandBinding(NewProjectCommand, NewProject_Click(s, e)));
-            CommandBindings.Add(new CommandBinding(OpenProjectCommand, OpenProject_Click(s, e)));
-            CommandBindings.Add(new CommandBinding(OnlineHelpCommand, OnlineHelp_Click(s, e)));
+            // Ctrl+N, Ctrl+O နှင့် F1 Shortcuts များအတွက် CommandBindings များကို ပုံစံမှန်ကန်စွာ ချိတ်ဆက်ခြင်း
+            CommandBindings.Add(new CommandBinding(NewProjectCommand, (s, e) => NewProject_Click(s, new RoutedEventArgs())));
+            CommandBindings.Add(new CommandBinding(OpenProjectCommand, (s, e) => OpenProject_Click(s, new RoutedEventArgs())));
+            CommandBindings.Add(new CommandBinding(OnlineHelpCommand, (s, e) => OnlineHelp_Click(s, new RoutedEventArgs())));
         }
 
         // --- Menu and Toolbar Click Event Handlers ---
