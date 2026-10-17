@@ -23,10 +23,31 @@ namespace IDWorksEnterpriseDesigner
             InitializeComponent();
         }
 
-        private void NewProject_Click(object sender, RoutedEventArgs e) 
-        { 
-            ProjectWorkspace.Visibility = Visibility.Visible; 
-            MenuCloseProject.Visibility = Visibility.Visible; 
+        // --- Menu and Toolbar Click Event Handlers ---
+        private void NewProject_Click(object sender, RoutedEventArgs e)
+        {
+            NewProjectWindow dlg = new NewProjectWindow();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true)
+            {
+                ShowWorkspaceUI();
+            }
+        }
+
+        private void OpenProject_Click(object sender, RoutedEventArgs e)
+        {
+            OpenProjectWindow dlg = new OpenProjectWindow();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true)
+            {
+                ShowWorkspaceUI();
+            }
+        }
+
+        private void ShowWorkspaceUI()
+        {
+            ProjectWorkspace.Visibility = Visibility.Visible;
+            MenuCloseProject.Visibility = Visibility.Visible;
             MenuSaveProject.Visibility = Visibility.Visible;
             MenuSaveProjectAs.Visibility = Visibility.Visible;
             MenuProjectProperties.Visibility = Visibility.Visible;
@@ -46,7 +67,6 @@ namespace IDWorksEnterpriseDesigner
             MenuRecentFileItem.Visibility = Visibility.Visible;
         }
 
-        private void OpenProject_Click(object sender, RoutedEventArgs e) { NewProject_Click(sender, e); }
         private void CloseProject_Click(object sender, RoutedEventArgs e) 
         { 
             ProjectWorkspace.Visibility = Visibility.Collapsed; 
@@ -173,8 +193,7 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-style Drag & Drop Guide Logic ---
-
+        // --- Guide Logic ---
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -197,7 +216,7 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                this.CaptureMouse(); // Window အဆင့်ထိ Mouse ကို Capture လုပ်မည်
+                this.CaptureMouse();
                 e.Handled = true;
             }
         }
@@ -224,7 +243,7 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                this.CaptureMouse(); // Window အဆင့်ထိ Mouse ကို Capture လုပ်မည်
+                this.CaptureMouse();
                 e.Handled = true;
             }
         }
@@ -235,7 +254,6 @@ namespace IDWorksEnterpriseDesigner
 
             if (isDraggingGuide && activeGuideLine != null && activeGuidesCanvas != null)
             {
-                // Active Canvas ၏ Coordinate စနစ်ပေါ်မူတည်၍ မောက်စ်နေရာကို ရယူခြင်း
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
                 if (isVerticalGuide)
@@ -259,7 +277,6 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
-                // Document/Card Canvas ပြင်ပသို့ ရောက်ရှိနေပါက Guide Line ကို ဖျက်ပစ်မည်
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
@@ -275,9 +292,6 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            // Existing guides စစ်ဆေးရန် (လိုအပ်ပါက)
-        }
+        private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
     }
 }
