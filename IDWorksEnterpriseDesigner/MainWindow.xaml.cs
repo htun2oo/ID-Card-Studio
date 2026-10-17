@@ -14,7 +14,7 @@ namespace IDWorksEnterpriseDesigner
         public static readonly RoutedCommand OpenProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OnlineHelpCommand = new RoutedCommand();
 
-        // Photoshop-style Guide Variables (Using Nullable Types to fix warnings)
+        // Photoshop-style Guide Variables
         private bool isDraggingGuide = false;
         private bool isVerticalGuide = false; 
         private Line? activeGuideLine = null;
