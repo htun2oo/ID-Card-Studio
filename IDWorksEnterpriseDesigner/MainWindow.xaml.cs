@@ -311,7 +311,7 @@ namespace IDWorksEnterpriseDesigner
                         if (child is Line line)
                         {
                             bool isVert = (line.X1 == line.X2);
-                            if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
+                            if ((isVert && Math.Abs(pos.X - line.X1) < 10) || (!isVert && Math.Abs(pos.Y - line.Y1) < 10))
                             {
                                 canvasToUpdate.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
                                 foundCloseLine = true;
@@ -341,7 +341,7 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 10) || (!isVert && Math.Abs(pos.Y - line.Y1) < 10))
                         {
                             guidesCanvas.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
                             foundCloseLine = true;
@@ -368,7 +368,7 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 10) || (!isVert && Math.Abs(pos.Y - line.Y1) < 10))
                         {
                             activeGuidesCanvas = guidesCanvas;
                             activeGuideLine = line;
