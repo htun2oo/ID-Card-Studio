@@ -2,277 +2,245 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Diagnostics;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Globalization;
 
 namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Routed Commands များ ကြေညာခြင်း
-        public static RoutedCommand NewProjectCommand = new RoutedCommand();
-        public static RoutedCommand OpenProjectCommand = new RoutedCommand();
-        public static RoutedCommand OnlineHelpCommand = new RoutedCommand();
+        // Photoshop-style Guide Variables
+        private bool isDraggingGuide = false;
+        private bool isVerticalGuide = false; 
+        private Line activeGuideLine = null;
+        private Canvas activeGuidesCanvas = null;
+        private Line hoveredGuideLine = null;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            // Shortcut KeyBindings များကို သက်ဆိုင်ရာ Methods များသို့ ချိတ်ဆက်ခြင်း
-            CommandBindings.Add(new CommandBinding(NewProjectCommand, (s, e) => NewProject_Click(s, e)));
-            CommandBindings.Add(new CommandBinding(OpenProjectCommand, (s, e) => OpenProject_Click(s, e)));
-            CommandBindings.Add(new CommandBinding(OnlineHelpCommand, (s, e) => OnlineHelp_Click(s, e)));
         }
 
-        private void NewProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Views ဖိုင်တွဲအောက်ရှိ NewProjectWindow ကို ခေါ်ယူခြင်း
-            var dialog = new IDWorksEnterpriseDesigner.Views.NewProjectWindow();
-            dialog.Owner = this;
-            if (dialog.ShowDialog() == true)
-            {
-                // OK နှိပ်ပြီးပါက Workspace ကို ပေါ်လာစေရန်
-                ProjectWorkspace.Visibility = Visibility.Visible;
-            }
+        // --- Menu and Toolbar Click Event Handlers ---
+        private void NewProject_Click(object sender, RoutedEventArgs e) 
+        { 
+            ProjectWorkspace.Visibility = Visibility.Visible; 
+            MenuCloseProject.Visibility = Visibility.Visible; 
+            MenuSaveProject.Visibility = Visibility.Visible;
+            MenuSaveProjectAs.Visibility = Visibility.Visible;
+            MenuProjectProperties.Visibility = Visibility.Visible;
+            MenuPrintCard.Visibility = Visibility.Visible;
+            MenuDeleteProject.Visibility = Visibility.Visible;
+            MenuEdit.Visibility = Visibility.Visible;
+            MenuInsert.Visibility = Visibility.Visible;
+            MenuFormat.Visibility = Visibility.Visible;
+            MenuTools.Visibility = Visibility.Visible;
+            MenuWindow.Visibility = Visibility.Visible;
+            MenuSep1.Visibility = Visibility.Visible;
+            MenuSep2.Visibility = Visibility.Visible;
+            MenuSep3.Visibility = Visibility.Visible;
+            MenuSep4.Visibility = Visibility.Visible;
+            MenuSep5.Visibility = Visibility.Visible;
+            MenuSep6.Visibility = Visibility.Visible;
+            MenuRecentFileItem.Visibility = Visibility.Visible;
         }
 
-        private void OpenProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Views ဖိုင်တွဲအောက်ရှိ OpenProjectWindow ကို ခေါ်ယူခြင်း
-            var dialog = new IDWorksEnterpriseDesigner.Views.OpenProjectWindow();
-            dialog.Owner = this;
-            if (dialog.ShowDialog() == true)
-            {
-                // Open နှိပ်ပြီးပါက Workspace ကို ပေါ်လာစေရန်
-                ProjectWorkspace.Visibility = Visibility.Visible;
-            }
+        private void OpenProject_Click(object sender, RoutedEventArgs e) 
+        { 
+            NewProject_Click(sender, e); 
         }
 
-        private void CloseProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Close Project Event Handler
+        private void CloseProject_Click(object sender, RoutedEventArgs e) 
+        { 
+            ProjectWorkspace.Visibility = Visibility.Collapsed; 
+            MenuCloseProject.Visibility = Visibility.Collapsed; 
+            MenuSaveProject.Visibility = Visibility.Collapsed;
+            MenuSaveProjectAs.Visibility = Visibility.Collapsed;
+            MenuProjectProperties.Visibility = Visibility.Collapsed;
+            MenuPrintCard.Visibility = Visibility.Collapsed;
+            MenuDeleteProject.Visibility = Visibility.Collapsed;
+            MenuEdit.Visibility = Visibility.Collapsed;
+            MenuInsert.Visibility = Visibility.Collapsed;
+            MenuFormat.Visibility = Visibility.Collapsed;
+            MenuTools.Visibility = Visibility.Collapsed;
+            MenuWindow.Visibility = Visibility.Collapsed;
+            MenuSep1.Visibility = Visibility.Collapsed;
+            MenuSep2.Visibility = Visibility.Collapsed;
+            MenuSep3.Visibility = Visibility.Collapsed;
+            MenuSep4.Visibility = Visibility.Collapsed;
+            MenuSep5.Visibility = Visibility.Collapsed;
+            MenuSep6.Visibility = Visibility.Collapsed;
+            MenuRecentFileItem.Visibility = Visibility.Collapsed;
         }
 
-        private void SaveProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Save Project Event Handler
-        }
-
-        private void SaveProjectAs_Click(object sender, RoutedEventArgs e)
-        {
-            // Save Project As Event Handler
-        }
-
-        private void ProjectProperties_Click(object sender, RoutedEventArgs e)
-        {
-            // Project Properties Event Handler
-        }
-
-        private void PrintSampleCard_Click(object sender, RoutedEventArgs e)
-        {
-            // Print Sample Card Event Handler
-        }
-
-        private void ReportPageSetup_Click(object sender, RoutedEventArgs e)
-        {
-            // Report Page Setup Event Handler
-        }
-
-        private void DeleteProject_Click(object sender, RoutedEventArgs e)
-        {
-            // Delete Project Event Handler
-        }
-
-        private void RecentFile_Click(object sender, RoutedEventArgs e)
-        {
-            // Recent File Event Handler
-        }
-
-        private void Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private void LargeToolbar_Click(object sender, RoutedEventArgs e)
-        {
-            LargeToolbarMenu.IsChecked = true;
-            SmallToolbarMenu.IsChecked = false;
-        }
-
-        private void SmallToolbar_Click(object sender, RoutedEventArgs e)
-        {
-            SmallToolbarMenu.IsChecked = true;
-            LargeToolbarMenu.IsChecked = false;
-        }
-
-        private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Report Size Selection Changed
-        }
-
-        // --- Ruler Drawing Logic (1 cm = 10 ticks / mm scale) ---
-
-        private void DrawTopRuler(Canvas canvas, double width)
-        {
-            if (canvas == null) return;
-            canvas.Children.Clear();
-            canvas.Width = Math.Max(width, 1000);
-
-            double cmPixels = 37.8;
-            double mmPixels = cmPixels / 10.0; // 1 mm per tick (10 ticks per cm)
-
-            // Draw baseline for the ruler
-            var baseLine = new Line
-            {
-                X1 = 0, Y1 = 24,
-                X2 = canvas.Width, Y2 = 24,
-                Stroke = Brushes.Gray,
-                StrokeThickness = 0.5
-            };
-            canvas.Children.Add(baseLine);
-
-            for (double i = 0; i < canvas.Width; i += mmPixels)
-            {
-                int tickIndex = (int)Math.Round(i / mmPixels);
-                double tickHeight = 3; // very small tick for millimeters (1, 2, 3, 4, 6, 7, 8, 9)
-
-                if (tickIndex % 10 == 0)
-                {
-                    tickHeight = 12; // 1 cm mark (Long)
-                }
-                else if (tickIndex % 5 == 0)
-                {
-                    tickHeight = 8;  // 0.5 cm mark (Medium)
-                }
-
-                var line = new Line
-                {
-                    X1 = i, Y1 = 24,
-                    X2 = i, Y2 = 24 - tickHeight,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 0.6
-                };
-                canvas.Children.Add(line);
-
-                // Add numbers for every 1 cm (every 10 ticks)
-                if (tickIndex % 10 == 0)
-                {
-                    int cmValue = tickIndex / 10;
-                    var textBlock = new TextBlock
-                    {
-                        Text = cmValue.ToString(),
-                        FontSize = 10,
-                        FontWeight = FontWeights.SemiBold,
-                        FontFamily = new FontFamily("Arial"),
-                        Foreground = Brushes.Black
-                    };
-                    
-                    double xOffset = (cmValue == 0) ? 2 : (cmValue < 10 ? 4 : 7);
-                    Canvas.SetLeft(textBlock, i - xOffset);
-                    Canvas.SetTop(textBlock, 1);
-                    canvas.Children.Add(textBlock);
-                }
-            }
-        }
-
-        private void DrawLeftRuler(Canvas canvas, double height)
-        {
-            if (canvas == null) return;
-            canvas.Children.Clear();
-            canvas.Height = Math.Max(height, 1000);
-
-            double cmPixels = 37.8;
-            double mmPixels = cmPixels / 10.0;
-
-            // Draw baseline for the vertical ruler
-            var baseLine = new Line
-            {
-                X1 = 24, Y1 = 0,
-                X2 = 24, Y2 = canvas.Height,
-                Stroke = Brushes.Gray,
-                StrokeThickness = 0.5
-            };
-            canvas.Children.Add(baseLine);
-
-            for (double i = 0; i < canvas.Height; i += mmPixels)
-            {
-                int tickIndex = (int)Math.Round(i / mmPixels);
-                double tickWidth = 3;
-
-                if (tickIndex % 10 == 0)
-                {
-                    tickWidth = 12;
-                }
-                else if (tickIndex % 5 == 0)
-                {
-                    tickWidth = 8;
-                }
-
-                var line = new Line
-                {
-                    X1 = 24, Y1 = i,
-                    X2 = 24 - tickWidth, Y2 = i,
-                    Stroke = Brushes.Black,
-                    StrokeThickness = 0.6
-                };
-                canvas.Children.Add(line);
-
-                if (tickIndex % 10 == 0)
-                {
-                    int cmValue = tickIndex / 10;
-                    var textBlock = new TextBlock
-                    {
-                        Text = cmValue.ToString(),
-                        FontSize = 10,
-                        FontWeight = FontWeights.SemiBold,
-                        FontFamily = new FontFamily("Arial"),
-                        Foreground = Brushes.Black
-                    };
-                    
-                    Canvas.SetLeft(textBlock, 2);
-                    Canvas.SetTop(textBlock, i - 6);
-                    canvas.Children.Add(textBlock);
-                }
-            }
-        }
-
-        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(FrontTopRulerCanvas, e.NewSize.Width);
-        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(FrontLeftRulerCanvas, e.NewSize.Height);
-        private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
+        private void SaveProject_Click(object sender, RoutedEventArgs e) { }
+        private void SaveProjectAs_Click(object sender, RoutedEventArgs e) { }
+        private void ProjectProperties_Click(object sender, RoutedEventArgs e) { }
+        private void PrintSampleCard_Click(object sender, RoutedEventArgs e) { }
+        private void ReportPageSetup_Click(object sender, RoutedEventArgs e) { }
+        private void DeleteProject_Click(object sender, RoutedEventArgs e) { CloseProject_Click(sender, e); }
+        private void RecentFile_Click(object sender, RoutedEventArgs e) { }
+        private void Exit_Click(object sender, RoutedEventArgs e) { Application.Current.Shutdown(); }
         
-        private void FrontCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
-        private void FrontCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
-        private void FrontCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+        private void OnlineHelp_Click(object sender, RoutedEventArgs e) { MessageBox.Show("Online Help..."); }
+        private void About_Click(object sender, RoutedEventArgs e) { MessageBox.Show("Datacard ID Works Enterprise Designer"); }
 
-        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(BackTopRulerCanvas, e.NewSize.Width);
-        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(BackLeftRulerCanvas, e.NewSize.Height);
+        private void LargeToolbar_Click(object sender, RoutedEventArgs e) 
+        { 
+            LargeToolbarMenu.IsChecked = true; 
+            SmallToolbarMenu.IsChecked = false; 
+        }
+        
+        private void SmallToolbar_Click(object sender, RoutedEventArgs e) 
+        { 
+            SmallToolbarMenu.IsChecked = true; 
+            LargeToolbarMenu.IsChecked = false; 
+        }
+
+        private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
+
+        // --- Ruler SizeChanged Events ---
+        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+
+        // --- ScrollViewer ScrollChanged Events ---
+        private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
         private void BackMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
-
-        private void BackCardOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
-        private void BackCardOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
-        private void BackCardOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
-
-        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawTopRuler(ReportTopRulerCanvas, e.NewSize.Width);
-        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) => DrawLeftRuler(ReportLeftRulerCanvas, e.NewSize.Height);
         private void ReportMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
 
-        private void ReportOverlayCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
-        private void ReportOverlayCanvas_MouseMove(object sender, MouseEventArgs e) { }
-        private void ReportOverlayCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { }
+        // --- Photoshop-style Guide Logic ---
 
-        // Help Menu & F1 Shortcut Event Handler
-        private void OnlineHelp_Click(object sender, RoutedEventArgs e)
+        private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            var helpWindow = new IDWorksEnterpriseDesigner.Views.HelpWindow();
-            helpWindow.Owner = this;
-            helpWindow.Show();
+            if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
+            {
+                Point pos = e.GetPosition(guidesCanvas);
+                activeGuidesCanvas = guidesCanvas;
+                isVerticalGuide = true;
+                isDraggingGuide = true;
+
+                activeGuideLine = new Line
+                {
+                    X1 = pos.X,
+                    Y1 = 0,
+                    X2 = pos.X,
+                    Y2 = guidesCanvas.ActualHeight,
+                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00B4F0")),
+                    StrokeThickness = 1,
+                    Cursor = Cursors.SizeWE
+                };
+
+                guidesCanvas.Children.Add(activeGuideLine);
+                guidesCanvas.CaptureMouse();
+            }
         }
 
-        private void About_Click(object sender, RoutedEventArgs e)
+        private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Datacard ID Works Enterprise Designer\nVersion 1.0.0\n\nAll rights reserved.", "About", MessageBoxButton.OK, MessageBoxImage.Information);
+            if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
+            {
+                Point pos = e.GetPosition(guidesCanvas);
+                activeGuidesCanvas = guidesCanvas;
+                isVerticalGuide = false;
+                isDraggingGuide = true;
+
+                activeGuideLine = new Line
+                {
+                    X1 = 0,
+                    Y1 = pos.Y,
+                    X2 = guidesCanvas.ActualWidth,
+                    Y2 = pos.Y,
+                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00B4F0")),
+                    StrokeThickness = 1,
+                    Cursor = Cursors.SizeNS
+                };
+
+                guidesCanvas.Children.Add(activeGuideLine);
+                guidesCanvas.CaptureMouse();
+            }
+        }
+
+        private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender is Canvas guidesCanvas)
+            {
+                Point pos = e.GetPosition(guidesCanvas);
+
+                if (isDraggingGuide && activeGuideLine != null)
+                {
+                    if (isVerticalGuide)
+                    {
+                        activeGuideLine.X1 = pos.X;
+                        activeGuideLine.X2 = pos.X;
+                    }
+                    else
+                    {
+                        activeGuideLine.Y1 = pos.Y;
+                        activeGuideLine.Y2 = pos.Y;
+                    }
+                }
+                else
+                {
+                    foreach (var child in guidesCanvas.Children)
+                    {
+                        if (child is Line line)
+                        {
+                            bool isVert = (line.X1 == line.X2);
+                            if (isVert && Math.Abs(pos.X - line.X1) < 4)
+                            {
+                                line.Cursor = Cursors.SizeWE;
+                                hoveredGuideLine = line;
+                                return;
+                            }
+                            else if (!isVert && Math.Abs(pos.Y - line.Y1) < 4)
+                            {
+                                line.Cursor = Cursors.SizeNS;
+                                hoveredGuideLine = line;
+                                return;
+                            }
+                        }
+                    }
+                    hoveredGuideLine = null;
+                }
+            }
+        }
+
+        private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Canvas guidesCanvas && hoveredGuideLine != null)
+            {
+                activeGuidesCanvas = guidesCanvas;
+                activeGuideLine = hoveredGuideLine;
+                isVerticalGuide = (activeGuideLine.X1 == activeGuideLine.X2);
+                isDraggingGuide = true;
+                guidesCanvas.CaptureMouse();
+                e.Handled = true;
+            }
+        }
+
+        private void GuidesCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (isDraggingGuide && activeGuidesCanvas != null)
+            {
+                Point pos = e.GetPosition(activeGuidesCanvas);
+
+                bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
+                                                   : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
+
+                if (outOfBounds && activeGuideLine != null)
+                {
+                    activeGuidesCanvas.Children.Remove(activeGuideLine);
+                }
+
+                activeGuidesCanvas.ReleaseMouseCapture();
+                isDraggingGuide = false;
+                activeGuideLine = null;
+                activeGuidesCanvas = null;
+            }
         }
     }
 }
