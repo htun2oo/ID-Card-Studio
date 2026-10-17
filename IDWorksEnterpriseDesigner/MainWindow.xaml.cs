@@ -299,6 +299,70 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = null;
             }
         }
+        // --- Existing Guide Line Click & Move Handling on Canvas ---
+        
+        private Line? hoveredGuideLine = null;
+
+        private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (sender is Canvas guidesCanvas && !isDraggingGuide)
+            {
+                Point pos = e.GetPosition(guidesCanvas);
+                hoveredGuideLine = null;
+
+                foreach (var child in guidesCanvas.Children)
+                {
+                    if (child is Line line)
+                    {
+                        bool isVert = (line.X1 == line.X2);
+                        if (isVert && Math.Abs(pos.X - line.X1) < 5) // 5 pixels tolerance for easy hovering
+                        {
+                            line.Cursor = Cursors.SizeWE;
+                            hoveredGuideLine = line;
+                            return;
+                        }
+                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 5)
+                        {
+                            line.Cursor = Cursors.SizeNS;
+                            hoveredGuideLine = line;
+                            return;
+                        }
+                        else
+                        {
+                            line.Cursor = Cursors.Arrow;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is Canvas guidesCanvas)
+            {
+                Point pos = e.GetPosition(guidesCanvas);
+                
+                // Check if clicking an existing guide line to move it
+                foreach (var child in guidesCanvas.Children)
+                {
+                    if (child is Line line)
+                    {
+                        bool isVert = (line.X1 == line.X2);
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 5) || (!isVert && Math.Abs(pos.Y - line.Y1) < 5))
+                        {
+                            activeGuidesCanvas = guidesCanvas;
+                            activeGuideLine = line;
+                            isVerticalGuide = isVert;
+                            isDraggingGuide = true;
+
+                            this.CaptureMouse();
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
 
         private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
     }
