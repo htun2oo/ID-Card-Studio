@@ -7,6 +7,9 @@ namespace IDWorksEnterpriseDesigner.Views
         public NewProjectWindow()
         {
             InitializeComponent();
+
+            // ဒိုင်ယာလော့ခ် ပွင့်လာသည်နှင့် Project Name TextBox သို့ Focus အလိုအလျောက် ရောက်စေရန်
+            Loaded += (s, e) => txtProjectName.Focus();
         }
 
         private void CardCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
