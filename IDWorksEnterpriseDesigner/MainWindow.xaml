@@ -8,7 +8,6 @@
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
 
-    <!-- Keyboard Shortcuts -->
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{x:Static local:MainWindow.NewProjectCommand}" />
         <KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.OpenProjectCommand}" />
@@ -21,7 +20,6 @@
             <MenuItem Header="File">
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" Click="OpenProject_Click" />
-                
                 <MenuItem x:Name="MenuCloseProject" Header="Close Project" Click="CloseProject_Click" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep1" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuSaveProject" Header="Save Project" InputGestureText="Ctrl+S" Click="SaveProject_Click" Visibility="Collapsed" />
@@ -37,22 +35,9 @@
                 <Separator x:Name="MenuSep5" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuRecentFileItem" Header="1 C:\Users\...\Sample\Sample.iwp" Click="RecentFile_Click" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep6" Visibility="Collapsed" />
-
-                <Separator />
-                <MenuItem Header="Recent File" IsEnabled="False" Foreground="Gray" />
                 <Separator />
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
-
-            <MenuItem x:Name="MenuEdit" Header="Edit" Visibility="Collapsed">
-                <MenuItem Header="Cut" InputGestureText="Ctrl+X" IsEnabled="False" />
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C" IsEnabled="False" />
-                <MenuItem Header="Paste" InputGestureText="Ctrl+V" IsEnabled="False" />
-                <Separator />
-                <MenuItem Header="Delete" InputGestureText="Del" IsEnabled="False" />
-                <MenuItem Header="Select All" InputGestureText="Ctrl+A" IsEnabled="False" />
-            </MenuItem>
-
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
@@ -66,25 +51,7 @@
                     <MenuItem Header="Large Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="True" Click="LargeToolbar_Click" x:Name="LargeToolbarMenu" />
                     <MenuItem Header="Small Toolbar Buttons" Style="{StaticResource RadioMenuItemStyle}" IsChecked="False" Click="SmallToolbar_Click" x:Name="SmallToolbarMenu" />
                 </MenuItem>
-                <Separator />
-                <MenuItem Header="Show Welcome on startup" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
             </MenuItem>
-
-            <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed">
-                <MenuItem Header="Text Field" />
-                <MenuItem Header="Photo Field" />
-            </MenuItem>
-            <MenuItem x:Name="MenuFormat" Header="Format" Visibility="Collapsed">
-                <MenuItem Header="Align" />
-            </MenuItem>
-            <MenuItem x:Name="MenuTools" Header="Tools" Visibility="Collapsed">
-                <MenuItem Header="Options..." />
-            </MenuItem>
-            <MenuItem x:Name="MenuWindow" Header="Window" Visibility="Collapsed">
-                <MenuItem Header="Cascade" />
-                <MenuItem Header="Tile" />
-            </MenuItem>
-
             <MenuItem Header="Help">
                 <MenuItem Header="Online Help..." InputGestureText="F1" Click="OnlineHelp_Click" />
                 <Separator />
@@ -101,26 +68,6 @@
                 <Button Content="🖨️" ToolTip="Print" Click="PrintSampleCard_Click"/>
                 <Separator/>
                 <Button Content="❓" ToolTip="Help" Click="OnlineHelp_Click"/>
-                <Separator/>
-                <Button Content="✂️" ToolTip="Cut" IsEnabled="False"/>
-                <Button Content="📋" ToolTip="Copy" IsEnabled="False"/>
-                <Button Content="📄" ToolTip="Paste" IsEnabled="False"/>
-                <Separator/>
-                <Button Content="↩️" ToolTip="Undo"/>
-                <Button Content="↪️" ToolTip="Redo"/>
-                <Separator/>
-                <Button Content="🔍" ToolTip="Zoom In"/>
-                <Button Content="🔎" ToolTip="Zoom Out"/>
-                <Separator/>
-                <Button Content="📐" ToolTip="Rulers"/>
-                <Button Content="📏" ToolTip="Grid Lines"/>
-                <Separator/>
-                <ComboBox Width="70" Height="22" SelectedIndex="0">
-                    <ComboBoxItem Content="100%"/>
-                    <ComboBoxItem Content="75%"/>
-                    <ComboBoxItem Content="50%"/>
-                    <ComboBoxItem Content="25%"/>
-                </ComboBox>
             </ToolBar>
         </ToolBarTray>
 
@@ -166,10 +113,12 @@
                                     
                                     <!-- Front Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
-                                        <ScrollViewer x:Name="FrontTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                                             <Canvas x:Name="FrontTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
                                                     SizeChanged="FrontTopRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=FrontCardOverlayCanvas}">
                                                 <Grid Width="500">
                                                     <Grid.ColumnDefinitions>
@@ -194,10 +143,12 @@
 
                                     <!-- Front Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
-                                        <ScrollViewer x:Name="FrontLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                                             <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
                                                     SizeChanged="FrontLeftRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=FrontCardOverlayCanvas}">
                                                 <Grid Height="300">
                                                     <Grid.RowDefinitions>
@@ -213,20 +164,9 @@
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Front Workspace & Overlay Canvas -->
-                                    <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
-                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1">
-                                                <Border.ContextMenu>
-                                                    <ContextMenu>
-                                                        <MenuItem Header="Cut" IsEnabled="False"/>
-                                                        <MenuItem Header="Copy" IsEnabled="False"/>
-                                                        <MenuItem Header="Paste" IsEnabled="False"/>
-                                                        <Separator/>
-                                                        <MenuItem Header="Card Properties..."/>
-                                                    </ContextMenu>
-                                                </Border.ContextMenu>
-                                            </Border>
+                                            <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
                                                     MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
                                                     MouseMove="GuidesCanvas_MouseMove"
@@ -259,10 +199,12 @@
                                     
                                     <!-- Back Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
-                                        <ScrollViewer x:Name="BackTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                                             <Canvas x:Name="BackTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
                                                     SizeChanged="BackTopRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=BackCardOverlayCanvas}">
                                                 <Grid Width="500">
                                                     <Grid.ColumnDefinitions>
@@ -287,10 +229,12 @@
 
                                     <!-- Back Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
-                                        <ScrollViewer x:Name="BackLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                                             <Canvas x:Name="BackLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
                                                     SizeChanged="BackLeftRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=BackCardOverlayCanvas}">
                                                 <Grid Height="300">
                                                     <Grid.RowDefinitions>
@@ -306,8 +250,7 @@
                                         </ScrollViewer>
                                     </Border>
 
-                                    <!-- Back Workspace & Overlay Canvas -->
-                                    <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
@@ -347,12 +290,8 @@
                                     <ColumnDefinition Width="170"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
-                                <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
-                                    <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" Tag="A4" IsSelected="True"/>
-                                    <ComboBoxItem Content="A5 (14.8 x 21.0 cm)" Tag="A5"/>
-                                    <ComboBoxItem Content="B5 (17.6 x 25.0 cm)" Tag="B5"/>
-                                    <ComboBoxItem Content="Letter (8.5 x 11 in)" Tag="Letter"/>
-                                    <ComboBoxItem Content="Legal (8.5 x 14 in)" Tag="Legal"/>
+                                <ComboBox Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20">
+                                    <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" IsSelected="True"/>
                                 </ComboBox>
                             </Grid>
 
@@ -371,10 +310,12 @@
 
                                     <!-- Report Top Ruler -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
-                                        <ScrollViewer x:Name="ReportTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
                                             <Canvas x:Name="ReportTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
                                                     SizeChanged="ReportTopRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=ReportOverlayCanvas}">
                                                 <Grid Width="800">
                                                     <Grid.ColumnDefinitions>
@@ -405,10 +346,12 @@
 
                                     <!-- Report Left Ruler -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
-                                        <ScrollViewer x:Name="ReportLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                                             <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
                                                     SizeChanged="ReportLeftRulerCanvas_SizeChanged"
                                                     MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    MouseMove="Ruler_MouseMove"
+                                                    MouseLeftButtonUp="Ruler_MouseLeftButtonUp"
                                                     Tag="{Binding ElementName=ReportOverlayCanvas}">
                                                 <Grid Height="500">
                                                     <Grid.RowDefinitions>
@@ -427,9 +370,9 @@
                                     <!-- Report Workspace & Overlay Canvas -->
                                     <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" 
                                                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
-                                                  Background="#D6D6D6" ScrollChanged="ReportMainScrollViewer_ScrollChanged">
+                                                  Background="#D6D6D6">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
-                                            <Border x:Name="ReportDocumentBorder" Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
+                                            <Border Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent"
                                                     MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
                                                     MouseMove="GuidesCanvas_MouseMove"
