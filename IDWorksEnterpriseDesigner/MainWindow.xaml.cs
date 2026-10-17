@@ -26,25 +26,32 @@ namespace IDWorksEnterpriseDesigner
         // --- Menu and Toolbar Click Event Handlers ---
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            NewProjectWindow dlg = new NewProjectWindow();
-            dlg.Owner = this;
-            if (dlg.ShowDialog() == true)
+            // သင့် ပရောဂျက်ထဲရှိ Dialog Window Class အမည်အတိုင်း ခေါ်ယူရန်
+            // ဥပမာ - Views.NewProjectDialog သို့မဟုတ် NewProjectDialog
+            try
             {
+                // သက်ဆိုင်ရာ Dialog Class ကို ခေါ်ယူရန် ယာယီအဖြစ် ShowWorkspaceUI() ကို အသုံးပြုထားပါသည်
                 ShowWorkspaceUI();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            OpenProjectWindow dlg = new OpenProjectWindow();
-            dlg.Owner = this;
-            if (dlg.ShowDialog() == true)
+            try
             {
                 ShowWorkspaceUI();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void ShowWorkspaceUI()
+        public void ShowWorkspaceUI()
         {
             ProjectWorkspace.Visibility = Visibility.Visible;
             MenuCloseProject.Visibility = Visibility.Visible;
@@ -193,7 +200,8 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Guide Logic ---
+        // --- Photoshop-style Drag & Drop Guide Logic ---
+
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
