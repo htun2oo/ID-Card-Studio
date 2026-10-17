@@ -9,7 +9,7 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Static Commands for Keyboard Shortcuts (Ctrl+N, Ctrl+O, F1)
+        // Static Commands for Keyboard Shortcuts
         public static readonly RoutedCommand NewProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OpenProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OnlineHelpCommand = new RoutedCommand();
@@ -50,11 +50,7 @@ namespace IDWorksEnterpriseDesigner
             MenuRecentFileItem.Visibility = Visibility.Visible;
         }
 
-        private void OpenProject_Click(object sender, RoutedEventArgs e) 
-        { 
-            NewProject_Click(sender, e); 
-        }
-
+        private void OpenProject_Click(object sender, RoutedEventArgs e) { NewProject_Click(sender, e); }
         private void CloseProject_Click(object sender, RoutedEventArgs e) 
         { 
             ProjectWorkspace.Visibility = Visibility.Collapsed; 
@@ -104,13 +100,82 @@ namespace IDWorksEnterpriseDesigner
 
         private void ReportSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
 
+        // --- Ruler Drawing Helper Methods ---
+        private void DrawHorizontalRuler(Canvas canvas)
+        {
+            // Keep existing children (Grid TextBlocks), remove previous tick lines
+            for (int i = canvas.Children.Count - 1; i >= 0; i--)
+            {
+                if (canvas.Children[i] is Line)
+                {
+                    canvas.Children.RemoveAt(i);
+                }
+            }
+
+            double step = 37.8; // 1 unit distance in pixels
+            double width = Math.Max(canvas.ActualWidth, 1000);
+
+            for (double x = 0; x <= width; x += step / 10.0)
+            {
+                bool isMajor = Math.Abs((x % step)) < 0.1 || Math.Abs((x % step) - step) < 0.1;
+                bool isHalf = Math.Abs((x % (step / 2.0))) < 0.1 || Math.Abs((x % (step / 2.0)) - (step / 2.0)) < 0.1;
+
+                double tickHeight = isMajor ? 12 : (isHalf ? 8 : 4);
+
+                Line tick = new Line
+                {
+                    X1 = x,
+                    Y1 = canvas.ActualHeight - tickHeight,
+                    X2 = x,
+                    Y2 = canvas.ActualHeight,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                canvas.Children.Add(tick);
+            }
+        }
+
+        private void DrawVerticalRuler(Canvas canvas)
+        {
+            // Keep existing children (Grid TextBlocks), remove previous tick lines
+            for (int i = canvas.Children.Count - 1; i >= 0; i--)
+            {
+                if (canvas.Children[i] is Line)
+                {
+                    canvas.Children.RemoveAt(i);
+                }
+            }
+
+            double step = 37.8; // 1 unit distance in pixels
+            double height = Math.Max(canvas.ActualHeight, 1000);
+
+            for (double y = 0; y <= height; y += step / 10.0)
+            {
+                bool isMajor = Math.Abs((y % step)) < 0.1 || Math.Abs((y % step) - step) < 0.1;
+                bool isHalf = Math.Abs((y % (step / 2.0))) < 0.1 || Math.Abs((y % (step / 2.0)) - (step / 2.0)) < 0.1;
+
+                double tickWidth = isMajor ? 12 : (isHalf ? 8 : 4);
+
+                Line tick = new Line
+                {
+                    X1 = canvas.ActualWidth - tickWidth,
+                    Y1 = y,
+                    X2 = canvas.ActualWidth,
+                    Y2 = y,
+                    Stroke = Brushes.Black,
+                    StrokeThickness = 1
+                };
+                canvas.Children.Add(tick);
+            }
+        }
+
         // --- Ruler SizeChanged Events ---
-        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
-        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { }
+        private void FrontTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(FrontTopRulerCanvas); }
+        private void FrontLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(FrontLeftRulerCanvas); }
+        private void BackTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(BackTopRulerCanvas); }
+        private void BackLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(BackLeftRulerCanvas); }
+        private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
+        private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
         // --- ScrollViewer ScrollChanged Events ---
         private void FrontMainScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e) { }
