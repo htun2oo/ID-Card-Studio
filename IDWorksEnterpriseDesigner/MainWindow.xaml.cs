@@ -195,7 +195,7 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Strict Drag-From-Ruler) ---
+        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Strict Ruler-Exit Threshold) ---
 
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -204,9 +204,9 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = true;
                 isDraggingGuide = true;
-                activeGuideLine = null; // Do not create line on ruler click
+                activeGuideLine = null;
 
-                this.CaptureMouse(); // Capture mouse globally
+                this.CaptureMouse();
                 e.Handled = true;
             }
         }
@@ -218,9 +218,9 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = false;
                 isDraggingGuide = true;
-                activeGuideLine = null; // Do not create line on ruler click
+                activeGuideLine = null;
 
-                this.CaptureMouse(); // Capture mouse globally
+                this.CaptureMouse();
                 e.Handled = true;
             }
         }
@@ -233,12 +233,12 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
-                // Check if the mouse is dragged inside the canvas bounds
-                bool isInsideCanvas = (pos.X >= 0 && pos.X <= activeGuidesCanvas.ActualWidth &&
-                                       pos.Y >= 0 && pos.Y <= activeGuidesCanvas.ActualHeight);
+                // Check if mouse has exited the respective ruler area:
+                // For Vertical/Left ruler (isVerticalGuide = false), it exits when pos.X >= 0.
+                // For Top ruler (isVerticalGuide = true), it exits when pos.Y >= 0.
+                bool hasLeftRuler = isVerticalGuide ? (pos.Y >= 0) : (pos.X >= 0);
 
-                // Only create the guide line once dragged onto the canvas area
-                if (activeGuideLine == null && isInsideCanvas)
+                if (activeGuideLine == null && hasLeftRuler)
                 {
                     activeGuideLine = new Line
                     {
@@ -261,7 +261,6 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Add(activeGuideLine);
                 }
 
-                // Dynamically move the line if active
                 if (activeGuideLine != null)
                 {
                     if (isVerticalGuide)
@@ -289,7 +288,6 @@ namespace IDWorksEnterpriseDesigner
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
-                // Remove line if dropped outside canvas or dragged back onto ruler
                 if (outOfBounds && activeGuideLine != null)
                 {
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
