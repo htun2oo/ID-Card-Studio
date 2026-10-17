@@ -39,15 +39,6 @@
                 <MenuItem Header="Exit" Click="Exit_Click" />
             </MenuItem>
 
-            <MenuItem x:Name="MenuEdit" Header="Edit" Visibility="Collapsed">
-                <MenuItem Header="Cut" InputGestureText="Ctrl+X" IsEnabled="False" />
-                <MenuItem Header="Copy" InputGestureText="Ctrl+C" IsEnabled="False" />
-                <MenuItem Header="Paste" InputGestureText="Ctrl+V" IsEnabled="False" />
-                <Separator />
-                <MenuItem Header="Delete" InputGestureText="Del" IsEnabled="False" />
-                <MenuItem Header="Select All" InputGestureText="Ctrl+A" IsEnabled="False" />
-            </MenuItem>
-
             <MenuItem Header="View">
                 <MenuItem Header="Toolbars">
                     <MenuItem Header="Project Toolbar" IsCheckable="True" IsChecked="True" Style="{StaticResource CheckMenuItemStyle}" />
@@ -63,10 +54,10 @@
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem x:Name="MenuInsert" Header="Insert" Visibility="Collapsed"><MenuItem Header="Text Field"/></MenuItem>
-            <MenuItem x:Name="MenuFormat" Header="Format" Visibility="Collapsed"><MenuItem Header="Align"/></MenuItem>
-            <MenuItem x:Name="MenuTools" Header="Tools" Visibility="Collapsed"><MenuItem Header="Options..."/></MenuItem>
-            <MenuItem x:Name="MenuWindow" Header="Window" Visibility="Collapsed"><MenuItem Header="Cascade"/></MenuItem>
+            <MenuItem Header="Insert"><MenuItem Header="Text Field"/></MenuItem>
+            <MenuItem Header="Format"><MenuItem Header="Align"/></MenuItem>
+            <MenuItem Header="Tools"><MenuItem Header="Options..."/></MenuItem>
+            <MenuItem Header="Window"><MenuItem Header="Cascade"/></MenuItem>
 
             <MenuItem Header="Help">
                 <MenuItem Header="Online Help..." InputGestureText="F1" Click="OnlineHelp_Click" />
