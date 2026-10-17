@@ -195,9 +195,8 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Refined) ---
+        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Strict Drag-From-Ruler) ---
 
-        // 1. MouseDown on Top Ruler -> Record Drag Start state only (DO NOT create line yet)
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -205,14 +204,13 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = true;
                 isDraggingGuide = true;
-                activeGuideLine = null; // Reset line
+                activeGuideLine = null; // Do not create line on ruler click
 
-                Mouse.Capture(this); // Capture mouse globally
+                this.CaptureMouse(); // Capture mouse globally
                 e.Handled = true;
             }
         }
 
-        // 2. MouseDown on Left Ruler -> Record Drag Start state only (DO NOT create line yet)
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -220,14 +218,13 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = false;
                 isDraggingGuide = true;
-                activeGuideLine = null; // Reset line
+                activeGuideLine = null; // Do not create line on ruler click
 
-                Mouse.Capture(this); // Capture mouse globally
+                this.CaptureMouse(); // Capture mouse globally
                 e.Handled = true;
             }
         }
 
-        // 3. MouseMove -> Create line ONLY when dragged inside canvas, and move it continuously
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -236,8 +233,12 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
-                // Create line lazily when mouse enters valid canvas area or moves
-                if (activeGuideLine == null)
+                // Check if the mouse is dragged inside the canvas bounds
+                bool isInsideCanvas = (pos.X >= 0 && pos.X <= activeGuidesCanvas.ActualWidth &&
+                                       pos.Y >= 0 && pos.Y <= activeGuidesCanvas.ActualHeight);
+
+                // Only create the guide line once dragged onto the canvas area
+                if (activeGuideLine == null && isInsideCanvas)
                 {
                     activeGuideLine = new Line
                     {
@@ -260,21 +261,23 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Add(activeGuideLine);
                 }
 
-                // Update line position dynamically
-                if (isVerticalGuide)
+                // Dynamically move the line if active
+                if (activeGuideLine != null)
                 {
-                    activeGuideLine.X1 = pos.X;
-                    activeGuideLine.X2 = pos.X;
-                }
-                else
-                {
-                    activeGuideLine.Y1 = pos.Y;
-                    activeGuideLine.Y2 = pos.Y;
+                    if (isVerticalGuide)
+                    {
+                        activeGuideLine.X1 = pos.X;
+                        activeGuideLine.X2 = pos.X;
+                    }
+                    else
+                    {
+                        activeGuideLine.Y1 = pos.Y;
+                        activeGuideLine.Y2 = pos.Y;
+                    }
                 }
             }
         }
 
-        // 4. MouseUp -> Check bounds: Keep if inside canvas, remove if dropped outside/back on ruler
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonUp(e);
@@ -286,13 +289,13 @@ namespace IDWorksEnterpriseDesigner
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
-                // Remove line if dropped outside canvas bounds or dragged back to ruler
+                // Remove line if dropped outside canvas or dragged back onto ruler
                 if (outOfBounds && activeGuideLine != null)
                 {
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
                 }
 
-                Mouse.Capture(null); // Release mouse capture
+                this.ReleaseMouseCapture();
                 isDraggingGuide = false;
                 activeGuideLine = null;
                 activeGuidesCanvas = null;
