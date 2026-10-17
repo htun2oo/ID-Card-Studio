@@ -297,7 +297,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Optimized Tolerance) ---
+        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Magnetic/Expanded Tolerance) ---
         private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender is Canvas guidesCanvas && !isDraggingGuide)
@@ -309,13 +309,13 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        // Tolerance ကို 5 pixels မှ 10 pixels သို့ တိုးမြှင့်ပေးထားပါသည်
-                        if (isVert && Math.Abs(pos.X - line.X1) < 10)
+                        // Tolerance ကို 15 pixels သို့ တိုးမြှင့်ထားသဖြင့် မျဉ်းနှင့်နီးကပ်လာသည်နှင့် မောက်စ်ပုံစံပြောင်းလဲမည်
+                        if (isVert && Math.Abs(pos.X - line.X1) < 15)
                         {
                             line.Cursor = Cursors.SizeWE;
                             return;
                         }
-                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 10)
+                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 15)
                         {
                             line.Cursor = Cursors.SizeNS;
                             return;
@@ -340,8 +340,8 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        // Tolerance ကို 5 pixels မှ 10 pixels သို့ တိုးမြှင့်ပေးထားပါသည်
-                        if ((isVert && Math.Abs(pos.X - line.X1) < 10) || (!isVert && Math.Abs(pos.Y - line.Y1) < 10))
+                        // Tolerance ကို 15 pixels သို့ တိုးမြှင့်ထားသဖြင့် အလွယ်တကူ ကလစ်ဖိ၍ ဆွဲရွှေ့နိုင်မည်
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
                         {
                             activeGuidesCanvas = guidesCanvas;
                             activeGuideLine = line;
