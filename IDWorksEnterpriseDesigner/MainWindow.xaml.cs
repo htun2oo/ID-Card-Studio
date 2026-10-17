@@ -195,14 +195,14 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Strict Ruler-Exit Threshold) ---
+        // --- Photoshop-Style Interactive Guide Line Dragging & Moving Logic ---
 
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = false; // false = Horizontal Guide Line
+                isVerticalGuide = false; // Horizontal Guide
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
@@ -216,7 +216,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = true; // true = Vertical Guide Line
+                isVerticalGuide = true; // Vertical Guide
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
@@ -233,10 +233,7 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
-                // Check if mouse has exited the respective ruler area:
-                // For Vertical/Left ruler (isVerticalGuide = false), it exits when pos.X >= 0.
-                // For Top ruler (isVerticalGuide = true), it exits when pos.Y >= 0.
-                bool hasLeftRuler = isVerticalGuide ? (pos.Y >= 0) : (pos.X >= 0);
+                bool hasLeftRuler = isVerticalGuide ? (pos.X >= 0) : (pos.Y >= 0);
 
                 if (activeGuideLine == null && hasLeftRuler)
                 {
@@ -299,32 +296,28 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = null;
             }
         }
-        // --- Existing Guide Line Click & Move Handling on Canvas ---
-        
-        private Line? hoveredGuideLine = null;
+
+        // --- Guide Line Hover & Click-to-Move Logic on Canvas ---
 
         private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender is Canvas guidesCanvas && !isDraggingGuide)
             {
                 Point pos = e.GetPosition(guidesCanvas);
-                hoveredGuideLine = null;
 
                 foreach (var child in guidesCanvas.Children)
                 {
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        if (isVert && Math.Abs(pos.X - line.X1) < 5) // 5 pixels tolerance for easy hovering
+                        if (isVert && Math.Abs(pos.X - line.X1) < 5)
                         {
                             line.Cursor = Cursors.SizeWE;
-                            hoveredGuideLine = line;
                             return;
                         }
                         else if (!isVert && Math.Abs(pos.Y - line.Y1) < 5)
                         {
                             line.Cursor = Cursors.SizeNS;
-                            hoveredGuideLine = line;
                             return;
                         }
                         else
@@ -341,8 +334,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas guidesCanvas)
             {
                 Point pos = e.GetPosition(guidesCanvas);
-                
-                // Check if clicking an existing guide line to move it
+
                 foreach (var child in guidesCanvas.Children)
                 {
                     if (child is Line line)
@@ -363,7 +355,5 @@ namespace IDWorksEnterpriseDesigner
                 }
             }
         }
-
-        private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { }
     }
 }
