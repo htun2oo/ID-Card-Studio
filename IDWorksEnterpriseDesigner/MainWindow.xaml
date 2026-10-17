@@ -8,7 +8,7 @@
         Title="Datacard ID Works Enterprise Designer" Height="690" Width="1012"
         WindowStartupLocation="CenterScreen">
 
-    <!-- Keyboard Shortcuts (Ctrl+N, Ctrl+O နှင့် F1 အလုပ်လုပ်စေရန် x:Static အသုံးပြုထားသည်) -->
+    <!-- Keyboard Shortcuts (Ctrl+N, Ctrl+O နှင့် F1) -->
     <Window.InputBindings>
         <KeyBinding Key="N" Modifiers="Control" Command="{x:Static local:MainWindow.NewProjectCommand}" />
         <KeyBinding Key="O" Modifiers="Control" Command="{x:Static local:MainWindow.OpenProjectCommand}" />
@@ -164,18 +164,27 @@
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
                                     
+                                    <!-- Front Top Ruler Canvas -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="FrontTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="FrontTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="FrontTopRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="FrontTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
+                                                    SizeChanged="FrontTopRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=FrontCardOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Front Left Ruler Canvas -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="FrontLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="FrontLeftRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="FrontLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
+                                                    SizeChanged="FrontLeftRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=FrontCardOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Front Workspace & Overlay Canvas -->
                                     <ScrollViewer x:Name="FrontMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="FrontMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1">
@@ -190,9 +199,9 @@
                                                 </Border.ContextMenu>
                                             </Border>
                                             <Canvas x:Name="FrontCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
-                                                    MouseLeftButtonDown="FrontCardOverlayCanvas_MouseLeftButtonDown"
-                                                    MouseMove="FrontCardOverlayCanvas_MouseMove"
-                                                    MouseLeftButtonUp="FrontCardOverlayCanvas_MouseLeftButtonUp"
+                                                    MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                    MouseMove="GuidesCanvas_MouseMove"
+                                                    MouseLeftButtonUp="GuidesCanvas_MouseLeftButtonUp"
                                                     IsHitTestVisible="True"/>
                                         </Grid>
                                     </ScrollViewer>
@@ -219,25 +228,34 @@
                                     </Grid.RowDefinitions>
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
                                     
+                                    <!-- Back Top Ruler Canvas -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="BackTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="BackTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="BackTopRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="BackTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
+                                                    SizeChanged="BackTopRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=BackCardOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Back Left Ruler Canvas -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="BackLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="BackLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="BackLeftRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="BackLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
+                                                    SizeChanged="BackLeftRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=BackCardOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Back Workspace & Overlay Canvas -->
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent"
-                                                    MouseLeftButtonDown="BackCardOverlayCanvas_MouseLeftButtonDown"
-                                                    MouseMove="BackCardOverlayCanvas_MouseMove"
-                                                    MouseLeftButtonUp="BackCardOverlayCanvas_MouseLeftButtonUp"
+                                                    MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                    MouseMove="GuidesCanvas_MouseMove"
+                                                    MouseLeftButtonUp="GuidesCanvas_MouseLeftButtonUp"
                                                     IsHitTestVisible="True"/>
                                         </Grid>
                                     </ScrollViewer>
@@ -293,27 +311,36 @@
 
                                     <Border Grid.Row="0" Grid.Column="0" Background="#E0E0E0" BorderBrush="#A0A0A0" BorderThickness="0,0,1,1"/>
 
+                                    <!-- Report Top Ruler Canvas -->
                                     <Border Grid.Row="0" Grid.Column="1" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,0,1" ClipToBounds="True">
                                         <ScrollViewer x:Name="ReportTopRulerScrollViewer" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-                                            <Canvas x:Name="ReportTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" SizeChanged="ReportTopRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="ReportTopRulerCanvas" Height="24" Background="Transparent" Margin="10,0,0,0" 
+                                                    SizeChanged="ReportTopRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="TopRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=ReportOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Report Left Ruler Canvas -->
                                     <Border Grid.Row="1" Grid.Column="0" Background="#F5F5F5" BorderBrush="#A0A0A0" BorderThickness="0,0,1,0" ClipToBounds="True">
                                         <ScrollViewer x:Name="ReportLeftRulerScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-                                            <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" SizeChanged="ReportLeftRulerCanvas_SizeChanged"/>
+                                            <Canvas x:Name="ReportLeftRulerCanvas" Width="24" Background="Transparent" Margin="0,10,0,0" 
+                                                    SizeChanged="ReportLeftRulerCanvas_SizeChanged"
+                                                    MouseLeftButtonDown="LeftRuler_MouseLeftButtonDown"
+                                                    Tag="{Binding ElementName=ReportOverlayCanvas}"/>
                                         </ScrollViewer>
                                     </Border>
 
+                                    <!-- Report Workspace & Overlay Canvas -->
                                     <ScrollViewer x:Name="ReportMainScrollViewer" Grid.Row="1" Grid.Column="1" 
                                                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" 
                                                   Background="#D6D6D6" ScrollChanged="ReportMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
                                             <Border x:Name="ReportDocumentBorder" Width="793.8" Height="1122.6" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="ReportOverlayCanvas" Width="793.8" Height="1122.6" Background="Transparent"
-                                                    MouseLeftButtonDown="ReportOverlayCanvas_MouseLeftButtonDown"
-                                                    MouseMove="ReportOverlayCanvas_MouseMove"
-                                                    MouseLeftButtonUp="ReportOverlayCanvas_MouseLeftButtonUp"
+                                                    MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
+                                                    MouseMove="GuidesCanvas_MouseMove"
+                                                    MouseLeftButtonUp="GuidesCanvas_MouseLeftButtonUp"
                                                     IsHitTestVisible="True"/>
                                         </Grid>
                                     </ScrollViewer>
