@@ -17,7 +17,6 @@ namespace IDWorksEnterpriseDesigner
         private bool isVerticalGuide = false; 
         private Line? activeGuideLine = null;
         private Canvas? activeGuidesCanvas = null;
-        private Line? hoveredGuideLine = null;
 
         public MainWindow()
         {
@@ -180,10 +179,11 @@ namespace IDWorksEnterpriseDesigner
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
-                Point pos = Mouse.GetPosition(guidesCanvas);
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = true;
                 isDraggingGuide = true;
+
+                Point pos = e.GetPosition(activeGuidesCanvas);
 
                 activeGuideLine = new Line
                 {
@@ -197,7 +197,7 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                ruler.CaptureMouse();
+                this.CaptureMouse(); // Window အဆင့်ထိ Mouse ကို Capture လုပ်မည်
                 e.Handled = true;
             }
         }
@@ -206,10 +206,11 @@ namespace IDWorksEnterpriseDesigner
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
-                Point pos = Mouse.GetPosition(guidesCanvas);
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = false;
                 isDraggingGuide = true;
+
+                Point pos = e.GetPosition(activeGuidesCanvas);
 
                 activeGuideLine = new Line
                 {
@@ -223,16 +224,20 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                ruler.CaptureMouse();
+                this.CaptureMouse(); // Window အဆင့်ထိ Mouse ကို Capture လုပ်မည်
                 e.Handled = true;
             }
         }
 
-        private void Ruler_MouseMove(object sender, MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
+            base.OnMouseMove(e);
+
             if (isDraggingGuide && activeGuideLine != null && activeGuidesCanvas != null)
             {
-                Point pos = Mouse.GetPosition(activeGuidesCanvas);
+                // Active Canvas ၏ Coordinate စနစ်ပေါ်မူတည်၍ မောက်စ်နေရာကို ရယူခြင်း
+                Point pos = e.GetPosition(activeGuidesCanvas);
+
                 if (isVerticalGuide)
                 {
                     activeGuideLine.X1 = pos.X;
@@ -246,11 +251,15 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        private void Ruler_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
-            if (isDraggingGuide && activeGuidesCanvas != null && sender is FrameworkElement fe)
+            base.OnMouseLeftButtonUp(e);
+
+            if (isDraggingGuide && activeGuidesCanvas != null)
             {
-                Point pos = Mouse.GetPosition(activeGuidesCanvas);
+                Point pos = e.GetPosition(activeGuidesCanvas);
+
+                // Document/Card Canvas ပြင်ပသို့ ရောက်ရှိနေပါက Guide Line ကို ဖျက်ပစ်မည်
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
@@ -259,89 +268,16 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
                 }
 
-                fe.ReleaseMouseCapture();
+                this.ReleaseMouseCapture();
                 isDraggingGuide = false;
                 activeGuideLine = null;
                 activeGuidesCanvas = null;
-            }
-        }
-
-        private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (sender is Canvas guidesCanvas)
-            {
-                Point pos = e.GetPosition(guidesCanvas);
-
-                if (isDraggingGuide && activeGuideLine != null)
-                {
-                    if (isVerticalGuide)
-                    {
-                        activeGuideLine.X1 = pos.X;
-                        activeGuideLine.X2 = pos.X;
-                    }
-                    else
-                    {
-                        activeGuideLine.Y1 = pos.Y;
-                        activeGuideLine.Y2 = pos.Y;
-                    }
-                }
-                else
-                {
-                    foreach (var child in guidesCanvas.Children)
-                    {
-                        if (child is Line line)
-                        {
-                            bool isVert = (line.X1 == line.X2);
-                            if (isVert && Math.Abs(pos.X - line.X1) < 4)
-                            {
-                                line.Cursor = Cursors.SizeWE;
-                                hoveredGuideLine = line;
-                                return;
-                            }
-                            else if (!isVert && Math.Abs(pos.Y - line.Y1) < 4)
-                            {
-                                line.Cursor = Cursors.SizeNS;
-                                hoveredGuideLine = line;
-                                return;
-                            }
-                        }
-                    }
-                    hoveredGuideLine = null;
-                }
             }
         }
 
         private void GuidesCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (sender is Canvas guidesCanvas && hoveredGuideLine != null)
-            {
-                activeGuidesCanvas = guidesCanvas;
-                activeGuideLine = hoveredGuideLine;
-                isVerticalGuide = (activeGuideLine.X1 == activeGuideLine.X2);
-                isDraggingGuide = true;
-                guidesCanvas.CaptureMouse();
-                e.Handled = true;
-            }
-        }
-
-        private void GuidesCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (isDraggingGuide && activeGuidesCanvas != null)
-            {
-                Point pos = e.GetPosition(activeGuidesCanvas);
-                bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
-                                                   : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
-
-                if (outOfBounds && activeGuideLine != null)
-                {
-                    activeGuidesCanvas.Children.Remove(activeGuideLine);
-                }
-
-                activeGuidesCanvas.ReleaseMouseCapture();
-                isDraggingGuide = false;
-                activeGuideLine = null;
-                activeGuidesCanvas = null;
-            }
+            // Existing guides စစ်ဆေးရန် (လိုအပ်ပါက)
         }
     }
 }
