@@ -310,12 +310,13 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        if (isVert && Math.Abs(pos.X - line.X1) < 5)
+                        // Tolerance ကို 5 pixels မှ 10 pixels သို့ တိုးမြှင့်ပေးထားပါသည်
+                        if (isVert && Math.Abs(pos.X - line.X1) < 10)
                         {
                             line.Cursor = Cursors.SizeWE;
                             return;
                         }
-                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 5)
+                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 10)
                         {
                             line.Cursor = Cursors.SizeNS;
                             return;
@@ -340,7 +341,8 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        if ((isVert && Math.Abs(pos.X - line.X1) < 5) || (!isVert && Math.Abs(pos.Y - line.Y1) < 5))
+                        // Tolerance ကို 5 pixels မှ 10 pixels သို့ တိုးမြှင့်ပေးထားပါသည်
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 10) || (!isVert && Math.Abs(pos.Y - line.Y1) < 10))
                         {
                             activeGuidesCanvas = guidesCanvas;
                             activeGuideLine = line;
