@@ -195,9 +195,9 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-Style Interactive Guide Line Dragging Logic ---
+        // --- Photoshop-Style Interactive Guide Line Dragging Logic (Refined) ---
 
-        // 1. MouseDown on Top Ruler -> Create Vertical Guide
+        // 1. MouseDown on Top Ruler -> Record Drag Start state only (DO NOT create line yet)
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -205,27 +205,14 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = true;
                 isDraggingGuide = true;
+                activeGuideLine = null; // Reset line
 
-                Point pos = e.GetPosition(activeGuidesCanvas);
-
-                activeGuideLine = new Line
-                {
-                    X1 = pos.X,
-                    Y1 = 0,
-                    X2 = pos.X,
-                    Y2 = guidesCanvas.ActualHeight,
-                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00B4F0")),
-                    StrokeThickness = 1,
-                    Cursor = Cursors.SizeWE
-                };
-
-                guidesCanvas.Children.Add(activeGuideLine);
-                Mouse.Capture(this); // Window level mouse capture
+                Mouse.Capture(this); // Capture mouse globally
                 e.Handled = true;
             }
         }
 
-        // 2. MouseDown on Left Ruler -> Create Horizontal Guide
+        // 2. MouseDown on Left Ruler -> Record Drag Start state only (DO NOT create line yet)
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -233,35 +220,47 @@ namespace IDWorksEnterpriseDesigner
                 activeGuidesCanvas = guidesCanvas;
                 isVerticalGuide = false;
                 isDraggingGuide = true;
+                activeGuideLine = null; // Reset line
 
-                Point pos = e.GetPosition(activeGuidesCanvas);
-
-                activeGuideLine = new Line
-                {
-                    X1 = 0,
-                    Y1 = pos.Y,
-                    X2 = guidesCanvas.ActualWidth,
-                    Y2 = pos.Y,
-                    Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00B4F0")),
-                    StrokeThickness = 1,
-                    Cursor = Cursors.SizeNS
-                };
-
-                guidesCanvas.Children.Add(activeGuideLine);
-                Mouse.Capture(this); // Window level mouse capture
+                Mouse.Capture(this); // Capture mouse globally
                 e.Handled = true;
             }
         }
 
-        // 3. MouseMove -> Move Guide Line continuously while holding mouse
+        // 3. MouseMove -> Create line ONLY when dragged inside canvas, and move it continuously
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
-            if (isDraggingGuide && activeGuideLine != null && activeGuidesCanvas != null)
+            if (isDraggingGuide && activeGuidesCanvas != null)
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
+                // Create line lazily when mouse enters valid canvas area or moves
+                if (activeGuideLine == null)
+                {
+                    activeGuideLine = new Line
+                    {
+                        Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00B4F0")),
+                        StrokeThickness = 1,
+                        Cursor = isVerticalGuide ? Cursors.SizeWE : Cursors.SizeNS
+                    };
+
+                    if (isVerticalGuide)
+                    {
+                        activeGuideLine.Y1 = 0;
+                        activeGuideLine.Y2 = activeGuidesCanvas.ActualHeight;
+                    }
+                    else
+                    {
+                        activeGuideLine.X1 = 0;
+                        activeGuideLine.X2 = activeGuidesCanvas.ActualWidth;
+                    }
+
+                    activeGuidesCanvas.Children.Add(activeGuideLine);
+                }
+
+                // Update line position dynamically
                 if (isVerticalGuide)
                 {
                     activeGuideLine.X1 = pos.X;
@@ -275,7 +274,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // 4. MouseUp -> Finalize Position or Remove if dragged back to Ruler / out of bounds
+        // 4. MouseUp -> Check bounds: Keep if inside canvas, remove if dropped outside/back on ruler
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonUp(e);
@@ -284,10 +283,10 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
-                // Check if dropped outside canvas or back onto ruler
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
+                // Remove line if dropped outside canvas bounds or dragged back to ruler
                 if (outOfBounds && activeGuideLine != null)
                 {
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
