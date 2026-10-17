@@ -33,20 +33,28 @@ namespace IDWorksEnterpriseDesigner
         // --- Menu and Toolbar Click Event Handlers ---
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
+            // New Project ဒိုင်ယာလော့ခ် မပေါ်လာမီ Workspace ကို ဦးစွာပိတ်ထားမည် (Collapsed)
+            CloseProject_Click(sender, e);
+            
             NewProjectWindow dlg = new NewProjectWindow();
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
+                // OK နှိပ်မှသာ Workspace ကို ပြသမည်
                 ShowWorkspaceUI();
             }
         }
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
+            // Open Project ဒိုင်ယာလော့ခ် မပေါ်လာမီ Workspace ကို ဦးစွာပိတ်ထားမည် (Collapsed)
+            CloseProject_Click(sender, e);
+            
             OpenProjectWindow dlg = new OpenProjectWindow();
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
+                // OK နှိပ်မှသာ Workspace ကို ပြသမည်
                 ShowWorkspaceUI();
             }
         }
