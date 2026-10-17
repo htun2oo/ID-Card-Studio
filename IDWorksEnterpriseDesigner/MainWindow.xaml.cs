@@ -14,6 +14,7 @@ namespace IDWorksEnterpriseDesigner
         public static readonly RoutedCommand OpenProjectCommand = new RoutedCommand();
         public static readonly RoutedCommand OnlineHelpCommand = new RoutedCommand();
 
+        // Photoshop Guide Dragging State Variables
         private bool isDraggingGuide = false;
         private bool isVerticalGuide = false; 
         private Line? activeGuideLine = null;
@@ -194,8 +195,9 @@ namespace IDWorksEnterpriseDesigner
         private void ReportTopRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawHorizontalRuler(ReportTopRulerCanvas); }
         private void ReportLeftRulerCanvas_SizeChanged(object sender, SizeChangedEventArgs e) { DrawVerticalRuler(ReportLeftRulerCanvas); }
 
-        // --- Photoshop-style Drag & Drop Guide Logic ---
+        // --- Photoshop-Style Interactive Guide Line Dragging Logic ---
 
+        // 1. MouseDown on Top Ruler -> Create Vertical Guide
         private void TopRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -218,11 +220,12 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                this.CaptureMouse();
+                Mouse.Capture(this); // Window level mouse capture
                 e.Handled = true;
             }
         }
 
+        // 2. MouseDown on Left Ruler -> Create Horizontal Guide
         private void LeftRuler_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
@@ -245,11 +248,12 @@ namespace IDWorksEnterpriseDesigner
                 };
 
                 guidesCanvas.Children.Add(activeGuideLine);
-                this.CaptureMouse();
+                Mouse.Capture(this); // Window level mouse capture
                 e.Handled = true;
             }
         }
 
+        // 3. MouseMove -> Move Guide Line continuously while holding mouse
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
@@ -271,6 +275,7 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
+        // 4. MouseUp -> Finalize Position or Remove if dragged back to Ruler / out of bounds
         protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonUp(e);
@@ -279,6 +284,7 @@ namespace IDWorksEnterpriseDesigner
             {
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
+                // Check if dropped outside canvas or back onto ruler
                 bool outOfBounds = isVerticalGuide ? (pos.X < 0 || pos.X > activeGuidesCanvas.ActualWidth) 
                                                    : (pos.Y < 0 || pos.Y > activeGuidesCanvas.ActualHeight);
 
@@ -287,7 +293,7 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
                 }
 
-                this.ReleaseMouseCapture();
+                Mouse.Capture(null); // Release mouse capture
                 isDraggingGuide = false;
                 activeGuideLine = null;
                 activeGuidesCanvas = null;
