@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using IDWorksEnterpriseDesigner.Views; // Views ဖိုင်တွဲအောက်ရှိ Window များကို ခေါ်သုံးရန်
 
 namespace IDWorksEnterpriseDesigner
 {
@@ -26,28 +27,21 @@ namespace IDWorksEnterpriseDesigner
         // --- Menu and Toolbar Click Event Handlers ---
         private void NewProject_Click(object sender, RoutedEventArgs e)
         {
-            // သင့် ပရောဂျက်ထဲရှိ Dialog Window Class အမည်အတိုင်း ခေါ်ယူရန်
-            // ဥပမာ - Views.NewProjectDialog သို့မဟုတ် NewProjectDialog
-            try
+            NewProjectWindow dlg = new NewProjectWindow();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true)
             {
-                // သက်ဆိုင်ရာ Dialog Class ကို ခေါ်ယူရန် ယာယီအဖြစ် ShowWorkspaceUI() ကို အသုံးပြုထားပါသည်
                 ShowWorkspaceUI();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            try
+            OpenProjectWindow dlg = new OpenProjectWindow();
+            dlg.Owner = this;
+            if (dlg.ShowDialog() == true)
             {
                 ShowWorkspaceUI();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
             }
         }
 
