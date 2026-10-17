@@ -9,12 +9,17 @@ namespace IDWorksEnterpriseDesigner
 {
     public partial class MainWindow : Window
     {
-        // Photoshop-style Guide Variables
+        // Static Commands for Keyboard Shortcuts (Ctrl+N, Ctrl+O, F1)
+        public static readonly RoutedCommand NewProjectCommand = new RoutedCommand();
+        public static readonly RoutedCommand OpenProjectCommand = new RoutedCommand();
+        public static readonly RoutedCommand OnlineHelpCommand = new RoutedCommand();
+
+        // Photoshop-style Guide Variables (Using Nullable Types to fix warnings)
         private bool isDraggingGuide = false;
         private bool isVerticalGuide = false; 
-        private Line activeGuideLine = null;
-        private Canvas activeGuidesCanvas = null;
-        private Line hoveredGuideLine = null;
+        private Line? activeGuideLine = null;
+        private Canvas? activeGuidesCanvas = null;
+        private Line? hoveredGuideLine = null;
 
         public MainWindow()
         {
