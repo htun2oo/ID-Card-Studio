@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using IDWorksEnterpriseDesigner.Views; // Views ဖိုင်တွဲအောက်ရှိ Window များကို ခေါ်သုံးရန်
+using IDWorksEnterpriseDesigner.Views;
 
 namespace IDWorksEnterpriseDesigner
 {
