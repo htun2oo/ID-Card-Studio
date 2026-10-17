@@ -297,34 +297,33 @@ namespace IDWorksEnterpriseDesigner
             }
         }
 
-        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Magnetic/Expanded Tolerance) ---
+        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Stable Canvas-Level Cursor) ---
         private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender is Canvas guidesCanvas && !isDraggingGuide)
             {
                 Point pos = e.GetPosition(guidesCanvas);
+                bool foundCloseLine = false;
 
                 foreach (var child in guidesCanvas.Children)
                 {
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        // Tolerance ကို 15 pixels သို့ တိုးမြှင့်ထားသဖြင့် မျဉ်းနှင့်နီးကပ်လာသည်နှင့် မောက်စ်ပုံစံပြောင်းလဲမည်
-                        if (isVert && Math.Abs(pos.X - line.X1) < 15)
+                        // Guide Line နှင့် 15 pixels အတွင်း နီးကပ်နေပါက Canvas တစ်ခုလုံး၏ Cursor ကို မြှားခေါင်နှစ်ဖက်ပုံစံသို့ ပြောင်းပေးမည်
+                        if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
                         {
-                            line.Cursor = Cursors.SizeWE;
-                            return;
-                        }
-                        else if (!isVert && Math.Abs(pos.Y - line.Y1) < 15)
-                        {
-                            line.Cursor = Cursors.SizeNS;
-                            return;
-                        }
-                        else
-                        {
-                            line.Cursor = Cursors.Arrow;
+                            guidesCanvas.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
+                            foundCloseLine = true;
+                            break;
                         }
                     }
+                }
+                
+                // မျဉ်းများနှင့် ကင်းကွာသွားမှသာ Normal Arrow သို့ ပြန်ပြောင်းမည်
+                if (!foundCloseLine)
+                {
+                    guidesCanvas.Cursor = Cursors.Arrow;
                 }
             }
         }
