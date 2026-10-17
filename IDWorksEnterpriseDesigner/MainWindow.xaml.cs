@@ -206,8 +206,7 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
-                // Dragging စတင်ချိန်တွင် Cursor ကို အမြှားနှစ်ဖက်ပုံစံသို့ တိုက်ရိုက်သတ်မှတ်မည်
-                activeGuidesCanvas.Cursor = Cursors.SizeNS;
+                Mouse.OverrideCursor = Cursors.SizeNS;
 
                 this.CaptureMouse();
                 e.Handled = true;
@@ -223,8 +222,7 @@ namespace IDWorksEnterpriseDesigner
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
-                // Dragging စတင်ချိန်တွင် Cursor ကို အမြှားနှစ်ဖက်ပုံစံသို့ တိုက်ရိုက်သတ်မှတ်မည်
-                activeGuidesCanvas.Cursor = Cursors.SizeWE;
+                Mouse.OverrideCursor = Cursors.SizeWE;
 
                 this.CaptureMouse();
                 e.Handled = true;
@@ -237,9 +235,6 @@ namespace IDWorksEnterpriseDesigner
 
             if (isDraggingGuide && activeGuidesCanvas != null)
             {
-                // Dragging လုပ်နေစဉ်အတွင်း Cursor ပုံစံ ပျောက်မသွားစေရန် အမြဲထိန်းသိမ်းထားမည်
-                activeGuidesCanvas.Cursor = isVerticalGuide ? Cursors.SizeWE : Cursors.SizeNS;
-                
                 Point pos = e.GetPosition(activeGuidesCanvas);
 
                 bool hasLeftRuler = isVerticalGuide ? (pos.X >= 0) : (pos.Y >= 0);
@@ -299,17 +294,41 @@ namespace IDWorksEnterpriseDesigner
                     activeGuidesCanvas.Children.Remove(activeGuideLine);
                 }
 
-                // Dragging ပြီးဆုံးသောအခါ Canvas Cursor ကို မူလအခြေအနေသို့ ပြန်ပြောင်းမည်
-                activeGuidesCanvas.Cursor = Cursors.Arrow;
-                
+                Canvas canvasToUpdate = activeGuidesCanvas;
+
+                Mouse.OverrideCursor = null;
+
                 this.ReleaseMouseCapture();
                 isDraggingGuide = false;
                 activeGuideLine = null;
                 activeGuidesCanvas = null;
+
+                if (canvasToUpdate != null)
+                {
+                    bool foundCloseLine = false;
+                    foreach (var child in canvasToUpdate.Children)
+                    {
+                        if (child is Line line)
+                        {
+                            bool isVert = (line.X1 == line.X2);
+                            if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
+                            {
+                                canvasToUpdate.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
+                                foundCloseLine = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!foundCloseLine)
+                    {
+                        canvasToUpdate.Cursor = Cursors.Arrow;
+                    }
+                }
             }
         }
 
-        // --- Guide Line Hover & Click-to-Move Logic on Canvas (Stable Canvas-Level Cursor) ---
+        // --- Guide Line Hover & Click-to-Move Logic on Canvas ---
+
         private void GuidesCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (sender is Canvas guidesCanvas && !isDraggingGuide)
@@ -322,7 +341,6 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        // Guide Line နှင့် 15 pixels အတွင်း နီးကပ်နေပါက Canvas တစ်ခုလုံး၏ Cursor ကို မြှားခေါင်နှစ်ဖက်ပုံစံသို့ ပြောင်းပေးမည်
                         if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
                         {
                             guidesCanvas.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
@@ -331,8 +349,7 @@ namespace IDWorksEnterpriseDesigner
                         }
                     }
                 }
-                
-                // မျဉ်းများနှင့် ကင်းကွာသွားမှသာ Normal Arrow သို့ ပြန်ပြောင်းမည်
+
                 if (!foundCloseLine)
                 {
                     guidesCanvas.Cursor = Cursors.Arrow;
@@ -351,7 +368,6 @@ namespace IDWorksEnterpriseDesigner
                     if (child is Line line)
                     {
                         bool isVert = (line.X1 == line.X2);
-                        // Tolerance ကို 15 pixels သို့ တိုးမြှင့်ထားသဖြင့် အလွယ်တကူ ကလစ်ဖိ၍ ဆွဲရွှေ့နိုင်မည်
                         if ((isVert && Math.Abs(pos.X - line.X1) < 15) || (!isVert && Math.Abs(pos.Y - line.Y1) < 15))
                         {
                             activeGuidesCanvas = guidesCanvas;
@@ -359,9 +375,8 @@ namespace IDWorksEnterpriseDesigner
                             isVerticalGuide = isVert;
                             isDraggingGuide = true;
 
-                            // ရှိပြီးသား Guide Line ကို ကလစ်ဖိ၍ ရွှေ့ချိန်တွင်လည်း Cursor ကို မြှားနှစ်ဖက်ပုံစံသို့ ချက်ချင်းပြောင်းမည်
-                            activeGuidesCanvas.Cursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
-                            
+                            Mouse.OverrideCursor = isVert ? Cursors.SizeWE : Cursors.SizeNS;
+
                             this.CaptureMouse();
                             e.Handled = true;
                             return;
