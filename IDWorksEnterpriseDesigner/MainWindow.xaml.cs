@@ -202,7 +202,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = true;
+                isVerticalGuide = false; // false = Horizontal Guide Line
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
@@ -216,7 +216,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = false;
+                isVerticalGuide = true; // true = Vertical Guide Line
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
