@@ -4,7 +4,10 @@ namespace IDWorksEnterpriseDesigner.Views
 {
     public partial class NewProjectWindow : Window
     {
-        // Portrait ကို ရွေးချယ်ထားခြင်း ရှိမရှိ စစ်ဆေးရန် Property
+        // CheckBox ရွေးချယ်ထားမှု အခြေအနေများ
+        public bool HasProductionForm => ProductionFormCheckBox?.IsChecked == true; // သို့မဟုတ် XAML ရှိ CheckBox အမည်
+        public bool HasCardDesign => CardCheckBox?.IsChecked == true;
+        public bool HasReportDesign => ReportCheckBox?.IsChecked == true; // သို့မဟုတ် XAML ရှိ Report CheckBox အမည်
         public bool IsPortrait => PortraitRadio?.IsChecked == true;
         
         public NewProjectWindow()
