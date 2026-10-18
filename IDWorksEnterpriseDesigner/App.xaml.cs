@@ -5,7 +5,7 @@ using System.Windows.Threading;
 
 namespace IDWorksEnterpriseDesigner
 {
-    public partial class Application : System.Windows.Application
+    public partial class App : System.Windows.Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
