@@ -34,7 +34,7 @@
                     Background="#E1E1E1" BorderBrush="#707070" BorderThickness="1"/>
         </StackPanel>
 
-        <!-- Initial Components Section -->
+        <!-- Initial Components Section (Width matches Project Name TextBox via Column 0) -->
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,0,0,0" BorderBrush="#B5C4D5">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
