@@ -127,10 +127,10 @@
                     </Grid.RowDefinitions>
 
                     <!-- Front Card Window -->
-                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="FrontCardWindowBorder" Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
                         <DockPanel>
-                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
-                                <TextBlock Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            <Grid x:Name="FrontCardTitleGrid" DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock x:Name="FrontCardTitleText" Text="Card" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                             </Grid>
                             <Border Background="#CCCCCC" Padding="4">
                                 <Grid Background="#E6E6E6">
@@ -207,10 +207,10 @@
                     </Border>
 
                     <!-- Back Card Window -->
-                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="BackCardWindowBorder" Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
                         <DockPanel>
-                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
-                                <TextBlock Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            <Grid x:Name="BackCardTitleGrid" DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock x:Name="BackCardTitleText" Text="Card (back side)" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                             </Grid>
                             <Border Background="#CCCCCC" Padding="4">
                                 <Grid Background="#E6E6E6">
@@ -295,24 +295,24 @@
                     </Grid.RowDefinitions>
 
                     <!-- Production Form Container -->
-                    <Border x:Name="ProductionFormContainer" Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="ProductionFormContainer" Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
                         <DockPanel>
-                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
-                                <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                            <Grid x:Name="ProductionFormTitleGrid" DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
+                                <TextBlock x:Name="ProductionFormTitleText" Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                             </Grid>
                             <Border Background="White" Margin="4"/>
                         </DockPanel>
                     </Border>
 
                     <!-- Report Container -->
-                    <Border x:Name="ReportContainer" Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="ReportContainer" Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown">
                         <DockPanel>
-                            <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
+                            <Grid x:Name="ReportTitleGrid" DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="170"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
+                                <TextBlock x:Name="ReportTitleText" Text="Report" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
                                 <ComboBox x:Name="ReportSizeComboBox" Grid.Column="1" VerticalAlignment="Center" Margin="0,0,4,0" Height="20" SelectionChanged="ReportSizeComboBox_SelectionChanged">
                                     <ComboBoxItem Content="A4 (21.0 x 29.7 cm)" IsSelected="True"/>
                                 </ComboBox>
