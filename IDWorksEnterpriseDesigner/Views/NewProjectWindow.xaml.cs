@@ -4,6 +4,9 @@ namespace IDWorksEnterpriseDesigner.Views
 {
     public partial class NewProjectWindow : Window
     {
+        // Portrait ကို ရွေးချယ်ထားခြင်း ရှိမရှိ စစ်ဆေးရန် Property
+        public bool IsPortrait => PortraitRadio?.IsChecked == true;
+        
         public NewProjectWindow()
         {
             InitializeComponent();
