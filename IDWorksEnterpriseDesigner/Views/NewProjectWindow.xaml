@@ -38,52 +38,51 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <!-- Project Name Label & TextBox -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,0" VerticalAlignment="Top">
+        <!-- Left Main Content Area (TextBox နှင့် GroupBox ကြား အကွာအဝေးကို အနည်းဆုံးဖြစ်အောင် နီးကပ်ထားပါသည်) -->
+        <StackPanel Grid.Column="0" Margin="0,0,12,0" VerticalAlignment="Top">
+            <!-- Project Name Label -->
             <TextBlock Text="Project Name:" Margin="0,0,0,0" Foreground="#000000" FontSize="12"/>
+            
+            <!-- Project Name TextBox -->
             <TextBox x:Name="ProjectNameTextBox" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7" Background="White" Margin="0,1,0,0"/>
+
+            <!-- Initial Components GroupBox (TextBox ၏ အောက်တွင် တိုက်ရိုက်ကပ်၍ နီးကပ်စွာ ရွှေ့ထားပါသည်) -->
+            <GroupBox Header="Initial Components" Padding="10,6,10,10" Margin="0,4,0,0" BorderBrush="#B5C4D5">
+                <StackPanel>
+                    <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
+                    
+                    <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,2,0,4"/>
+                    
+                    <StackPanel Margin="22,0,0,6">
+                        <!-- Landscape Option with Icon -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                            <Border Width="15" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="OrientationGroup" IsChecked="True" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Portrait Option with Icon -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                            <Border Width="10" Height="15" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,11,0" VerticalAlignment="Center"/>
+                            <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="OrientationGroup" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Multi-card CheckBox -->
+                        <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
+                    </StackPanel>
+
+                    <!-- Report Design CheckBox -->
+                    <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="False" Margin="0,4,0,0"/>
+                </StackPanel>
+            </GroupBox>
         </StackPanel>
 
         <!-- OK and Cancel Buttons (Top-Right stacked) -->
-        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0,16,0,0">
+        <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="0,16,0,0">
             <Button x:Name="OkButton" Content="OK" Style="{StaticResource DialogButtonStyle}" Margin="0,0,0,5" 
                     Click="OkButton_Click" IsDefault="True"/>
             <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource DialogButtonStyle}" BorderBrush="#CCCCCC" 
                     Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
-
-        <!-- Initial Components GroupBox (ProjectNameTextBox နှင့် ပိုမိုနီးကပ်စေရန် အပေါ်သို့ ပိုမိုကပ်ထားပါသည်) -->
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,-4,12,0" BorderBrush="#B5C4D5">
-            <StackPanel>
-                <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
-                
-                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,2,0,4"/>
-                
-                <StackPanel Margin="22,0,0,6">
-                    <!-- Landscape Option with Icon -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
-                        <Border Width="15" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                        <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="OrientationGroup" IsChecked="True" VerticalAlignment="Center"/>
-                    </StackPanel>
-
-                    <!-- Portrait Option with Icon -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                        <Border Width="10" Height="15" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,11,0" VerticalAlignment="Center"/>
-                        <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="OrientationGroup" VerticalAlignment="Center"/>
-                    </StackPanel>
-
-                    <!-- Multi-card CheckBox -->
-                    <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
-                </StackPanel>
-
-                <!-- Report Design CheckBox -->
-                <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="False" Margin="0,4,0,0"/>
-            </StackPanel>
-        </GroupBox>
     </Grid>
 </Window>
