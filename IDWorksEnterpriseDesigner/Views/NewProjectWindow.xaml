@@ -5,23 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IDWorksEnterpriseDesigner.Views"
         mc:Ignorable="d"
-        Title="New Project" Height="380" Width="450"
+        Title="New Project" Height="365" Width="460"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- Project Name Section -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+        <!-- Project Name Section (Top-Left) -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,15,10">
             <TextBlock Text="Project Name:" Margin="0,0,0,5"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="22" VerticalContentAlignment="Center" BorderBrush="#0078D7"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7"/>
+        </StackPanel>
+
+        <!-- Buttons Section (Top-Right Stacked) -->
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
+            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,0,6" Click="OkButton_Click" IsDefault="True"/>
+            <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="23" Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
 
         <!-- Initial Components Section -->
-        <GroupBox Grid.Row="1" Header="Initial Components" Padding="10,8,10,10" Margin="0,0,0,15">
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Initial Components" Padding="10,8,10,10" Margin="0,0,0,0">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,8"/>
                 
@@ -47,11 +56,5 @@
                 <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="True" Margin="0,4,0,0"/>
             </StackPanel>
         </GroupBox>
-
-        <!-- Bottom Buttons Section (OK / Cancel on the bottom right) -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,8,0" Click="OkButton_Click" IsDefault="True"/>
-            <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="23" Click="CancelButton_Click" IsCancel="True"/>
-        </StackPanel>
     </Grid>
 </Window>
