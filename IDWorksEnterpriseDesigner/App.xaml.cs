@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -9,8 +11,29 @@ namespace IDWorksEnterpriseDesigner
         {
             base.OnStartup(e);
             
+            // Software စတင်ဖွင့်လိုက်သည်နှင့် Public Documents ထဲတွင် ဖိုင်တွဲအလိုအလျောက် ဆောက်ပေးရန်
+            CreateDefaultProjectFolder();
+
             // Global Exception Catching
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        }
+
+        private void CreateDefaultProjectFolder()
+        {
+            try
+            {
+                string publicDocs = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
+                string projectFolderPath = Path.Combine(publicDocs, "ID Card Studio", "Projects");
+
+                if (!Directory.Exists(projectFolderPath))
+                {
+                    Directory.CreateDirectory(projectFolderPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating project folder: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
