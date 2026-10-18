@@ -40,7 +40,20 @@ namespace IDWorksEnterpriseDesigner
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
-                // OK နှိပ်မှသာ Workspace ကို ပြသမည်
+                // Portrait သို့မဟုတ် Landscape အပေါ်မူတည်၍ Card ၏ Width နှင့် Height ကို သတ်မှတ်ခြင်း
+                if (dlg.IsPortrait)
+                {
+                    // Portrait (အမြင့်ပိုရှည်မည်)
+                    CardDesigner.Width = 220;  // ဥပမာ အကျယ်
+                    CardDesigner.Height = 340; // ဥပမာ အမြင့်
+                }
+                else
+                {
+                    // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း)
+                    CardDesigner.Width = 340;  // ဥပမာ အကျယ်
+                    CardDesigner.Height = 220; // ဥပမာ အမြင့်
+                }
+                
                 ShowWorkspaceUI();
             }
         }
