@@ -8,7 +8,32 @@
         Title="New Project" Height="370" Width="460"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="#F0F0F0">
-    <Grid Margin="12,12,12,12">
+    <Window.Resources>
+        <!-- Windows Style Standard Rounded Buttons -->
+        <Style x:Key="DialogButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="76"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Background" Value="#FBFBFB"/>
+            <Setter Property="BorderBrush" Value="#0078D7"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#E5F1FB"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -19,24 +44,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Project Name Label (Row 0) -->
+        <!-- Project Name Label -->
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Project Name:" Margin="0,0,0,4" Foreground="#000000" FontSize="12"/>
 
-        <!-- Project Name TextBox (Row 1, Column 0) -->
+        <!-- Project Name TextBox (Grid.Column="0" ၏ ညာဘက်အစွန်းအထိ ရောက်ရှိမည်) -->
         <TextBox x:Name="ProjectNameTextBox" Grid.Row="1" Grid.Column="0" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7" Background="White" Margin="0,0,12,0"/>
 
-        <!-- OK and Cancel Buttons (Row 1, Column 1 - Aligned perfectly with TextBox top) -->
+        <!-- OK and Cancel Buttons (Top-Right stacked) -->
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top">
-            <Button x:Name="OkButton" Content="OK" Width="76" Height="23" Margin="0,0,0,6" 
-                    Click="OkButton_Click" IsDefault="True"
-                    Background="#E1E1E1" BorderBrush="#0078D7" BorderThickness="1"/>
-            <Button x:Name="CancelButton" Content="Cancel" Width="76" Height="23" 
-                    Click="CancelButton_Click" IsCancel="True"
-                    Background="#E1E1E1" BorderBrush="#707070" BorderThickness="1"/>
+            <Button x:Name="OkButton" Content="OK" Style="{StaticResource DialogButtonStyle}" Margin="0,0,0,5" 
+                    Click="OkButton_Click" IsDefault="True"/>
+            <Button x:Name="CancelButton" Content="Cancel" Style="{StaticResource DialogButtonStyle}" BorderBrush="#CCCCCC" 
+                    Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
 
-        <!-- Initial Components Section (Row 2, Column 0 - Width matches TextBox exactly) -->
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,12,0,0" BorderBrush="#B5C4D5">
+        <!-- Initial Components GroupBox (TextBox ၏ ညာဘက်အစွန်းအတိုင်း အတိအကျ ညီပါမည်) -->
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,12,12,0" BorderBrush="#B5C4D5">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
                 
