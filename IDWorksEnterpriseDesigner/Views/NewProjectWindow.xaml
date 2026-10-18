@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IDWorksEnterpriseDesigner.Views"
         mc:Ignorable="d"
-        Title="New Project" Height="380" Width="400"
+        Title="New Project" Height="380" Width="450"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -17,29 +17,41 @@
         <!-- Project Name Section -->
         <StackPanel Grid.Row="0" Margin="0,0,0,10">
             <TextBlock Text="Project Name:" Margin="0,0,0,5"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="24" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="22" VerticalContentAlignment="Center" BorderBrush="#0078D7"/>
         </StackPanel>
 
         <!-- Initial Components Section -->
-        <GroupBox Grid.Row="1" Header="Initial Components" Padding="10" Margin="0,0,0,10">
+        <GroupBox Grid.Row="1" Header="Initial Components" Padding="10,8,10,10" Margin="0,0,0,15">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,8"/>
                 
-                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,0,0,5"/>
-                <StackPanel Margin="20,0,0,8">
-                    <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="OrientationGroup" IsChecked="True" Margin="0,0,0,4"/>
-                    <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="OrientationGroup" Margin="0,0,0,4"/>
+                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,0,0,6"/>
+                
+                <StackPanel Margin="24,0,0,8">
+                    <!-- Landscape Option with Icon -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                        <Border Width="16" Height="11" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="OrientationGroup" IsChecked="True" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Portrait Option with Icon -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <Border Width="11" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,11,0" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="OrientationGroup" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Multi-card CheckBox -->
                     <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
                 </StackPanel>
 
-                <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="True" Margin="0,5,0,0"/>
+                <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="True" Margin="0,4,0,0"/>
             </StackPanel>
         </GroupBox>
 
-        <!-- Buttons Section -->
+        <!-- Bottom Buttons Section (OK / Cancel on the bottom right) -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="OkButton" Content="OK" Width="75" Height="25" Margin="0,0,10,0" Click="OkButton_Click"/>
-            <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="25" Click="CancelButton_Click"/>
+            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,8,0" Click="OkButton_Click" IsDefault="True"/>
+            <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="23" Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>
