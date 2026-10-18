@@ -20,6 +20,12 @@ namespace IDWorksEnterpriseDesigner
         private Line? activeGuideLine = null;
         private Canvas? activeGuidesCanvas = null;
 
+        // Window Active/Inactive Title Bar Colors
+        private readonly Brush activeTitleBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#005A9E"));
+        private readonly Brush activeTitleFg = Brushes.White;
+        private readonly Brush inactiveTitleBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#D1D9E0"));
+        private readonly Brush inactiveTitleFg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000080"));
+
         public MainWindow()
         {
             InitializeComponent();
@@ -28,6 +34,53 @@ namespace IDWorksEnterpriseDesigner
             CommandBindings.Add(new CommandBinding(NewProjectCommand, (s, e) => NewProject_Click(s, new RoutedEventArgs())));
             CommandBindings.Add(new CommandBinding(OpenProjectCommand, (s, e) => OpenProject_Click(s, new RoutedEventArgs())));
             CommandBindings.Add(new CommandBinding(OnlineHelpCommand, (s, e) => OnlineHelp_Click(s, new RoutedEventArgs())));
+        }
+
+        // --- Window Active State Toggle Logic ---
+        private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is FrameworkElement clickedElement)
+            {
+                SetActiveWindow(clickedElement);
+            }
+        }
+
+        private void SetActiveWindow(FrameworkElement target)
+        {
+            // အရင်ဆုံး Window အားလုံးကို Inactive (မှိန်သည့်အခြေအနေ) သို့ ပြောင်းမည်
+            if (FrontCardTitleGrid != null) FrontCardTitleGrid.Background = inactiveTitleBg;
+            if (FrontCardTitleText != null) FrontCardTitleText.Foreground = inactiveTitleFg;
+
+            if (BackCardTitleGrid != null) BackCardTitleGrid.Background = inactiveTitleBg;
+            if (BackCardTitleText != null) BackCardTitleText.Foreground = inactiveTitleFg;
+
+            if (ProductionFormTitleGrid != null) ProductionFormTitleGrid.Background = inactiveTitleBg;
+            if (ProductionFormTitleText != null) ProductionFormTitleText.Foreground = inactiveTitleFg;
+
+            if (ReportTitleGrid != null) ReportTitleGrid.Background = inactiveTitleBg;
+            if (ReportTitleText != null) ReportTitleText.Foreground = inactiveTitleFg;
+
+            // Click နှိပ်လိုက်သော Window တစ်ခုတည်းကိုသာ Active (လင်းသည့်အခြေအနေ) သို့ ပြောင်းမည်
+            if (target == FrontCardWindowBorder || target == FrontCardTitleGrid)
+            {
+                if (FrontCardTitleGrid != null) FrontCardTitleGrid.Background = activeTitleBg;
+                if (FrontCardTitleText != null) FrontCardTitleText.Foreground = activeTitleFg;
+            }
+            else if (target == BackCardWindowBorder || target == BackCardTitleGrid)
+            {
+                if (BackCardTitleGrid != null) BackCardTitleGrid.Background = activeTitleBg;
+                if (BackCardTitleText != null) BackCardTitleText.Foreground = activeTitleFg;
+            }
+            else if (target == ProductionFormContainer || target == ProductionFormTitleGrid)
+            {
+                if (ProductionFormTitleGrid != null) ProductionFormTitleGrid.Background = activeTitleBg;
+                if (ProductionFormTitleText != null) ProductionFormTitleText.Foreground = activeTitleFg;
+            }
+            else if (target == ReportContainer || target == ReportTitleGrid)
+            {
+                if (ReportTitleGrid != null) ReportTitleGrid.Background = activeTitleBg;
+                if (ReportTitleText != null) ReportTitleText.Foreground = activeTitleFg;
+            }
         }
 
         // --- Menu and Toolbar Click Event Handlers ---
@@ -83,14 +136,12 @@ namespace IDWorksEnterpriseDesigner
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            // Open Project ဒိုင်ယာလော့ခ် မပေါ်လာမီ Workspace ကို ဦးစွာပိတ်ထားမည် (Collapsed)
             CloseProject_Click(sender, e);
             
             OpenProjectWindow dlg = new OpenProjectWindow();
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
-                // OK နှိပ်မှသာ Workspace ကို ပြသမည်
                 ShowWorkspaceUI();
             }
         }
@@ -99,19 +150,17 @@ namespace IDWorksEnterpriseDesigner
         {
             ProjectWorkspace.Visibility = Visibility.Visible;
 
-            // Designer surface window တွင် Recent File အပို မပေါ်စေရန် Collapsed လုပ်ခြင်း
             MenuRecentFileItem.Visibility = Visibility.Collapsed;
             MenuSepRecentTop.Visibility = Visibility.Collapsed;
             MenuSepRecentBottom.Visibility = Visibility.Collapsed;
 
-            // Project Workspace ပွင့်ချိန်တွင် ပေါ်လာမည့် မီနူးများ
             MenuCloseProject.Visibility = Visibility.Visible;
             MenuSaveProject.Visibility = Visibility.Visible;
             MenuSaveProjectAs.Visibility = Visibility.Visible;
             MenuProjectProperties.Visibility = Visibility.Visible;
             MenuPrintCard.Visibility = Visibility.Visible;
             MenuDeleteProject.Visibility = Visibility.Visible;
-            MenuSampleFilePath.Visibility = Visibility.Visible; // နမူနာ ဖိုင်လမ်းကြောင်း
+            MenuSampleFilePath.Visibility = Visibility.Visible;
             
             MenuEdit.Visibility = Visibility.Visible;
             MenuInsert.Visibility = Visibility.Visible;
@@ -131,12 +180,10 @@ namespace IDWorksEnterpriseDesigner
         { 
             ProjectWorkspace.Visibility = Visibility.Collapsed;
 
-            // Software စစချင်း Main Window အခြေအနေသို့ ပြန်ရောက်ပါက Recent File ကို ပြန်ပြခြင်း
             MenuRecentFileItem.Visibility = Visibility.Visible;
             MenuSepRecentTop.Visibility = Visibility.Visible;
             MenuSepRecentBottom.Visibility = Visibility.Visible;
 
-            // Project ဆိုင်ရာ မီနူးများကို ပြန်ဖျောက်ခြင်း
             MenuCloseProject.Visibility = Visibility.Collapsed; 
             MenuSaveProject.Visibility = Visibility.Collapsed;
             MenuSaveProjectAs.Visibility = Visibility.Collapsed;
@@ -269,7 +316,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = false; // Horizontal Guide
+                isVerticalGuide = false;
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
@@ -285,7 +332,7 @@ namespace IDWorksEnterpriseDesigner
             if (sender is Canvas ruler && ruler.Tag is Canvas guidesCanvas)
             {
                 activeGuidesCanvas = guidesCanvas;
-                isVerticalGuide = true; // Vertical Guide
+                isVerticalGuide = true;
                 isDraggingGuide = true;
                 activeGuideLine = null;
 
