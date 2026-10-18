@@ -295,7 +295,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
-                    <Border Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="ProductionFormContainer" Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
                                 <TextBlock Text="Production Form" VerticalAlignment="Center" Margin="6,0,0,0" FontSize="11" FontWeight="Bold" Foreground="#000080"/>
@@ -304,7 +304,7 @@
                         </DockPanel>
                     </Border>
 
-                    <Border Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
+                    <Border x:Name="ReportContainer" Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
                                 <Grid.ColumnDefinitions>
