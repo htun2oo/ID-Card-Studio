@@ -21,7 +21,11 @@
                 <MenuItem Header="New Project..." InputGestureText="Ctrl+N" Click="NewProject_Click" />
                 <MenuItem Header="Open Project..." InputGestureText="Ctrl+O" Click="OpenProject_Click" />
 
-                
+                <!-- Main Window စစချင်းတွင် ပေါ်မည်ဖြစ်ပြီး Project Workspace ပွင့်သွားပါက ကွယ်သွားမည် -->
+                <Separator x:Name="MenuSepRecentTop" />
+                <MenuItem x:Name="MenuRecentFileItem" Header="Recent File" IsEnabled="False" Foreground="Gray" />
+                <Separator x:Name="MenuSepRecentBottom" />
+
                 <!-- Project Workspace ပွင့်လာမှသာ ပေါ်လာမည့် Item များနှင့် Separator များ -->
                 <MenuItem x:Name="MenuCloseProject" Header="Close Project" Click="CloseProject_Click" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep1" Visibility="Collapsed" />
@@ -36,7 +40,9 @@
                 <Separator x:Name="MenuSep4" Visibility="Collapsed" />
                 <MenuItem x:Name="MenuDeleteProject" Header="Delete Project" Click="DeleteProject_Click" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep5" Visibility="Collapsed" />
-                <MenuItem x:Name="MenuRecentFileItem" Header="1 C:\Users\...\Sample\Sample.iwp" Click="RecentFile_Click" Visibility="Collapsed" />
+
+                <!-- နမူနာ ဖိုင်လမ်းကြောင်း မီနူး (Project ဖွင့်ထားချိန်တွင်သာ ပေါ်မည်) -->
+                <MenuItem x:Name="MenuSampleFilePath" Header="1 C:\Users\...\Sample\Sample.iwp" Visibility="Collapsed" />
                 <Separator x:Name="MenuSep6" Visibility="Collapsed" />
                 
                 <MenuItem Header="Exit" Click="Exit_Click" />
