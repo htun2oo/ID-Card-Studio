@@ -43,15 +43,15 @@ namespace IDWorksEnterpriseDesigner
                 // Portrait သို့မဟုတ် Landscape အပေါ်မူတည်၍ Card ၏ Width နှင့် Height ကို သတ်မှတ်ခြင်း
                 if (dlg.IsPortrait)
                 {
-                    // Portrait (အမြင့်ပိုရှည်မည်)
-                    CardDesigner.Width = 220;  // ဥပမာ အကျယ်
-                    CardDesigner.Height = 340; // ဥပမာ အမြင့်
+                    // Portrait (အမြင့်ပိုရှည်မည် - ဥပမာ Width: 204.04, Height: 323.57)
+                    if (CardDesigner != null) { CardDesigner.Width = 204.04; CardDesigner.Height = 323.57; }
+                    if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 204.04; FrontCardOverlayCanvas.Height = 323.57; }
                 }
                 else
                 {
-                    // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း)
-                    CardDesigner.Width = 340;  // ဥပမာ အကျယ်
-                    CardDesigner.Height = 220; // ဥပမာ အမြင့်
+                    // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း Width: 323.57, Height: 204.04)
+                    if (CardDesigner != null) { CardDesigner.Width = 323.57; CardDesigner.Height = 204.04; }
+                    if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 323.57; FrontCardOverlayCanvas.Height = 204.04; }
                 }
                 
                 ShowWorkspaceUI();
