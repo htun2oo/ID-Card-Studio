@@ -18,34 +18,34 @@
         </Grid.RowDefinitions>
 
         <!-- Project Name Section (Top-Left) -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,15,10">
-            <TextBlock Text="Project Name:" Margin="0,0,0,5"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,15,12">
+            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
             <TextBox x:Name="ProjectNameTextBox" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7"/>
         </StackPanel>
 
         <!-- Buttons Section (Top-Right Stacked) -->
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
-            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,0,6" Click="OkButton_Click" IsDefault="True"/>
+            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,0,5" Click="OkButton_Click" IsDefault="True"/>
             <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="23" Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
 
         <!-- Initial Components Section -->
-        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Initial Components" Padding="10,8,10,10" Margin="0,0,0,0">
+        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Initial Components" Padding="10,6,10,10" Margin="0,0,0,0">
             <StackPanel>
-                <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,0,0,8"/>
+                <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
                 
-                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,0,0,6"/>
+                <CheckBox x:Name="CardCheckBox" Content="Card Design" IsChecked="True" Checked="CardCheckBox_CheckedChanged" Unchecked="CardCheckBox_CheckedChanged" Margin="0,2,0,4"/>
                 
-                <StackPanel Margin="24,0,0,8">
+                <StackPanel Margin="22,0,0,6">
                     <!-- Landscape Option with Icon -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                        <Border Width="16" Height="11" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                        <Border Width="15" Height="10" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,6,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="LandscapeRadio" Content="Landscape" GroupName="OrientationGroup" IsChecked="True" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <!-- Portrait Option with Icon -->
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
-                        <Border Width="11" Height="16" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,11,0" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <Border Width="10" Height="15" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0,0,11,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="PortraitRadio" Content="Portrait" GroupName="OrientationGroup" VerticalAlignment="Center"/>
                     </StackPanel>
 
