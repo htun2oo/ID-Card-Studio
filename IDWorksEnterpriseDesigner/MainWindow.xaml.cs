@@ -46,12 +46,18 @@ namespace IDWorksEnterpriseDesigner
                     // Portrait (အမြင့်ပိုရှည်မည် - ဥပမာ Width: 204.04, Height: 323.57)
                     if (CardDesigner != null) { CardDesigner.Width = 204.04; CardDesigner.Height = 323.57; }
                     if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 204.04; FrontCardOverlayCanvas.Height = 323.57; }
+
+                    if (CardDesignerBack != null) { CardDesignerBack.Width = 204.04; CardDesignerBack.Height = 323.57; }
+                    if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 204.04; BackCardOverlayCanvas.Height = 323.57; }
                 }
                 else
                 {
                     // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း Width: 323.57, Height: 204.04)
                     if (CardDesigner != null) { CardDesigner.Width = 323.57; CardDesigner.Height = 204.04; }
                     if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 323.57; FrontCardOverlayCanvas.Height = 204.04; }
+
+                    if (CardDesignerBack != null) { CardDesignerBack.Width = 323.57; CardDesignerBack.Height = 204.04; }
+                    if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 323.57; BackCardOverlayCanvas.Height = 204.04; }
                 }
                 
                 ShowWorkspaceUI();
