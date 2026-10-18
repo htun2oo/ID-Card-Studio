@@ -119,8 +119,8 @@
                     <ColumnDefinition Width="1.4*"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Column: Card Windows (Front & Back) -->
-                <Grid Grid.Column="0">
+                <!-- Left Column: Card Windows Container -->
+                <Grid x:Name="CardDesignContainer" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
@@ -275,7 +275,6 @@
 
                                     <ScrollViewer x:Name="BackMainScrollViewer" Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#D6D6D6" ScrollChanged="BackMainScrollViewer_ScrollChanged">
                                         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,20,20">
-                                            <!-- x:Name="CardDesignerBack" ကို ဤနေရာတွင် ထည့်ပါ -->
                                             <Border x:Name="CardDesignerBack" Width="323.57" Height="204.04" Background="White" BorderBrush="#000000" BorderThickness="1"/>
                                             <Canvas x:Name="BackCardOverlayCanvas" Width="323.57" Height="204.04" Background="Transparent" IsHitTestVisible="True"
                                                 MouseLeftButtonDown="GuidesCanvas_MouseLeftButtonDown"
@@ -295,6 +294,7 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
+                    <!-- Production Form Container -->
                     <Border x:Name="ProductionFormContainer" Grid.Row="0" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="22">
@@ -304,6 +304,7 @@
                         </DockPanel>
                     </Border>
 
+                    <!-- Report Container -->
                     <Border x:Name="ReportContainer" Grid.Row="1" Margin="2" BorderBrush="#708090" BorderThickness="1" Background="#CCCCCC">
                         <DockPanel>
                             <Grid DockPanel.Dock="Top" Background="#D1D9E0" Height="26">
