@@ -62,47 +62,65 @@ namespace IDWorksEnterpriseDesigner
         public void ShowWorkspaceUI()
         {
             ProjectWorkspace.Visibility = Visibility.Visible;
+
+            // Designer surface window တွင် Recent File အပို မပေါ်စေရန် Collapsed လုပ်ခြင်း
+            MenuRecentFileItem.Visibility = Visibility.Collapsed;
+            MenuSepRecentTop.Visibility = Visibility.Collapsed;
+            MenuSepRecentBottom.Visibility = Visibility.Collapsed;
+
+            // Project Workspace ပွင့်ချိန်တွင် ပေါ်လာမည့် မီနူးများ
             MenuCloseProject.Visibility = Visibility.Visible;
             MenuSaveProject.Visibility = Visibility.Visible;
             MenuSaveProjectAs.Visibility = Visibility.Visible;
             MenuProjectProperties.Visibility = Visibility.Visible;
             MenuPrintCard.Visibility = Visibility.Visible;
             MenuDeleteProject.Visibility = Visibility.Visible;
+            MenuSampleFilePath.Visibility = Visibility.Visible; // နမူနာ ဖိုင်လမ်းကြောင်း
+            
             MenuEdit.Visibility = Visibility.Visible;
             MenuInsert.Visibility = Visibility.Visible;
             MenuFormat.Visibility = Visibility.Visible;
             MenuTools.Visibility = Visibility.Visible;
             MenuWindow.Visibility = Visibility.Visible;
+            
             MenuSep1.Visibility = Visibility.Visible;
             MenuSep2.Visibility = Visibility.Visible;
             MenuSep3.Visibility = Visibility.Visible;
             MenuSep4.Visibility = Visibility.Visible;
             MenuSep5.Visibility = Visibility.Visible;
-            MenuSep6.Visibility = Visibility.Visible;
-            MenuRecentFileItem.Visibility = Visibility.Visible;
+            MenuSep6.Visibility = Visibility.Visible;            
         }
 
         private void CloseProject_Click(object sender, RoutedEventArgs e) 
         { 
-            ProjectWorkspace.Visibility = Visibility.Collapsed; 
+            ProjectWorkspace.Visibility = Visibility.Collapsed;
+
+            // Software စစချင်း Main Window အခြေအနေသို့ ပြန်ရောက်ပါက Recent File ကို ပြန်ပြခြင်း
+            MenuRecentFileItem.Visibility = Visibility.Visible;
+            MenuSepRecentTop.Visibility = Visibility.Visible;
+            MenuSepRecentBottom.Visibility = Visibility.Visible;
+
+            // Project ဆိုင်ရာ မီနူးများကို ပြန်ဖျောက်ခြင်း
             MenuCloseProject.Visibility = Visibility.Collapsed; 
             MenuSaveProject.Visibility = Visibility.Collapsed;
             MenuSaveProjectAs.Visibility = Visibility.Collapsed;
             MenuProjectProperties.Visibility = Visibility.Collapsed;
             MenuPrintCard.Visibility = Visibility.Collapsed;
             MenuDeleteProject.Visibility = Visibility.Collapsed;
+            MenuSampleFilePath.Visibility = Visibility.Collapsed;
+            
             MenuEdit.Visibility = Visibility.Collapsed;
             MenuInsert.Visibility = Visibility.Collapsed;
             MenuFormat.Visibility = Visibility.Collapsed;
             MenuTools.Visibility = Visibility.Collapsed;
             MenuWindow.Visibility = Visibility.Collapsed;
+            
             MenuSep1.Visibility = Visibility.Collapsed;
             MenuSep2.Visibility = Visibility.Collapsed;
             MenuSep3.Visibility = Visibility.Collapsed;
             MenuSep4.Visibility = Visibility.Collapsed;
             MenuSep5.Visibility = Visibility.Collapsed;
-            MenuSep6.Visibility = Visibility.Collapsed;
-            MenuRecentFileItem.Visibility = Visibility.Collapsed;
+            MenuSep6.Visibility = Visibility.Collapsed;            
         }
 
         private void SaveProject_Click(object sender, RoutedEventArgs e) { }
