@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:IDWorksEnterpriseDesigner.Views"
         mc:Ignorable="d"
         Title="New Project" Height="365" Width="460"
-        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
-    <Grid Margin="15">
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#F0F0F0">
+    <Grid Margin="12,12,12,12">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -18,19 +19,23 @@
         </Grid.RowDefinitions>
 
         <!-- Project Name Section (Top-Left) -->
-        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,15,12">
-            <TextBlock Text="Project Name:" Margin="0,0,0,4"/>
-            <TextBox x:Name="ProjectNameTextBox" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,12,10">
+            <TextBlock Text="Project Name:" Margin="0,0,0,4" Foreground="#000000" FontSize="12"/>
+            <TextBox x:Name="ProjectNameTextBox" Height="23" VerticalContentAlignment="Center" BorderBrush="#0078D7" Background="White"/>
         </StackPanel>
 
         <!-- Buttons Section (Top-Right Stacked) -->
-        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0,0,0,0">
-            <Button x:Name="OkButton" Content="OK" Width="75" Height="23" Margin="0,0,0,4" Click="OkButton_Click" IsDefault="True"/>
-            <Button x:Name="CancelButton" Content="Cancel" Width="75" Height="23" Click="CancelButton_Click" IsCancel="True"/>
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Margin="0,18,0,0">
+            <Button x:Name="OkButton" Content="OK" Width="76" Height="23" Margin="0,0,0,6" 
+                    Click="OkButton_Click" IsDefault="True"
+                    Background="#E1E1E1" BorderBrush="#0078D7" BorderThickness="1"/>
+            <Button x:Name="CancelButton" Content="Cancel" Width="76" Height="23" 
+                    Click="CancelButton_Click" IsCancel="True"
+                    Background="#E1E1E1" BorderBrush="#707070" BorderThickness="1"/>
         </StackPanel>
 
         <!-- Initial Components Section -->
-        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Initial Components" Padding="10,6,10,10" Margin="0,0,0,0">
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,0,0,0" BorderBrush="#B5C4D5">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
                 
@@ -53,7 +58,7 @@
                     <CheckBox x:Name="MultiCardCheckBox" Content="Allow for more than one card design&#x0a;(data-driven card production)" Margin="0,2,0,0"/>
                 </StackPanel>
 
-                <!-- Report Design CheckBox unchecked -->
+                <!-- Report Design CheckBox -->
                 <CheckBox x:Name="ReportCheckBox" Content="Report Design" IsChecked="False" Margin="0,4,0,0"/>
             </StackPanel>
         </GroupBox>
