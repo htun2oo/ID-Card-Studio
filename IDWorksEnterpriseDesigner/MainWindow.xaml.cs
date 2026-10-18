@@ -40,30 +40,26 @@ namespace IDWorksEnterpriseDesigner
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
-                // ၁။ Card Design ရွေးမရွေး စစ်ဆေးခြင်း
+                // ၁။ Initial Components CheckBox များအပေါ်မူတည်၍ Visibility များကို သတ်မှတ်ခြင်း
                 if (CardDesignContainer != null)
                 {
                     CardDesignContainer.Visibility = dlg.HasCardDesign ? Visibility.Visible : Visibility.Collapsed;
                 }
-
-                // ၂။ Production Form Design ရွေးမရွေး စစ်ဆေးခြင်း
                 if (ProductionFormContainer != null)
                 {
                     ProductionFormContainer.Visibility = dlg.HasProductionForm ? Visibility.Visible : Visibility.Collapsed;
                 }
-
-                // ၃။ Report Design ရွေးမရွေး စစ်ဆေးခြင်း
                 if (ReportContainer != null)
                 {
                     ReportContainer.Visibility = dlg.HasReportDesign ? Visibility.Visible : Visibility.Collapsed;
                 }
 
-                // Card Orientation ချိန်ညှိခြင်း (Card Design ရွေးထားပါက)
+                // ၂။ Card Design ရွေးချယ်ထားပါက Portrait / Landscape နှင့် Width / Height ကို သတ်မှတ်ခြင်း
                 if (dlg.HasCardDesign)
                 {
                     if (dlg.IsPortrait)
                     {
-                        // Portrait (အမြင့်ပိုရှည်မည် - ဥပမာ Width: 204.04, Height: 323.57)
+                        // Portrait (Front & Back Card)
                         if (CardDesigner != null) { CardDesigner.Width = 204.04; CardDesigner.Height = 323.57; }
                         if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 204.04; FrontCardOverlayCanvas.Height = 323.57; }
 
@@ -72,7 +68,7 @@ namespace IDWorksEnterpriseDesigner
                     }
                     else
                     {
-                        // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း Width: 323.57, Height: 204.04)
+                        // Landscape (Front & Back Card)
                         if (CardDesigner != null) { CardDesigner.Width = 323.57; CardDesigner.Height = 204.04; }
                         if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 323.57; FrontCardOverlayCanvas.Height = 204.04; }
 
