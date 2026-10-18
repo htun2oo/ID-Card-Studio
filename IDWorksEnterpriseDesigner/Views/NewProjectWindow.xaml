@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IDWorksEnterpriseDesigner.Views"
         mc:Ignorable="d"
-        Title="New Project" Height="360" Width="460"
+        Title="New Project" Height="355" Width="460"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="#F0F0F0">
     <Window.Resources>
@@ -57,8 +57,8 @@
                     Click="CancelButton_Click" IsCancel="True"/>
         </StackPanel>
 
-        <!-- Initial Components GroupBox (ProjectNameTextBox နှင့် ပိုမိုနီးကပ်စေရန် Top Margin ကို လျှော့ချထားပါသည်) -->
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,6,12,0" BorderBrush="#B5C4D5">
+        <!-- Initial Components GroupBox (ProjectNameTextBox ထံသို့ ပိုမိုနီးကပ်စွာ အပေါ်ဘက်သို့ ရွှေ့ထားပါသည်) -->
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Initial Components" Padding="10,6,10,10" Margin="0,2,12,0" BorderBrush="#B5C4D5">
             <StackPanel>
                 <CheckBox x:Name="ProductionFormCheckBox" Content="Production Form Design" IsChecked="True" Margin="0,2,0,6"/>
                 
