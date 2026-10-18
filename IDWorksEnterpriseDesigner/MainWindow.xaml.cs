@@ -206,7 +206,44 @@ namespace IDWorksEnterpriseDesigner
             MenuSep6.Visibility = Visibility.Collapsed;            
         }
 
-        private void SaveProject_Click(object sender, RoutedEventArgs e) { }
+        private void SaveProject_Click(object sender, RoutedEventArgs e)
+        {
+            // SaveProjectDialog ကို ခေါ်ယူခြင်း
+            var dialog = new IDWorksEnterpriseDesigner.Views.SaveProjectDialog();
+            dialog.Owner = this;
+
+            if (dialog.ShowDialog() == true)
+            {
+                string projectName = dialog.ProjectName;
+                string publicDocs = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
+                string projectsFolder = System.IO.Path.Combine(publicDocs, "ID Card Studio", "Projects");
+
+                // ဖိုင်တွဲ မရှိသေးပါက အလိုအလျောက် တည်ဆောက်ခြင်း
+                if (!System.IO.Directory.Exists(projectsFolder))
+                {
+                    System.IO.Directory.CreateDirectory(projectsFolder);
+                }
+
+                // .idp extension ဖြင့် ဖိုင်လမ်းကြောင်း သတ်မှတ်ခြင်း
+                string filePath = System.IO.Path.Combine(projectsFolder, projectName + ".idp");
+
+                try
+                {
+                    // Project ဖိုင်အတွင်း သတင်းအချက်အလက် ရေးသားသိမ်းဆည်းခြင်း
+                    System.IO.File.WriteAllText(filePath, "// ID Card Studio Project File");
+
+                    // မီနူးတွင် သိမ်းဆည်းထားသော ဖိုင်လမ်းကြောင်း ပြသပေးခြင်း
+                    MenuSampleFilePath.Header = filePath;
+                    MenuSampleFilePath.Visibility = Visibility.Visible;
+
+                    MessageBox.Show($"Project saved successfully to:\n{filePath}", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                MessageBox.Show($"Error saving project: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
         private void SaveProjectAs_Click(object sender, RoutedEventArgs e) { }
         private void ProjectProperties_Click(object sender, RoutedEventArgs e) { }
         private void PrintSampleCard_Click(object sender, RoutedEventArgs e) { }
