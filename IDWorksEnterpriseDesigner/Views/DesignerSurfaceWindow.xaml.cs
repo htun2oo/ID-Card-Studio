@@ -1,10 +1,10 @@
-using System.Windows.Controls;
+using System.Windows;
 
 namespace IDWorksEnterpriseDesigner.Views
 {
-    public partial class DesignerWorkspace : UserControl
+    public partial class DesignerSurfaceWindow : Window
     {
-        public DesignerWorkspace()
+        public DesignerSurfaceWindow()
         {
             InitializeComponent();
         }
