@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Windows;
 
 namespace IDWorksEnterpriseDesigner.Views
@@ -23,11 +24,34 @@ namespace IDWorksEnterpriseDesigner.Views
                 // 2. TextBox သို့ စာသား ထည့်သွင်းခြင်း
                 ProjectNameTextBox.Text = defaultName;
 
-                // 3. Photoshop ကဲ့သို့ ရိုက်ထည့်ရလွယ်ကူစေရန် စာသားအားလုံးကို Select လုပ်ထားပေးခြင်း (သို့မဟုတ် Cursor အဆုံးပို့ခြင်း)
+                // 3. Photoshop ကဲ့သို့ ရိုက်ထည့်ရလွယ်ကူစေရန် စာသားအားလုံးကို Select လုပ်ထားပေးခြင်း
                 ProjectNameTextBox.Focus();
                 ProjectNameTextBox.SelectAll(); // စာအပြည့် Select လုပ်ထားလိုပါက
-                // ProjectNameTextBox.CaretIndex = ProjectNameTextBox.Text.Length; // Cursor ကို စာသား အဆုံးတွင် ထားလိုပါက
             };
+        }
+
+        // --- "Untitled-1", "Untitled-2" စသည်ဖြင့် နံပါတ် အစဉ်လိုက် တိုးပေးသည့် Method ---
+        private string GetNextUntitledProjectName()
+        {
+            int counter = 1;
+            string baseName = "Untitled-";
+
+            // လက်ရှိ ရှိပြီးသား Project နာမည်များ စာရင်းကို ရယူသည့် Method
+            List<string> existingProjectNames = GetExistingProjectNames(); 
+
+            while (existingProjectNames.Contains($"{baseName}{counter}"))
+            {
+                counter++;
+            }
+
+            return $"{baseName}{counter}";
+        }
+
+        // လက်ရှိ Project စာရင်းများ ရယူရန် Helper Method (မိမိတို့ project ၏ directory သို့မဟုတ် data structure အလိုက် ချိတ်ဆက်နိုင်ပါသည်)
+        private List<string> GetExistingProjectNames()
+        {
+            // ဥပမာအနေဖြင့် လက်ရှိ ရှိနှင့်ပြီးသား project name များကို List ဖြင့် ပြန်ပေးရန်
+            return new List<string>(); 
         }
 
         private void CardCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
