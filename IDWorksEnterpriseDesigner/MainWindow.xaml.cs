@@ -40,24 +40,45 @@ namespace IDWorksEnterpriseDesigner
             dlg.Owner = this;
             if (dlg.ShowDialog() == true)
             {
-                // Portrait သို့မဟုတ် Landscape အပေါ်မူတည်၍ Card ၏ Width နှင့် Height ကို သတ်မှတ်ခြင်း
-                if (dlg.IsPortrait)
+                // ၁။ Card Design ရွေးမရွေး စစ်ဆေးခြင်း
+                if (CardDesignContainer != null)
                 {
-                    // Portrait (အမြင့်ပိုရှည်မည် - ဥပမာ Width: 204.04, Height: 323.57)
-                    if (CardDesigner != null) { CardDesigner.Width = 204.04; CardDesigner.Height = 323.57; }
-                    if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 204.04; FrontCardOverlayCanvas.Height = 323.57; }
-
-                    if (CardDesignerBack != null) { CardDesignerBack.Width = 204.04; CardDesignerBack.Height = 323.57; }
-                    if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 204.04; BackCardOverlayCanvas.Height = 323.57; }
+                    CardDesignContainer.Visibility = dlg.HasCardDesign ? Visibility.Visible : Visibility.Collapsed;
                 }
-                else
-                {
-                    // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း Width: 323.57, Height: 204.04)
-                    if (CardDesigner != null) { CardDesigner.Width = 323.57; CardDesigner.Height = 204.04; }
-                    if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 323.57; FrontCardOverlayCanvas.Height = 204.04; }
 
-                    if (CardDesignerBack != null) { CardDesignerBack.Width = 323.57; CardDesignerBack.Height = 204.04; }
-                    if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 323.57; BackCardOverlayCanvas.Height = 204.04; }
+                // ၂။ Production Form Design ရွေးမရွေး စစ်ဆေးခြင်း
+                if (ProductionFormContainer != null)
+                {
+                    ProductionFormContainer.Visibility = dlg.HasProductionForm ? Visibility.Visible : Visibility.Collapsed;
+                }
+
+                // ၃။ Report Design ရွေးမရွေး စစ်ဆေးခြင်း
+                if (ReportContainer != null)
+                {
+                    ReportContainer.Visibility = dlg.HasReportDesign ? Visibility.Visible : Visibility.Collapsed;
+                }
+
+                // Card Orientation ချိန်ညှိခြင်း (Card Design ရွေးထားပါက)
+                if (dlg.HasCardDesign)
+                {
+                    if (dlg.IsPortrait)
+                    {
+                        // Portrait (အမြင့်ပိုရှည်မည် - ဥပမာ Width: 204.04, Height: 323.57)
+                        if (CardDesigner != null) { CardDesigner.Width = 204.04; CardDesigner.Height = 323.57; }
+                        if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 204.04; FrontCardOverlayCanvas.Height = 323.57; }
+
+                        if (CardDesignerBack != null) { CardDesignerBack.Width = 204.04; CardDesignerBack.Height = 323.57; }
+                        if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 204.04; BackCardOverlayCanvas.Height = 323.57; }
+                    }
+                    else
+                    {
+                        // Landscape (အကျယ်ပိုရှည်မည် - မူလအတိုင်း Width: 323.57, Height: 204.04)
+                        if (CardDesigner != null) { CardDesigner.Width = 323.57; CardDesigner.Height = 204.04; }
+                        if (FrontCardOverlayCanvas != null) { FrontCardOverlayCanvas.Width = 323.57; FrontCardOverlayCanvas.Height = 204.04; }
+
+                        if (CardDesignerBack != null) { CardDesignerBack.Width = 323.57; CardDesignerBack.Height = 204.04; }
+                        if (BackCardOverlayCanvas != null) { BackCardOverlayCanvas.Width = 323.57; BackCardOverlayCanvas.Height = 204.04; }
+                    }
                 }
                 
                 ShowWorkspaceUI();
