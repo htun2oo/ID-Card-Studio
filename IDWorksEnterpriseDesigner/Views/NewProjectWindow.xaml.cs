@@ -14,8 +14,20 @@ namespace IDWorksEnterpriseDesigner.Views
         {
             InitializeComponent();
 
-            // ဒိုင်ယာလော့ခ် ပွင့်လာသည်နှင့် Project Name TextBox သို့ Focus အလိုအလျောက် ရောက်စေရန်
-            Loaded += (s, e) => ProjectNameTextBox.Focus();
+            // Window Load ဖြစ်ချိန်တွင် Project Name သတ်မှတ်ပေးခြင်း
+            this.Loaded += (s, e) =>
+            {
+                // 1. "Untitled-1", "Untitled-2" စသည်ဖြင့် နံပါတ်တိုးထားသော နာမည်ယူခြင်း
+                string defaultName = GetNextUntitledProjectName();
+
+                // 2. TextBox သို့ စာသား ထည့်သွင်းခြင်း
+                ProjectNameTextBox.Text = defaultName;
+
+                // 3. Photoshop ကဲ့သို့ ရိုက်ထည့်ရလွယ်ကူစေရန် စာသားအားလုံးကို Select လုပ်ထားပေးခြင်း (သို့မဟုတ် Cursor အဆုံးပို့ခြင်း)
+                ProjectNameTextBox.Focus();
+                ProjectNameTextBox.SelectAll(); // စာအပြည့် Select လုပ်ထားလိုပါက
+                // ProjectNameTextBox.CaretIndex = ProjectNameTextBox.Text.Length; // Cursor ကို စာသား အဆုံးတွင် ထားလိုပါက
+            };
         }
 
         private void CardCheckBox_CheckedChanged(object sender, RoutedEventArgs e)
