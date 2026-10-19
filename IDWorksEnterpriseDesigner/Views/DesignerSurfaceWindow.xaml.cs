@@ -6,20 +6,11 @@ namespace IDWorksEnterpriseDesigner.Views
 {
     public partial class DesignerSurfaceWindow : Window
     {
-        // Warning ရှင်းရန် string? သုံးပေးခြင်း
         private string? currentFilePath = null;
-        
+
         public DesignerSurfaceWindow()
         {
             InitializeComponent();
-
-            // Window အပြည့်အစုံ Load ဖြစ်လာချိန်တွင် အလုပ်လုပ်ရန် ချိတ်ဆက်ခြင်း
-            this.Loaded += DesignerSurfaceWindow_Loaded;
-        }
-
-        private void DesignerSurfaceWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Window load ဖြစ်ချိန် လုပ်ဆောင်ရန်များ
         }
 
         // --- Save Project As... Implementation ---
