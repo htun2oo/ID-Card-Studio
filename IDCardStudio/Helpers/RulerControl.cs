@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls; // <- ဤ namespace ကို ထည့်သွင်းပေးရန် လိုအပ်ပါသည်
 using System.Windows.Media;
 
-namespace IDWorksEnterpriseDesigner.Helpers
+namespace IDCardStudio.Helpers
 {
     public class RulerControl : FrameworkElement
     {

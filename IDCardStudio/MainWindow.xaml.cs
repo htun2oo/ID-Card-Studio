@@ -4,9 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using IDWorksEnterpriseDesigner.Views;
+using IDCardStudio.Views;
 
-namespace IDWorksEnterpriseDesigner
+namespace IDCardStudio
 {
     public partial class MainWindow : Window
     {
@@ -209,7 +209,7 @@ namespace IDWorksEnterpriseDesigner
         private void SaveProject_Click(object sender, RoutedEventArgs e)
         {
             // SaveProjectDialog ကို ခေါ်ယူခြင်း
-            var dialog = new IDWorksEnterpriseDesigner.Views.SaveProjectDialog();
+            var dialog = new IDCardStudio.Views.SaveProjectDialog();
             dialog.Owner = this;
 
             if (dialog.ShowDialog() == true)

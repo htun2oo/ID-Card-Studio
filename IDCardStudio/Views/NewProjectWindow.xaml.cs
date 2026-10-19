@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace IDWorksEnterpriseDesigner.Views
+namespace IDCardStudio.Views
 {
     public partial class NewProjectWindow : Window
     {

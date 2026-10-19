@@ -1,10 +1,10 @@
 # Solution File အသစ်ဆောက်ခြင်း
-dotnet new sln -n IDWorksEnterpriseDesigner --force
+dotnet new sln -n IDCardStudio --force
 
 # Project ကို Solution ထဲသို့ ထည့်သွင်းခြင်း
-dotnet sln IDWorksEnterpriseDesigner.sln add IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj
+dotnet sln IDCardStudio.sln add IDCardStudio/IDCardStudio.csproj
 
 # GitHub သို့ Commit & Push လုပ်ခြင်း
-git add IDWorksEnterpriseDesigner.sln
+git add IDCardStudio.sln
 git commit -m "Fix invalid solution file format"
 git push origin main

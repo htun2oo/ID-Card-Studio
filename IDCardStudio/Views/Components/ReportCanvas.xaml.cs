@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace IDWorksEnterpriseDesigner.Views.Components
+namespace IDCardStudio.Views.Components
 {
     public partial class ReportCanvas : UserControl
     {

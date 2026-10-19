@@ -20,19 +20,19 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj
+      run: dotnet restore IDCardStudio/IDCardStudio.csproj
 
     - name: Publish Desktop App
-      run: dotnet publish IDWorksEnterpriseDesigner/IDWorksEnterpriseDesigner.csproj -c Release -r win-x64 --self-contained true -o ./publish
+      run: dotnet publish IDCardStudio/IDCardStudio.csproj -c Release -r win-x64 --self-contained true -o ./publish
 
     - name: Create Self-Signed Certificate and Sign Executable
       shell: pwsh
       run: |
         # GitHub Actions Runner ထဲတွင် ယာယီ Certificate တစ်ခု ဖန်တီးခြင်း
-        $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDWorksEnterpriseDesigner" -CertStoreLocation Cert:\CurrentUser\My
+        $cert = New-SelfSignedCertificate -Type CodeSigningCert -Subject "CN=IDCardStudio" -CertStoreLocation Cert:\CurrentUser\My
         
         # ထွက်လာမည့် .exe ဖိုင်ကို လက်မှတ်ထိုးခြင်း
-        $targetExe = "./publish/IDWorksEnterpriseDesigner.exe"
+        $targetExe = "./publish/IDCardStudio.exe"
         Set-AuthenticodeSignature -FilePath $targetExe -Certificate $cert
         
         Write-Host "Application successfully signed with self-signed certificate!"
@@ -40,5 +40,5 @@ jobs:
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@main
       with:
-        name: IDWorksEnterpriseDesigner-Windows-x64
+        name: IDCardStudio-Windows-x64
         path: ./publish

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace IDWorksEnterpriseDesigner.Views
+namespace IDCardStudio.Views
 {
     public partial class OpenProjectWindow : Window
     {

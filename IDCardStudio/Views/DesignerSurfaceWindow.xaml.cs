@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Windows;
 
-namespace IDWorksEnterpriseDesigner.Views
+namespace IDCardStudio.Views
 {
     public partial class DesignerSurfaceWindow : Window
     {

@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace IDWorksEnterpriseDesigner.Views
+namespace IDCardStudio.Views
 {
     public partial class SaveProjectDialog : Window
     {
